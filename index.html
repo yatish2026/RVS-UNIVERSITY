@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/rvs-official-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RVS University | Where Knowledge Meets Possibility | Chittoor, Andhra Pradesh</title>
+    <meta name="description" content="RVS University (R.V.S Nagar, Chittoor, AP) - A premier multidisciplinary university offering world-class programs in Engineering, Artificial Intelligence, Computing, Management, and Research." />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-gold-500 selection:text-navy-950">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Dograh Voice AI Agent Widget -->
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://app.dograh.com/embed/dograh-widget.js?token=emb__BWXK4u_0FREQV3sJCHhK0h607k_b-jirpHSsVBStO8&environment=production&apiEndpoint=https://api.dograh.com';
+        // Details about this visitor, available in your prompts as {{initial_context.page_url}}
+        js.setAttribute('data-dograh-context', JSON.stringify({
+          page_url: window.location.href,
+          today: new Date().toISOString().slice(0, 10)
+        }));
+        js.async = true;
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'dograh-widget'));
+    </script>
+  </body>
+</html>
