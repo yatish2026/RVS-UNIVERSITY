@@ -114,12 +114,12 @@ export const HeroSection: React.FC = () => {
                 Explore Programmes
               </a>
 
-              {/* Admissions 2026–27 Pill Button */}
+              {/* Admissions 2026–27 Premium Gold Pill Button */}
               <a
                 href="#admissions"
-                className="px-8 py-3.5 rounded-full bg-[#5CB85C] hover:bg-[#4CAE4C] text-white text-sm sm:text-base font-semibold shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#C5A059] via-[#E5C46D] to-[#D4AF37] hover:from-[#D4AF37] hover:to-[#C5A059] text-navy-950 text-sm sm:text-base font-bold shadow-[0_4px_25px_rgba(212,175,55,0.45)] hover:shadow-[0_6px_32px_rgba(212,175,55,0.7)] border border-amber-200/70 transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5 tracking-wide"
               >
-                Admissions 2026–27
+                Admissions 2026–27 →
               </a>
             </div>
           </Reveal>
