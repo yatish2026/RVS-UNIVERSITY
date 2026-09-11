@@ -16,10 +16,10 @@ export const Reveal: React.FC<RevealProps> = ({
   children,
   direction = 'up',
   delay = 0,
-  duration = 600,
+  duration = 500,
   className = '',
-  threshold = 0.1,
-  once = false, // Changed to false so animations re-trigger on both scroll up and scroll down!
+  threshold = 0.05,
+  once = true, // Render smoothly once to prevent stuttering/dragging on continuous scroll
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -32,13 +32,11 @@ export const Reveal: React.FC<RevealProps> = ({
           if (once && ref.current) {
             observer.unobserve(ref.current);
           }
-        } else if (!once) {
-          setIsVisible(false);
         }
       },
       {
         threshold,
-        rootMargin: '0px 0px -40px 0px',
+        rootMargin: '50px 0px 0px 0px',
       }
     );
 

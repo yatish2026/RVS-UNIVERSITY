@@ -1,4 +1,6 @@
 import { NavItem } from '../types';
+import campusLife3Img from '../assets/3.png';
+import irBannerImg from '../assets/international-relations-banner.png';
 
 export const UTILITY_BAR_LINKS = [
   { name: 'Exam Portal', href: '#exam-portal', highlight: true },
@@ -42,7 +44,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     megaMenu: {
       featuredCard: {
         title: 'Legacy of Academic Excellence',
-        description: 'Established under the aegis of Srinivasa Educational Academy, guiding 23 institutions and 30+ programs.',
+        description: 'Established under the aegis of Srinivasa Educational Academy, guiding 23 institutions and 49+ programs.',
         image: '/images/chairman.jpg',
         linkText: 'Explore Chairman & Leadership →',
         href: '#about-chairman',
@@ -51,7 +53,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
         {
           title: 'Executive Leadership',
           items: [
-            { name: 'Chairman’s Desk', href: '#about-chairman', badge: 'Founder', description: 'Dr. Ravuri Venkataswamy biography & awards' },
+            { name: 'Chairman’s Desk', href: '#about-chairman', badge: 'Founder', description: 'Dr. Ravuri Venkataswamy biography & vision' },
             { name: 'Vice Chairman’s Desk', href: '#about-vice-chairman', badge: 'Leadership', description: 'Shri R.V. Srinivas & 23 Group Institutions' },
             { name: 'Principal’s Desk', href: '#about-principal', description: 'Dr. Matam Mohan Babu profile & research' },
             { name: 'Organisation Chart', href: '#administration', description: 'Institutional administrative hierarchy' },
@@ -61,7 +63,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
           title: 'Governance & Committees',
           items: [
             { name: 'Governing Body (12 Members)', href: '#committee-governing-body', description: 'Executive university governance board' },
-            { name: 'Academic Council (33 Members)', href: '#committee-academic-council', description: 'Academic regulations & HODs' },
+            { name: 'Academic Council (34 Members)', href: '#committee-academic-council', description: 'Academic regulations & HODs' },
             { name: 'Finance Committee', href: '#committee-finance', description: 'Financial estimates & budget oversight' },
             { name: '23 Group Institutions', href: '#about-vice-chairman', description: 'Footprint of Srinivasa Educational Academy' },
           ],
@@ -69,86 +71,52 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
       ],
     },
   },
+
   {
-    id: 'admissions',
-    label: 'Admissions',
-    href: '#admissions',
-    hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Admissions Open 2026–27',
-        description: 'Take the first step toward a future-proof career. Merit scholarships and early-bird benefits available.',
-        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
-        linkText: 'Apply Online Now →',
-        href: '#admissions',
-      },
-      columns: [
-        {
-          title: 'Study Levels',
-          items: [
-            { name: 'Undergraduate Admissions', href: '#admissions', badge: 'B.Tech / BCA', description: 'Emerging tech & computing degrees' },
-            { name: 'Postgraduate Admissions', href: '#admissions', badge: 'MBA / MCA / M.Tech', description: 'Advanced leadership programs' },
-            { name: 'Nursing & Allied Healthcare', href: '#course-nursing', description: 'ANM, GNM, B.Sc & M.Sc Nursing, BPT' },
-            { name: 'Pharmacy Admissions', href: '#course-pharmacy', description: 'B.Pharm, M.Pharm, Pharm.D & Ph.D' },
-          ],
-        },
-        {
-          title: 'Student Support & Info',
-          items: [
-            { name: 'Fee Structure & Scholarships', href: '#admissions', description: 'Merit, sports, and need-based financial aid' },
-            { name: 'Eligibility & Selection Criteria', href: '#admissions', description: 'EAPCET / ICET / University Entrance' },
-            { name: 'International Student Admissions', href: '#international-relations', description: 'Admissions for NRI & foreign nationals' },
-            { name: 'Download Prospectus 2026', href: '#admissions', description: 'Official curriculum and university brochure' },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    id: 'committees',
-    label: 'Committees',
-    href: '#committee-governing-body',
+    id: 'exam-portal',
+    label: 'Exam Portal',
+    href: '#exam-portal',
     hasDropdown: true,
     simpleDropdown: [
-      { name: 'Governing Body (12 Members)', href: '#committee-governing-body', description: 'Executive university governance' },
-      { name: 'Academic Council (33 Members)', href: '#committee-academic-council', description: 'Academic regulations & standards' },
-      { name: 'Finance Committee', href: '#committee-finance', description: 'Budget limits & financial auditing' },
-      { name: 'Organisation Chart', href: '#administration', description: 'Administrative hierarchical structure' },
-      { name: 'Anti-Ragging Committee & Squad', href: '#anti-ragging', description: 'Zero tolerance campus policy' },
-      { name: 'Internal Complaints Committee (ICC)', href: '#icc', description: 'Gender equality and workplace safety' },
-      { name: 'Research & Innovation Advisory', href: '#research', description: 'Grants, IPR and patent cell' },
+      { name: 'Results', href: '#exam-results', description: 'Semester grade sheets & provisional certificates' },
+      { name: 'Online Results', href: '#exam-online-results', description: 'Instant hall-ticket result lookup' },
+      { name: 'Exam Schedules', href: '#exam-schedules', description: 'Mid-term & semester examination timetables' },
+      { name: 'Exam Notifications', href: '#exam-notifications', description: 'Exam fee dates, revaluation & circulars' },
     ],
   },
   {
     id: 'academics',
     label: 'Academics',
-    href: '#academics',
+    href: '#academic-mandatory-disclosure',
     hasDropdown: true,
     megaMenu: {
       featuredCard: {
-        title: 'NEP 2020 Aligned Curriculum',
-        description: 'Multidisciplinary credit framework, industry-embedded capstones, and experiential lab learning.',
-        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
-        linkText: 'Explore Academic Framework →',
-        href: '#academic-framework',
+        title: 'Academic & Regulatory Framework',
+        description: 'Explore approved curricula, examination schedules, central library resources, and statutory compliance disclosures.',
+        image: campusLife3Img,
+        linkText: 'Open Academics Portal →',
+        href: '#academic-mandatory-disclosure',
       },
       columns: [
         {
-          title: 'Curriculum & Structure',
+          title: 'Regulatory & Governance',
           items: [
-            { name: 'Faculties & Schools', href: '#faculties', description: 'Engineering, Computing, Management & Sciences' },
-            { name: 'Academic Regulations & Syllabi', href: '#regulations', description: 'Outcome-based education framework' },
-            { name: 'Academic Calendar 2026–27', href: '#calendar', description: 'Semester dates, exams and holidays' },
-            { name: 'Examination & Evaluation Cell', href: '#examinations', description: 'Portal, grading rules and results' },
+            { name: 'Mandatory Disclosure', href: '#academic-mandatory-disclosure', badge: 'AICTE' },
+            { name: 'Board Of Studies (BOS)', href: '#academic-board-of-studies' },
+            { name: 'Academic Calendars', href: '#academic-calendars', badge: '2026–27' },
+            { name: 'NAAC Self Study Report', href: '#academic-naac-ssr', badge: 'Grade A' },
+            { name: 'AQAR (IQAC Cell)', href: '#academic-aqar' },
           ],
         },
         {
-          title: 'Learning Ecosystem',
+          title: 'Central Digital Library',
           items: [
-            { name: 'Industry 4.0 Center of Excellence', href: '#coe', description: 'Joint labs with IBM, AWS & Siemens' },
-            { name: 'Value Added & Honors Courses', href: '#value-added', description: 'Certifications in cloud, cyber & robotics' },
-            { name: 'Central Digital Library', href: '#library', description: 'IEEE, Springer, ScienceDirect e-journals' },
-            { name: 'Faculty Directory & Research Guides', href: '#faculty-directory', description: 'Distinguished Ph.D. professors & mentors' },
+            { name: 'About Central Library', href: '#academic-about-library', badge: '85k+ Books' },
+            { name: 'Librarian’s Desk', href: '#academic-librarians-desk' },
+            { name: 'Rules & Regulations', href: '#academic-library-rules' },
+            { name: 'E-Resources & Databases', href: '#academic-library-resources' },
+            { name: 'RFID Automation & Kiosks', href: '#academic-library-rfid' },
+            { name: 'Library Services & Repo', href: '#academic-library-services' },
           ],
         },
       ],
@@ -156,39 +124,32 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
   {
     id: 'departments',
-    label: 'Courses & Departments',
+    label: 'Programs',
     href: '#departments',
     hasDropdown: true,
     megaMenu: {
       featuredCard: {
-        title: 'Comprehensive Degree Offerings',
-        description: 'Explore 30+ programs across B.Tech, M.Tech, Diploma, Management, Nursing, Physiotherapy, and Pharmacy.',
+        title: '6 Academic Schools & 49 Programmes',
+        description: 'Explore 4,579 approved intake seats across Engineering, Computer Sciences, AI & Data Science, Computing, Management & Allied Health.',
         image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80',
-        linkText: 'View Full Course Directory →',
+        linkText: 'Explore All 49 Programmes →',
         href: '#departments',
       },
       columns: [
         {
-          title: 'Engineering & Technology',
+          title: 'Engineering & Computing Schools',
           items: [
-            { name: 'B.Tech (14 Specializations)', href: '#course-btech', badge: 'Flagship', description: 'CSE, AI, AI&DS, IoT, Cyber, ECE, EEE, Mech, Civil' },
-            { name: 'Diploma / Polytechnic (5 Streams)', href: '#course-diploma', description: 'Civil, EEE, ECE, Mechanical, CSE' },
-            { name: 'M.Tech (6 Postgraduate Disciplines)', href: '#course-mtech', description: 'CAD/CAM, PEED, VLSI, CSE, Structural, Data Science' },
+            { name: 'School of Engineering & Tech (SOET)', href: '#course-school-soet', badge: '765 Seats', description: 'Civil, EEE, Mech, ECE, Drone Tech & M.Tech' },
+            { name: 'School of Computer Science & Eng (SCSE)', href: '#course-school-scse', badge: '1044 Seats', description: 'B.Tech CSE, AI, Cloud & B.Sc (Hons) AI' },
+            { name: 'School of AI & Data Science (SAID)', href: '#course-school-said', badge: '906 Seats', description: 'AI & ML, Robotics, Data Eng, Data Science' },
           ],
         },
         {
-          title: 'Management & Applications',
+          title: 'Computing, Management & Healthcare',
           items: [
-            { name: 'UG Degrees (BBA & BCA)', href: '#course-ug-degree', description: 'Bachelor of Business Administration & Computer Applications' },
-            { name: 'PG Programmes (MBA & MCA)', href: '#course-pg-programmes', badge: 'Top Tier', description: 'Master of Business Admin & Computer Applications' },
-          ],
-        },
-        {
-          title: 'Healthcare & Pharmacy',
-          items: [
-            { name: 'Nursing (ANM, GNM, B.Sc & M.Sc)', href: '#course-nursing', description: 'APNMC & INC Approved Hospital Attachments' },
-            { name: 'Physiotherapy (BPT - 4.5 Yrs)', href: '#course-physiotherapy', description: 'Orthopaedics, Neurology & Cardiopulmonary Rehab' },
-            { name: 'Pharmacy (SVCP - B.Pharm, M.Pharm, Pharm.D, Ph.D)', href: '#course-pharmacy', description: 'PCI Approved Pharmaceutical Sciences' },
+            { name: 'School of Computing & Info Sciences (SCIS)', href: '#course-school-scis', badge: '804 Seats', description: 'IT, IoT, Quantum, Cyber Security, BCA, MCA' },
+            { name: 'School of Management Studies (SOMS)', href: '#course-school-soms', badge: '180 Seats', description: 'MBA (120 Seats) & BBA (60 Seats)' },
+            { name: 'School of Allied Health Sciences (SAHS)', href: '#course-school-sahs', badge: '880 Seats', description: '14 Clinical & Therapy Bachelor Degrees' },
           ],
         },
       ],
@@ -236,17 +197,17 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     hasDropdown: true,
     megaMenu: {
       featuredCard: {
-        title: 'Vibrant 100+ Acre Campus',
-        description: 'State-of-the-art residential hostels, Olympic-sized sports facilities, and cultural clubs.',
-        image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80',
-        linkText: 'Virtual Campus Tour →',
-        href: '#virtual-tour',
+        title: 'Vibrant 65+ Acre Campus',
+        description: 'Hostel residences for 1,500+ students, Olympic-sized sports complex, hospital-attached health center, and active technical societies.',
+        image: campusLife3Img,
+        linkText: 'Explore Campus Life Hub →',
+        href: '#hostels',
       },
       columns: [
         {
           title: 'Living & Wellness',
           items: [
-            { name: 'Hostels & Dining Halls', href: '#hostels', description: 'AC/Non-AC rooms with hygienic multicuisine' },
+            { name: 'Hostels & Dining Halls', href: '#hostels', badge: '375 Rooms', description: 'AC/Non-AC rooms, 269 Boys & 129 Girls rooms' },
             { name: 'Sports & Athletic Complex', href: '#sports', description: 'Cricket stadium, indoor badminton & gymnasium' },
             { name: 'Health Center & Ambulance', href: '#health', description: '24/7 medical team and emergency pharmacy' },
             { name: 'Campus Safety & Transport', href: '#safety', description: 'CCTV surveillance & extensive bus fleet' },
@@ -265,8 +226,42 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     },
   },
   {
+    id: 'international-relations',
+    label: 'International Relations',
+    href: '#international-relations',
+    hasDropdown: true,
+    megaMenu: {
+      featuredCard: {
+        title: 'Global Community at RVS University',
+        description: 'Over 300+ international scholars from 62+ countries thriving across our undergraduate and postgraduate degree programs.',
+        image: irBannerImg,
+        linkText: 'Explore International Relations Portal →',
+        href: '#international-relations',
+      },
+      columns: [
+        {
+          title: 'Admissions & Eligibility',
+          items: [
+            { name: 'International Admissions Overview', href: '#international-relations-admissions', description: 'Application forms, visas, guidelines' },
+            { name: 'B.Tech Eligibility (13 Courses)', href: '#international-relations-btech-eligibility', badge: '13 Branches', description: 'Undergraduate engineering admissions' },
+            { name: 'PG Eligibility (M.Tech/MCA/MBA)', href: '#international-relations-pg-eligibility', badge: '8 Programs', description: 'Postgraduate admissions & procedure' },
+            { name: 'International Scholarships', href: '#international-relations-admissions', description: 'Merit-based financial aid for foreign scholars' },
+          ],
+        },
+        {
+          title: 'Global Network & Support',
+          items: [
+            { name: 'Partner Universities (MoUs)', href: '#international-relations-partner-universities', badge: '11 Global MoUs', description: 'USA, Germany, Malaysia, Ethiopia, Bhutan' },
+            { name: 'Student Testimonials (IR)', href: '#international-relations-testimonials', description: 'Stories from international alumni & scholars' },
+            { name: 'International Relations Office', href: '#international-relations-contact', description: 'Nodal officers, contacts & helpdesk' },
+          ],
+        },
+      ],
+    },
+  },
+  {
     id: 'our-institutions',
-    label: 'Our Institutions',
+    label: 'Institutions',
     href: '#about-vice-chairman',
   },
 ];

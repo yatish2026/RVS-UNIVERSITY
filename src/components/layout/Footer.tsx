@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  MapPin, Phone, Mail, Globe, Facebook, Twitter, Linkedin, 
+  MapPin, Phone, Mail, Facebook, 
   Instagram, Youtube, ArrowRight, ShieldCheck, Heart 
 } from 'lucide-react';
 import { Logo } from '../ui/Logo';
@@ -15,50 +15,47 @@ export const Footer: React.FC = () => {
           <div className="max-w-xl">
             <Logo variant="light" size="lg" />
             <p className="mt-4 text-xs text-slate-400 leading-relaxed font-light">
-              RVS University is a premier multidisciplinary institution established under the Andhra Pradesh Private Universities Act, dedicated to fostering next-generation leaders across computing, engineering, management, and research.
+              RVS University is a premier multidisciplinary institution established under the Andhra Pradesh Private Universities Act, dedicated to fostering next-generation leaders across computing, engineering, management, and healthcare.
             </p>
           </div>
 
-          {/* Social Links */}
+          {/* Social Links — Only Instagram, YouTube & Facebook */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-gold-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans">
               Connect With Us:
             </span>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3">
+              {/* 1. Instagram */}
               <a
-                href="#facebook"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-500/50 hover:bg-navy-850 transition-colors"
+                href="https://www.instagram.com/rvsuniversityofficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="RVS University Official Instagram"
+                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-pink-400 hover:border-pink-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
               >
-                <Facebook className="w-4 h-4" />
+                <Instagram className="w-5 h-5" />
               </a>
+
+              {/* 2. YouTube */}
               <a
-                href="#twitter"
-                aria-label="Twitter / X"
-                className="w-9 h-9 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-500/50 hover:bg-navy-850 transition-colors"
+                href="https://www.youtube.com/@rvs_university"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="RVS University Official YouTube Channel"
+                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-red-500 hover:border-red-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
               >
-                <Twitter className="w-4 h-4" />
+                <Youtube className="w-5 h-5" />
               </a>
+
+              {/* 3. Facebook */}
               <a
-                href="#linkedin"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-500/50 hover:bg-navy-850 transition-colors"
+                href="https://www.facebook.com/p/RVSUniversityofficial-61593336956152/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="RVS University Official Facebook Page"
+                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-blue-400 hover:border-blue-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
               >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#instagram"
-                aria-label="Instagram"
-                className="w-9 h-9 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-500/50 hover:bg-navy-850 transition-colors"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="#youtube"
-                aria-label="YouTube"
-                className="w-9 h-9 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-500/50 hover:bg-navy-850 transition-colors"
-              >
-                <Youtube className="w-4 h-4" />
+                <Facebook className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -74,74 +71,72 @@ export const Footer: React.FC = () => {
               About RVS
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#about" className="hover:text-gold-300 transition-colors">University Overview</a></li>
-              <li><a href="#leadership" className="hover:text-gold-300 transition-colors">Chancellor & VC</a></li>
-              <li><a href="#governance" className="hover:text-gold-300 transition-colors">Governing Body</a></li>
-              <li><a href="#vision" className="hover:text-gold-300 transition-colors">Vision & Mission</a></li>
-              <li><a href="#approvals" className="hover:text-gold-300 transition-colors">Statutory Act & UGC</a></li>
-              <li><a href="#awards" className="hover:text-gold-300 transition-colors">Accreditations</a></li>
+              <li><a href="#about-chairman" className="hover:text-gold-300 transition-colors">Chairman’s Desk</a></li>
+              <li><a href="#about-vice-chairman" className="hover:text-gold-300 transition-colors">Vice Chairman & 23 Institutions</a></li>
+              <li><a href="#about-principal" className="hover:text-gold-300 transition-colors">Principal Profile</a></li>
+              <li><a href="#administration" className="hover:text-gold-300 transition-colors">Organisation Chart</a></li>
+              <li><a href="#committee-governing-body" className="hover:text-gold-300 transition-colors">Governing Body</a></li>
+              <li><a href="#committee-academic-council" className="hover:text-gold-300 transition-colors">Academic Council</a></li>
             </ul>
           </div>
 
-          {/* Column 2: Academics */}
+          {/* Column 2: 6 Academic Schools */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Faculties & Degrees
+              Academic Schools
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#course-btech" className="hover:text-gold-300 transition-colors">B.Tech (14 Streams)</a></li>
-              <li><a href="#course-diploma" className="hover:text-gold-300 transition-colors">Diploma Polytechnic</a></li>
-              <li><a href="#course-mtech" className="hover:text-gold-300 transition-colors">M.Tech Programmes</a></li>
-              <li><a href="#course-ug-degree" className="hover:text-gold-300 transition-colors">UG Degrees (BBA/BCA)</a></li>
-              <li><a href="#course-pg-programmes" className="hover:text-gold-300 transition-colors">PG Degrees (MBA/MCA)</a></li>
-              <li><a href="#course-nursing" className="hover:text-gold-300 transition-colors">Nursing Sciences</a></li>
-              <li><a href="#course-physiotherapy" className="hover:text-gold-300 transition-colors">Physiotherapy (BPT)</a></li>
-              <li><a href="#course-pharmacy" className="hover:text-gold-300 transition-colors">Pharmacy (SVCP)</a></li>
+              <li><a href="#course-school-soet" className="hover:text-gold-300 transition-colors">Engineering & Tech (SOET)</a></li>
+              <li><a href="#course-school-scse" className="hover:text-gold-300 transition-colors">Computer Science (SCSE)</a></li>
+              <li><a href="#course-school-said" className="hover:text-gold-300 transition-colors">AI & Data Science (SAID)</a></li>
+              <li><a href="#course-school-scis" className="hover:text-gold-300 transition-colors">Computing & Info (SCIS)</a></li>
+              <li><a href="#course-school-soms" className="hover:text-gold-300 transition-colors">Management Studies (SOMS)</a></li>
+              <li><a href="#course-school-sahs" className="hover:text-gold-300 transition-colors">Allied Health Sciences (SAHS)</a></li>
             </ul>
           </div>
 
           {/* Column 3: Admissions */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Admissions
+              Admissions 2026
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">B.Tech Admissions</a></li>
-              <li><a href="#admissions-pg" className="hover:text-gold-300 transition-colors">MBA / MCA / M.Tech</a></li>
-              <li><a href="#admissions-phd" className="hover:text-gold-300 transition-colors">Ph.D. Fellowships</a></li>
-              <li><a href="#scholarships" className="hover:text-gold-300 transition-colors">Scholarship Matrix</a></li>
-              <li><a href="#fees" className="hover:text-gold-300 transition-colors">Fee Structure</a></li>
-              <li><a href="#international" className="hover:text-gold-300 transition-colors">International Students</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">B.Tech Engineering</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">MBA & BBA Programs</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">BCA & MCA Programs</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">Allied Health & Paramedical</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">Scholarship Matrix</a></li>
+              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">International Admissions</a></li>
             </ul>
           </div>
 
-          {/* Column 4: Placements & Life */}
+          {/* Column 4: Campus Life Hub */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Placements & Life
+              Campus Life Hub
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#placements" className="hover:text-gold-300 transition-colors">Placement Statistics</a></li>
-              <li><a href="#recruiters" className="hover:text-gold-300 transition-colors">Recruiting Partners</a></li>
-              <li><a href="#hostels" className="hover:text-gold-300 transition-colors">Campus Hostels</a></li>
-              <li><a href="#sports" className="hover:text-gold-300 transition-colors">Sports & Athletics</a></li>
-              <li><a href="#library" className="hover:text-gold-300 transition-colors">Digital Library</a></li>
-              <li><a href="#clubs" className="hover:text-gold-300 transition-colors">Student Clubs & Fest</a></li>
+              <li><a href="#hostels" className="hover:text-gold-300 transition-colors">Hostels & Dining (375 Rooms)</a></li>
+              <li><a href="#sports" className="hover:text-gold-300 transition-colors">Sports Complex & Stadium</a></li>
+              <li><a href="#health" className="hover:text-gold-300 transition-colors">Health Center & Ambulance</a></li>
+              <li><a href="#safety" className="hover:text-gold-300 transition-colors">Safety & Transport Fleet</a></li>
+              <li><a href="#tech-clubs" className="hover:text-gold-300 transition-colors">Technical Societies</a></li>
+              <li><a href="#cultural-fest" className="hover:text-gold-300 transition-colors">SELESTA Cultural Fest</a></li>
             </ul>
           </div>
 
-          {/* Column 5: Important Links */}
+          {/* Column 5: Portals & Compliance */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
               Quick Portals
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#exam-portal" className="text-gold-300 hover:text-white font-semibold">Exam Portal Login</a></li>
-              <li><a href="#alumni" className="hover:text-gold-300 transition-colors">Alumni Network</a></li>
+              <li><a href="#exam-portal" className="text-gold-300 hover:text-white font-semibold">Exam Portal & Results</a></li>
+              <li><a href="#exam-schedules" className="hover:text-gold-300 transition-colors">Exam Schedules</a></li>
+              <li><a href="#exam-notifications" className="hover:text-gold-300 transition-colors">Exam Notifications</a></li>
               <li><a href="#atal-idea-lab" className="hover:text-gold-300 transition-colors">ATAL IDEA Lab</a></li>
               <li><a href="#iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
               <li><a href="#grievances" className="hover:text-gold-300 transition-colors">Grievance Portal</a></li>
-              <li><a href="#mandatory-disclosure" className="hover:text-gold-300 transition-colors">Mandatory Disclosure</a></li>
             </ul>
           </div>
 

@@ -1,4 +1,21 @@
 import { Department, StatItem, Program, NewsItem, EventItem, Testimonial } from '../types';
+import cseLabImg from '../assets/dept/comp-dept.jpg';
+import aiDeptImg from '../assets/dept/ai-dept.webp';
+import aimlDeptImg from '../assets/dept/aiml-dept.webp';
+import dsDeptImg from '../assets/dept/ds-dept.webp';
+import iotDeptImg from '../assets/dept/iot-dept.webp';
+import csbsDeptImg from '../assets/dept/csbs-dept.webp';
+import eceDeptImg from '../assets/dept/ece-dept.webp';
+import eeeDeptImg from '../assets/dept/eee-dept.webp';
+import itDeptImg from '../assets/dept/it-dept.webp';
+import mechDeptImg from '../assets/dept/mech-dept.jpg';
+import civilDeptImg from '../assets/dept/civil-dept1.webp';
+import biochemDeptImg from '../assets/dept/biochem-dept.jpg';
+import mbaDeptImg from '../assets/dept/mba-dept.jpg';
+import mcaDeptImg from '../assets/dept/mca-dept.webp';
+import cyberSecurityImg from '../assets/generated/cyber-security-soc.jpg';
+import dataEngineeringImg from '../assets/generated/data-engineering-hub.jpg';
+import bcaStudioImg from '../assets/generated/bca-app-dev-studio.jpg';
 
 export const UNIVERSITY_INFO = {
   name: 'RVS University',
@@ -12,23 +29,19 @@ export const UNIVERSITY_INFO = {
   tagline: 'Where Knowledge Meets Possibility',
   subtagline: 'Empowering the next generation with knowledge, innovation and purpose.',
   statsSummary: {
-    acreage: '100+',
+    acreage: '65+',
     placements: '95%+',
     labs: '50+',
-    alumni: '15,000+',
-    highestPackage: '44 LPA',
+    alumni: '15k+',
+    highestPackage: '16 LPA',
+    placedCurrentYear: '1,083',
+    placed3Years: '4,300+',
     patents: '35+',
     recruiters: '250+',
   }
 };
 
 export const UNIVERSITY_STATS: StatItem[] = [
-  {
-    label: 'Campus Spread',
-    value: '100+',
-    suffix: 'Acres',
-    description: 'Ultra-modern Wi-Fi enabled green academic ecosystem in Chittoor.',
-  },
   {
     label: 'Placement Record',
     value: '95%',
@@ -37,10 +50,22 @@ export const UNIVERSITY_STATS: StatItem[] = [
   },
   {
     label: 'Highest Package',
-    value: '44',
+    value: '16',
     prefix: '₹',
     suffix: 'LPA',
     description: 'International and national tier-1 corporate offers.',
+  },
+  {
+    label: 'Placed in 2025–26',
+    value: '1,083',
+    suffix: 'Placed',
+    description: 'Total successful campus placements achieved during academic session 2025–26.',
+  },
+  {
+    label: 'Placed (Last 3 Years)',
+    value: '4,300+',
+    suffix: 'Placed',
+    description: 'Consistent career recruitment across engineering & management.',
   },
   {
     label: 'Specialized Labs',
@@ -60,6 +85,12 @@ export const UNIVERSITY_STATS: StatItem[] = [
     suffix: 'MNCs',
     description: 'Annual campus drives with top global technology enterprises.',
   },
+  {
+    label: 'Campus Spread',
+    value: '65+',
+    suffix: 'Acres',
+    description: 'Ultra-modern Wi-Fi enabled green academic ecosystem in Chittoor.',
+  },
 ];
 
 export const UNIVERSITY_DEPARTMENTS: Department[] = [
@@ -72,7 +103,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Pioneering foundational computation, systems architecture, distributed computing, and full-stack software development.',
     highlights: ['Cloud Computing Lab', 'ACM & IEEE Student Chapters', 'Industry Capstone Projects'],
     iconName: 'Code',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80',
+    image: cseLabImg,
   },
   {
     id: 'ai',
@@ -83,7 +114,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Deep dive into computational intelligence, machine reasoning, computer vision, and cognitive systems engineering.',
     highlights: ['GPU Supercomputing Clusters', 'Deep Learning Workstations', 'Applied AI Projects'],
     iconName: 'Cpu',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+    image: aiDeptImg,
   },
   {
     id: 'aids',
@@ -94,7 +125,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Blending statistical learning, big data pipelines, machine learning engineering, and predictive analytics at scale.',
     highlights: ['Big Data Hadoop/Spark Cluster', 'Kaggle Grandmaster Mentorship', 'Business Intelligence Suites'],
     iconName: 'Database',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+    image: dataEngineeringImg,
   },
   {
     id: 'cse-aiml',
@@ -105,7 +136,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Specialized computing track tailored to algorithms, neural networks, natural language processing, and automated systems.',
     highlights: ['NLP & Generative AI Lab', 'Reinforcement Learning R&D', 'TensorFlow & PyTorch Sandbox'],
     iconName: 'Binary',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80',
+    image: aimlDeptImg,
   },
   {
     id: 'cse-ds',
@@ -116,7 +147,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Focused on data warehousing, statistical modeling, data visualization, and large-scale data engineering solutions.',
     highlights: ['Data Analytics CoE', 'Tableau & PowerBI Labs', 'Real-world Case Studies'],
     iconName: 'LineChart',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
+    image: dsDeptImg,
   },
   {
     id: 'cse-iot',
@@ -127,7 +158,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Connecting embedded devices, edge sensors, wireless sensor networks, and industrial IoT communication protocols.',
     highlights: ['Smart Campus Sensor Grids', 'Edge AI Compute Boards', 'Arduino & Raspberry Pi Prototyping'],
     iconName: 'Wifi',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    image: iotDeptImg,
   },
   {
     id: 'cse-cs',
@@ -138,7 +169,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Fortifying digital networks, cryptography, ethical hacking, malware forensics, and enterprise cyber resilience.',
     highlights: ['Ethical Hacking Sandbox', 'Security Operations Center (SOC)', 'CISCO Network Academy'],
     iconName: 'ShieldCheck',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
+    image: cyberSecurityImg,
   },
   {
     id: 'csbs',
@@ -149,7 +180,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Curriculum designed in consultation with industry leaders combining core computing with modern business acumen and fintech.',
     highlights: ['Enterprise ERP Systems', 'FinTech Analytics', 'Corporate Strategy Simulations'],
     iconName: 'Briefcase',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    image: csbsDeptImg,
   },
   {
     id: 'ece',
@@ -160,7 +191,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Mastering 5G/6G wireless communications, VLSI design, semiconductor chips, embedded systems, and DSP applications.',
     highlights: ['Cadence VLSI Lab', 'Microwave & Antenna Chamber', 'Embedded IoT Testbeds'],
     iconName: 'Radio',
-    image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80',
+    image: eceDeptImg,
   },
   {
     id: 'eee',
@@ -171,7 +202,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Power systems, renewable clean energy, smart grid infrastructure, power electronics, and electric vehicle (EV) technologies.',
     highlights: ['EV Powertrain Prototyping', 'Solar Grid Station (On-Campus)', 'MATLAB Power Systems Suite'],
     iconName: 'Zap',
-    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80',
+    image: eeeDeptImg,
   },
   {
     id: 'it',
@@ -182,7 +213,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Enterprise IT architecture, software testing, cloud infrastructure administration, and full-stack DevOps workflows.',
     highlights: ['DevOps & CI/CD Pipelines', 'Enterprise Database Management', 'Agile Software Studio'],
     iconName: 'Server',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+    image: itDeptImg,
   },
   {
     id: 'me',
@@ -193,7 +224,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Robotics, 3D printing & additive manufacturing, thermal engineering, automotive design, and mechatronics systems.',
     highlights: ['3D Printing Additive Hub', 'CNC Machining Center', 'SolidWorks & ANSYS Simulation'],
     iconName: 'Settings',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: mechDeptImg,
   },
   {
     id: 'ce',
@@ -204,7 +235,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Smart city infrastructure, sustainable structural design, GIS surveying, environmental engineering, and earthquake resistance.',
     highlights: ['Total Station GIS Lab', 'Structural Testing Rig', 'STAAD Pro & AutoCAD Suites'],
     iconName: 'Building',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
+    image: civilDeptImg,
   },
   {
     id: 'hs',
@@ -215,7 +246,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Empowering first-year scholars with rigorous foundations in Applied Physics, Chemistry, Engineering Mathematics, and Professional Communication.',
     highlights: ['English Digital Language Lab', 'Advanced Optics & Materials Lab', 'Interdisciplinary Science Projects'],
     iconName: 'BookOpen',
-    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80',
+    image: biochemDeptImg,
   },
   {
     id: 'mba',
@@ -226,7 +257,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Transformative management education with specializations in Finance, Marketing, HR, Business Analytics, and Supply Chain.',
     highlights: ['Harvard Case Study Method', 'Leadership Incubation Series', 'Corporate CXO Masterclasses'],
     iconName: 'TrendingUp',
-    image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80',
+    image: mbaDeptImg,
   },
   {
     id: 'mca',
@@ -237,7 +268,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Advanced postgraduate software engineering, enterprise application development, cloud computing, and cybersecurity paradigms.',
     highlights: ['Full Stack Java & Python Labs', 'Industry Live Projects', 'Placement Acceleration Track'],
     iconName: 'Terminal',
-    image: 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=800&q=80',
+    image: mcaDeptImg,
   },
   {
     id: 'bca',
@@ -248,7 +279,7 @@ export const UNIVERSITY_DEPARTMENTS: Department[] = [
     description: 'Undergraduate computing gateway covering web technologies, database administration, software lifecycle, and mobile app design.',
     highlights: ['Interactive Coding Labs', 'App Development Hackathons', 'Direct PG Pathways'],
     iconName: 'Laptop',
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
+    image: bcaStudioImg,
   },
 ];
 
@@ -335,10 +366,10 @@ export const NEWS_ANNOUNCEMENTS: NewsItem[] = [
   },
   {
     id: 'news-3',
-    title: 'Campus Placements 2025–26 Cross 1,200+ Job Offers with 44 LPA Top Tier Placement',
+    title: 'Campus Placements 2025–26: 1,083 Placed with ₹16 LPA Highest CTC Record',
     category: 'Placements',
     date: 'February 10, 2026',
-    snippet: 'Record-breaking placement season witnessed top product companies visiting RVS University for specialized computing roles.',
+    snippet: 'Outstanding placement season witnessed top technology and MNCs recruiting RVS University graduates.',
     link: '#placements',
   },
   {

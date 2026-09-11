@@ -24,7 +24,7 @@ export const HeroCarousel: React.FC = () => {
       id: 'campus-rainbow',
       image: '/images/banner-campus-rainbow.png',
       title: 'The Future Looks Bright at RVS University',
-      caption: '100+ Acre Green Residential Campus with Central Library & Smart Amphitheatre.',
+      caption: '65+ Acre Green Residential Campus with Central Library & Smart Amphitheatre.',
       tag: 'World-Class Campus Infrastructure',
       href: '#campus-life',
     },

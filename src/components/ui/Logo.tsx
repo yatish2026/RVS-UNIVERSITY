@@ -5,32 +5,32 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   showText?: boolean;
+  showCaption?: boolean | 'responsive';
 }
 
 export const Logo: React.FC<LogoProps> = ({ 
   variant = 'dark', 
   size = 'md', 
   className = '', 
-  showText = true 
+  showText = true,
+  showCaption = 'responsive'
 }) => {
-  const isLight = variant === 'light';
-
   // Standard Tailwind sizing classes with fixed dimensions
   const logoDimensions = {
-    sm: 'w-9 h-9 min-w-[36px] min-h-[36px]',
-    md: 'w-12 h-12 md:w-14 md:h-14 min-w-[48px] min-h-[48px]',
-    lg: 'w-16 h-16 md:w-20 md:h-20 min-w-[64px] min-h-[64px]',
+    sm: 'w-8 h-8 md:w-9 md:h-9 min-w-[32px] min-h-[32px]',
+    md: 'w-10 h-10 md:w-12 md:h-12 min-w-[40px] min-h-[40px]',
+    lg: 'w-14 h-14 md:w-18 md:h-18 min-w-[56px] min-h-[56px]',
   };
 
   // Typography sizing
   const titleSizes = {
-    sm: 'text-base md:text-lg',
-    md: 'text-xl sm:text-2xl md:text-[26px]',
+    sm: 'text-sm md:text-base',
+    md: 'text-lg sm:text-xl md:text-[22px]',
     lg: 'text-2xl md:text-3xl',
   };
 
   return (
-    <a href="#home" className={`flex items-center gap-3 group select-none flex-shrink-0 ${className}`}>
+    <a href="#home" className={`flex items-center gap-2.5 sm:gap-3 group select-none flex-shrink-0 ${className}`}>
       {/* Official Circular University Crest */}
       <div className={`relative flex-shrink-0 ${logoDimensions[size]} transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-md border-2 border-gold-400 bg-white p-0.5 aspect-square`}>
         <img
@@ -40,19 +40,29 @@ export const Logo: React.FC<LogoProps> = ({
         />
       </div>
 
-      {/* Prominent University Name with R(Red) V(Purple) S(Green) */}
+      {/* Prominent University Name with R(Red) V(Purple) S(Green) + Caption */}
       {showText && (
         <div className="flex flex-col justify-center flex-shrink-0">
           <span
             className={`font-serif font-black tracking-tight leading-none whitespace-nowrap ${titleSizes[size]}`}
           >
-            <span className="text-[#E53935] font-black">R</span>
-            <span className="text-[#8E24AA] font-black">V</span>
-            <span className="text-[#2E7D32] font-black">S</span>{' '}
-            <span className={isLight ? "text-gold-400 font-extrabold" : "text-gold-600 font-extrabold"}>UNIVERSITY</span>
+            <span className="text-[#FF4D4D] font-black">R</span>
+            <span className="text-[#CE93D8] font-black">V</span>
+            <span className="text-[#81C784] font-black">S</span>{' '}
+            <span className="text-gold-400 font-extrabold drop-shadow-sm">UNIVERSITY</span>
           </span>
+          {showCaption && (
+            <span
+              className={`text-[8.5px] sm:text-[9.5px] md:text-[10px] font-semibold tracking-wider text-slate-300 uppercase mt-0.5 whitespace-nowrap ${
+                showCaption === 'responsive' ? 'hidden 2xl:block' : ''
+              }`}
+            >
+              Find Your Place <span className="text-gold-400 font-bold">•</span> Follow Your Passion
+            </span>
+          )}
         </div>
       )}
     </a>
   );
 };
+

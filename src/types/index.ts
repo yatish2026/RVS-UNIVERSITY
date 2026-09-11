@@ -3,6 +3,7 @@ export interface NavSubItem {
   href: string;
   description?: string;
   badge?: string;
+  subItems?: NavSubItem[];
 }
 
 export interface MegaMenuColumn {

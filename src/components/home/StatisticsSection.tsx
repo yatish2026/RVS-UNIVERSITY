@@ -29,23 +29,23 @@ export const StatisticsSection: React.FC = () => {
           </div>
         </Reveal>
 
-        {/* Statistics Grid with Staggered Zoom & Fade Entrances */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Statistics Grid with Staggered Zoom & Fade Entrances (4x2 layout on desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {UNIVERSITY_STATS.map((stat, idx) => (
             <Reveal
               key={idx}
               direction="zoom"
-              delay={idx * 100}
+              delay={idx * 60}
             >
-              <div className="p-8 rounded-2xl bg-navy-900/80 border border-navy-750 hover:border-gold-500/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between h-full group">
+              <div className="p-6 sm:p-7 rounded-3xl bg-navy-900/80 border border-navy-750 hover:border-gold-500/60 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between h-full group shadow-lg">
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-gold-400 font-mono mb-2">
                     {stat.label}
                   </div>
-                  <div className="flex items-baseline gap-1 text-4xl lg:text-5xl font-serif font-extrabold text-white group-hover:text-gold-300 transition-colors my-2">
-                    {stat.prefix && <span className="text-gold-400 text-3xl">{stat.prefix}</span>}
+                  <div className="flex items-baseline gap-1 text-3xl sm:text-4xl lg:text-[42px] font-serif font-extrabold text-white group-hover:text-gold-300 transition-colors my-1.5">
+                    {stat.prefix && <span className="text-gold-400 text-2xl sm:text-3xl">{stat.prefix}</span>}
                     <span>{stat.value}</span>
-                    {stat.suffix && <span className="text-gold-400 text-2xl font-sans ml-1">{stat.suffix}</span>}
+                    {stat.suffix && <span className="text-gold-400 text-xl sm:text-2xl font-sans ml-1">{stat.suffix}</span>}
                   </div>
                 </div>
 

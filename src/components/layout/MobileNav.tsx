@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { X, ChevronDown, ChevronRight, Phone, Mail, MapPin, Sparkles, ExternalLink } from 'lucide-react';
+import { 
+  X, ChevronDown, ChevronRight, Phone, Mail, MapPin, 
+  Sparkles, ExternalLink, Instagram, Youtube, Facebook 
+} from 'lucide-react';
 import { MAIN_NAV_ITEMS, UTILITY_BAR_LINKS } from '../../data/navigationData';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 import { Logo } from '../ui/Logo';
@@ -176,23 +179,60 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Contact Footer Inside Drawer */}
-        <div className="pt-6 pb-4 space-y-2 text-xs text-slate-400 border-t border-navy-800/80">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-            <span>{UNIVERSITY_INFO.address}</span>
+        {/* Contact Footer & Social Channels Inside Drawer */}
+        <div className="pt-6 pb-4 space-y-4 text-xs text-slate-400 border-t border-navy-800/80">
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-gold-400">
+              Follow Us:
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.instagram.com/rvsuniversityofficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-8 h-8 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-pink-400"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.youtube.com/@rvs_university"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-8 h-8 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-red-500"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.facebook.com/p/RVSUniversityofficial-61593336956152/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-8 h-8 rounded-lg bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-blue-400"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-            <a href={`tel:${UNIVERSITY_INFO.phone}`} className="text-slate-200 hover:text-gold-300">
-              {UNIVERSITY_INFO.phone}
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-            <a href={`mailto:${UNIVERSITY_INFO.email}`} className="text-slate-200 hover:text-gold-300">
-              {UNIVERSITY_INFO.email}
-            </a>
+
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+              <span>{UNIVERSITY_INFO.address}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+              <a href={`tel:${UNIVERSITY_INFO.phone}`} className="text-slate-200 hover:text-gold-300">
+                {UNIVERSITY_INFO.phone}
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+              <a href={`mailto:${UNIVERSITY_INFO.email}`} className="text-slate-200 hover:text-gold-300">
+                {UNIVERSITY_INFO.email}
+              </a>
+            </div>
           </div>
         </div>
       </div>

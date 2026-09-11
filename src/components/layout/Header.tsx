@@ -8,7 +8,7 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -20,18 +20,22 @@ export const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 left-0 w-full z-40 transition-all duration-300">
-      {/* Main Navigation Bar */}
-      <Navbar
-        isScrolled={isScrolled}
-        onMobileMenuOpen={() => setIsMobileMenuOpen(true)}
-      />
+    <header className="fixed top-0 left-0 w-full z-40 px-2 sm:px-4 lg:px-6 2xl:px-8 pt-2 sm:pt-3 lg:pt-3.5 transition-all duration-500 pointer-events-none">
+      <div className="max-w-[1580px] mx-auto transition-all duration-500 pointer-events-auto">
+        {/* Navigation Bar: Floating glassbox capsule at initial landing, deepening on scroll */}
+        <Navbar
+          isScrolled={isScrolled}
+          onMobileMenuOpen={() => setIsMobileMenuOpen(true)}
+        />
+      </div>
 
       {/* Mobile Fullscreen Navigation Drawer */}
-      <MobileNav
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
+      <div className="pointer-events-auto">
+        <MobileNav
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        />
+      </div>
     </header>
   );
 };

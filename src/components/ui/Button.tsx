@@ -30,11 +30,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     gold: 'bg-gold-500 hover:bg-gold-400 text-navy-950 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.98] border border-gold-400 focus:ring-gold-500 font-bold',
-    'primary-navy': 'bg-navy-850 hover:bg-navy-900 text-white hover:shadow-lg hover:shadow-navy-900/25 active:scale-[0.98] border border-navy-700 focus:ring-navy-800',
-    'outline-navy': 'bg-transparent hover:bg-navy-50 text-navy-900 border-2 border-navy-850 hover:border-navy-900 active:scale-[0.98] focus:ring-navy-800',
-    'outline-gold': 'bg-transparent hover:bg-gold-50 text-gold-700 border-2 border-gold-500 hover:border-gold-600 active:scale-[0.98] focus:ring-gold-500',
+    'primary-navy': 'bg-navy-850 hover:bg-navy-800 text-white hover:shadow-lg hover:shadow-navy-900/25 active:scale-[0.98] border border-navy-700 focus:ring-navy-800',
+    'outline-navy': 'bg-navy-900/80 hover:bg-navy-800 text-slate-200 hover:text-white border-2 border-navy-700 hover:border-gold-400 active:scale-[0.98] focus:ring-gold-500 shadow-md',
+    'outline-gold': 'bg-transparent hover:bg-gold-500/10 text-gold-300 border-2 border-gold-500 hover:border-gold-400 active:scale-[0.98] focus:ring-gold-500',
     'ghost-white': 'bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-md hover:border-white/40 active:scale-[0.98] focus:ring-white',
-    glass: 'bg-white/90 hover:bg-white text-navy-900 border border-slate-200/80 shadow-md backdrop-blur-md active:scale-[0.98] focus:ring-navy-800',
+    glass: 'bg-navy-900/90 hover:bg-navy-850 text-white border border-navy-700 shadow-md backdrop-blur-md active:scale-[0.98] focus:ring-gold-500',
   };
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
