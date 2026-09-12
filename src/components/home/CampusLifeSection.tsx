@@ -89,7 +89,7 @@ export const CampusLifeSection: React.FC = () => {
           <Reveal direction="left">
             <SectionHeading
               eyebrow="Student Experience & Infrastructure"
-              title="Life on a 65+ Acre Smart Campus"
+              title="Life on a Smart Campus"
               subtitle="From high-tech learning spaces and vibrant student festivals to competitive athletics and serene residential greens, experience a truly holistic university life."
               variant="dark"
             />

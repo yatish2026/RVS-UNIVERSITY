@@ -166,6 +166,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
         {
           title: 'Clubs & Culture',
           items: [
+            { name: 'Photo Gallery', href: '#gallery', badge: '15+ Photos', description: 'Interactive visual tour with motion & animations' },
             { name: 'Student Technical Societies', href: '#tech-clubs', description: 'Coding club, Robotics, AI builders, IEEE' },
             { name: 'Cultural Fest & Arts Guild', href: '#cultural-fest', description: 'Music, drama, literary & annual university fest' },
             { name: 'NSS & Community Outreach', href: '#nss', description: 'Village adoption and social welfare missions' },

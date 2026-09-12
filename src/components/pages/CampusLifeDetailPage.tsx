@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   ArrowLeft, ArrowRight, Bed, UtensilsCrossed, Trophy, HeartPulse, 
   ShieldCheck, Bus, Code, Sparkles, Music, Users, Leaf, Sun, 
   Droplets, Camera, CheckCircle2, Phone, Mail, Clock, MapPin, 
-  Tv, Wifi, Activity, Dumbbell, Shield, Flame, Radio
+  Tv, Wifi, Activity, Dumbbell, Shield, Flame, Radio, X, ZoomIn,
+  ChevronLeft, ChevronRight, Layers, Eye, Filter
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
@@ -20,6 +21,14 @@ import auditoriumImg from '../../assets/Screenshot 2026-08-25 123412.png';
 import campusBoulevardImg from '../../assets/Screenshot 2026-08-25 123337.png';
 import studentHoneycombImg from '../../assets/student-honeycomb-collage.png';
 
+import roboticsImg from '../../assets/064A8030.JPG';
+import electronicsImg from '../../assets/064A8040.JPG';
+import culturalDanceImg from '../../assets/064A1094.JPG';
+import youthConcertImg from '../../assets/064A7319.JPG';
+import convocationImg from '../../assets/064A7604.JPG';
+import sportsGroundImg from '../../assets/DSC05876.JPG';
+import mechWorkshopImg from '../../assets/DSC06305.JPG';
+
 export type CampusLifeTab = 
   | 'hostels' 
   | 'sports' 
@@ -28,7 +37,8 @@ export type CampusLifeTab =
   | 'tech-clubs' 
   | 'cultural-fest' 
   | 'nss' 
-  | 'green-campus';
+  | 'green-campus'
+  | 'gallery';
 
 interface CampusLifeDetailPageProps {
   activeTab: CampusLifeTab;
@@ -41,9 +51,24 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
   onBackToHome,
   onSelectTab,
 }) => {
+  const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>('all');
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activeTab]);
+
+  // Handle lightbox keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowRight') setLightboxIndex((prev) => (prev !== null && prev < 16 ? prev + 1 : 0));
+      if (e.key === 'ArrowLeft') setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : 16));
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
 
   // Hostels Occupancy Data
   const hostelOccupancyData = [
@@ -104,6 +129,12 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
       eyebrow: 'Sustainability & Environmental Stewardship',
       subtitle: '500 kW rooftop solar energy, 100% rainwater harvesting, sewage water recycling, and lush green biodiversity.',
       image: greenGardenImg,
+    },
+    gallery: {
+      title: 'Campus Life Photo Gallery',
+      eyebrow: 'Visual Showcase & Motion Moments',
+      subtitle: 'Explore 15+ curated high-resolution photographs capturing our vibrant cultural mega-fests, frontier laboratories, athletic tournaments, and student life.',
+      image: festStageImg,
     },
   };
 
@@ -181,6 +212,7 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
               { id: 'cultural-fest' as CampusLifeTab, label: 'Cultural & Arts', icon: Music },
               { id: 'nss' as CampusLifeTab, label: 'NSS & Outreach', icon: Users },
               { id: 'green-campus' as CampusLifeTab, label: 'Green Campus', icon: Leaf },
+              { id: 'gallery' as CampusLifeTab, label: 'Photo Gallery', icon: Camera },
             ].map((tab) => {
               const TabIcon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -192,7 +224,7 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
                     onSelectTab(tab.id);
                     window.location.hash = tab.id;
                   }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                     isActive
                       ? 'bg-navy-950 text-gold-300 font-black shadow-md'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-navy-950 border border-slate-200'
@@ -845,6 +877,372 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 9: CAMPUS LIFE PHOTO GALLERY (17 AUTHENTIC PHOTOS WITH MOTION & LIGHTBOX) */}
+        {/* ========================================================================= */}
+        {activeTab === 'gallery' && (
+          <div className="space-y-10">
+            {/* Gallery Intro & Animated Filter Tabs */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-lg text-navy-950 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-gold-700 border border-amber-200 text-xs font-bold uppercase tracking-wider">
+                  <Camera className="w-3.5 h-3.5 text-gold-600" />
+                  <span>Curated High-Resolution Visual Gallery</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy-950">
+                  Campus Life in Motion & Moments
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500">
+                  Showing real photographs from university festivals, engineering labs, sports grounds, and academic life.
+                </p>
+              </div>
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 self-stretch md:self-auto">
+                {[
+                  { id: 'all', label: 'All Photos' },
+                  { id: 'cultural', label: 'Festivals & Arts' },
+                  { id: 'labs', label: 'Tech Labs & AI' },
+                  { id: 'campus', label: 'Campus & Greenery' },
+                  { id: 'sports', label: 'Sports & Life' },
+                ].map((cat) => {
+                  const isActive = selectedGalleryCategory === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setSelectedGalleryCategory(cat.id)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                        isActive
+                          ? 'bg-navy-950 text-gold-300 shadow-md font-extrabold'
+                          : 'text-slate-600 hover:text-navy-950 hover:bg-slate-200/70'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Interactive Animated Photo Grid (17 Photos) */}
+            {(() => {
+              const galleryPhotos = [
+                {
+                  id: 0,
+                  src: festStageImg,
+                  title: 'SELESTA Annual Cultural Mega Fest',
+                  category: 'cultural',
+                  tag: 'Cultural Festival',
+                  desc: 'High-energy mainstage performances, lights, music, and student choreography.',
+                  aspect: 'aspect-[4/3] md:col-span-2 md:aspect-[16/9]',
+                },
+                {
+                  id: 1,
+                  src: festOnamImg,
+                  title: 'Traditional Onam & Floral Rangoli',
+                  category: 'cultural',
+                  tag: 'Heritage & Fest',
+                  desc: 'Multicultural campus community celebrating festive spirit with grand Pookkalam.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 2,
+                  src: techLabImg,
+                  title: 'Advanced AI & Supercomputing Lab',
+                  category: 'labs',
+                  tag: 'Innovation Hub',
+                  desc: 'High-performance computing workstations for deep learning & coding hackathons.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 3,
+                  src: greenAerialImg,
+                  title: 'Panoramic Green Campus Aerial View',
+                  category: 'campus',
+                  tag: 'Infrastructure',
+                  desc: 'Lush 65+ acre integrated smart campus nestled amidst serene hills.',
+                  aspect: 'aspect-[4/3] md:col-span-2 md:aspect-[16/9]',
+                },
+                {
+                  id: 4,
+                  src: festBonfireImg,
+                  title: 'Student Night Carnival & Campfire',
+                  category: 'cultural',
+                  tag: 'Night Fest',
+                  desc: 'Memorable student night celebrations, bonfires, and open-air acoustic jams.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 5,
+                  src: roboticsImg,
+                  title: 'Robotics & Drone Innovation Studio',
+                  category: 'labs',
+                  tag: 'R&D Labs',
+                  desc: 'Hands-on prototyping with autonomous drone systems and robotic arms.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 6,
+                  src: festFoodImg,
+                  title: 'Campus Food Fiesta & Culinary Stalls',
+                  category: 'cultural',
+                  tag: 'Student Carnival',
+                  desc: 'Youth culinary fest showcasing authentic regional cuisines and pop-up stalls.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 7,
+                  src: rvsHospitalImg,
+                  title: 'RVS Multi-Speciality Teaching Hospital',
+                  category: 'campus',
+                  tag: 'Healthcare',
+                  desc: 'State-of-the-art medical hospital and clinical care training facility.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 8,
+                  src: sportsGroundImg,
+                  title: 'Outdoor Sports Stadium & Athletics',
+                  category: 'sports',
+                  tag: 'Athletics Arena',
+                  desc: 'Full-sized cricket ground, football arena, and athletic tracks.',
+                  aspect: 'aspect-[4/3] md:col-span-2 md:aspect-[16/9]',
+                },
+                {
+                  id: 9,
+                  src: auditoriumImg,
+                  title: 'Central Air-Conditioned Auditorium',
+                  category: 'campus',
+                  tag: 'Convention Center',
+                  desc: '2,000+ seat acoustic auditorium hosting global symposiums & conventions.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 10,
+                  src: culturalDanceImg,
+                  title: 'Classical & Fusion Dance Ensembles',
+                  category: 'cultural',
+                  tag: 'Performing Arts',
+                  desc: 'Vibrant classical performances celebrating Indian rich artistic heritage.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 11,
+                  src: electronicsImg,
+                  title: 'VLSI Design & Semiconductor Hub',
+                  category: 'labs',
+                  tag: 'Engineering Labs',
+                  desc: 'Industry-standard EDA software tools and semiconductor test benches.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 12,
+                  src: youthConcertImg,
+                  title: 'Student Rock Concert & Music Gala',
+                  category: 'cultural',
+                  tag: 'Live Concert',
+                  desc: 'Electrifying music performances by student rock bands and visiting artists.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 13,
+                  src: greenGardenImg,
+                  title: 'Botanical Gardens & Tree-Lined Avenues',
+                  category: 'campus',
+                  tag: 'Eco Campus',
+                  desc: 'Tranquil study spots and lush green biodiversity across the campus.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 14,
+                  src: convocationImg,
+                  title: 'Annual Graduation Convocation Ceremony',
+                  category: 'sports',
+                  tag: 'Academic Milestone',
+                  desc: 'Celebration of graduating batches receiving degrees and gold medals.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 15,
+                  src: mechWorkshopImg,
+                  title: 'Heavy Machinery & CNC Automation Lab',
+                  category: 'labs',
+                  tag: 'Industrial Labs',
+                  desc: 'Precision engineering, CNC turning centers, and industrial automation.',
+                  aspect: 'aspect-[4/3]',
+                },
+                {
+                  id: 16,
+                  src: campusBoulevardImg,
+                  title: 'Smart Campus Boulevard & Bus Fleet',
+                  category: 'campus',
+                  tag: 'Transit & Boulevard',
+                  desc: 'Modern university infrastructure with 45+ AC buses ensuring smooth connectivity.',
+                  aspect: 'aspect-[4/3] md:col-span-2 md:aspect-[16/9]',
+                },
+              ];
+
+              const filteredPhotos = selectedGalleryCategory === 'all'
+                ? galleryPhotos
+                : galleryPhotos.filter((p) => p.category === selectedGalleryCategory);
+
+              return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {filteredPhotos.map((photo, index) => (
+                    <div
+                      key={photo.id}
+                      onClick={() => setLightboxIndex(photo.id)}
+                      className={`group relative rounded-3xl overflow-hidden bg-navy-950 border-2 border-slate-200/80 hover:border-gold-400 shadow-lg hover:shadow-2xl hover:shadow-gold-500/20 transition-all duration-500 cursor-pointer transform hover:-translate-y-1.5 ${
+                        photo.aspect.includes('col-span-2') && selectedGalleryCategory === 'all' ? 'sm:col-span-2' : ''
+                      }`}
+                    >
+                      {/* Image Container with Dynamic Scale Motion */}
+                      <div className="w-full h-64 sm:h-72 lg:h-80 overflow-hidden relative">
+                        <img
+                          src={photo.src}
+                          alt={photo.title}
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-0.5"
+                          loading="lazy"
+                        />
+                        
+                        {/* Shimmer Ambient Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                        
+                        {/* Top Category Badge */}
+                        <div className="absolute top-4 left-4 z-10">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-950/80 backdrop-blur-md border border-gold-400/40 text-gold-300 text-[11px] font-bold uppercase tracking-wider shadow-md">
+                            <Sparkles className="w-3 h-3 text-gold-400" />
+                            {photo.tag}
+                          </span>
+                        </div>
+
+                        {/* Top Right Zoom Icon Indicator */}
+                        <div className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-navy-950/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110 shadow-md">
+                          <ZoomIn className="w-4 h-4 text-gold-300" />
+                        </div>
+
+                        {/* Bottom Info Bar with Motion Reveal */}
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-white z-10 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300 space-y-1">
+                          <h3 className="font-serif text-base sm:text-lg font-bold text-white group-hover:text-gold-300 transition-colors drop-shadow-md">
+                            {photo.title}
+                          </h3>
+                          <p className="text-xs text-slate-300 line-clamp-2 font-light leading-relaxed">
+                            {photo.desc}
+                          </p>
+                          <div className="pt-1 flex items-center gap-1.5 text-[11px] font-semibold text-gold-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span>Click to enlarge in full screen</span>
+                            <ArrowRight className="w-3 h-3" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+
+            {/* Interactive Lightbox Modal */}
+            {lightboxIndex !== null && (() => {
+              const allPhotos = [
+                { id: 0, src: festStageImg, title: 'SELESTA Annual Cultural Mega Fest', tag: 'Cultural Festival', desc: 'High-energy mainstage performances, lights, music, and student choreography.' },
+                { id: 1, src: festOnamImg, title: 'Traditional Onam & Floral Rangoli', tag: 'Heritage & Fest', desc: 'Multicultural campus community celebrating festive spirit with grand Pookkalam.' },
+                { id: 2, src: techLabImg, title: 'Advanced AI & Supercomputing Lab', tag: 'Innovation Hub', desc: 'High-performance computing workstations for deep learning & coding hackathons.' },
+                { id: 3, src: greenAerialImg, title: 'Panoramic Green Campus Aerial View', tag: 'Infrastructure', desc: 'Lush 65+ acre integrated smart campus nestled amidst serene hills.' },
+                { id: 4, src: festBonfireImg, title: 'Student Night Carnival & Campfire', tag: 'Night Fest', desc: 'Memorable student night celebrations, bonfires, and open-air acoustic jams.' },
+                { id: 5, src: roboticsImg, title: 'Robotics & Drone Innovation Studio', tag: 'R&D Labs', desc: 'Hands-on prototyping with autonomous drone systems and robotic arms.' },
+                { id: 6, src: festFoodImg, title: 'Campus Food Fiesta & Culinary Stalls', tag: 'Student Carnival', desc: 'Youth culinary fest showcasing authentic regional cuisines and pop-up stalls.' },
+                { id: 7, src: rvsHospitalImg, title: 'RVS Multi-Speciality Teaching Hospital', tag: 'Healthcare', desc: 'State-of-the-art medical hospital and clinical care training facility.' },
+                { id: 8, src: sportsGroundImg, title: 'Outdoor Sports Stadium & Athletics', tag: 'Athletics Arena', desc: 'Full-sized cricket ground, football arena, and athletic tracks.' },
+                { id: 9, src: auditoriumImg, title: 'Central Air-Conditioned Auditorium', tag: 'Convention Center', desc: '2,000+ seat acoustic auditorium hosting global symposiums & conventions.' },
+                { id: 10, src: culturalDanceImg, title: 'Classical & Fusion Dance Ensembles', tag: 'Performing Arts', desc: 'Vibrant classical performances celebrating Indian rich artistic heritage.' },
+                { id: 11, src: electronicsImg, title: 'VLSI Design & Semiconductor Hub', tag: 'Engineering Labs', desc: 'Industry-standard EDA software tools and semiconductor test benches.' },
+                { id: 12, src: youthConcertImg, title: 'Student Rock Concert & Music Gala', tag: 'Live Concert', desc: 'Electrifying music performances by student rock bands and visiting artists.' },
+                { id: 13, src: greenGardenImg, title: 'Botanical Gardens & Tree-Lined Avenues', tag: 'Eco Campus', desc: 'Tranquil study spots and lush green biodiversity across the campus.' },
+                { id: 14, src: convocationImg, title: 'Annual Graduation Convocation Ceremony', tag: 'Academic Milestone', desc: 'Celebration of graduating batches receiving degrees and gold medals.' },
+                { id: 15, src: mechWorkshopImg, title: 'Heavy Machinery & CNC Automation Lab', tag: 'Industrial Labs', desc: 'Precision engineering, CNC turning centers, and industrial automation.' },
+                { id: 16, src: campusBoulevardImg, title: 'Smart Campus Boulevard & Bus Fleet', tag: 'Transit & Boulevard', desc: 'Modern university infrastructure with 45+ AC buses ensuring smooth connectivity.' },
+              ];
+              const curPhoto = allPhotos[lightboxIndex] || allPhotos[0];
+
+              return (
+                <div
+                  className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-between p-4 md:p-8 animate-fadeIn text-white"
+                  onClick={() => setLightboxIndex(null)}
+                >
+                  {/* Top Header Controls */}
+                  <div
+                    className="w-full max-w-6xl flex items-center justify-between z-20 pb-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="px-3 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
+                        {curPhoto.tag}
+                      </span>
+                      <span className="text-xs text-slate-400 font-sans">
+                        Photo {lightboxIndex + 1} of {allPhotos.length}
+                      </span>
+                    </div>
+
+                    <button
+                      onClick={() => setLightboxIndex(null)}
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 cursor-pointer shadow-lg"
+                      aria-label="Close Preview"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Main Centered Image with Navigation Arrows */}
+                  <div
+                    className="relative w-full max-w-5xl flex-1 flex items-center justify-center my-auto"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => setLightboxIndex(lightboxIndex > 0 ? lightboxIndex - 1 : allPhotos.length - 1)}
+                      className="absolute left-2 md:-left-12 p-3 rounded-full bg-navy-950/80 hover:bg-gold-500 hover:text-navy-950 text-white border border-gold-400/40 backdrop-blur-md transition-all duration-200 z-30 cursor-pointer shadow-2xl"
+                      aria-label="Previous Photo"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+
+                    {/* Image Stage */}
+                    <div className="relative max-h-[70vh] rounded-3xl overflow-hidden shadow-2xl border border-gold-400/30 bg-navy-950">
+                      <img
+                        src={curPhoto.src}
+                        alt={curPhoto.title}
+                        className="max-h-[70vh] w-auto object-contain rounded-3xl animate-scaleIn"
+                      />
+                    </div>
+
+                    {/* Next Button */}
+                    <button
+                      onClick={() => setLightboxIndex(lightboxIndex < allPhotos.length - 1 ? lightboxIndex + 1 : 0)}
+                      className="absolute right-2 md:-right-12 p-3 rounded-full bg-navy-950/80 hover:bg-gold-500 hover:text-navy-950 text-white border border-gold-400/40 backdrop-blur-md transition-all duration-200 z-30 cursor-pointer shadow-2xl"
+                      aria-label="Next Photo"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  {/* Bottom Caption Bar */}
+                  <div
+                    className="w-full max-w-4xl text-center pt-4 border-t border-white/10 z-20 space-y-1"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-gold-300">
+                      {curPhoto.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto font-light">
+                      {curPhoto.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         )}
 

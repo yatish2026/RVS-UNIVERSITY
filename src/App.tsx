@@ -262,8 +262,14 @@ export const App: React.FC = () => {
       // 4. Check Campus Life hashes
       const campusLifeTabs: CampusLifeTab[] = [
         'hostels', 'sports', 'health', 'safety', 
-        'tech-clubs', 'cultural-fest', 'nss', 'green-campus'
+        'tech-clubs', 'cultural-fest', 'nss', 'green-campus', 'gallery'
       ];
+      if (hash === '#gallery' || hash === '#campus-gallery' || hash === '#photo-gallery' || hash === '#campus-life-gallery') {
+        resetAllViews();
+        setCampusLifeTab('gallery');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       const matchedCampusTab = campusLifeTabs.find((tab) => hash === `#${tab}`);
       if (matchedCampusTab) {
         resetAllViews();

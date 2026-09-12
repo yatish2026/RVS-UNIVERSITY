@@ -117,7 +117,8 @@ export const Footer: React.FC = () => {
               Campus Life Hub
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#academic-about-library" className="text-gold-300 hover:text-white font-medium transition-colors">Central Digital Library (85k+ Books)</a></li>
+              <li><a href="#gallery" className="text-gold-300 hover:text-white font-medium transition-colors">Campus Photo Gallery (15+ Photos)</a></li>
+              <li><a href="#academic-about-library" className="hover:text-gold-300 transition-colors">Central Digital Library (85k+ Books)</a></li>
               <li><a href="#hostels" className="hover:text-gold-300 transition-colors">Hostels & Dining (375 Rooms)</a></li>
               <li><a href="#sports" className="hover:text-gold-300 transition-colors">Sports Complex & Stadium</a></li>
               <li><a href="#health" className="hover:text-gold-300 transition-colors">Health Center & Ambulance</a></li>
