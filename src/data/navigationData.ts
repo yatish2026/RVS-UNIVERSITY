@@ -221,9 +221,4 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
       ],
     },
   },
-  {
-    id: 'our-institutions',
-    label: 'Institutions',
-    href: '#about-vice-chairman',
-  },
 ];
