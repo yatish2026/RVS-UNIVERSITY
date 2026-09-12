@@ -41,15 +41,34 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     label: 'About',
     href: '#about-overview',
     hasDropdown: true,
-    simpleDropdown: [
-      { name: 'Overview', href: '#about-overview', description: 'Vision, Mission, and University Profile' },
-      { name: 'Leadership', href: '#about-leadership', description: 'Founder Chairman, Vice Chairman & Principal' },
-      { name: 'Governance', href: '#about-governance', description: 'Governing Body, Academic Council & Committees' },
-      { name: 'Administration', href: '#about-administration', description: 'Administrative Hierarchy & Organisation Chart' },
-      { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A', description: 'NBA, AICTE, NIRF & Recognitions' },
-      { name: 'IQAC', href: '#about-iqac', badge: 'Cell', description: 'Internal Quality Assurance Cell & AQAR' },
-      { name: 'Contact Us', href: '#contact-us', badge: 'Helpline', description: '+91 9669660155 • info@rvsu.org' },
-    ],
+    megaMenu: {
+      featuredCard: {
+        title: 'Chancellor Dr. Ravuri Venkataswamy',
+        description: 'Founder & Chancellor, RVS University. Guiding a 28-year legacy of academic innovation across 23 group institutions.',
+        image: '/images/chairman.jpg',
+        linkText: 'Explore Chancellor & Leadership →',
+        href: '#about-leadership',
+      },
+      columns: [
+        {
+          title: 'Institutional Pillars',
+          items: [
+            { name: 'Overview', href: '#about-overview', description: 'Vision, Mission, and University Profile' },
+            { name: 'Leadership', href: '#about-leadership', badge: 'Executive', description: 'Chancellor, Pro Chancellor & Vice Chancellor' },
+            { name: 'Governance', href: '#about-governance', description: 'Statutory Body & University Council' },
+            { name: 'Administration', href: '#about-administration', description: 'Administrative Hierarchy & Organisation' },
+          ],
+        },
+        {
+          title: 'Quality & Assurance',
+          items: [
+            { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A Grade', description: 'NBA, AICTE, NIRF & Recognitions' },
+            { name: 'IQAC', href: '#about-iqac', badge: 'Quality Cell', description: 'Internal Quality Assurance Cell & AQAR' },
+            { name: 'Contact Us', href: '#contact-us', badge: 'Helpline', description: '+91 9669660155 • info@rvsu.org' },
+          ],
+        },
+      ],
+    },
   },
 
   {

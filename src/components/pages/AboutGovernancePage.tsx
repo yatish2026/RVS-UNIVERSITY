@@ -3,7 +3,7 @@ import {
   ArrowLeft, ArrowRight, Award, GraduationCap, Building2, 
   Users, FileText, CheckCircle2, ShieldCheck, Landmark, 
   Compass, HeartHandshake, BookOpen, Clock, Phone, Mail, MapPin,
-  Sparkles, Star, Target, CheckCircle, ExternalLink, Globe, Layers, UserCheck
+  Sparkles, Star, Target, CheckCircle, ExternalLink, Globe, Layers, UserCheck, AlertCircle
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
@@ -17,6 +17,9 @@ export type AboutPageType =
   | 'iqac'
   | 'contact-us'
   // Legacy aliases
+  | 'chancellor'
+  | 'pro-chancellor'
+  | 'vice-chancellor'
   | 'chairman' 
   | 'vice-chairman' 
   | 'principal' 
@@ -34,8 +37,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
   pageType,
   onBackToHome,
 }) => {
-  const [leadershipSubTab, setLeadershipSubTab] = useState<'chairman' | 'vice-chairman' | 'principal'>('chairman');
-  const [governanceSubTab, setGovernanceSubTab] = useState<'governing-body' | 'academic-council' | 'finance'>('governing-body');
+  const [leadershipSubTab, setLeadershipSubTab] = useState<'chancellor' | 'pro-chancellor' | 'vice-chancellor' | 'principal'>('chancellor');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,17 +45,15 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
 
   // Set sub-tabs if a direct legacy URL hash was accessed
   useEffect(() => {
-    if (pageType === 'chairman') setLeadershipSubTab('chairman');
-    if (pageType === 'vice-chairman') setLeadershipSubTab('vice-chairman');
+    if (pageType === 'chancellor' || pageType === 'chairman') setLeadershipSubTab('chancellor');
+    if (pageType === 'pro-chancellor' || pageType === 'vice-chairman') setLeadershipSubTab('pro-chancellor');
+    if (pageType === 'vice-chancellor') setLeadershipSubTab('vice-chancellor');
     if (pageType === 'principal') setLeadershipSubTab('principal');
-    if (pageType === 'governing-body') setGovernanceSubTab('governing-body');
-    if (pageType === 'academic-council') setGovernanceSubTab('academic-council');
-    if (pageType === 'finance') setGovernanceSubTab('finance');
   }, [pageType]);
 
   // Normalize pageType to one of the 7 main categories
   const activeMainTab: 'overview' | 'leadership' | 'governance' | 'administration' | 'ranking-accreditation' | 'iqac' | 'contact-us' = 
-    pageType === 'chairman' || pageType === 'vice-chairman' || pageType === 'principal' ? 'leadership'
+    pageType === 'chancellor' || pageType === 'pro-chancellor' || pageType === 'vice-chancellor' || pageType === 'chairman' || pageType === 'vice-chairman' || pageType === 'principal' ? 'leadership'
     : pageType === 'governing-body' || pageType === 'academic-council' || pageType === 'finance' ? 'governance'
     : pageType === 'admin-chart' ? 'administration'
     : pageType;
@@ -85,130 +85,6 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     { name: 'Sri Srinivasa M.P.H.W.(F) Training Institute', location: 'Chittoor', courses: 'M.P.H.W / A.N.M' },
   ];
 
-  // Governing Body 12 Members
-  const governingBodyMembers = [
-    { sno: 1, name: 'Dr. R. Venkataswamy, Chairman, RVS University, R.V.S. Nagar, Chittoor', category: 'Management', designation: 'Chairman' },
-    { sno: 2, name: 'Sri. R.V. Srinivas, Vice Chairman, RVS University, R.V.S. Nagar, Chittoor', category: 'Management', designation: 'Member' },
-    { sno: 3, name: 'Smt. R. Allikeswari, Member, Srinivasa Educational Academy, R.V.S. Nagar, Chittoor', category: 'Management', designation: 'Member' },
-    { sno: 4, name: 'Dr. R. Shalini, Member, Srinivasa Educational Academy, R.V.S. Nagar, Chittoor', category: 'Management', designation: 'Member' },
-    { sno: 5, name: 'Dr. R. Madhuri Gandhi, Member, Srinivasa Educational Academy, R. V. S. Nagar, Chittoor', category: 'Management', designation: 'Member' },
-    { sno: 6, name: 'Dr. E. Lokanadha Reddy, Vice Principal & Dean, Evaluation, RVS University, R. V. S. Nagar, Chittoor', category: 'Faculty nominated by the Principal', designation: 'Member' },
-    { sno: 7, name: 'Dr. Y. N. Vijaya Kumar, Head, Electrical and Electronics Engineering Department, RVS University, Chittoor', category: 'Faculty nominated by the Principal', designation: 'Member' },
-    { sno: 8, name: 'Prof. V. Sumalatha, Professor, Department of ECE, JNTUA College of Engineering, Ananthapuramu – 515002', category: 'AP State Govt. Nominee', designation: 'Member' },
-    { sno: 9, name: 'Prof. S. Krishnaiah, Professor of Civil Engineering & Registrar, JNT University Anantapur, Ananthapuramu - 515002', category: 'JNT University Nominee', designation: 'Member' },
-    { sno: 10, name: 'Dr. M. Muralidhar, Former Director, RVS University, R.V.S. Nagar, Chittoor', category: 'Special Invitee', designation: 'Member' },
-    { sno: 11, name: 'Prof. Dandu Shiva Rama Raju, Professor & Director, Kansas State University Bulk Solids Innovation Center, Salina, KS 67401', category: 'Special Invitee', designation: 'Member' },
-    { sno: 12, name: 'Dr. M. Mohan Babu, Principal, RVS University, R.V.S. Nagar, Chittoor', category: 'Principal', designation: 'Member Secretary' },
-  ];
-
-  // Academic Council Categorized Sections (34 Members across 7 Statutory Categories)
-  const academicCouncilSections = [
-    {
-      id: 'chairman',
-      categoryNumber: '1',
-      categoryTitle: 'Head of the Institution / Chairman',
-      badge: 'Chairman',
-      badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
-      description: 'Presiding Officer and Chief Academic Administrator of the University Academic Council.',
-      members: [
-        { sno: 1, name: 'Dr. M. Mohan Babu, Principal, RVS University, Chittoor', category: 'Principal / Head of Institution', designation: 'Chairman', contact: 'info@rvsu.org' },
-      ],
-    },
-    {
-      id: 'heads-of-departments',
-      categoryNumber: '2',
-      categoryTitle: 'All the Heads of the Departments',
-      badge: '12 Department Heads',
-      badgeColor: 'bg-blue-50 text-blue-900 border-blue-200',
-      description: 'Departmental leadership representing Engineering disciplines, Computer Applications, Management Studies, and Basic Sciences.',
-      members: [
-        { sno: 2, name: 'Dr. B. Damodhara Reddy, Head, Civil Engineering Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodce@rvsu.org' },
-        { sno: 3, name: 'Dr. Y.N. Vijaya Kumar, Head, Electrical and Electronics Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodeee@rvsu.org' },
-        { sno: 4, name: 'Dr. S. Arun Saco, Head, Mechanical Engineering Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodme@rvsu.org' },
-        { sno: 5, name: 'Dr. D. Srihari, Head, Electronics and Communication Engineering Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodece@rvsu.org' },
-        { sno: 6, name: 'Ms. P. Jyotheeswari, Head, Computer Science and Engineering Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodcse@rvsu.org' },
-        { sno: 7, name: 'Dr. M. Lavanya, Head, Computer Science and Engineering (AI&ML) Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodcsm@rvsu.org' },
-        { sno: 8, name: 'Mrs. Kokila, Head, Computer Science and Engineering (DS) Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodcsd@rvsu.org' },
-        { sno: 9, name: 'Dr. J. Velmurugan, Head, Information Technology Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodit@rvsu.org' },
-        { sno: 10, name: 'Dr. Hamsaveni, Head, Master of Computer Applications Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodmca@rvsu.org' },
-        { sno: 11, name: 'Dr. N. Giri Babu, Head, Master of Business Administration Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodmba@rvsu.org' },
-        { sno: 12, name: 'Dr. K. Komala, Head, Humanities and Sciences Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodhas@rvsu.org' },
-        { sno: 13, name: 'Dr. P. Gopi Krishna, Associate Head, Humanities and Sciences Department, RVS University, Chittoor', category: 'Head of the Dept.', designation: 'Member', contact: 'hodhas2@rvsu.org' },
-      ],
-    },
-    {
-      id: 'nominated-faculty',
-      categoryNumber: '3',
-      categoryTitle: 'Four Faculty Members Nominated by the Principal',
-      badge: '4 Faculty Nominees',
-      badgeColor: 'bg-emerald-50 text-emerald-900 border-emerald-200',
-      description: 'Senior professors and institutional deans representing interdisciplinary teaching, examination, and research wings.',
-      members: [
-        { sno: 14, name: 'Dr. T. Raja Reddy, Dean I&E, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member', contact: 'deanie@rvsu.org' },
-        { sno: 15, name: 'Dr. A. Mahamani, Professor, Mechanical Engineering Department, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member', contact: 'research@rvsu.org' },
-        { sno: 16, name: 'Dr. C. K. Selvi, Associate Professor, Humanities and Sciences Department, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member', contact: 'info@rvsu.org' },
-        { sno: 17, name: 'Dr. C. Uma Maheswari, Controller of Examinations, Mechanical Department, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member', contact: 'ce@rvsu.org' },
-      ],
-    },
-    {
-      id: 'governing-body-experts',
-      categoryNumber: '4',
-      categoryTitle: 'Experts from Outside the College Nominated by the Governing Body',
-      badge: '7 External Experts',
-      badgeColor: 'bg-purple-50 text-purple-900 border-purple-200',
-      description: 'Distinguished leaders representing international universities, Fortune 500 tech corporations, national research labs (NARL), and public sector undertakings (BHEL).',
-      members: [
-        { sno: 18, name: 'Prof. Dandu Sivarama Raju, Professor & Director, Kansas State University Bulk Solids Innovation Center, Salina.KS 67401', category: 'GB Nominee representing Education', designation: 'Member', contact: 'rdandu@ksu.edu' },
-        { sno: 19, name: 'Mr. Ajit Kumar Koppali, Chairman, VDM India on the move, Bangalore', category: 'GB Nominee representing Education', designation: 'Member', contact: 'acharyavdmajit@gmail.com' },
-        { sno: 20, name: 'Mr. Sreenivasa Ramanujam. K, Head – Trainee Engagement & Academic Relations, AWS Cloud Unit, TCS Bangalore', category: 'GB Nominee representing Industry', designation: 'Member', contact: 'sreenivasa.ramanujam@tcs.com' },
-        { sno: 21, name: 'Dr. K. Mallikharjuna Babu, Vice-Chancellor, Galgotias University, Greater Noida', category: 'GB Nominee representing Industry', designation: 'Member', contact: 'drkmbabu@gmail.com' },
-        { sno: 22, name: 'Dr. Amit Kumar Patra, Director, NARL, Gadanki', category: 'GB Nominee representing Industry', designation: 'Member', contact: 'director@narl.gov.in' },
-        { sno: 23, name: 'Dr. Subramani Ramakrishnan, Vice President, UPS-SCS (India) Private Limited, Chennai', category: 'GB Nominee representing Sciences', designation: 'Member', contact: 'rsubramani@ups.com' },
-        { sno: 24, name: 'Mr. Arun Mozhi Devan M, Executive Director, General Management, BHEL, Ranipet', category: 'GB Nominee representing Sciences', designation: 'Member', contact: 'amdevan@bhel.in' },
-      ],
-    },
-    {
-      id: 'jntua-nominees',
-      categoryNumber: '5',
-      categoryTitle: 'Three Nominees of JNT University Anantapur, Ananthapuramu',
-      badge: '3 University Nominees',
-      badgeColor: 'bg-rose-50 text-rose-900 border-rose-200',
-      description: 'Official representatives appointed by the affiliating university JNTUA to oversee academic governance and regulatory compliance.',
-      members: [
-        { sno: 25, name: 'Prof. G. Ranga Janardhana, Professor, Department of Mechanical Engineering, JNTUA College of Engineering, Kalikiri', category: 'JNTUA nominee', designation: 'Ex-Officio Member', contact: 'rangajanardhana@gmail.com' },
-        { sno: 26, name: 'Prof. Vaishali G Ghorpade, Professor, Department of Civil Engineering, JNTUA College of Engineering, Ananthapuramu', category: 'JNTUA nominee', designation: 'Ex-Officio Member', contact: 'vaishali.civil@jntua.ac.in' },
-        { sno: 27, name: 'Prof. A. P Siva Kumar, Professor, Department of Computer Science & Engineering, JNTUA College of Engineering, Ananthapuramu', category: 'JNTUA nominee', designation: 'Member', contact: 'sivakumar.cse@jntua.ac.in' },
-      ],
-    },
-    {
-      id: 'special-invitees',
-      categoryNumber: '6',
-      categoryTitle: 'Special Invitees Nominated by the Principal',
-      badge: '6 Special Invitees',
-      badgeColor: 'bg-indigo-50 text-indigo-900 border-indigo-200',
-      description: 'Eminent Vice Chancellors, international aerospace professors, and strategic skill development deans.',
-      members: [
-        { sno: 28, name: 'Dr. M. Muralidhar, Former Director, RVS University, Chittoor', category: 'Special Invitee', designation: 'Member', contact: 'muralidhar6666@gmail.com' },
-        { sno: 29, name: 'Dr. K. Sandeep Kumar, Dean, CSE, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member', contact: 'deancse@rvsu.org' },
-        { sno: 30, name: 'Dr. Rakesh Kumar Jain, Vice Chancellor, Ajeenkya DY Patil University, Pune', category: 'Special Invitee', designation: 'Member', contact: 'jainrb20@gmail.com' },
-        { sno: 31, name: 'Dr. A. Ramaswamy Reddy, Vice Chancellor, Mallareddy Deemed-to-be-University, Hyderabad', category: 'Special Invitee', designation: 'Member', contact: 'ramaswamyreddymail@gmail.com' },
-        { sno: 32, name: 'Mr. N. Sendhil Kumar, Dean, Training and Skill Development, RVS University, Chittoor', category: 'Special Invitee', designation: 'Member', contact: 'dean.tsd@rvsu.org' },
-        { sno: 33, name: 'Dr. Sridhar Condoor, Professor of Aerospace and Mechanical Engineering, Saint Louis University, USA', category: 'Special Invitee', designation: 'Member', contact: 'sridhar.condoor@slu.edu' },
-      ],
-    },
-    {
-      id: 'member-secretary',
-      categoryNumber: '7',
-      categoryTitle: 'Member Secretary Nominated by the Principal',
-      badge: 'Member Secretary',
-      badgeColor: 'bg-teal-50 text-teal-900 border-teal-200',
-      description: 'Chief administrative and executive officer coordinating the proceedings of the University Academic Council.',
-      members: [
-        { sno: 34, name: 'Dr. E. Lokanadha Reddy, Vice Principal, RVS University, Chittoor', category: 'Nominated by the Principal', designation: 'Member Secretary', contact: 'viceprincipal@rvsu.org' },
-      ],
-    },
-  ];
-
   const mainTabs = [
     { id: 'overview', label: 'Overview', href: '#about-overview', icon: <Compass className="w-4 h-4" /> },
     { id: 'leadership', label: 'Leadership', href: '#about-leadership', icon: <Users className="w-4 h-4" /> },
@@ -231,10 +107,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 <span>About RVS University</span>
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-                About Us & Institutional Heritage
+                About Us & University Leadership
               </h1>
               <p className="text-sm md:text-base text-slate-300 mt-2 max-w-2xl font-light">
-                Explore our legacy of educational excellence since 1998, visionary leadership, statutory governance, accreditations, and smart campus facilities.
+                Explore our legacy of educational excellence since 1998, Chancellor and executive leadership, statutory governance framework, accreditations, and smart campus facilities.
               </p>
             </div>
 
@@ -318,7 +194,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-gold-400/40 bg-navy-950">
                     <img
                       src="/images/chairman.jpg"
-                      alt="RVS University Campus & Leadership"
+                      alt="RVS University Chancellor Dr. Ravuri Venkataswamy"
                       className="w-full h-[400px] object-cover object-top"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-80" />
@@ -327,7 +203,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                         Srinivasa Educational Academy
                       </span>
                       <h4 className="font-serif text-lg font-bold text-white">
-                        Founder Chairman Dr. Ravuri Venkataswamy
+                        Founder Chancellor Dr. Ravuri Venkataswamy
                       </h4>
                       <p className="text-xs text-slate-300 mt-1">
                         "Education for Peace & Global Empowerment"
@@ -425,12 +301,13 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         {/* ========================================================================= */}
         {activeMainTab === 'leadership' && (
           <div className="space-y-8 animate-fadeIn">
-            {/* Leadership Sub Tabs */}
-            <div className="flex items-center justify-center gap-3 border-b border-slate-200 pb-4">
+            {/* Leadership Sub Tabs: Chancellor, Pro Chancellor, Vice Chancellor, Principal */}
+            <div className="flex items-center justify-center gap-2 sm:gap-3 border-b border-slate-200 pb-4 flex-wrap">
               {[
-                { id: 'chairman', label: "Founder Chairman's Desk", sub: 'Dr. Ravuri Venkataswamy' },
-                { id: 'vice-chairman', label: "Vice Chairman's Desk", sub: 'Shri R.V. Srinivas' },
-                { id: 'principal', label: "Principal's Desk", sub: 'Dr. Matam Mohan Babu' },
+                { id: 'chancellor', label: "Chancellor", sub: 'Dr. Ravuri Venkataswamy' },
+                { id: 'pro-chancellor', label: "Pro Chancellor", sub: 'Shri R.V. Srinivas' },
+                { id: 'vice-chancellor', label: "Vice Chancellor", sub: 'Will be updated soon' },
+                { id: 'principal', label: "Principal", sub: 'Dr. Matam Mohan Babu' },
               ].map((subTab) => (
                 <button
                   key={subTab.id}
@@ -447,15 +324,15 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
               ))}
             </div>
 
-            {/* Leader 1: Chairman */}
-            {leadershipSubTab === 'chairman' && (
+            {/* Leader 1: Chancellor (Dr. Ravuri Venkataswamy) */}
+            {leadershipSubTab === 'chancellor' && (
               <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                   <div className="lg:col-span-4 space-y-4">
                     <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
                       <img
                         src="/images/chairman.jpg"
-                        alt="Dr. Ravuri Venkataswamy, Chairman"
+                        alt="Dr. Ravuri Venkataswamy, Chancellor"
                         className="w-full h-[440px] object-cover object-top"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
@@ -464,7 +341,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                           Dr. Ravuri Venkataswamy
                         </h3>
                         <p className="text-xs text-gold-300 font-semibold mt-0.5">
-                          Founder Chairman, SV Group of Educational Institutions
+                          Founder & Chancellor, RVS University
                         </p>
                       </div>
                     </div>
@@ -483,29 +360,29 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="lg:col-span-8 space-y-6">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                        Founder Chairman's Desk
+                        Chancellor's Desk
                       </span>
                       <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950 mt-1">
                         Dr. Ravuri Venkataswamy
                       </h2>
                       <p className="text-sm font-semibold text-gold-600 mt-1">
-                        Founder Chairman, Srinivasa Educational Academy & SV Group of Institutions
+                        Founder & Chancellor, RVS University & SV Group of Institutions
                       </p>
                       <div className="h-1 w-20 bg-gold-500 rounded-full mt-3" />
                     </div>
 
                     <div className="space-y-4 text-slate-600 text-sm md:text-base leading-relaxed font-normal">
                       <p>
-                        <strong className="text-navy-950">Dr. R. Venkataswamy</strong>, S/o. late Sri R. Kanakaiah, is a well known Educationist and Philanthropist of this region. With a keen interest to promote education in the backward Rayalaseema Region of Andhra Pradesh, with a motto of <em className="text-gold-700">“Education for Peace”</em>, he floated an educational society in the name of <strong className="text-navy-950">“Srinivasa Educational Academy”</strong> in the year 1998 with fellow philanthropists and educationists of this area.
+                        <strong className="text-navy-950">Dr. R. Venkataswamy</strong>, S/o. late Sri R. Kanakaiah, is a renowned Educationist and Philanthropist. With a keen vision to promote quality higher education in Andhra Pradesh under the noble motto of <em className="text-gold-700">“Education for Peace & Global Empowerment”</em>, he established <strong className="text-navy-950">“Srinivasa Educational Academy”</strong> in the year 1998.
                       </p>
                       <p>
                         He established <strong className="text-navy-950">Sri Venkateswara School of Nursing & Sri Srinivasa MPHW (F) Training Institute in 1986</strong> which is affiliated to Director of Medical Education, Hyderabad and recognized by Indian Nursing Council, New Delhi. In the year 1992 he started <strong className="text-navy-950">Sri R.K.M. Law College</strong>, affiliated to S.V. University, Tirupathi and recognized by Bar Council of India, New Delhi.
                       </p>
                       <p>
-                        With this experience and an intention to provide quality technical education, providing self-employment to the youth of this region, he established <strong className="text-navy-950">RVS University (formerly SVCET) in the year 1998</strong>. It is approved by AICTE, New Delhi, accredited by NBA under Tier-I, and affiliated to JNTUA. In a span of about 9 years it was recognized as one of the best colleges in A.P. state with 2 Gold Medals and 95%+ results. Ranked <strong className="text-gold-700">3rd in Andhra Pradesh and 30th in India</strong> by CSR-GHRDC Survey.
+                        With this profound experience and dedication to technical excellence, he founded <strong className="text-navy-950">RVS University (formerly SVCET) in 1998</strong>. It is approved by AICTE, New Delhi, accredited by NBA under Tier-I, and conferred Autonomous status. Ranked <strong className="text-gold-700">3rd in Andhra Pradesh and 30th in India</strong> by CSR-GHRDC Survey.
                       </p>
                       <p>
-                        The college campus with excellent buildings across <strong className="text-navy-950">40+ Acres of land</strong> is located on R.V.S. Nagar. Johnson & Wales University, Rhode Island conferred an <strong className="text-gold-700">Honorary Degree, Doctor of Philosophy – Ph.D. in Education</strong> on him.
+                        The university campus spanning <strong className="text-navy-950">40+ Acres of lush green academic infrastructure</strong> is located on R.V.S. Nagar, Chittoor. Johnson & Wales University, Rhode Island, USA conferred an <strong className="text-gold-700">Honorary Degree, Doctor of Philosophy – Ph.D. in Education</strong> on him in recognition of his transformative contributions.
                       </p>
                     </div>
                   </div>
@@ -513,15 +390,15 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
               </div>
             )}
 
-            {/* Leader 2: Vice Chairman */}
-            {leadershipSubTab === 'vice-chairman' && (
+            {/* Leader 2: Pro Chancellor (Shri R.V. Srinivas) */}
+            {leadershipSubTab === 'pro-chancellor' && (
               <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                   <div className="lg:col-span-4 space-y-4">
                     <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
                       <img
                         src="/images/vice-chairman.jpg"
-                        alt="Shri R.V. Srinivas, Vice Chairman"
+                        alt="Shri R.V. Srinivas, Pro Chancellor"
                         className="w-full h-[440px] object-cover object-top"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
@@ -530,7 +407,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                           Shri R.V. Srinivas
                         </h3>
                         <p className="text-xs text-gold-300 font-semibold mt-0.5">
-                          Vice Chairman, SV Group of Educational Institutions
+                          Pro Chancellor, RVS University
                         </p>
                       </div>
                     </div>
@@ -549,26 +426,26 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="lg:col-span-8 space-y-6">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                        Vice Chairman's Desk
+                        Pro Chancellor's Desk
                       </span>
                       <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950 mt-1">
                         Shri R.V. Srinivas
                       </h2>
                       <p className="text-sm font-semibold text-gold-600 mt-1">
-                        Vice Chairman, Srinivasa Educational Academy & SV Group of Institutions
+                        Pro Chancellor, RVS University & SV Group of Institutions
                       </p>
                       <div className="h-1 w-20 bg-gold-500 rounded-full mt-3" />
                     </div>
 
                     <div className="space-y-4 text-slate-600 text-sm md:text-base leading-relaxed font-normal">
                       <p>
-                        <strong className="text-navy-950">Sri. R.V. Srinivas</strong>, Vice Chairman, SV Group of Educational Institutions, is a young dynamic entrepreneur and administrator. He holds a <strong className="text-navy-950">B.Tech in Mechanical Engineering</strong> and completed his <strong className="text-navy-950">MBA in the United Kingdom</strong>.
+                        <strong className="text-navy-950">Sri. R.V. Srinivas</strong>, Pro Chancellor, RVS University, is a visionary entrepreneur and institutional leader. He holds a <strong className="text-navy-950">B.Tech in Mechanical Engineering</strong> and completed his <strong className="text-navy-950">MBA in the United Kingdom</strong>.
                       </p>
                       <p>
-                        Under his energetic leadership, the Srinivasa Educational Academy has expanded across Andhra Pradesh and Telangana, overseeing <strong className="text-navy-950">23 educational institutions</strong> spanning Engineering, Pharmacy, Management, Computer Applications, Law, Nursing, Allied Health Sciences, and Teacher Training.
+                        Under his dynamic stewardship, the Srinivasa Educational Academy guides <strong className="text-navy-950">23 prestigious institutions</strong> across Andhra Pradesh and Telangana, spanning Engineering, Computing, Pharmacy, Management, Law, Nursing, and Allied Health Sciences.
                       </p>
                       <p>
-                        His visionary efforts have spearheaded the modernization of labs, high-bandwidth campus-wide optical fiber backbones, AI research centers, international MoUs with universities in the US and Europe, and 100% placement track records across Fortune 500 corporations.
+                        His strategic initiatives have established state-of-the-art AI and Robotics labs, high-speed campus fiber backbones, the AICTE ATAL IDEA Lab, international academic partnerships in the USA and Europe, and stellar 95%+ campus placements.
                       </p>
                     </div>
 
@@ -592,7 +469,31 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
               </div>
             )}
 
-            {/* Leader 3: Principal */}
+            {/* Leader 3: Vice Chancellor (Will be updated soon) */}
+            {leadershipSubTab === 'vice-chancellor' && (
+              <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-6">
+                <div className="w-20 h-20 rounded-full bg-gold-500/10 border-2 border-gold-400/50 flex items-center justify-center mx-auto text-gold-600 shadow-inner">
+                  <GraduationCap className="w-10 h-10 text-gold-600" />
+                </div>
+                <div className="max-w-xl mx-auto space-y-2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider">
+                    Executive Academic Leadership
+                  </span>
+                  <h3 className="font-serif text-3xl font-extrabold text-navy-950">
+                    Vice Chancellor
+                  </h3>
+                  <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
+                  <p className="text-base text-slate-700 font-semibold">
+                    Will be updated soon
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                    The profile, appointment notification, and vision address from the Vice Chancellor of RVS University are currently being finalized and will be published shortly.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Leader 4: Principal */}
             {leadershipSubTab === 'principal' && (
               <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -658,164 +559,50 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 3: GOVERNANCE */}
+        {/* TAB 3: GOVERNANCE (Will be updated soon notice) */}
         {/* ========================================================================= */}
         {activeMainTab === 'governance' && (
           <div className="space-y-8 animate-fadeIn">
-            {/* Governance Sub Tabs */}
-            <div className="flex items-center justify-center gap-3 border-b border-slate-200 pb-4">
-              {[
-                { id: 'governing-body', label: 'Governing Body', sub: '12 Executive Board Members' },
-                { id: 'academic-council', label: 'Academic Council', sub: '34 Academic & Industry Leaders' },
-                { id: 'finance', label: 'Finance Committee', sub: 'Budget & Financial Oversight' },
-              ].map((subTab) => (
-                <button
-                  key={subTab.id}
-                  onClick={() => setGovernanceSubTab(subTab.id as any)}
-                  className={`px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition-all ${
-                    governanceSubTab === subTab.id
-                      ? 'bg-navy-950 text-gold-300 shadow-md scale-105'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                  }`}
+            <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-6">
+              <div className="w-20 h-20 rounded-full bg-amber-50 border-2 border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
+                <Landmark className="w-10 h-10 text-gold-600" />
+              </div>
+
+              <div className="max-w-xl mx-auto space-y-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+                  <span>Statutory Governance</span>
+                </div>
+                <h3 className="font-serif text-3xl font-extrabold text-navy-950">
+                  Governing Body & Academic Council
+                </h3>
+                <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
+                <p className="text-base md:text-lg text-slate-800 font-bold">
+                  Will be updated soon
+                </p>
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                  The statutory governing boards, academic council, and executive committees for RVS University under the Andhra Pradesh Private Universities Act are currently being reconstituted and will be updated shortly.
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-center gap-3">
+                <Button
+                  variant="gold"
+                  size="md"
+                  href="#about-overview"
                 >
-                  <div>{subTab.label}</div>
-                  <div className="text-[10px] opacity-75 font-normal">{subTab.sub}</div>
-                </button>
-              ))}
+                  Explore University Overview
+                </Button>
+                <Button
+                  variant="ghost-white"
+                  size="md"
+                  onClick={onBackToHome}
+                  className="text-navy-950 border-slate-300 hover:bg-slate-100"
+                >
+                  Return to Homepage
+                </Button>
+              </div>
             </div>
-
-            {/* Sub-tab: Governing Body */}
-            {governanceSubTab === 'governing-body' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 space-y-6">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                    Statutory Governance
-                  </span>
-                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                    Governing Body (12 Members)
-                  </h3>
-                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                    The Governing Body is the apex statutory authority responsible for strategic direction, policy formulation, approvals, and institutional oversight.
-                  </p>
-                </div>
-
-                <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
-                  <table className="w-full text-left text-xs md:text-sm border-collapse">
-                    <thead>
-                      <tr className="bg-navy-950 text-gold-300 font-serif">
-                        <th className="p-3.5 border-b border-navy-800 text-center w-12">S.No</th>
-                        <th className="p-3.5 border-b border-navy-800">Name & Designation</th>
-                        <th className="p-3.5 border-b border-navy-800">Category</th>
-                        <th className="p-3.5 border-b border-navy-800 text-center">Role</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-200">
-                      {governingBodyMembers.map((member) => (
-                        <tr key={member.sno} className="hover:bg-slate-50 transition-colors">
-                          <td className="p-3.5 text-center font-bold text-slate-400">{member.sno}</td>
-                          <td className="p-3.5 font-bold text-navy-950">{member.name}</td>
-                          <td className="p-3.5 text-slate-600">{member.category}</td>
-                          <td className="p-3.5 text-center">
-                            <span className="px-2.5 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 font-bold text-xs whitespace-nowrap">
-                              {member.designation}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {/* Sub-tab: Academic Council */}
-            {governanceSubTab === 'academic-council' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 space-y-6">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                    Academic Standards & Curriculum
-                  </span>
-                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                    Academic Council (34 Members)
-                  </h3>
-                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                    Constitutes the principal academic body of RVS University, approving curricula, examination regulations, degree awards, and pedagogical reforms.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {academicCouncilSections.map((section) => (
-                    <div key={section.id} className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                      <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <div>
-                          <div className="text-xs font-bold text-gold-800 uppercase tracking-wider">Category {section.categoryNumber}</div>
-                          <h4 className="font-serif text-base md:text-lg font-bold text-navy-950">{section.categoryTitle}</h4>
-                        </div>
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-bold border self-start sm:self-auto ${section.badgeColor}`}>
-                          {section.badge}
-                        </span>
-                      </div>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs md:text-sm border-collapse">
-                          <thead>
-                            <tr className="bg-slate-100/80 text-slate-700 font-semibold border-b border-slate-200">
-                              <th className="p-2.5 text-center w-12">S.No</th>
-                              <th className="p-2.5">Name & Affiliation</th>
-                              <th className="p-2.5">Category</th>
-                              <th className="p-2.5 text-center">Designation</th>
-                              <th className="p-2.5">Official Contact</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100">
-                            {section.members.map((m) => (
-                              <tr key={m.sno} className="hover:bg-amber-50/30">
-                                <td className="p-2.5 text-center font-bold text-slate-400">{m.sno}</td>
-                                <td className="p-2.5 font-bold text-navy-950">{m.name}</td>
-                                <td className="p-2.5 text-slate-600 text-xs">{m.category}</td>
-                                <td className="p-2.5 text-center font-bold text-gold-700">{m.designation}</td>
-                                <td className="p-2.5 text-slate-500 font-mono text-[11px]">{m.contact}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Sub-tab: Finance Committee */}
-            {governanceSubTab === 'finance' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 space-y-6">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                    Financial Governance
-                  </span>
-                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                    Finance Committee
-                  </h3>
-                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                    Statutory body overseeing institutional annual budgets, expenditure audits, capital allocations, and funding.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
-                      The annual accounts and financial estimates of the Institution are vetted by the Finance Committee before final submission to the Governing Body.
-                    </p>
-                  </div>
-                  <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">
-                      Fixes recurring and non-recurring expenditure boundaries based on resource allocation and academic capital requirements.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
 
@@ -829,10 +616,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 Institutional Hierarchy & Governance
               </span>
               <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                Organisation & Administrative Chart
+                Organisation & Administrative Structure
               </h3>
               <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                Hierarchical flow from Management & Principal to Administrative Deans, HODs, Exam Cell, and Functional Wings.
+                Hierarchical flow from Chancellor, Pro Chancellor & Executive Officers to Deans, HODs, Exam Cell, and Functional Wings.
               </p>
             </div>
 
@@ -847,12 +634,12 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Executive Management</h5>
-                <p className="text-xs text-slate-500">Chairman, Vice Chairman & Governing Body</p>
+                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Executive Leadership</h5>
+                <p className="text-xs text-slate-500">Chancellor, Pro Chancellor & Vice Chancellor</p>
               </div>
 
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Academic Leadership</h5>
+                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Academic Administration</h5>
                 <p className="text-xs text-slate-500">Principal, Deans & Academic Council</p>
               </div>
 
@@ -1122,7 +909,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   </div>
                 </div>
 
-                {/* Right: Interactive Enquiry / Reach Us Card */}
+                {/* Right: Interactive Enquiry Card */}
                 <div className="lg:col-span-6 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white p-8 rounded-3xl border border-gold-400/30 shadow-xl space-y-5">
                   <div className="space-y-1">
                     <span className="text-xs font-bold uppercase tracking-wider text-gold-400">Quick Enquiry</span>

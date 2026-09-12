@@ -129,15 +129,21 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#about-chairman' || hash === '#chairman') {
+      if (hash === '#about-chancellor' || hash === '#chancellor' || hash === '#about-chairman' || hash === '#chairman') {
         resetAllViews();
-        setAboutTab('chairman');
+        setAboutTab('chancellor');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#about-vice-chairman' || hash === '#vice-chairman' || hash === '#group-institutions' || hash === '#23-institutions') {
+      if (hash === '#about-pro-chancellor' || hash === '#pro-chancellor' || hash === '#about-vice-chairman' || hash === '#vice-chairman' || hash === '#group-institutions' || hash === '#23-institutions') {
         resetAllViews();
-        setAboutTab('vice-chairman');
+        setAboutTab('pro-chancellor');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (hash === '#about-vice-chancellor' || hash === '#vice-chancellor') {
+        resetAllViews();
+        setAboutTab('vice-chancellor');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
@@ -147,21 +153,9 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#about-governance' || hash === '#governance' || hash === '#committee-governing-body' || hash === '#governing-body' || hash === '#governing-body-12') {
+      if (hash === '#about-governance' || hash === '#governance' || hash === '#committee-governing-body' || hash === '#governing-body' || hash === '#governing-body-12' || hash === '#committee-academic-council' || hash === '#academic-council' || hash === '#committee-finance' || hash === '#finance') {
         resetAllViews();
-        setAboutTab('governing-body');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      if (hash === '#committee-academic-council' || hash === '#academic-council' || hash === '#academic-council-34') {
-        resetAllViews();
-        setAboutTab('academic-council');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      if (hash === '#committee-finance' || hash === '#finance' || hash === '#finance-committee') {
-        resetAllViews();
-        setAboutTab('finance');
+        setAboutTab('governance');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
