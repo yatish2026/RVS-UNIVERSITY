@@ -148,7 +148,7 @@ export const HeroSection: React.FC = () => {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-slate-200 font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
             <span className="flex items-center gap-1.5 text-gold-300 font-bold">
               <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-              NAAC 'A' Grade • UGC Recognized
+              NAAC Grade A+ • UGC Autonomous
             </span>
             <span className="hidden sm:inline-flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-gold-400" />

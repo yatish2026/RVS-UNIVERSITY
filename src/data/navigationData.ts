@@ -84,44 +84,6 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    id: 'academics',
-    label: 'Academics',
-    href: '#academic-mandatory-disclosure',
-    hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Academic & Regulatory Framework',
-        description: 'Explore approved curricula, examination schedules, central library resources, and statutory compliance disclosures.',
-        image: campusLife3Img,
-        linkText: 'Open Academics Portal →',
-        href: '#academic-mandatory-disclosure',
-      },
-      columns: [
-        {
-          title: 'Regulatory & Governance',
-          items: [
-            { name: 'Mandatory Disclosure', href: '#academic-mandatory-disclosure', badge: 'AICTE' },
-            { name: 'Board Of Studies (BOS)', href: '#academic-board-of-studies' },
-            { name: 'Academic Calendars', href: '#academic-calendars', badge: '2026–27' },
-            { name: 'NAAC Self Study Report', href: '#academic-naac-ssr', badge: 'Grade A' },
-            { name: 'AQAR (IQAC Cell)', href: '#academic-aqar' },
-          ],
-        },
-        {
-          title: 'Central Digital Library',
-          items: [
-            { name: 'About Central Library', href: '#academic-about-library', badge: '85k+ Books' },
-            { name: 'Librarian’s Desk', href: '#academic-librarians-desk' },
-            { name: 'Rules & Regulations', href: '#academic-library-rules' },
-            { name: 'E-Resources & Databases', href: '#academic-library-resources' },
-            { name: 'RFID Automation & Kiosks', href: '#academic-library-rfid' },
-            { name: 'Library Services & Repo', href: '#academic-library-services' },
-          ],
-        },
-      ],
-    },
-  },
-  {
     id: 'departments',
     label: 'Programs',
     href: '#departments',
@@ -197,15 +159,16 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     megaMenu: {
       featuredCard: {
         title: 'Vibrant 65+ Acre Campus',
-        description: 'Hostel residences for 1,500+ students, Olympic-sized sports complex, hospital-attached health center, and active technical societies.',
+        description: 'Hostel residences for 1,500+ students, Central Digital Library with 85k+ books, Olympic-sized sports complex, and active student societies.',
         image: campusLife3Img,
         linkText: 'Explore Campus Life Hub →',
         href: '#hostels',
       },
       columns: [
         {
-          title: 'Living & Wellness',
+          title: 'Living & Facilities',
           items: [
+            { name: 'Central Digital Library', href: '#academic-about-library', badge: '85k+ Books', description: '85,000+ print volumes, IEEE/DELNET & RFID smart kiosks' },
             { name: 'Hostels & Dining Halls', href: '#hostels', badge: '375 Rooms', description: 'AC/Non-AC rooms, 269 Boys & 129 Girls rooms' },
             { name: 'Sports & Athletic Complex', href: '#sports', description: 'Cricket stadium, indoor badminton & gymnasium' },
             { name: 'Health Center & Ambulance', href: '#health', description: '24/7 medical team and emergency pharmacy' },

@@ -117,6 +117,7 @@ export const Footer: React.FC = () => {
               Campus Life Hub
             </h4>
             <ul className="space-y-2 text-xs">
+              <li><a href="#academic-about-library" className="text-gold-300 hover:text-white font-medium transition-colors">Central Digital Library (85k+ Books)</a></li>
               <li><a href="#hostels" className="hover:text-gold-300 transition-colors">Hostels & Dining (375 Rooms)</a></li>
               <li><a href="#sports" className="hover:text-gold-300 transition-colors">Sports Complex & Stadium</a></li>
               <li><a href="#health" className="hover:text-gold-300 transition-colors">Health Center & Ambulance</a></li>
@@ -133,10 +134,11 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-xs">
               <li><a href="#exam-portal" className="text-gold-300 hover:text-white font-semibold">Exam Portal & Results</a></li>
+              <li><a href="#academic-about-library" className="hover:text-gold-300 transition-colors">Central Digital Library</a></li>
               <li><a href="#exam-schedules" className="hover:text-gold-300 transition-colors">Exam Schedules</a></li>
               <li><a href="#exam-notifications" className="hover:text-gold-300 transition-colors">Exam Notifications</a></li>
               <li><a href="#atal-idea-lab" className="hover:text-gold-300 transition-colors">ATAL IDEA Lab</a></li>
-              <li><a href="#iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
+              <li><a href="#about-iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
               <li><a href="#grievances" className="hover:text-gold-300 transition-colors">Grievance Portal</a></li>
             </ul>
           </div>

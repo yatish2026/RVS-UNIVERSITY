@@ -48,7 +48,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
     { id: 'mandatory-disclosure', label: 'Mandatory Disclosure', group: 'Statutory & Compliance' },
     { id: 'board-of-studies', label: 'Board of Studies', group: 'Statutory & Compliance' },
     { id: 'academic-calendars', label: 'Academic Calendars', group: 'Statutory & Compliance', badge: '2026–27' },
-    { id: 'naac-ssr', label: 'NAAC Self Study Report', group: 'Statutory & Compliance', badge: 'Grade A' },
+    { id: 'naac-ssr', label: 'NAAC Self Study Report', group: 'Statutory & Compliance', badge: 'Grade A+' },
     { id: 'aqar', label: 'AQAR', group: 'Statutory & Compliance' },
     { id: 'about-library', label: 'About Central Library', group: 'Library Hub' },
     { id: 'librarians-desk', label: 'Librarian’s Desk', group: 'Library Hub' },
@@ -284,7 +284,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                     </div>
                     <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
                       <div className="text-xs text-slate-500 font-medium">NAAC Grade</div>
-                      <div className="text-base font-bold text-emerald-700">Grade 'A' (Cycle-2)</div>
+                      <div className="text-base font-bold text-emerald-700">Grade 'A+' (Cycle-2)</div>
                     </div>
                     <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
                       <div className="text-xs text-slate-500 font-medium">UGC Recognition</div>
