@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Sparkles, ChevronLeft, ChevronRight, ArrowRight, GraduationCap, ShieldCheck, Award } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ArrowRight, GraduationCap } from 'lucide-react';
 
 interface WelcomePreloaderProps {
   onComplete?: () => void;
@@ -68,7 +68,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
     setTimeout(() => {
       setPhase('notices');
       setSplashFading(false);
-    }, 450);
+    }, 400);
   };
 
   // Handle ESC key to dismiss current notice or advance
@@ -119,90 +119,93 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
   return (
     <>
       {/* ========================================================================= */}
-      {/* 1. REGAL WELCOME SPLASH / LOADING SCREEN (Runs for ~2.2s on opening) */}
+      {/* 1. EXACT REGAL WELCOME SPLASH SCREEN MATCHING USER DESIGN */}
       {/* ========================================================================= */}
       {phase === 'splash' && (
         <div
-          className={`fixed inset-0 z-[200] flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#06101E] via-[#0A192F] to-[#040B15] text-white transition-opacity duration-500 select-none ${
+          className={`fixed inset-0 z-[200] flex flex-col items-center justify-center p-4 bg-[#080E18] text-white transition-opacity duration-500 select-none ${
             splashFading ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
           }`}
         >
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+          {/* Subtle Geometric Matrix / Dot Pattern */}
+          <div 
+            className="absolute inset-0 opacity-15 pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(#D4AF37 1px, transparent 1px)',
+              backgroundSize: '28px 28px'
+            }}
+          />
+
+          {/* Subtle Ambient Golden Center Glow */}
+          <div className="absolute w-[450px] h-[450px] bg-[#D4AF37]/10 rounded-full blur-[100px] pointer-events-none animate-pulse" />
 
           {/* Top Skip Button */}
           <button
             onClick={finishSplash}
-            className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-white/10 hover:bg-gold-500 hover:text-navy-950 text-gold-300 text-xs font-bold border border-gold-400/40 backdrop-blur-md transition-all cursor-pointer shadow-md"
+            className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-white/5 hover:bg-[#D4AF37] hover:text-navy-950 text-[#D4AF37] text-xs font-bold border border-[#D4AF37]/30 backdrop-blur-md transition-all cursor-pointer shadow-md"
           >
             Skip Intro →
           </button>
 
-          {/* Center Logo & Welcome Branding */}
-          <div className="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto space-y-6">
-            {/* Logo Container Landing from Top */}
-            <div className="relative animate-logo-drop">
-              {/* Expanding Gold Ring on Landing */}
-              <div className="absolute inset-0 rounded-3xl border-2 border-gold-400/80 pointer-events-none animate-gold-ring" />
-              
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-white/95 p-3.5 shadow-[0_0_70px_rgba(212,175,55,0.65)] border-2 border-gold-400 flex items-center justify-center transform transition-transform duration-300">
-                <img
-                  src="/images/logo.png"
-                  alt="RVS University Official Logo"
-                  className="w-full h-full object-contain filter drop-shadow-md"
-                />
+          {/* Center Content Container */}
+          <div className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto space-y-6">
+            
+            {/* Top Logo: Animated Drop from Top down into place */}
+            <div className="relative animate-logo-drop flex items-center justify-center">
+              {/* Outer Dashed / Dotted Golden Orbit Ring */}
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border border-dashed border-[#D4AF37]/60 p-2 flex items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.35)] animate-spin-slow" style={{ animationDuration: '25s' }}>
+                {/* Inner Solid White Circular Badge with Emblem */}
+                <div className="w-full h-full rounded-full bg-white p-2.5 sm:p-3 shadow-xl flex items-center justify-center">
+                  <img
+                    src="/images/logo.png"
+                    alt="RVS University Emblem"
+                    className="w-full h-full object-contain filter drop-shadow-sm"
+                  />
+                </div>
               </div>
-              <span className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 text-navy-950 text-[10px] font-black uppercase tracking-wider shadow-lg whitespace-nowrap border border-gold-300">
-                Estd. 1998
-              </span>
             </div>
 
-            {/* University Name & Welcome Heading (Staggered reveal) */}
-            <div className="space-y-2 pt-2 animate-text-reveal-1">
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gold-400 font-sans">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: '6s' }} />
-                <span>Empowering Global Leaders</span>
+            {/* Pill Tag: ✧ WELCOME TO ✧ */}
+            <div className="animate-text-reveal-1 pt-1">
+              <div className="inline-flex items-center gap-2 px-5 py-1 rounded-full border border-[#D4AF37]/40 bg-[#0A192F]/80 text-[#D4AF37] text-xs font-bold uppercase tracking-[0.25em] shadow-sm backdrop-blur-md">
+                <span className="text-[10px]">✧</span>
+                <span>WELCOME TO</span>
+                <span className="text-[10px]">✧</span>
               </div>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6BE] via-[#D4AF37] to-[#FFF4D0] drop-shadow-sm">
-                Welcome to RVS University
+            </div>
+
+            {/* University Name: RVS in White, UNIVERSITY in Gold */}
+            <div className="space-y-3 animate-text-reveal-2">
+              <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none">
+                <span className="text-white">RVS </span>
+                <span className="text-[#D4AF37]">UNIVERSITY</span>
               </h1>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto font-light leading-relaxed">
-                40+ Acre Smart Autonomous Campus • Chittoor, Andhra Pradesh
+
+              {/* Sub-location & Estd */}
+              <p className="text-[11px] sm:text-xs md:text-sm text-slate-300 font-sans tracking-[0.2em] uppercase font-medium">
+                CHITTOOR, ANDHRA PRADESH • ESTD. 1998
+              </p>
+
+              {/* Sanskrit Motto Quote in Gold Italic */}
+              <p className="font-serif italic text-[#E2B855] text-xs sm:text-sm md:text-base pt-1 font-normal tracking-wide">
+                “विद्या सर्वस्य भूषणम् • Knowledge is the Supreme Ornament”
               </p>
             </div>
 
-            {/* Accreditation Badges Strip (Staggered reveal) */}
-            <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 animate-text-reveal-2">
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
-                <Award className="w-3.5 h-3.5 text-gold-400" />
-                NAAC Grade A+
-              </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
-                <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
-                NBA Tier-I
-              </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
-                <GraduationCap className="w-3.5 h-3.5 text-gold-400" />
-                AICTE Approved
-              </span>
-            </div>
-
-            {/* Loading Progress Bar (Staggered reveal) */}
-            <div className="w-64 sm:w-80 space-y-2 pt-2 animate-text-reveal-3">
-              <div className="h-1.5 w-full bg-navy-900/80 rounded-full overflow-hidden border border-gold-500/40 p-0.5">
+            {/* Bottom Progress Bar */}
+            <div className="w-72 sm:w-96 space-y-2 pt-4 animate-text-reveal-3">
+              <div className="h-1.5 w-full bg-[#0F223D] rounded-full overflow-hidden border border-[#D4AF37]/30 p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-gold-500 via-amber-300 to-gold-400 rounded-full transition-all duration-75 shadow-[0_0_15px_rgba(212,175,55,0.9)]"
+                  className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3BA2F] to-[#D4AF37] rounded-full transition-all duration-75 shadow-[0_0_15px_rgba(212,175,55,0.9)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                <span className="flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping" />
-                  <span>Initializing Portal...</span>
-                </span>
-                <span>{Math.round(progress)}%</span>
+              <div className="flex items-center justify-between text-[11px] text-slate-400 font-sans">
+                <span>Entering Campus Portal...</span>
+                <span className="font-mono text-[#D4AF37] font-semibold">{Math.round(progress)}%</span>
               </div>
             </div>
+
           </div>
         </div>
       )}
