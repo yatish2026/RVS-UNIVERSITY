@@ -17,6 +17,7 @@ import { DepartmentDetailPage } from './components/pages/DepartmentDetailPage';
 import { AcademicsDetailPage, AcademicTab } from './components/pages/AcademicsDetailPage';
 import { InternationalRelationsPage, IRTab } from './components/pages/InternationalRelationsPage';
 import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDetailPage';
+import { AdmissionsModal } from './components/modals/AdmissionsModal';
 import { WelcomePreloader } from './components/ui/WelcomePreloader';
 import { ALL_DEGREE_CATEGORIES } from './data/coursesCatalog';
 
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
   const [aboutTab, setAboutTab] = useState<AboutPageType | null>(null);
   const [campusLifeTab, setCampusLifeTab] = useState<CampusLifeTab | null>(null);
   const [examPortalTab, setExamPortalTab] = useState<ExamPortalTab | null>(null);
+  const [isAdmissionsModalOpen, setIsAdmissionsModalOpen] = useState(false);
 
   // Sync with URL hash
   useEffect(() => {
@@ -394,6 +396,29 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Global click interceptor for any #admissions or #apply links
+  useEffect(() => {
+    const handleAdmissionsClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('a, button');
+      if (target) {
+        const href = target.getAttribute('href');
+        if (
+          href === '#admissions' ||
+          href === '#apply' ||
+          href === '#apply-now' ||
+          href === '#admissions-portal' ||
+          href === '#admissions-enquiry' ||
+          href === '#enquiry'
+        ) {
+          e.preventDefault();
+          setIsAdmissionsModalOpen(true);
+        }
+      }
+    };
+    document.addEventListener('click', handleAdmissionsClick);
+    return () => document.removeEventListener('click', handleAdmissionsClick);
+  }, []);
+
   const handleSelectCategory = (categoryId: string) => {
     setSelectedCourseId(categoryId);
     setDepartmentId(null);
@@ -426,6 +451,12 @@ export const App: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* Initial Welcome Splash Animation */}
       <WelcomePreloader />
+
+      {/* Quick Admissions Enquiry & Application Modal */}
+      <AdmissionsModal
+        isOpen={isAdmissionsModalOpen}
+        onClose={() => setIsAdmissionsModalOpen(false)}
+      />
 
       {/* Sticky Main Navigation Header */}
       <Header />
