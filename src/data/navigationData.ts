@@ -62,7 +62,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
         {
           title: 'Quality & Assurance',
           items: [
-            { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A Grade', description: 'NBA, AICTE, NIRF & Recognitions' },
+            { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A+ Grade', description: 'NBA, AICTE, NIRF & Recognitions' },
             { name: 'IQAC', href: '#about-iqac', badge: 'Quality Cell', description: 'Internal Quality Assurance Cell & AQAR' },
             { name: 'Contact Us', href: '#contact-us', badge: 'Helpline', description: '+91 9669660155 • info@rvsu.org' },
           ],
