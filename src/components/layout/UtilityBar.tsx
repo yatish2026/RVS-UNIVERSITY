@@ -29,9 +29,9 @@ export const UtilityBar: React.FC = () => {
 
           <div className="hidden md:flex items-center gap-1 text-slate-400 before:content-['•'] before:mr-2 before:text-slate-600">
             <span>Admissions:</span>
-            <a href="tel:7729999158" className="text-gold-400 hover:text-gold-300 font-bold flex items-center gap-1 transition-colors">
+            <a href="tel:+919669660155" className="text-gold-400 hover:text-gold-300 font-bold flex items-center gap-1 transition-colors">
               <Phone className="w-3 h-3" />
-              +91 77299 99158
+              +91 9669660155
             </a>
           </div>
         </div>

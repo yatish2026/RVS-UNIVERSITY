@@ -39,37 +39,17 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   {
     id: 'about',
     label: 'About',
-    href: '#about-chairman',
+    href: '#about-overview',
     hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Legacy of Academic Excellence',
-        description: 'Established under the aegis of Srinivasa Educational Academy, guiding 23 institutions and 49+ programs.',
-        image: '/images/chairman.jpg',
-        linkText: 'Explore Chairman & Leadership →',
-        href: '#about-chairman',
-      },
-      columns: [
-        {
-          title: 'Executive Leadership',
-          items: [
-            { name: 'Chairman’s Desk', href: '#about-chairman', badge: 'Founder', description: 'Dr. Ravuri Venkataswamy biography & vision' },
-            { name: 'Vice Chairman’s Desk', href: '#about-vice-chairman', badge: 'Leadership', description: 'Shri R.V. Srinivas & 23 Group Institutions' },
-            { name: 'Principal’s Desk', href: '#about-principal', description: 'Dr. Matam Mohan Babu profile & research' },
-            { name: 'Organisation Chart', href: '#administration', description: 'Institutional administrative hierarchy' },
-          ],
-        },
-        {
-          title: 'Governance & Committees',
-          items: [
-            { name: 'Governing Body (12 Members)', href: '#committee-governing-body', description: 'Executive university governance board' },
-            { name: 'Academic Council (34 Members)', href: '#committee-academic-council', description: 'Academic regulations & HODs' },
-            { name: 'Finance Committee', href: '#committee-finance', description: 'Financial estimates & budget oversight' },
-            { name: '23 Group Institutions', href: '#about-vice-chairman', description: 'Footprint of Srinivasa Educational Academy' },
-          ],
-        },
-      ],
-    },
+    simpleDropdown: [
+      { name: 'Overview', href: '#about-overview', description: 'Vision, Mission, and University Profile' },
+      { name: 'Leadership', href: '#about-leadership', description: 'Founder Chairman, Vice Chairman & Principal' },
+      { name: 'Governance', href: '#about-governance', description: 'Governing Body, Academic Council & Committees' },
+      { name: 'Administration', href: '#about-administration', description: 'Administrative Hierarchy & Organisation Chart' },
+      { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A', description: 'NBA, AICTE, NIRF & Recognitions' },
+      { name: 'IQAC', href: '#about-iqac', badge: 'Cell', description: 'Internal Quality Assurance Cell & AQAR' },
+      { name: 'Contact Us', href: '#contact-us', badge: 'Helpline', description: '+91 9669660155 • info@rvsu.org' },
+    ],
   },
 
   {

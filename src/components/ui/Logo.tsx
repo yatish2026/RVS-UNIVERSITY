@@ -13,24 +13,24 @@ export const Logo: React.FC<LogoProps> = ({
   size = 'md', 
   className = '', 
   showText = true,
-  showCaption = 'responsive'
+  showCaption = true
 }) => {
   // Standard Tailwind sizing classes with fixed dimensions
   const logoDimensions = {
     sm: 'w-8 h-8 md:w-9 md:h-9 min-w-[32px] min-h-[32px]',
-    md: 'w-10 h-10 md:w-12 md:h-12 min-w-[40px] min-h-[40px]',
-    lg: 'w-14 h-14 md:w-18 md:h-18 min-w-[56px] min-h-[56px]',
+    md: 'w-10 h-10 md:w-11 md:h-11 min-w-[38px] min-h-[38px]',
+    lg: 'w-13 h-13 md:w-16 md:h-16 min-w-[52px] min-h-[52px]',
   };
 
   // Typography sizing
   const titleSizes = {
     sm: 'text-sm md:text-base',
-    md: 'text-lg sm:text-xl md:text-[22px]',
+    md: 'text-base sm:text-lg md:text-[20px]',
     lg: 'text-2xl md:text-3xl',
   };
 
   return (
-    <a href="#home" className={`flex items-center gap-2.5 sm:gap-3 group select-none flex-shrink-0 ${className}`}>
+    <a href="#home" className={`flex items-center gap-2 sm:gap-2.5 group select-none flex-shrink-0 ${className}`}>
       {/* Official Circular University Crest */}
       <div className={`relative flex-shrink-0 ${logoDimensions[size]} transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-md border-2 border-gold-400 bg-white p-0.5 aspect-square`}>
         <img
@@ -40,24 +40,22 @@ export const Logo: React.FC<LogoProps> = ({
         />
       </div>
 
-      {/* Prominent University Name with R(Red) V(Purple) S(Green) + Caption */}
+      {/* Prominent University Name with R(Red) V(Purple) S(Green) + Always Visible Tagline */}
       {showText && (
         <div className="flex flex-col justify-center flex-shrink-0">
           <span
             className={`font-serif font-black tracking-tight leading-none whitespace-nowrap ${titleSizes[size]}`}
           >
-            <span className="text-[#FF4D4D] font-black">R</span>
-            <span className="text-[#CE93D8] font-black">V</span>
-            <span className="text-[#81C784] font-black">S</span>{' '}
+            <span className="text-[#FF4D4D] font-black drop-shadow-sm">R</span>
+            <span className="text-[#CE93D8] font-black drop-shadow-sm">V</span>
+            <span className="text-[#81C784] font-black drop-shadow-sm">S</span>{' '}
             <span className="text-gold-400 font-extrabold drop-shadow-sm">UNIVERSITY</span>
           </span>
-          {showCaption && (
+          {showCaption !== false && (
             <span
-              className={`text-[8.5px] sm:text-[9.5px] md:text-[10px] font-semibold tracking-wider text-slate-300 uppercase mt-0.5 whitespace-nowrap ${
-                showCaption === 'responsive' ? 'hidden 2xl:block' : ''
-              }`}
+              className="text-[7.5px] sm:text-[8.5px] md:text-[9.5px] font-bold tracking-wider text-slate-200 uppercase mt-0.5 whitespace-nowrap block drop-shadow-sm"
             >
-              Find Your Place <span className="text-gold-400 font-bold">•</span> Follow Your Passion
+              FIND YOUR PLACE <span className="text-gold-400 font-bold">•</span> FOLLOW YOUR PASSION
             </span>
           )}
         </div>
@@ -65,4 +63,3 @@ export const Logo: React.FC<LogoProps> = ({
     </a>
   );
 };
-

@@ -10,7 +10,7 @@ import { StudentAchievementsSection } from './components/home/StudentAchievement
 import { CallToActionSection } from './components/home/CallToActionSection';
 import { Footer } from './components/layout/Footer';
 import { CourseDetailPage } from './components/pages/CourseDetailPage';
-import { AboutGovernancePage } from './components/pages/AboutGovernancePage';
+import { AboutGovernancePage, AboutPageType } from './components/pages/AboutGovernancePage';
 import { CampusLifeDetailPage, CampusLifeTab } from './components/pages/CampusLifeDetailPage';
 import { ExamPortalPage, ExamPortalTab } from './components/pages/ExamPortalPage';
 import { DepartmentDetailPage } from './components/pages/DepartmentDetailPage';
@@ -24,9 +24,7 @@ export const App: React.FC = () => {
   const [departmentId, setDepartmentId] = useState<string | null>(null);
   const [academicTab, setAcademicTab] = useState<AcademicTab | null>(null);
   const [irTab, setIrTab] = useState<IRTab | null>(null);
-  const [aboutTab, setAboutTab] = useState<
-    'chairman' | 'vice-chairman' | 'principal' | 'governing-body' | 'academic-council' | 'finance' | 'admin-chart' | null
-  >(null);
+  const [aboutTab, setAboutTab] = useState<AboutPageType | null>(null);
   const [campusLifeTab, setCampusLifeTab] = useState<CampusLifeTab | null>(null);
   const [examPortalTab, setExamPortalTab] = useState<ExamPortalTab | null>(null);
 
@@ -118,7 +116,19 @@ export const App: React.FC = () => {
         return;
       }
 
-      // 2. Check About & Leadership / Committees hashes
+      // 2. Check About & Sub-Sections hashes
+      if (hash === '#about' || hash === '#about-us' || hash === '#about-overview' || hash === '#overview') {
+        resetAllViews();
+        setAboutTab('overview');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (hash === '#about-leadership' || hash === '#leadership') {
+        resetAllViews();
+        setAboutTab('leadership');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       if (hash === '#about-chairman' || hash === '#chairman') {
         resetAllViews();
         setAboutTab('chairman');
@@ -137,7 +147,7 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#committee-governing-body' || hash === '#governing-body' || hash === '#governing-body-12') {
+      if (hash === '#about-governance' || hash === '#governance' || hash === '#committee-governing-body' || hash === '#governing-body' || hash === '#governing-body-12') {
         resetAllViews();
         setAboutTab('governing-body');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -155,9 +165,27 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#administration' || hash === '#admin-chart' || hash === '#organisation-chart' || hash === '#organization-chart') {
+      if (hash === '#about-administration' || hash === '#administration' || hash === '#admin-chart' || hash === '#organisation-chart' || hash === '#organization-chart') {
         resetAllViews();
-        setAboutTab('admin-chart');
+        setAboutTab('administration');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (hash === '#about-ranking-accreditation' || hash === '#ranking-accreditation' || hash === '#ranking' || hash === '#rankings' || hash === '#accreditation') {
+        resetAllViews();
+        setAboutTab('ranking-accreditation');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (hash === '#about-iqac' || hash === '#iqac-cell') {
+        resetAllViews();
+        setAboutTab('iqac');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (hash === '#contact-us' || hash === '#contact-campus') {
+        resetAllViews();
+        setAboutTab('contact-us');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }

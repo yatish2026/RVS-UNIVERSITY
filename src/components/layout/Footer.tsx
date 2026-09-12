@@ -71,12 +71,13 @@ export const Footer: React.FC = () => {
               About RVS
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#about-chairman" className="hover:text-gold-300 transition-colors">Chairman’s Desk</a></li>
-              <li><a href="#about-vice-chairman" className="hover:text-gold-300 transition-colors">Vice Chairman & 23 Institutions</a></li>
-              <li><a href="#about-principal" className="hover:text-gold-300 transition-colors">Principal Profile</a></li>
-              <li><a href="#administration" className="hover:text-gold-300 transition-colors">Organisation Chart</a></li>
-              <li><a href="#committee-governing-body" className="hover:text-gold-300 transition-colors">Governing Body</a></li>
-              <li><a href="#committee-academic-council" className="hover:text-gold-300 transition-colors">Academic Council</a></li>
+              <li><a href="#about-overview" className="hover:text-gold-300 transition-colors">Overview</a></li>
+              <li><a href="#about-leadership" className="hover:text-gold-300 transition-colors">Leadership</a></li>
+              <li><a href="#about-governance" className="hover:text-gold-300 transition-colors">Governance</a></li>
+              <li><a href="#about-administration" className="hover:text-gold-300 transition-colors">Administration</a></li>
+              <li><a href="#about-ranking-accreditation" className="hover:text-gold-300 transition-colors">Ranking & Accreditation</a></li>
+              <li><a href="#about-iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
+              <li><a href="#contact-us" className="hover:text-gold-300 transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
@@ -152,22 +153,22 @@ export const Footer: React.FC = () => {
                   {UNIVERSITY_INFO.address}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <a href={`tel:${UNIVERSITY_INFO.phone}`} className="hover:text-gold-300">
-                  {UNIVERSITY_INFO.phone}
-                </a>
-              </div>
               <div className="flex items-start gap-2">
-                <Mail className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" />
-                <div className="flex flex-col">
-                  <a href={`mailto:${UNIVERSITY_INFO.altEmail}`} className="hover:text-gold-300 truncate">
-                    {UNIVERSITY_INFO.altEmail}
+                <Phone className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-1">
+                  <a href={`tel:${UNIVERSITY_INFO.phone}`} className="hover:text-gold-300">
+                    {UNIVERSITY_INFO.phone}
                   </a>
-                  <a href={`mailto:${UNIVERSITY_INFO.email}`} className="hover:text-gold-300 truncate">
-                    {UNIVERSITY_INFO.email}
+                  <a href={`tel:${UNIVERSITY_INFO.altPhone}`} className="hover:text-gold-300">
+                    {UNIVERSITY_INFO.altPhone}
                   </a>
                 </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-gold-400 flex-shrink-0" />
+                <a href={`mailto:${UNIVERSITY_INFO.email}`} className="hover:text-gold-300 truncate">
+                  {UNIVERSITY_INFO.email}
+                </a>
               </div>
             </div>
           </div>
