@@ -102,8 +102,8 @@ export const HeroSection: React.FC = () => {
               </h1>
 
               {/* Tagline text with clean shadow */}
-              <p className="text-sm sm:text-base md:text-lg text-slate-100 font-medium max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
-                Autonomous Excellence • State-of-the-Art 65+ Acre Hillside Campus • UGC Recognized & NAAC 'A' Grade
+              <p className="text-base sm:text-lg md:text-xl text-slate-100 font-semibold max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] tracking-wide">
+                Life on a Smart Campus &bull; Empowering Global Innovators
               </p>
 
             </div>
@@ -148,7 +148,7 @@ export const HeroSection: React.FC = () => {
             </span>
             <span className="hidden sm:inline-flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-gold-400" />
-              65+ Acre Smart Hillside Campus, Chittoor, AP
+              Life on a Smart Campus, Chittoor, AP
             </span>
           </div>
 
