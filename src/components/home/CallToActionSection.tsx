@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Phone, ArrowRight, FileText, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Phone, ArrowRight, FileText, CheckCircle2, Play } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 import { Reveal } from '../ui/Reveal';
@@ -73,11 +73,11 @@ export const CallToActionSection: React.FC = () => {
               <Button
                 variant="ghost-white"
                 size="lg"
-                href="#download-brochure"
-                icon={<FileText className="w-5 h-5" />}
-                className="w-full sm:w-auto shadow-md"
+                href="#watch-video-prospectus"
+                icon={<Play className="w-5 h-5 text-gold-400 fill-gold-400/30" />}
+                className="w-full sm:w-auto shadow-md border-gold-400/40 hover:border-gold-400"
               >
-                DOWNLOAD PROSPECTUS
+                WATCH VIDEO PROSPECTUS
               </Button>
             </div>
           </Reveal>

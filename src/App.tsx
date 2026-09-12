@@ -18,6 +18,7 @@ import { AcademicsDetailPage, AcademicTab } from './components/pages/AcademicsDe
 import { InternationalRelationsPage, IRTab } from './components/pages/InternationalRelationsPage';
 import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDetailPage';
 import { AdmissionsModal } from './components/modals/AdmissionsModal';
+import { VideoModal } from './components/modals/VideoModal';
 import { WelcomePreloader } from './components/ui/WelcomePreloader';
 import { ALL_DEGREE_CATEGORIES } from './data/coursesCatalog';
 
@@ -31,6 +32,7 @@ export const App: React.FC = () => {
   const [campusLifeTab, setCampusLifeTab] = useState<CampusLifeTab | null>(null);
   const [examPortalTab, setExamPortalTab] = useState<ExamPortalTab | null>(null);
   const [isAdmissionsModalOpen, setIsAdmissionsModalOpen] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Sync with URL hash
   useEffect(() => {
@@ -396,9 +398,9 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Global click interceptor for any #admissions or #apply links
+  // Global click interceptor for any #admissions or #video links
   useEffect(() => {
-    const handleAdmissionsClick = (e: MouseEvent) => {
+    const handleGlobalLinkClicks = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest('a, button');
       if (target) {
         const href = target.getAttribute('href');
@@ -412,11 +414,23 @@ export const App: React.FC = () => {
         ) {
           e.preventDefault();
           setIsAdmissionsModalOpen(true);
+        } else if (
+          href === '#watch-video' ||
+          href === '#watch-video-prospectus' ||
+          href === '#video-prospectus' ||
+          href === '#download-prospectus' ||
+          href === '#download-brochure' ||
+          href === '#admissions-prospectus' ||
+          href === '#campus-video' ||
+          href === '#play-video'
+        ) {
+          e.preventDefault();
+          setIsVideoModalOpen(true);
         }
       }
     };
-    document.addEventListener('click', handleAdmissionsClick);
-    return () => document.removeEventListener('click', handleAdmissionsClick);
+    document.addEventListener('click', handleGlobalLinkClicks);
+    return () => document.removeEventListener('click', handleGlobalLinkClicks);
   }, []);
 
   const handleSelectCategory = (categoryId: string) => {
@@ -456,6 +470,13 @@ export const App: React.FC = () => {
       <AdmissionsModal
         isOpen={isAdmissionsModalOpen}
         onClose={() => setIsAdmissionsModalOpen(false)}
+      />
+
+      {/* Official Video Prospectus & Campus Film Cinema Modal */}
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="/videos/prospectus.mp4"
       />
 
       {/* Sticky Main Navigation Header */}

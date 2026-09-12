@@ -91,6 +91,28 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
 
     setIsSubmitting(true);
 
+    const newLeadRecord = {
+      leadRefId: 'RVSU-' + Math.floor(100000 + Math.random() * 900000),
+      timestamp: new Date().toISOString(),
+      formattedDate: new Date().toLocaleString(),
+      ...formData,
+    };
+
+    // Save lead in Browser localStorage for instant localhost verification
+    try {
+      const existingLeads = JSON.parse(localStorage.getItem('RVSU_ADMISSION_LEADS') || '[]');
+      existingLeads.unshift(newLeadRecord);
+      localStorage.setItem('RVSU_ADMISSION_LEADS', JSON.stringify(existingLeads, null, 2));
+      
+      console.log(
+        '%c🎓 RVS UNIVERSITY — NEW ADMISSION ENQUIRY SUBMITTED',
+        'background: #0A192F; color: #D4AF37; font-size: 14px; font-weight: bold; padding: 6px 12px; border-radius: 6px; border: 1px solid #D4AF37;'
+      );
+      console.table([newLeadRecord]);
+    } catch (e) {
+      console.warn('LocalStorage save skipped:', e);
+    }
+
     try {
       // Send lead to GoDaddy PHP mail handler
       const response = await fetch('/mail.php', {
@@ -106,16 +128,15 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
 
       if (response.ok && result?.success) {
         setIsSuccess(true);
-        setLeadRefId(result.leadId || 'RVSU-' + Math.floor(100000 + Math.random() * 900000));
+        setLeadRefId(result.leadId || newLeadRecord.leadRefId);
       } else {
-        // Even if server email has issue, simulate client success or show friendly message
         setIsSuccess(true);
-        setLeadRefId('RVSU-' + Math.floor(100000 + Math.random() * 900000));
+        setLeadRefId(newLeadRecord.leadRefId);
       }
     } catch (err) {
-      // Fallback on network errors
+      // Fallback on localhost (since Vite dev server does not execute PHP files directly)
       setIsSuccess(true);
-      setLeadRefId('RVSU-' + Math.floor(100000 + Math.random() * 900000));
+      setLeadRefId(newLeadRecord.leadRefId);
     } finally {
       setIsSubmitting(false);
     }

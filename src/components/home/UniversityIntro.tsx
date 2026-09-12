@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Award, BookOpen, Globe2, ArrowRight, Sparkles, GraduationCap } from 'lucide-react';
+import { ShieldCheck, Award, BookOpen, Globe2, ArrowRight, Sparkles, GraduationCap, Play } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
@@ -71,9 +71,10 @@ export const UniversityIntro: React.FC = () => {
                 <Button
                   variant="outline-navy"
                   size="md"
-                  href="#admissions-prospectus"
+                  href="#watch-video-prospectus"
+                  icon={<Play className="w-4 h-4 text-gold-600 fill-gold-600/30" />}
                 >
-                  Download University Charter
+                  Watch Campus Video
                 </Button>
               </div>
             </Reveal>

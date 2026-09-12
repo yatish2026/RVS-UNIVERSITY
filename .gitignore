@@ -23,4 +23,6 @@ src/assets_backup/
 src/assets/syllabus/
 src/assets/**/*.pdf
 *.zip
+public/videos/prospectus.mp4
+
 
