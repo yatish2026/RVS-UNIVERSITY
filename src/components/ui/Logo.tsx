@@ -1,4 +1,5 @@
 import React from 'react';
+import rvsOfficialLogo from '../../assets/rvs-official-logo.png';
 
 interface LogoProps {
   variant?: 'dark' | 'light';
@@ -34,7 +35,7 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Official Circular University Crest */}
       <div className={`relative flex-shrink-0 ${logoDimensions[size]} transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-md border-2 border-gold-400 bg-white p-0.5 aspect-square`}>
         <img
-          src="/images/rvs-official-logo.png"
+          src={rvsOfficialLogo}
           alt="RVS University Official Seal"
           className="w-full h-full object-contain rounded-full block"
         />

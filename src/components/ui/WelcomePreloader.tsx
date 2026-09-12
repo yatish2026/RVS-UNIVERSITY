@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, ArrowRight, GraduationCap } from 'lucide-react';
+import noticeBanner1 from '../../assets/admission-announcement-banner.png';
+import noticeBanner2 from '../../assets/admissions-programmes-overview.jpg';
+import rvsLogo from '../../assets/logo.png';
 
 interface WelcomePreloaderProps {
   onComplete?: () => void;
@@ -10,7 +13,7 @@ const NOTICES = [
     id: 1,
     tag: 'New B.Tech Programmes',
     title: 'Specialized Engineering Disciplines (Code: RVSPU)',
-    image: '/images/admission-announcement-banner.png',
+    image: noticeBanner1,
     alt: 'RVS University New B.Tech Programmes and EAPCET RVSPU Admission Announcement',
     code: 'EAPCET: RVSPU',
   },
@@ -18,7 +21,7 @@ const NOTICES = [
     id: 2,
     tag: 'Admissions Open 2026–27',
     title: 'Choose Your Programme • SVCTPU & RVSPU',
-    image: '/images/admissions-programmes-overview.jpg',
+    image: noticeBanner2,
     alt: 'RVS University and SVCET Admissions Open Existing & New B.Tech Programmes',
     code: 'EAPCET: SVCTPU / RVSPU',
   },
@@ -157,7 +160,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
                 {/* Inner Solid White Circular Badge with Emblem */}
                 <div className="w-full h-full rounded-full bg-white p-2.5 sm:p-3 shadow-xl flex items-center justify-center">
                   <img
-                    src="/images/logo.png"
+                    src={rvsLogo}
                     alt="RVS University Emblem"
                     className="w-full h-full object-contain filter drop-shadow-sm"
                   />
