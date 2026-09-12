@@ -85,7 +85,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
   {
     id: 'departments',
-    label: 'Programs',
+    label: 'Academics',
     href: '#departments',
     hasDropdown: true,
     megaMenu: {
