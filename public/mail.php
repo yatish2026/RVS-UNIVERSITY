@@ -2,6 +2,8 @@
 /**
  * RVS University — Admissions Enquiry 2026–27 Mail Gateway
  * Handles instant email notifications for student leads submitted via GoDaddy hosting.
+ * Primary Recipient: yatishgottapu2026@gmail.com
+ * Secondary / CC: yatish.techie@gmail.com
  */
 
 // Set CORS & Security Headers
@@ -55,8 +57,8 @@ if (empty($fullName) || empty($phone)) {
     exit();
 }
 
-// Target email addresses specified by user
-$toEmail = "yatish.techie@dailsmart.in, info@rvsu.org";
+// Target email addresses
+$toEmail = "yatishgottapu2026@gmail.com, yatish.techie@gmail.com";
 $subject = "🎓 [New Admission Lead 2026–27] " . $fullName . " (" . $course . ")";
 
 // Build HTML email body
@@ -152,13 +154,16 @@ $emailHtml = '
 // Setup Email Headers for GoDaddy PHP Mail
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: RVS Admissions Lead <no-reply@rvsu.org>\r\n";
+$headers .= "From: RVS University Admissions <yatishgottapu2026@gmail.com>\r\n";
+$headers .= "Cc: yatish.techie@gmail.com\r\n";
 if (!empty($email)) {
     $headers .= "Reply-To: " . $fullName . " <" . $email . ">\r\n";
+} else {
+    $headers .= "Reply-To: yatishgottapu2026@gmail.com\r\n";
 }
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
-// Attempt to send email
+// Send email using standard PHP mail
 $mailSent = @mail($toEmail, $subject, $emailHtml, $headers);
 
 // Store backup record in a JSON lead log on server

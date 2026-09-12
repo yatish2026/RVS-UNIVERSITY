@@ -114,27 +114,35 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
     }
 
     try {
-      // Send lead to GoDaddy PHP mail handler
-      const response = await fetch('/mail.php', {
+      // Send lead to GoDaddy PHP mail handler with fast timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+      const response = await fetch('./mail.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify(formData),
+        signal: controller.signal,
+      }).catch(async () => {
+        return fetch('/mail.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
       });
 
-      const result = await response.json().catch(() => null);
+      clearTimeout(timeoutId);
+      const result = await response?.json().catch(() => null);
 
-      if (response.ok && result?.success) {
-        setIsSuccess(true);
-        setLeadRefId(result.leadId || newLeadRecord.leadRefId);
-      } else {
-        setIsSuccess(true);
-        setLeadRefId(newLeadRecord.leadRefId);
-      }
+      setIsSuccess(true);
+      setLeadRefId(result?.leadId || newLeadRecord.leadRefId);
     } catch (err) {
-      // Fallback on localhost (since Vite dev server does not execute PHP files directly)
       setIsSuccess(true);
       setLeadRefId(newLeadRecord.leadRefId);
     } finally {
