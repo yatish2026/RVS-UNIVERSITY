@@ -72,18 +72,6 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
 
   {
-    id: 'exam-portal',
-    label: 'Exam Portal',
-    href: '#exam-portal',
-    hasDropdown: true,
-    simpleDropdown: [
-      { name: 'Results', href: '#exam-results', description: 'Semester grade sheets & provisional certificates' },
-      { name: 'Online Results', href: '#exam-online-results', description: 'Instant hall-ticket result lookup' },
-      { name: 'Exam Schedules', href: '#exam-schedules', description: 'Mid-term & semester examination timetables' },
-      { name: 'Exam Notifications', href: '#exam-notifications', description: 'Exam fee dates, revaluation & circulars' },
-    ],
-  },
-  {
     id: 'departments',
     label: 'Academics',
     href: '#departments',
@@ -189,7 +177,7 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
   {
     id: 'directorate-of-research',
-    label: 'Directorate of Research',
+    label: 'Research',
     href: '#research-overview',
     hasDropdown: true,
     simpleDropdown: [
