@@ -189,7 +189,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     { id: 'downloads', label: 'Downloads', subtitle: 'Quality Templates, Forms & Feedback Rubrics' },
   ];
 
-  // Accreditation Seals / Badges (The 5 official uploaded images + extensible structure)
+  // Accreditation Seals / Badges (The 8 official uploaded images)
   const accreditationLogos = [
     {
       title: 'Government of Andhra Pradesh',
@@ -208,6 +208,14 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       tag: 'india.gov.in',
     },
     {
+      title: 'AICTE New Delhi',
+      category: 'Technical Education Approval',
+      image: '/images/accreditations/aicte-logo.png',
+      alt: 'All India Council for Technical Education AICTE Logo',
+      description: 'Approved by the All India Council for Technical Education (AICTE), Ministry of Education, New Delhi.',
+      tag: 'AICTE Approved',
+    },
+    {
       title: 'NAAC Accredited Grade A+',
       category: 'Institutional Quality Benchmark',
       image: '/images/accreditations/naac-a-plus-badge.png',
@@ -222,6 +230,22 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       alt: 'National Board of Accreditation NBA Seal',
       description: 'Undergraduate engineering programs accredited under Tier-I Washington Accord international standards.',
       tag: 'Tier-I NBA',
+    },
+    {
+      title: 'NIRF Ranking Framework',
+      category: 'National Institutional Ranking',
+      image: '/images/accreditations/nirf-logo.png',
+      alt: 'NIRF National Institutional Ranking Framework Logo',
+      description: 'Participating in the National Institutional Ranking Framework (NIRF), Ministry of Education, Govt of India.',
+      tag: 'NIRF MHRD',
+    },
+    {
+      title: "Institution's Innovation Council",
+      category: 'Innovation & Entrepreneurship',
+      image: '/images/accreditations/iic-logo.png',
+      alt: "Institution's Innovation Council Ministry of Education Logo",
+      description: "Established under the Ministry of Education's Innovation Cell (MIC) to foster startup culture and patents.",
+      tag: 'MoE Initiative',
     },
     {
       title: 'JNTUA Anantapur',
@@ -921,7 +945,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {accreditationLogos.map((seal, idx) => (
                   <div
                     key={idx}
@@ -950,81 +974,6 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Detailed Recognition Highlights */}
-            <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6">
-              <h4 className="font-serif text-xl md:text-2xl font-bold text-navy-950">
-                Institutional Quality Milestones
-              </h4>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* NAAC */}
-                <div className="p-6 rounded-3xl bg-amber-50/50 border border-amber-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-gold-500 text-navy-950 flex items-center justify-center font-bold text-xl shadow-md">
-                    A+
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">NAAC Grade A+</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Accredited with <strong className="text-navy-950">Grade 'A+'</strong> by NAAC for academic excellence, state-of-the-art infrastructure, and outstanding graduate outcomes.
-                  </p>
-                </div>
-
-                {/* NBA */}
-                <div className="p-6 rounded-3xl bg-blue-50/50 border border-blue-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-900 text-gold-300 flex items-center justify-center font-bold text-base shadow-md">
-                    NBA
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">NBA Tier-I Accredited</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Undergraduate engineering branches accredited under <strong className="text-navy-950">Washington Accord Tier-I</strong> for international mobility and outcome-based engineering education.
-                  </p>
-                </div>
-
-                {/* AICTE & UGC */}
-                <div className="p-6 rounded-3xl bg-emerald-50/50 border border-emerald-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-800 text-white flex items-center justify-center font-bold text-base shadow-md">
-                    UGC
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">UGC Autonomous & AICTE</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Autonomous status conferred by UGC, New Delhi, and approved by All India Council for Technical Education (AICTE).
-                  </p>
-                </div>
-
-                {/* ISO */}
-                <div className="p-6 rounded-3xl bg-purple-50/50 border border-purple-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-900 text-white flex items-center justify-center font-bold text-base shadow-md">
-                    ISO
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">ISO 9001:2015 Certified</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Certified quality management systems ensuring consistent standard operating procedures in education and examinations.
-                  </p>
-                </div>
-
-                {/* CSR GHRDC */}
-                <div className="p-6 rounded-3xl bg-rose-50/50 border border-rose-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-900 text-white flex items-center justify-center font-bold text-base shadow-md">
-                    #3
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">Top 3 in Andhra Pradesh</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Ranked <strong className="text-navy-950">3rd in AP and 30th in India</strong> by Competition Success Review (CSR-GHRDC) for outstanding infrastructure and placements.
-                  </p>
-                </div>
-
-                {/* AICTE IDEA LAB */}
-                <div className="p-6 rounded-3xl bg-teal-50/50 border border-teal-200/80 space-y-3">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-800 text-gold-300 flex items-center justify-center font-bold text-base shadow-md">
-                    IDEA
-                  </div>
-                  <h5 className="font-serif text-lg font-bold text-navy-950">AICTE ATAL IDEA Lab</h5>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    ₹1.1 Crore+ funded AICTE center for 3D printing, laser cutting, embedded prototyping, and student product incubation.
-                  </p>
-                </div>
               </div>
             </div>
           </div>
