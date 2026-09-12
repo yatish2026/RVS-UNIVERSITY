@@ -54,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isScrolled, onMobileMenuOpen }) 
       <div className="w-full flex items-center justify-between gap-1.5 lg:gap-2">
         
         {/* Left: Official University Logo */}
-        <div className="flex-shrink-0 min-w-max">
+        <div className="flex-shrink-0 min-w-0">
           <Logo size="md" variant="light" showCaption={true} />
         </div>
 

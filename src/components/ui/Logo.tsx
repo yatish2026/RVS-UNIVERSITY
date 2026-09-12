@@ -54,7 +54,7 @@ export const Logo: React.FC<LogoProps> = ({
           </span>
           {showCaption !== false && (
             <span
-              className="text-[7.5px] sm:text-[8.5px] md:text-[9.5px] font-bold tracking-wider text-slate-200 uppercase mt-0.5 whitespace-nowrap block drop-shadow-sm"
+              className="hidden sm:block text-[7.5px] sm:text-[8.5px] md:text-[9.5px] font-bold tracking-wider text-slate-200 uppercase mt-0.5 whitespace-nowrap drop-shadow-sm"
             >
               FIND YOUR PLACE <span className="text-gold-400 font-bold">•</span> FOLLOW YOUR PASSION
             </span>

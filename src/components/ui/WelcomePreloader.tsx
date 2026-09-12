@@ -36,6 +36,14 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
   const [isNoticeClosing, setIsNoticeClosing] = useState<boolean>(false);
   const [hasDismissedOnce, setHasDismissedOnce] = useState<boolean>(false);
 
+  // Eagerly preload announcement images into browser memory immediately
+  useEffect(() => {
+    const img1 = new Image();
+    img1.src = noticeBanner1;
+    const img2 = new Image();
+    img2.src = noticeBanner2;
+  }, []);
+
   // Check sessionStorage so we don't repeat splash on every route change in the same tab session
   useEffect(() => {
     const isDismissed = sessionStorage.getItem('rvs_admission_banner_dismissed');
@@ -218,56 +226,58 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
       {/* ========================================================================= */}
       {phase === 'notices' && (
         <div
-          className={`fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-5 pointer-events-none transition-all duration-300 ease-in-out select-none ${
+          className={`fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-4 w-full h-full max-w-full pointer-events-none transition-all duration-300 ease-in-out select-none ${
             isNoticeClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-fadeIn'
           }`}
         >
-          {/* Centered Modal Card */}
-          <div className="relative pointer-events-auto w-full max-w-[490px] bg-[#0A192F] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.95)] border-2 border-gold-400/80 overflow-hidden flex flex-col animate-scaleUp">
+          {/* Centered Modal Card - Fully responsive for mobile (max-w-[94vw]) & desktop */}
+          <div className="relative pointer-events-auto w-full max-w-[94vw] sm:max-w-[480px] bg-[#0A192F] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.95)] border-2 border-gold-400/80 overflow-hidden flex flex-col my-auto animate-scaleUp">
             
             {/* Top Bar with Step Indicators & Cancel Button */}
-            <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 bg-gradient-to-r from-navy-950 via-[#0E203C] to-navy-950 border-b border-gold-500/30">
-              <div className="flex items-center gap-2 truncate">
+            <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-navy-950 via-[#0E203C] to-navy-950 border-b border-gold-500/30">
+              <div className="flex items-center gap-1.5 sm:gap-2 truncate">
                 <span className="w-2 h-2 rounded-full bg-gold-400 animate-pulse flex-shrink-0" />
-                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-gold-300 font-sans truncate">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-gold-300 font-sans truncate">
                   {currentNotice.tag}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40">
+                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40">
                   {currentIndex + 1} of {NOTICES.length}
                 </span>
               </div>
 
               {/* Close / Next Cancel Button */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <button
                   onClick={handleCancelCurrentNotice}
-                  className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-red-500 text-slate-300 hover:text-white transition-all text-xs font-bold cursor-pointer"
+                  className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/10 hover:bg-red-500 text-slate-300 hover:text-white transition-all text-xs font-bold cursor-pointer"
                   aria-label={currentIndex === 0 ? "Close & View Next Notice" : "Close Notice"}
                   title={currentIndex === 0 ? "Next Notice (Esc)" : "Close (Esc)"}
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
 
             {/* Middle: Announcement Image Display with Prev/Next Controls */}
-            <div className="relative p-2 sm:p-2.5 bg-[#FFFBF0] flex items-center justify-center group overflow-hidden">
+            <div className="relative p-2 sm:p-2.5 bg-[#FFFBF0] flex items-center justify-center group overflow-hidden min-h-[160px] sm:min-h-[220px]">
               <img
                 key={currentNotice.id}
                 src={currentNotice.image}
                 alt={currentNotice.alt}
-                className="w-full h-auto max-h-[300px] sm:max-h-[340px] object-contain rounded-xl block transition-all duration-300 animate-fadeIn"
+                loading="eager"
+                decoding="sync"
+                className="w-full h-auto max-h-[240px] sm:max-h-[320px] object-contain rounded-xl block transition-all duration-200"
               />
 
               {/* Previous Arrow Button */}
               {currentIndex > 0 && (
                 <button
                   onClick={() => setCurrentIndex(currentIndex - 1)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
                   aria-label="Previous Notice"
                   title="Previous Notice"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               )}
 
@@ -275,11 +285,11 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
               {currentIndex < NOTICES.length - 1 && (
                 <button
                   onClick={() => setCurrentIndex(currentIndex + 1)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
                   aria-label="Next Notice"
                   title="Next Notice"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               )}
             </div>

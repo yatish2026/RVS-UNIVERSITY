@@ -61,6 +61,41 @@ execSync(`powershell -Command "${psZipImages}"`, { stdio: 'inherit' });
 fs.rmSync(stagingImages, { recursive: true, force: true });
 console.log(`✅ Successfully created: rvs-images-only.zip (${(fs.statSync(zipImages).size / (1024 * 1024)).toFixed(2)} MB)`);
 
-// 6. Clean staging directory
+// 6. Create rvs-quick-update.zip (Ultra-lightweight ~1.5 MB: ONLY index.html, mail.php, .htaccess, and core JS/CSS)
+const zipQuick = path.join(projectRoot, 'rvs-quick-update.zip');
+if (fs.existsSync(zipQuick)) {
+  fs.unlinkSync(zipQuick);
+}
+const stagingQuick = path.join(projectRoot, 'staging-quick');
+if (fs.existsSync(stagingQuick)) {
+  fs.rmSync(stagingQuick, { recursive: true, force: true });
+}
+fs.mkdirSync(path.join(stagingQuick, 'assets'), { recursive: true });
+
+// Copy root files
+fs.copyFileSync(path.join(distDir, 'index.html'), path.join(stagingQuick, 'index.html'));
+fs.copyFileSync(path.join(distDir, 'mail.php'), path.join(stagingQuick, 'mail.php'));
+fs.copyFileSync(path.join(distDir, '.htaccess'), path.join(stagingQuick, '.htaccess'));
+
+// Copy core JS and CSS and announcement banner assets from dist/assets
+const assetFiles = fs.readdirSync(path.join(distDir, 'assets'));
+for (const file of assetFiles) {
+  if (
+    file.startsWith('index-') ||
+    file.startsWith('admission-announcement') ||
+    file.startsWith('admissions-programmes') ||
+    file.startsWith('logo-') ||
+    file.startsWith('rvs-official')
+  ) {
+    fs.copyFileSync(path.join(distDir, 'assets', file), path.join(stagingQuick, 'assets', file));
+  }
+}
+
+const psZipQuick = `Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory('${stagingQuick}', '${zipQuick}', [System.IO.Compression.CompressionLevel]::Optimal, $false)`;
+execSync(`powershell -Command "${psZipQuick}"`, { stdio: 'inherit' });
+fs.rmSync(stagingQuick, { recursive: true, force: true });
+console.log(`✅ Successfully created: rvs-quick-update.zip (${(fs.statSync(zipQuick).size / (1024 * 1024)).toFixed(2)} MB)`);
+
+// 7. Clean staging directory
 fs.rmSync(stagingCore, { recursive: true, force: true });
 console.log('🎉 Packaging complete!');
