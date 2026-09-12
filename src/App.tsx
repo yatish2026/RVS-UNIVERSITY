@@ -16,6 +16,7 @@ import { ExamPortalPage, ExamPortalTab } from './components/pages/ExamPortalPage
 import { DepartmentDetailPage } from './components/pages/DepartmentDetailPage';
 import { AcademicsDetailPage, AcademicTab } from './components/pages/AcademicsDetailPage';
 import { InternationalRelationsPage, IRTab } from './components/pages/InternationalRelationsPage';
+import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDetailPage';
 import { WelcomePreloader } from './components/ui/WelcomePreloader';
 import { ALL_DEGREE_CATEGORIES } from './data/coursesCatalog';
 
@@ -24,6 +25,7 @@ export const App: React.FC = () => {
   const [departmentId, setDepartmentId] = useState<string | null>(null);
   const [academicTab, setAcademicTab] = useState<AcademicTab | null>(null);
   const [irTab, setIrTab] = useState<IRTab | null>(null);
+  const [researchTab, setResearchTab] = useState<ResearchTab | null>(null);
   const [aboutTab, setAboutTab] = useState<AboutPageType | null>(null);
   const [campusLifeTab, setCampusLifeTab] = useState<CampusLifeTab | null>(null);
   const [examPortalTab, setExamPortalTab] = useState<ExamPortalTab | null>(null);
@@ -39,12 +41,34 @@ export const App: React.FC = () => {
         setDepartmentId(null);
         setAcademicTab(null);
         setIrTab(null);
+        setResearchTab(null);
         setAboutTab(null);
         setCampusLifeTab(null);
         setExamPortalTab(null);
       };
 
-      // 0. Check International Relations hashes
+      // 0. Check Directorate of Research hashes
+      const researchTabs: ResearchTab[] = [
+        'overview', 'mission', 'recent-projects', 'academic-research', 'funded-research', 'thrust-area'
+      ];
+      if (
+        hash === '#research' || 
+        hash === '#directorate-of-research' || 
+        hash === '#research-overview' || 
+        hash.startsWith('#research-')
+      ) {
+        let tab: ResearchTab = 'overview';
+        const cleanTab = hash.replace('#research-', '').replace('#', '') as ResearchTab;
+        if (researchTabs.includes(cleanTab)) {
+          tab = cleanTab;
+        }
+        resetAllViews();
+        setResearchTab(tab);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // 0.1 Check International Relations hashes
       if (
         hash === '#international-relations' ||
         hash === '#international' ||
@@ -369,6 +393,7 @@ export const App: React.FC = () => {
     setDepartmentId(null);
     setAcademicTab(null);
     setIrTab(null);
+    setResearchTab(null);
     setAboutTab(null);
     setCampusLifeTab(null);
     setExamPortalTab(null);
@@ -380,6 +405,7 @@ export const App: React.FC = () => {
     setDepartmentId(null);
     setAcademicTab(null);
     setIrTab(null);
+    setResearchTab(null);
     setAboutTab(null);
     setCampusLifeTab(null);
     setExamPortalTab(null);
@@ -400,7 +426,17 @@ export const App: React.FC = () => {
 
       {/* Conditional Sub-Pages or Full Homepage Flow */}
       <main className="flex-grow">
-        {irTab ? (
+        {researchTab ? (
+          // Standalone Directorate of Research Sub-Page
+          <ResearchDetailPage
+            activeTab={researchTab}
+            onBackToHome={handleBackToHome}
+            onSelectTab={(tab) => {
+              setResearchTab(tab);
+              window.location.hash = `research-${tab}`;
+            }}
+          />
+        ) : irTab ? (
           // Standalone International Relations & Admissions Portal
           <InternationalRelationsPage
             initialTab={irTab}

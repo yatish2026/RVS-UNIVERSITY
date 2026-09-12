@@ -188,6 +188,20 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     },
   },
   {
+    id: 'directorate-of-research',
+    label: 'Directorate of Research',
+    href: '#research-overview',
+    hasDropdown: true,
+    simpleDropdown: [
+      { name: 'Overview', href: '#research-overview', description: 'Directorate profile & research ecosystem' },
+      { name: 'Mission', href: '#research-mission', description: 'Research vision, goals & charter' },
+      { name: 'Recent Projects', href: '#research-recent-projects', description: 'Institutional project initiatives' },
+      { name: 'Academic Research', href: '#research-academic-research', description: 'Doctoral & scholarly programs' },
+      { name: 'Funded Research', href: '#research-funded-research', description: 'Sponsored grants & funding agencies' },
+      { name: 'Thrust Area', href: '#research-thrust-area', description: 'Core domains & frontier focus technologies' },
+    ],
+  },
+  {
     id: 'international-relations',
     label: 'International Relations',
     href: '#international-relations',
