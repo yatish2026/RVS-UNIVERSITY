@@ -153,9 +153,22 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#about-governance' || hash === '#governance' || hash === '#committee-governing-body' || hash === '#governing-body' || hash === '#governing-body-12' || hash === '#committee-academic-council' || hash === '#academic-council' || hash === '#committee-finance' || hash === '#finance') {
+      // Governance side menu hashes
+      if (
+        hash === '#about-governance' || hash === '#governance' || 
+        hash === '#sponsoring-body' || hash === '#about-sponsoring-body' ||
+        hash === '#governing-body' || hash === '#about-governing-body' || hash === '#committee-governing-body' ||
+        hash === '#board-of-management' || hash === '#about-board-of-management' ||
+        hash === '#academic-council' || hash === '#about-academic-council' || hash === '#committee-academic-council' ||
+        hash === '#finance-committee' || hash === '#about-finance-committee' || hash === '#finance' || hash === '#committee-finance' ||
+        hash === '#planning-monitoring' || hash === '#about-planning-monitoring' ||
+        hash === '#research-innovation' || hash === '#about-research-innovation' ||
+        hash === '#board-of-examination' || hash === '#about-board-of-examination' ||
+        hash === '#board-of-studies' || hash === '#about-board-of-studies'
+      ) {
         resetAllViews();
-        setAboutTab('governance');
+        const govSub = hash.replace('#about-', '').replace('#', '') as any;
+        setAboutTab(govSub === 'governance' || govSub === 'committee-governing-body' ? 'governing-body' : govSub === 'committee-academic-council' ? 'academic-council' : govSub === 'committee-finance' || govSub === 'finance' ? 'finance-committee' : govSub);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
@@ -171,9 +184,21 @@ export const App: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
-      if (hash === '#about-iqac' || hash === '#iqac-cell') {
+      // IQAC side menu hashes
+      if (
+        hash === '#about-iqac' || hash === '#iqac' || hash === '#iqac-cell' ||
+        hash === '#members-committee' || hash === '#about-members-committee' ||
+        hash === '#meeting-minutes' || hash === '#about-meeting-minutes' ||
+        hash === '#annual-report' || hash === '#about-annual-report' ||
+        hash === '#naac-certificate' || hash === '#about-naac-certificate' ||
+        hash === '#aaa' || hash === '#about-aaa' ||
+        hash === '#idp' || hash === '#about-idp' ||
+        hash === '#useful-links' || hash === '#about-useful-links' ||
+        hash === '#downloads' || hash === '#about-downloads'
+      ) {
         resetAllViews();
-        setAboutTab('iqac');
+        const iqacSub = hash.replace('#about-', '').replace('#', '') as any;
+        setAboutTab(iqacSub === 'iqac' || iqacSub === 'iqac-cell' ? 'about-iqac' : iqacSub);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }

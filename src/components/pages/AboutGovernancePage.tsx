@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { 
   ArrowLeft, ArrowRight, Award, GraduationCap, Building2, 
   Users, FileText, CheckCircle2, ShieldCheck, Landmark, 
-  Compass, HeartHandshake, BookOpen, Clock, Phone, Mail, MapPin,
-  Sparkles, Star, Target, CheckCircle, ExternalLink, Globe, Layers, UserCheck, AlertCircle
+  Compass, BookOpen, Phone, Mail, MapPin,
+  Sparkles, Target, CheckCircle, ExternalLink, Globe, Layers, Download, Clock
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
@@ -16,17 +16,36 @@ export type AboutPageType =
   | 'ranking-accreditation'
   | 'iqac'
   | 'contact-us'
-  // Legacy aliases
+  // Leadership aliases
   | 'chancellor'
   | 'pro-chancellor'
   | 'vice-chancellor'
   | 'chairman' 
   | 'vice-chairman' 
   | 'principal' 
+  // Governance aliases & side menu items
+  | 'sponsoring-body'
   | 'governing-body' 
+  | 'board-of-management'
   | 'academic-council' 
-  | 'finance' 
-  | 'admin-chart';
+  | 'finance-committee'
+  | 'finance'
+  | 'planning-monitoring'
+  | 'research-innovation'
+  | 'board-of-examination'
+  | 'board-of-studies'
+  // Administration alias
+  | 'admin-chart'
+  // IQAC aliases & side menu items
+  | 'about-iqac'
+  | 'members-committee'
+  | 'meeting-minutes'
+  | 'annual-report'
+  | 'naac-certificate'
+  | 'aaa'
+  | 'idp'
+  | 'useful-links'
+  | 'downloads';
 
 interface AboutGovernancePageProps {
   pageType: AboutPageType;
@@ -38,24 +57,72 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
   onBackToHome,
 }) => {
   const [leadershipSubTab, setLeadershipSubTab] = useState<'chancellor' | 'pro-chancellor' | 'vice-chancellor' | 'principal'>('chancellor');
+  
+  const [governanceSubTab, setGovernanceSubTab] = useState<
+    | 'sponsoring-body'
+    | 'governing-body'
+    | 'board-of-management'
+    | 'academic-council'
+    | 'finance-committee'
+    | 'planning-monitoring'
+    | 'research-innovation'
+    | 'board-of-examination'
+    | 'board-of-studies'
+  >('sponsoring-body');
+
+  const [iqacSubTab, setIqacSubTab] = useState<
+    | 'about-iqac'
+    | 'members-committee'
+    | 'meeting-minutes'
+    | 'annual-report'
+    | 'naac-certificate'
+    | 'aaa'
+    | 'idp'
+    | 'useful-links'
+    | 'downloads'
+  >('about-iqac');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pageType]);
 
-  // Set sub-tabs if a direct legacy URL hash was accessed
+  // Sync sub-tabs from URL hash / pageType
   useEffect(() => {
+    // Leadership
     if (pageType === 'chancellor' || pageType === 'chairman') setLeadershipSubTab('chancellor');
     if (pageType === 'pro-chancellor' || pageType === 'vice-chairman') setLeadershipSubTab('pro-chancellor');
     if (pageType === 'vice-chancellor') setLeadershipSubTab('vice-chancellor');
     if (pageType === 'principal') setLeadershipSubTab('principal');
+
+    // Governance
+    if (pageType === 'sponsoring-body') setGovernanceSubTab('sponsoring-body');
+    if (pageType === 'governing-body') setGovernanceSubTab('governing-body');
+    if (pageType === 'board-of-management') setGovernanceSubTab('board-of-management');
+    if (pageType === 'academic-council') setGovernanceSubTab('academic-council');
+    if (pageType === 'finance-committee' || pageType === 'finance') setGovernanceSubTab('finance-committee');
+    if (pageType === 'planning-monitoring') setGovernanceSubTab('planning-monitoring');
+    if (pageType === 'research-innovation') setGovernanceSubTab('research-innovation');
+    if (pageType === 'board-of-examination') setGovernanceSubTab('board-of-examination');
+    if (pageType === 'board-of-studies') setGovernanceSubTab('board-of-studies');
+
+    // IQAC
+    if (pageType === 'about-iqac') setIqacSubTab('about-iqac');
+    if (pageType === 'members-committee') setIqacSubTab('members-committee');
+    if (pageType === 'meeting-minutes') setIqacSubTab('meeting-minutes');
+    if (pageType === 'annual-report') setIqacSubTab('annual-report');
+    if (pageType === 'naac-certificate') setIqacSubTab('naac-certificate');
+    if (pageType === 'aaa') setIqacSubTab('aaa');
+    if (pageType === 'idp') setIqacSubTab('idp');
+    if (pageType === 'useful-links') setIqacSubTab('useful-links');
+    if (pageType === 'downloads') setIqacSubTab('downloads');
   }, [pageType]);
 
   // Normalize pageType to one of the 7 main categories
   const activeMainTab: 'overview' | 'leadership' | 'governance' | 'administration' | 'ranking-accreditation' | 'iqac' | 'contact-us' = 
     pageType === 'chancellor' || pageType === 'pro-chancellor' || pageType === 'vice-chancellor' || pageType === 'chairman' || pageType === 'vice-chairman' || pageType === 'principal' ? 'leadership'
-    : pageType === 'governing-body' || pageType === 'academic-council' || pageType === 'finance' ? 'governance'
+    : pageType === 'sponsoring-body' || pageType === 'governing-body' || pageType === 'board-of-management' || pageType === 'academic-council' || pageType === 'finance-committee' || pageType === 'finance' || pageType === 'planning-monitoring' || pageType === 'research-innovation' || pageType === 'board-of-examination' || pageType === 'board-of-studies' ? 'governance'
     : pageType === 'admin-chart' ? 'administration'
+    : pageType === 'about-iqac' || pageType === 'members-committee' || pageType === 'meeting-minutes' || pageType === 'annual-report' || pageType === 'naac-certificate' || pageType === 'aaa' || pageType === 'idp' || pageType === 'useful-links' || pageType === 'downloads' ? 'iqac'
     : pageType;
 
   // 23 Group Institutions Data
@@ -85,6 +152,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     { name: 'Sri Srinivasa M.P.H.W.(F) Training Institute', location: 'Chittoor', courses: 'M.P.H.W / A.N.M' },
   ];
 
+  // 7 Main Tabs
   const mainTabs = [
     { id: 'overview', label: 'Overview', href: '#about-overview', icon: <Compass className="w-4 h-4" /> },
     { id: 'leadership', label: 'Leadership', href: '#about-leadership', icon: <Users className="w-4 h-4" /> },
@@ -93,6 +161,76 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     { id: 'ranking-accreditation', label: 'Ranking and Accreditation', href: '#about-ranking-accreditation', icon: <Award className="w-4 h-4" /> },
     { id: 'iqac', label: 'IQAC', href: '#about-iqac', icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'contact-us', label: 'Contact Us', href: '#contact-us', icon: <Phone className="w-4 h-4" /> },
+  ];
+
+  // Governance 9 Side Menu Items
+  const governanceMenuItems = [
+    { id: 'sponsoring-body', label: 'Sponsoring Body', subtitle: 'Srinivasa Educational Academy (Est. 1998)', role: 'Statutory Sponsoring Society' },
+    { id: 'governing-body', label: 'Governing Body', subtitle: 'Apex Governing Body', role: 'Apex University Authority' },
+    { id: 'board-of-management', label: 'Board of Management', subtitle: 'Executive Administration & Management', role: 'Executive Management' },
+    { id: 'academic-council', label: 'Academic Council Members', subtitle: 'Curriculum & Academic Regulation', role: 'Chief Academic Authority' },
+    { id: 'finance-committee', label: 'Finance Committee', subtitle: 'Budgeting, Audits & Resource Planning', role: 'Financial Governance' },
+    { id: 'planning-monitoring', label: 'Planning and Monitoring Board', subtitle: 'Strategic Roadmap & Infrastructure', role: 'Development Planning' },
+    { id: 'research-innovation', label: 'Research and Innovation Council', subtitle: 'R&D, Patents & ATAL IDEA Lab', role: 'Research & Incubation' },
+    { id: 'board-of-examination', label: 'Board of Examination', subtitle: 'Evaluation, Moderation & Exam Integrity', role: 'Autonomous Exam Cell' },
+    { id: 'board-of-studies', label: 'Board of Studies', subtitle: 'Departmental Syllabi & Industry Alignment', role: 'Curriculum Boards' },
+  ];
+
+  // IQAC 9 Side Menu Items
+  const iqacMenuItems = [
+    { id: 'about-iqac', label: 'About IQAC', subtitle: 'Vision, Quality Objectives & Framework' },
+    { id: 'members-committee', label: 'Members and Committee', subtitle: 'Internal Quality Assurance Cell Composition' },
+    { id: 'meeting-minutes', label: 'Meeting Minutes', subtitle: 'Quarterly Proceedings & Action Taken Reports' },
+    { id: 'annual-report', label: 'Annual Report', subtitle: 'AQAR & Institutional Quality Audits' },
+    { id: 'naac-certificate', label: 'NAAC Certificate', subtitle: 'Grade A+ Certificate & Accreditations' },
+    { id: 'aaa', label: 'AAA', subtitle: 'Academic & Administrative Audit Reports' },
+    { id: 'idp', label: 'IDP', subtitle: 'Institutional Development Plan (2026–2035)' },
+    { id: 'useful-links', label: 'Useful Links', subtitle: 'NAAC, NBA, UGC, AICTE & NIRF Portals' },
+    { id: 'downloads', label: 'Downloads', subtitle: 'Quality Templates, Forms & Feedback Rubrics' },
+  ];
+
+  // Accreditation Seals / Badges (The 5 official uploaded images + extensible structure)
+  const accreditationLogos = [
+    {
+      title: 'Government of Andhra Pradesh',
+      category: 'State Statutory Recognition',
+      image: '/images/accreditations/ap-govt-logo.png',
+      alt: 'Government of Andhra Pradesh Official Emblem',
+      description: 'Recognized under the Andhra Pradesh Private Universities (Establishment and Regulation) Act.',
+      tag: 'Statutory Act',
+    },
+    {
+      title: 'National Portal of India',
+      category: 'National Regulatory Compliance',
+      image: '/images/accreditations/india-gov-logo.png',
+      alt: 'National Portal of India / Govt of India Emblem',
+      description: 'Listed on the National Portal of India (india.gov.in) with complete regulatory compliance.',
+      tag: 'india.gov.in',
+    },
+    {
+      title: 'NAAC Accredited Grade A+',
+      category: 'Institutional Quality Benchmark',
+      image: '/images/accreditations/naac-a-plus-badge.png',
+      alt: 'NAAC Accredited with Grade A+ Official Seal',
+      description: 'Conferred prestigious Grade A+ by NAAC, UGC for excellence in teaching-learning and research.',
+      tag: 'Grade A+',
+    },
+    {
+      title: 'NBA (Washington Accord Tier-I)',
+      category: 'Engineering Accreditation',
+      image: '/images/accreditations/nba-logo.png',
+      alt: 'National Board of Accreditation NBA Seal',
+      description: 'Undergraduate engineering programs accredited under Tier-I Washington Accord international standards.',
+      tag: 'Tier-I NBA',
+    },
+    {
+      title: 'JNTUA Anantapur',
+      category: 'Affiliation & Academic Legacy',
+      image: '/images/accreditations/jntua-logo.png',
+      alt: 'Jawaharlal Nehru Technological University Anantapur Seal',
+      description: 'Distinguished 28-year autonomous technical engineering academic heritage in Andhra Pradesh.',
+      tag: 'Autonomous Legacy',
+    },
   ];
 
   return (
@@ -107,10 +245,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 <span>About RVS University</span>
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-                About Us & University Leadership
+                About Us & University Governance
               </h1>
               <p className="text-sm md:text-base text-slate-300 mt-2 max-w-2xl font-light">
-                Explore our legacy of educational excellence since 1998, Chancellor and executive leadership, statutory governance framework, accreditations, and smart campus facilities.
+                Explore our legacy of educational excellence since 1998, Chancellor and executive leadership, statutory governance framework, accreditations, and internal quality assurance.
               </p>
             </div>
 
@@ -171,7 +309,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     <strong className="text-navy-950">RVS University</strong> (established under the aegis of <strong className="text-navy-950">Srinivasa Educational Academy</strong> in 1998) stands as a premier seat of higher learning and technological empowerment in Andhra Pradesh. Spanning an expansive <strong className="text-navy-950">40+ Acre Smart Campus</strong> in Chittoor, the university is committed to academic rigor, experiential industry immersion, and human-centric innovation.
                   </p>
                   <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                    With autonomous governance, NBA Tier-1 accreditation, NAAC 'A' Grade, and AICTE approval, RVS University guides over <strong className="text-navy-950">4,500+ students</strong> across 49+ undergraduate, postgraduate, and doctoral degree programs.
+                    With autonomous governance, NBA Tier-1 accreditation, NAAC Grade A+, and AICTE approval, RVS University guides over <strong className="text-navy-950">4,500+ students</strong> across 49+ undergraduate, postgraduate, and doctoral degree programs.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
@@ -483,7 +621,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     Vice Chancellor
                   </h3>
                   <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
-                  <p className="text-base text-slate-700 font-semibold">
+                  <p className="text-base text-slate-800 font-bold">
                     Will be updated soon
                   </p>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
@@ -559,33 +697,171 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 3: GOVERNANCE (Will be updated soon notice) */}
+        {/* TAB 3: GOVERNANCE WITH DEDICATED SIDE MENU BAR */}
         {/* ========================================================================= */}
         {activeMainTab === 'governance' && (
           <div className="space-y-8 animate-fadeIn">
-            <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-6">
-              <div className="w-20 h-20 rounded-full bg-amber-50 border-2 border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
-                <Landmark className="w-10 h-10 text-gold-600" />
+            {/* Header Description */}
+            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                    Statutory Framework & Authorities
+                  </span>
+                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                    University Governance
+                  </h3>
+                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
+                    Statutory bodies, executive councils, and academic boards established under the Andhra Pradesh Private Universities Act.
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-50 border border-gold-300 text-gold-900 text-xs font-bold">
+                  <Landmark className="w-4 h-4 text-gold-600" />
+                  <span>9 Statutory Bodies</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 2-Column Layout: Left Side Menu Bar + Right Detail View */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Side Menu Bar */}
+              <div className="lg:col-span-4 bg-white rounded-3xl p-4 md:p-5 border border-slate-200 shadow-lg sticky top-20">
+                <div className="pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Governance Menu
+                  </span>
+                  <span className="text-[11px] font-semibold text-gold-600 bg-gold-50 px-2 py-0.5 rounded-full border border-gold-200">
+                    Statutory
+                  </span>
+                </div>
+
+                <div className="space-y-1.5 max-h-[580px] overflow-y-auto pr-1 custom-scrollbar">
+                  {governanceMenuItems.map((item) => {
+                    const isActive = governanceSubTab === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => setGovernanceSubTab(item.id as any)}
+                        className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between group ${
+                          isActive
+                            ? 'bg-navy-950 text-white shadow-md border border-gold-500/30 font-bold'
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-transparent'
+                        }`}
+                      >
+                        <div className="pr-2">
+                          <div className={`text-xs md:text-sm ${isActive ? 'text-gold-300 font-bold' : 'text-navy-950 font-semibold group-hover:text-gold-700'}`}>
+                            {item.label}
+                          </div>
+                          <div className={`text-[11px] mt-0.5 line-clamp-1 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                            {item.role}
+                          </div>
+                        </div>
+                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-gold-400 translate-x-1' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
-              <div className="max-w-xl mx-auto space-y-3">
+              {/* Right Content Area: Body Details (Will be updated soon) */}
+              <div className="lg:col-span-8 space-y-6">
+                {governanceMenuItems.map((item) => {
+                  if (governanceSubTab !== item.id) return null;
+                  return (
+                    <div key={item.id} className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-8 animate-fadeIn">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
+                        <div>
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
+                            <ShieldCheck className="w-3.5 h-3.5 text-gold-600" />
+                            <span>{item.role}</span>
+                          </div>
+                          <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-navy-950">
+                            {item.label}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-slate-500 mt-1 font-normal">
+                            {item.subtitle}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Clean "Will be updated soon" Display */}
+                      <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
+                          <Clock className="w-8 h-8 text-gold-600" />
+                        </div>
+                        <div className="max-w-md mx-auto space-y-2">
+                          <h4 className="font-serif text-xl font-bold text-navy-950">
+                            Will be updated soon
+                          </h4>
+                          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                            The official constitution, member listings, powers & functions, and meeting charter for the <strong className="text-navy-950 font-semibold">{item.label}</strong> of RVS University are currently under finalization and will be published shortly.
+                          </p>
+                        </div>
+                        <div className="pt-2">
+                          <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
+                            Status: Official notification under publication
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Statutory Contact Note */}
+                      <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/70 flex items-start gap-3 text-xs text-slate-700">
+                        <Landmark className="w-4 h-4 text-gold-700 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-navy-950">Statutory Notice:</strong> For urgent official queries regarding statutory bodies or council agendas, please contact the <strong className="text-navy-950">Office of the Registrar</strong> at <a href="mailto:info@rvsu.org" className="text-gold-800 font-bold underline hover:text-gold-900">info@rvsu.org</a> or call <a href="tel:+919669660155" className="text-gold-800 font-bold hover:text-gold-900">+91 9669660155</a>.
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 4: ADMINISTRATION (CLEAN "WILL BE UPDATED SOON") */}
+        {/* ========================================================================= */}
+        {activeMainTab === 'administration' && (
+          <div className="space-y-8 animate-fadeIn">
+            <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-8">
+              <div className="w-20 h-20 rounded-full bg-gold-500/10 border-2 border-gold-400/50 flex items-center justify-center mx-auto text-gold-600 shadow-inner">
+                <Layers className="w-10 h-10 text-gold-600" />
+              </div>
+
+              <div className="max-w-2xl mx-auto space-y-3">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider">
                   <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-                  <span>Statutory Governance</span>
+                  <span>University Administration</span>
                 </div>
-                <h3 className="font-serif text-3xl font-extrabold text-navy-950">
-                  Governing Body & Academic Council
+                <h3 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950">
+                  Organisation & Administrative Structure
                 </h3>
                 <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
                 <p className="text-base md:text-lg text-slate-800 font-bold">
                   Will be updated soon
                 </p>
                 <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                  The statutory governing boards, academic council, and executive committees for RVS University under the Andhra Pradesh Private Universities Act are currently being reconstituted and will be updated shortly.
+                  The complete organizational hierarchy chart, administrative officer directory, and functional wing structure of RVS University are currently under revision and will be updated soon.
                 </p>
               </div>
 
-              <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center justify-center gap-3">
+              <div className="max-w-xl mx-auto p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2 text-left">
+                <div className="font-bold text-navy-950 text-sm flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-gold-600" />
+                  <span>Administrative Inquiries & Secretarial Support</span>
+                </div>
+                <p>
+                  For immediate administrative communications, official orders, or departmental verifications, please reach out to the administrative office:
+                </p>
+                <div className="pt-2 flex flex-wrap gap-4 text-navy-950 font-semibold">
+                  <span>📞 +91 9669660155</span>
+                  <span>📞 +91 9669660214</span>
+                  <span>✉️ info@rvsu.org</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
                 <Button
                   variant="gold"
                   size="md"
@@ -607,87 +883,92 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 4: ADMINISTRATION */}
-        {/* ========================================================================= */}
-        {activeMainTab === 'administration' && (
-          <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 space-y-8 animate-fadeIn">
-            <div className="border-b border-slate-200 pb-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                Institutional Hierarchy & Governance
-              </span>
-              <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                Organisation & Administrative Structure
-              </h3>
-              <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                Hierarchical flow from Chancellor, Pro Chancellor & Executive Officers to Deans, HODs, Exam Cell, and Functional Wings.
-              </p>
-            </div>
-
-            {/* Organization Chart Display */}
-            <div className="p-4 md:p-6 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center">
-              <img
-                src="/images/org-chart.png"
-                alt="Organisation Chart of RVS University, Chittoor"
-                className="max-w-full h-auto rounded-xl shadow-2xl border border-slate-200"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Executive Leadership</h5>
-                <p className="text-xs text-slate-500">Chancellor, Pro Chancellor & Vice Chancellor</p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Academic Administration</h5>
-                <p className="text-xs text-slate-500">Principal, Deans & Academic Council</p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Evaluation & Exams</h5>
-                <p className="text-xs text-slate-500">Controller of Examinations & Autonomous Exam Cell</p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                <h5 className="font-serif font-bold text-navy-950 text-sm mb-1">Student Services & Wings</h5>
-                <p className="text-xs text-slate-500">Hostels, Library, Training & Placements, R&D Cell</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ========================================================================= */}
-        {/* TAB 5: RANKING AND ACCREDITATION */}
+        {/* TAB 5: RANKING AND ACCREDITATION (WITH 5 OFFICIAL SEALS & BADGES) */}
         {/* ========================================================================= */}
         {activeMainTab === 'ranking-accreditation' && (
-          <div className="space-y-8 animate-fadeIn">
+          <div className="space-y-10 animate-fadeIn">
+            {/* Header Card */}
             <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                  Quality Recognitions & Accreditations
-                </span>
-                <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                  Ranking and Accreditation
-                </h3>
-                <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                  RVS University maintains the highest benchmarks in autonomous engineering, pharmacy, and management education with top statutory accreditations.
-                </p>
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                    Quality Recognitions & Statutory Accreditations
+                  </span>
+                  <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-950 mt-1">
+                    Ranking and Accreditation
+                  </h3>
+                  <p className="text-xs md:text-sm text-slate-600 mt-1 max-w-2xl font-normal">
+                    RVS University upholds the highest statutory benchmarks in engineering, pharmaceutical, management, and multidisciplinary education with national and state recognitions.
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-50 border border-amber-300 text-gold-900 text-xs font-bold shadow-sm">
+                  <Award className="w-4 h-4 text-gold-600" />
+                  <span>NAAC Grade A+ & NBA Tier-I</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Official Statutory Seals & Emblems Showcase Grid */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-serif text-xl md:text-2xl font-bold text-navy-950">
+                    Statutory Seals & Accreditation Badges
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Official recognitions by Government of India, Government of Andhra Pradesh, NAAC, NBA, and JNTUA.
+                  </p>
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                {accreditationLogos.map((seal, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-3xl p-6 border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center group"
+                  >
+                    <div className="w-full h-32 flex items-center justify-center p-3 rounded-2xl bg-slate-50 border border-slate-100 group-hover:bg-amber-50/30 transition-colors">
+                      <img
+                        src={seal.image}
+                        alt={seal.alt}
+                        className="max-h-24 max-w-full object-contain filter drop-shadow-sm"
+                      />
+                    </div>
+
+                    <div className="mt-4 flex-1 flex flex-col justify-between w-full">
+                      <div>
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                          {seal.tag}
+                        </span>
+                        <h5 className="font-serif font-bold text-navy-950 text-sm md:text-base leading-snug">
+                          {seal.title}
+                        </h5>
+                        <p className="text-xs text-slate-500 mt-1 font-normal leading-relaxed">
+                          {seal.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Detailed Recognition Highlights */}
+            <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6">
+              <h4 className="font-serif text-xl md:text-2xl font-bold text-navy-950">
+                Institutional Quality Milestones
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* NAAC */}
                 <div className="p-6 rounded-3xl bg-amber-50/50 border border-amber-200/80 space-y-3">
                   <div className="w-12 h-12 rounded-2xl bg-gold-500 text-navy-950 flex items-center justify-center font-bold text-xl shadow-md">
-                    A
+                    A+
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">NAAC Accreditation</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">NAAC Grade A+</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Accredited with <strong className="text-navy-950">Grade 'A'</strong> by the National Assessment and Accreditation Council (NAAC), UGC for high academic standards and student infrastructure.
+                    Accredited with <strong className="text-navy-950">Grade 'A+'</strong> by NAAC for academic excellence, state-of-the-art infrastructure, and outstanding graduate outcomes.
                   </p>
-                  <a href="#naac" className="inline-flex items-center gap-1 text-xs font-bold text-gold-800 hover:text-gold-900 mt-2">
-                    <span>View NAAC SSR Disclosures</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                 </div>
 
                 {/* NBA */}
@@ -695,14 +976,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-blue-900 text-gold-300 flex items-center justify-center font-bold text-base shadow-md">
                     NBA
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">NBA Tier-I Accredited</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">NBA Tier-I Accredited</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Undergraduate Engineering programs accredited under <strong className="text-navy-950">Tier-I (Washington Accord)</strong>, validating international mobility and outcome-based engineering education.
+                    Undergraduate engineering branches accredited under <strong className="text-navy-950">Washington Accord Tier-I</strong> for international mobility and outcome-based engineering education.
                   </p>
-                  <a href="#departments" className="inline-flex items-center gap-1 text-xs font-bold text-blue-900 hover:text-blue-950 mt-2">
-                    <span>Explore Accredited Branches</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                 </div>
 
                 {/* AICTE & UGC */}
@@ -710,14 +987,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-emerald-800 text-white flex items-center justify-center font-bold text-base shadow-md">
                     UGC
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">UGC Autonomous & AICTE</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">UGC Autonomous & AICTE</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Conferred <strong className="text-navy-950">Autonomous Status by UGC</strong>, New Delhi, and approved by All India Council for Technical Education (AICTE), New Delhi.
+                    Autonomous status conferred by UGC, New Delhi, and approved by All India Council for Technical Education (AICTE).
                   </p>
-                  <a href="#academic-mandatory-disclosure" className="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 hover:text-emerald-950 mt-2">
-                    <span>View AICTE Approvals</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                 </div>
 
                 {/* ISO */}
@@ -725,9 +998,9 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-purple-900 text-white flex items-center justify-center font-bold text-base shadow-md">
                     ISO
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">ISO 9001:2015 Certified</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">ISO 9001:2015 Certified</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Certified quality management systems ensuring consistent standard operating procedures in education, examinations, laboratories, and student governance.
+                    Certified quality management systems ensuring consistent standard operating procedures in education and examinations.
                   </p>
                 </div>
 
@@ -736,7 +1009,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-rose-900 text-white flex items-center justify-center font-bold text-base shadow-md">
                     #3
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">Top 3 in Andhra Pradesh</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">Top 3 in Andhra Pradesh</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Ranked <strong className="text-navy-950">3rd in AP and 30th in India</strong> by Competition Success Review (CSR-GHRDC) for outstanding infrastructure and placements.
                   </p>
@@ -747,14 +1020,10 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <div className="w-12 h-12 rounded-2xl bg-teal-800 text-gold-300 flex items-center justify-center font-bold text-base shadow-md">
                     IDEA
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-navy-950">AICTE ATAL IDEA Lab</h4>
+                  <h5 className="font-serif text-lg font-bold text-navy-950">AICTE ATAL IDEA Lab</h5>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     ₹1.1 Crore+ funded AICTE center for 3D printing, laser cutting, embedded prototyping, and student product incubation.
                   </p>
-                  <a href="#atal-idea-lab" className="inline-flex items-center gap-1 text-xs font-bold text-teal-900 hover:text-teal-950 mt-2">
-                    <span>Explore IDEA Lab</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
                 </div>
               </div>
             </div>
@@ -762,76 +1031,378 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 6: IQAC */}
+        {/* TAB 6: IQAC WITH DEDICATED SIDE MENU BAR */}
         {/* ========================================================================= */}
         {activeMainTab === 'iqac' && (
           <div className="space-y-8 animate-fadeIn">
-            <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                  Internal Quality Assurance Cell
-                </span>
-                <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
-                  IQAC Cell & Quality Framework
-                </h3>
-                <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
-                  The Internal Quality Assurance Cell (IQAC) serves as the nodal engine for institutional quality enhancement, curriculum innovation, outcome audits, and compliance.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <div className="flex items-center gap-2 text-gold-800 font-bold">
-                    <Target className="w-5 h-5 text-gold-600" />
-                    <span>Quality Objectives</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    To develop a conscious, consistent, and catalytic action plan toward improving academic and administrative performance across all 6 constituent schools.
+            {/* Header Card */}
+            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                    Internal Quality Assurance Cell
+                  </span>
+                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                    IQAC Cell & Quality Framework
+                  </h3>
+                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
+                    Nodal center for institutional quality enhancement, NAAC/NBA accreditations, curriculum audits, and stakeholder feedback.
                   </p>
                 </div>
-
-                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <div className="flex items-center gap-2 text-gold-800 font-bold">
-                    <FileText className="w-5 h-5 text-gold-600" />
-                    <span>AQAR & SSR Reports</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Regular compilation and submission of the Annual Quality Assurance Report (AQAR) to NAAC, tracking research publications, patents, and faculty development.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <div className="flex items-center gap-2 text-gold-800 font-bold">
-                    <Users className="w-5 h-5 text-gold-600" />
-                    <span>Stakeholder Feedback</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Conducting structured 360-degree feedback from students, alumni, parents, and recruiters to refine curriculum and institutional infrastructure.
-                  </p>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold">
+                  <ShieldCheck className="w-4 h-4 text-blue-700" />
+                  <span>Quality Assurance</span>
                 </div>
               </div>
+            </div>
 
-              {/* IQAC Functions */}
-              <div className="pt-6 border-t border-slate-200 space-y-3">
-                <h4 className="font-serif text-xl font-bold text-navy-950">Key IQAC Initiatives & Deliverables</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm text-slate-700">
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>Periodic Academic & Administrative Audits (AAA)</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>Outcome Based Education (OBE) & Bloom's Taxonomy Mapping</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>National & International Accreditation Coordination</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>Faculty Development Programs (FDP) & Skill Enhancement</span>
-                  </div>
+            {/* 2-Column Layout: Left Side Menu Bar + Right Content Panel */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Side Menu Bar */}
+              <div className="lg:col-span-4 bg-white rounded-3xl p-4 md:p-5 border border-slate-200 shadow-lg sticky top-20">
+                <div className="pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    IQAC Menu
+                  </span>
+                  <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                    Quality Cell
+                  </span>
                 </div>
+
+                <div className="space-y-1.5 max-h-[580px] overflow-y-auto pr-1 custom-scrollbar">
+                  {iqacMenuItems.map((item) => {
+                    const isActive = iqacSubTab === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => setIqacSubTab(item.id as any)}
+                        className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between group ${
+                          isActive
+                            ? 'bg-navy-950 text-white shadow-md border border-gold-500/30 font-bold'
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-transparent'
+                        }`}
+                      >
+                        <div className="pr-2">
+                          <div className={`text-xs md:text-sm ${isActive ? 'text-gold-300 font-bold' : 'text-navy-950 font-semibold group-hover:text-gold-700'}`}>
+                            {item.label}
+                          </div>
+                          <div className={`text-[11px] mt-0.5 line-clamp-1 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                            {item.subtitle}
+                          </div>
+                        </div>
+                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-gold-400 translate-x-1' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right Content Area */}
+              <div className="lg:col-span-8 space-y-6">
+                {/* 1. About IQAC */}
+                {iqacSubTab === 'about-iqac' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Overview</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">About IQAC</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        In pursuance of National Assessment and Accreditation Council (NAAC) guidelines, the Internal Quality Assurance Cell (IQAC) of RVS University steers continuous enhancement in academic and administrative performance.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/70 space-y-2">
+                        <div className="font-serif font-bold text-navy-950 text-base flex items-center gap-2">
+                          <Target className="w-4 h-4 text-gold-700" />
+                          <span>Vision of IQAC</span>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          To establish quality benchmarks in academic, research, and governance systems, fostering holistic student empowerment.
+                        </p>
+                      </div>
+
+                      <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200/70 space-y-2">
+                        <div className="font-serif font-bold text-navy-950 text-base flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-blue-700" />
+                          <span>Core Mission</span>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          Developing catalytic mechanisms for continuous teaching-learning innovation, outcome-based audits, and stakeholder collaboration.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 pt-2">
+                      <h5 className="font-serif font-bold text-navy-950 text-base">Key Functions of IQAC</h5>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                          <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <span>Setting quality parameters for academic activities</span>
+                        </div>
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                          <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <span>Conducting Annual Quality Audits (AAA)</span>
+                        </div>
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                          <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <span>Facilitating learner-centric educational environment</span>
+                        </div>
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
+                          <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                          <span>Compiling Annual Quality Assurance Reports (AQAR)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. Members and Committee */}
+                {iqacSubTab === 'members-committee' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">IQAC Governance</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">Members and Committee</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Composition of the Internal Quality Assurance Cell comprising university leadership, senior faculty, administrative heads, industry experts, and student representatives.
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
+                        <Users className="w-8 h-8 text-gold-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          The updated list of IQAC Committee Members and department coordinators is currently under constitution and will be published shortly.
+                        </p>
+                      </div>
+                      <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
+                        Reconstitution in progress
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. Meeting Minutes */}
+                {iqacSubTab === 'meeting-minutes' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Official Proceedings</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">Meeting Minutes</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Official proceedings, resolutions, and Action Taken Reports (ATR) from quarterly IQAC meetings.
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-300 flex items-center justify-center mx-auto text-blue-700 shadow-inner">
+                        <FileText className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          Minutes of the IQAC meetings and subsequent Action Taken Reports are being archived for digital download and will be updated soon.
+                        </p>
+                      </div>
+                      <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
+                        Document archive under preparation
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. Annual Report */}
+                {iqacSubTab === 'annual-report' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">AQAR & Audits</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">Annual Report</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Annual Quality Assurance Reports (AQAR) submitted to the National Assessment and Accreditation Council (NAAC).
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-300 flex items-center justify-center mx-auto text-emerald-700 shadow-inner">
+                        <Award className="w-8 h-8 text-emerald-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          The comprehensive Annual Reports and AQAR repository for past and current academic cycles will be available for download shortly.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 5. NAAC Certificate */}
+                {iqacSubTab === 'naac-certificate' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Accreditation</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">NAAC Certificate</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Official NAAC Accreditation Certificate and Peer Team Evaluation Report.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                      <div className="md:col-span-5 flex justify-center">
+                        <div className="p-4 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
+                          <img
+                            src="/images/accreditations/naac-a-plus-badge.png"
+                            alt="NAAC Accredited Grade A+ Seal"
+                            className="max-h-48 mx-auto object-contain drop-shadow-md"
+                          />
+                          <div className="text-xs font-bold text-navy-950">
+                            NAAC Accredited with Grade A+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-7 space-y-4">
+                        <div className="p-6 rounded-2xl bg-amber-50/60 border border-amber-200/80 space-y-2">
+                          <h5 className="font-serif font-bold text-navy-950 text-base">Accreditation Status</h5>
+                          <p className="text-xs text-slate-700 leading-relaxed">
+                            RVS University has been conferred <strong className="text-navy-950">Grade 'A+'</strong> by NAAC in recognition of supreme quality in curriculum, research infrastructure, and graduate employability.
+                          </p>
+                          <div className="pt-2 text-xs text-slate-500 font-semibold">
+                            Status: Certificate download will be updated soon
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. AAA (Academic and Administrative Audit) */}
+                {iqacSubTab === 'aaa' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Audit Framework</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">AAA (Academic and Administrative Audit)</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Annual structured evaluation of teaching methodologies, laboratory readiness, research output, and administrative efficiency.
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-purple-50 border border-purple-300 flex items-center justify-center mx-auto text-purple-700 shadow-inner">
+                        <FileText className="w-8 h-8 text-purple-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          The internal and external AAA audit schedules, peer team reports, and department performance index will be published soon.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 7. IDP (Institutional Development Plan) */}
+                {iqacSubTab === 'idp' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Strategic Vision</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">IDP (Institutional Development Plan)</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        10-Year institutional development blueprint aligned with NEP 2020, sustainable development goals (SDGs), and international research collaborations.
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-teal-50 border border-teal-300 flex items-center justify-center mx-auto text-teal-700 shadow-inner">
+                        <Compass className="w-8 h-8 text-teal-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          The Institutional Development Plan document outlining strategic growth milestones is currently being finalized and will be updated soon.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 8. Useful Links */}
+                {iqacSubTab === 'useful-links' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Regulatory Portals</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">Useful Links</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Quick access to statutory national portals and accreditation regulatory bodies.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {[
+                        { title: 'NAAC National Portal', desc: 'National Assessment and Accreditation Council', url: 'https://naac.gov.in' },
+                        { title: 'NBA India', desc: 'National Board of Accreditation', url: 'https://www.nbaind.org' },
+                        { title: 'UGC Portal', desc: 'University Grants Commission', url: 'https://www.ugc.gov.in' },
+                        { title: 'AICTE New Delhi', desc: 'All India Council for Technical Education', url: 'https://www.aicte-india.org' },
+                        { title: 'NIRF India', desc: 'National Institutional Ranking Framework', url: 'https://www.nirfindia.org' },
+                        { title: 'APSCHE Portal', desc: 'Andhra Pradesh State Council of Higher Education', url: 'https://apsche.ap.gov.in' },
+                      ].map((link, idx) => (
+                        <a
+                          key={idx}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-4 rounded-2xl bg-slate-50 hover:bg-gold-50/50 border border-slate-200 hover:border-gold-300 transition-all flex items-start justify-between group"
+                        >
+                          <div>
+                            <div className="font-serif font-bold text-navy-950 text-sm group-hover:text-gold-700 flex items-center gap-1.5">
+                              <span>{link.title}</span>
+                              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold-600" />
+                            </div>
+                            <p className="text-xs text-slate-500 mt-0.5">{link.desc}</p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 9. Downloads */}
+                {iqacSubTab === 'downloads' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                    <div className="border-b border-slate-200 pb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Resources & Templates</span>
+                      <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">Downloads</h4>
+                      <p className="text-xs md:text-sm text-slate-600 mt-1">
+                        Download standard IQAC forms, feedback rubrics, course outcome templates, and audit proformas.
+                      </p>
+                    </div>
+
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-gold-500/10 border border-gold-400/40 flex items-center justify-center mx-auto text-gold-600 shadow-inner">
+                        <Download className="w-8 h-8 text-gold-600" />
+                      </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          All standardized IQAC templates, stakeholder feedback formats, and audit documents are being prepared for public download and will be updated soon.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
