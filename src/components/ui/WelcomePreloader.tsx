@@ -50,18 +50,15 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
 
   return (
     <>
-      {/* 1. Modal Overlay on Top of the Loading Page */}
+      {/* 1. Floating Center Notice without any background blur or darkening */}
       {isVisible && (
         <div
-          className={`fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm transition-all duration-300 ease-in-out select-none ${
-            isClosing ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100 scale-100 animate-fadeIn'
+          className={`fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 pointer-events-none transition-all duration-300 ease-in-out select-none ${
+            isClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-fadeIn'
           }`}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) handleDismiss();
-          }}
         >
-          {/* Compact Centered Card */}
-          <div className="relative w-full max-w-[520px] bg-[#0A192F] rounded-2xl sm:rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] border-2 border-gold-400/70 overflow-hidden flex flex-col animate-scaleUp">
+          {/* Compact Centered Card with pointer-events-auto */}
+          <div className="relative pointer-events-auto w-full max-w-[500px] bg-[#0A192F] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.95)] border-2 border-gold-400/80 overflow-hidden flex flex-col animate-scaleUp">
             
             {/* Top Bar with Title & Close Button */}
             <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 bg-gradient-to-r from-navy-950 via-[#0E203C] to-navy-950 border-b border-gold-500/30">
