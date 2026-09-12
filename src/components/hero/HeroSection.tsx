@@ -77,7 +77,7 @@ export const HeroSection: React.FC = () => {
       {/* ========================================================================= */}
       {/* 2. HERO CONTENT (Single Clean Title: Welcome to RVS University) */}
       {/* ========================================================================= */}
-      <div className="container-custom relative z-20 pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 my-auto px-4 md:px-8 text-center flex flex-col items-center justify-center">
+      <div className="container-custom relative z-20 pt-28 sm:pt-32 md:pt-36 lg:pt-38 xl:pt-40 pb-12 my-auto px-4 md:px-8 text-center flex flex-col items-center justify-center">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           
           <Reveal direction="fade" delay={100}>
@@ -91,11 +91,15 @@ export const HeroSection: React.FC = () => {
                 </span>
               </div>
 
-              {/* Prestigious RVS University Title */}
+              {/* Prestigious RVS University Title with Brand Color Accents */}
               <h1 
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-black mb-4 tracking-tight leading-[1.08] text-white drop-shadow-[0_6px_32px_rgba(0,0,0,0.98)] font-serif"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] font-black mb-4 tracking-tight leading-[1.08] drop-shadow-[0_6px_32px_rgba(0,0,0,0.98)] font-serif"
               >
-                <span className="text-white">RVS </span>
+                <span className="inline-block">
+                  <span className="text-[#FF4D4D] drop-shadow-[0_2px_18px_rgba(255,77,77,0.7)] font-black">R</span>
+                  <span className="text-[#E085E9] drop-shadow-[0_2px_18px_rgba(224,133,233,0.7)] font-black">V</span>
+                  <span className="text-[#72E28F] drop-shadow-[0_2px_18px_rgba(114,226,143,0.7)] font-black">S</span>
+                </span>{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE79A] via-[#F3BA2F] to-[#D4AF37] drop-shadow-[0_2px_20px_rgba(212,175,55,0.7)]">
                   UNIVERSITY
                 </span>
