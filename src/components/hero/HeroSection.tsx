@@ -1,151 +1,147 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Sparkles, MapPin, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Sparkles, MapPin, Play, Pause, Volume2, VolumeX, ArrowRight, Compass, ShieldCheck } from 'lucide-react';
 import { Reveal } from '../ui/Reveal';
 
-import heroImg1 from '../../assets/SVCET  Image.png';
-import heroImg2 from '../../assets/SVCET 2026.png';
-import heroImg3 from '../../assets/dsc06293.jpg';
-
-interface HeroSlide {
-  id: number;
-  image: string;
-  tagline: string;
-  subHeadline: string;
-  highlightBadge: string;
-  locationBadge: string;
-}
-
-const HERO_SLIDES: HeroSlide[] = [
+const TAGLINES = [
   {
-    id: 1,
-    image: heroImg1,
+    subHeadline: 'Autonomous Excellence & Innovation at',
     tagline: 'AUTONOMOUS EXCELLENCE • STATE-OF-THE-ART INFRASTRUCTURE',
-    subHeadline: 'World-Class Campus & Learning at',
-    highlightBadge: 'NAAC "A" Grade • UGC Recognized',
-    locationBadge: '65+ Acre Smart Hillside Campus, Chittoor, AP',
+    badge: 'NAAC "A" Grade • UGC Recognized',
+    location: '65+ Acre Smart Hillside Campus, Chittoor, AP',
   },
   {
-    id: 2,
-    image: heroImg2,
+    subHeadline: 'Empowering Next-Gen Innovators at',
     tagline: 'FIND YOUR PLACE • FOLLOW YOUR PASSION',
-    subHeadline: 'Welcome to Future-Ready Education at',
-    highlightBadge: '25+ Years Legacy • 49+ Degree Programmes',
-    locationBadge: 'Smart Research Labs & Innovation Centers',
+    badge: '25+ Years Legacy • 49+ Degree Programmes',
+    location: 'Smart Research Labs & Innovation Centers',
   },
   {
-    id: 3,
-    image: heroImg3,
-    tagline: 'EMPOWERING NEXT-GEN TECH LEADERS & INNOVATORS',
     subHeadline: 'Admissions Open for 2026–27 at',
-    highlightBadge: '95%+ Placement Record • ₹16 LPA Highest CTC',
-    locationBadge: '4,579 Approved Seats across 6 Academic Schools',
+    tagline: 'EMPOWERING NEXT-GEN TECH LEADERS & INNOVATORS',
+    badge: '95%+ Placement Record • ₹28 LPA Highest CTC',
+    location: '4,579 Approved Seats across 6 Academic Schools',
   },
 ];
 
 export const HeroSection: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [currentTagIndex, setCurrentTagIndex] = useState<number>(0);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-  }, []);
-
+  // Rotate tagline / badges smoothly
   useEffect(() => {
-    if (isPaused) return;
     const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
+      setCurrentTagIndex((prev) => (prev + 1) % TAGLINES.length);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+  }, []);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(videoRef.current.muted);
+  };
+
+  const activeTag = TAGLINES[currentTagIndex];
 
   return (
     <section
       id="home"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-navy-950 text-white select-none"
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#030914] text-white select-none"
     >
-      {/* 1. Full Screen Background Image Slider with Contrast Enhancement */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-navy-950">
-        {HERO_SLIDES.map((slide, index) => {
-          const isActive = index === currentSlide;
-          return (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
-            >
-              <img
-                src={slide.image}
-                alt={`RVS University Campus - Slide ${index + 1}`}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-                className={`w-full h-full object-cover object-center transform transition-transform duration-[7000ms] ease-out ${
-                  isActive ? 'scale-105' : 'scale-100'
-                }`}
-              />
-            </div>
-          );
-        })}
+      {/* ========================================================================= */}
+      {/* 1. CINEMATIC FULL-SCREEN BACKGROUND VIDEO BANNER (From svcetedu.org) */}
+      {/* ========================================================================= */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#030914]">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/images/hero-campus-1.jpg"
+          className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 ease-out"
+        >
+          <source src="/videos/videobanner.mp4" type="video/mp4" />
+          <source src="https://svcetedu.org/assets/img/videobanner.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
 
-        {/* Multi-Layer Cinematic Contrast Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060F1E] via-[#060F1E]/55 to-[#060F1E]/75 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060F1E]/60 via-transparent to-[#060F1E]/60 z-10 pointer-events-none" />
+        {/* Multi-Layer High-Contrast Gradients for Legibility & Luxury Feel */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#040A15] via-[#040A15]/65 to-[#040A15]/80 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#040A15]/85 via-transparent to-[#040A15]/85 z-10 pointer-events-none" />
+        <div 
+          className="absolute inset-0 opacity-[0.04] pointer-events-none z-10" 
+          style={{ backgroundImage: 'radial-gradient(#D4AF37 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+        />
       </div>
 
-      {/* Manual Left/Right Slide Controls */}
-      <button
-        type="button"
-        onClick={prevSlide}
-        aria-label="Previous Slide"
-        className="hidden sm:flex absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-navy-950/70 hover:bg-gold-500 hover:text-navy-950 text-white backdrop-blur-md border border-gold-400/40 items-center justify-center transition-all duration-200 transform hover:scale-110 shadow-2xl cursor-pointer"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
+      {/* Video Control Buttons (Floating Bottom Right) */}
+      <div className="absolute bottom-20 right-4 sm:right-8 z-30 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={isPlaying ? 'Pause Campus Video' : 'Play Campus Video'}
+          className="w-10 h-10 rounded-full bg-black/60 hover:bg-gold-500 hover:text-navy-950 text-white backdrop-blur-md border border-white/20 hover:border-gold-400 flex items-center justify-center transition-all duration-200 transform hover:scale-110 shadow-xl cursor-pointer"
+          title={isPlaying ? 'Pause Video' : 'Play Video'}
+        >
+          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+        </button>
 
-      <button
-        type="button"
-        onClick={nextSlide}
-        aria-label="Next Slide"
-        className="hidden sm:flex absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-navy-950/70 hover:bg-gold-500 hover:text-navy-950 text-white backdrop-blur-md border border-gold-400/40 items-center justify-center transition-all duration-200 transform hover:scale-110 shadow-2xl cursor-pointer"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+          className="w-10 h-10 rounded-full bg-black/60 hover:bg-gold-500 hover:text-navy-950 text-white backdrop-blur-md border border-white/20 hover:border-gold-400 flex items-center justify-center transition-all duration-200 transform hover:scale-110 shadow-xl cursor-pointer"
+          title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+        >
+          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+        </button>
+      </div>
 
-      {/* 2. Foreground Hero Content with Crystal-Clear Contrast */}
+      {/* ========================================================================= */}
+      {/* 2. HERO CONTENT WITH CRYSTAL-CLEAR GOLD RADIANCE */}
+      {/* ========================================================================= */}
       <div className="container-custom relative z-20 pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 my-auto px-4 md:px-8 text-center flex flex-col items-center justify-center">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           
-          {/* Classic Cohesive 2-Line Headline */}
+          {/* Main Headline */}
           <Reveal direction="fade" delay={100}>
             <div className="flex flex-col items-center mb-6">
               
               {/* Dynamic Sub-Headline with Gold Radiance */}
-              <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gold-500/20 border border-gold-400/50 backdrop-blur-md mb-3 shadow-lg">
-                <Sparkles className="w-3.5 h-3.5 text-gold-300" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 border border-gold-400/50 backdrop-blur-md mb-4 shadow-lg transition-all duration-500">
+                <Sparkles className="w-3.5 h-3.5 text-gold-300 animate-pulse" />
                 <span className="text-xs sm:text-sm md:text-base font-bold tracking-wider text-gold-200 uppercase font-sans">
-                  {HERO_SLIDES[currentSlide].subHeadline}
+                  {activeTag.subHeadline}
                 </span>
               </div>
 
               {/* Prestigious RVS University Title */}
               <h1 
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-black mb-3 tracking-tight leading-[1.1] text-white drop-shadow-[0_4px_28px_rgba(0,0,0,0.95)] font-serif"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[82px] font-black mb-4 tracking-tight leading-[1.08] text-white drop-shadow-[0_6px_32px_rgba(0,0,0,0.98)] font-serif"
               >
                 <span className="text-white">RVS </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE58F] via-[#F3BA2F] to-[#D4AF37] drop-shadow-[0_2px_16px_rgba(212,175,55,0.6)]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE79A] via-[#F3BA2F] to-[#D4AF37] drop-shadow-[0_2px_20px_rgba(212,175,55,0.7)]">
                   UNIVERSITY
                 </span>
               </h1>
 
               {/* University Tagline Banner */}
-              <div className="flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-black/60 border border-white/20 backdrop-blur-md text-xs sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase text-slate-100 mt-2 shadow-2xl">
-                <span>{HERO_SLIDES[currentSlide].tagline}</span>
+              <div className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-black/65 border border-white/20 backdrop-blur-md text-xs sm:text-sm md:text-base font-bold tracking-[0.18em] sm:tracking-[0.24em] uppercase text-slate-100 shadow-2xl transition-all duration-500">
+                <span>{activeTag.tagline}</span>
               </div>
 
             </div>
@@ -153,66 +149,67 @@ export const HeroSection: React.FC = () => {
 
           {/* Action Buttons */}
           <Reveal direction="up" delay={200}>
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-3 mb-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-2 mb-6">
               {/* Explore Programmes Pill Button */}
               <a
                 href="#departments"
-                className="px-8 py-3.5 rounded-full bg-navy-950/90 hover:bg-navy-900 text-white text-sm sm:text-base font-bold shadow-xl border border-gold-400/40 backdrop-blur-md transition-all duration-200 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-navy-950/90 hover:bg-navy-900 text-white text-sm sm:text-base font-bold shadow-2xl border border-gold-400/40 backdrop-blur-md transition-all duration-200 transform hover:scale-105 cursor-pointer"
               >
-                Explore Programmes
+                <Compass className="w-4 h-4 text-gold-400" />
+                <span>Explore Programmes</span>
               </a>
 
               {/* Admissions 2026–27 Button (Gold Metallic) */}
               <a
                 href="#admissions"
-                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3BA2F] to-[#D4AF37] hover:from-[#DFB742] hover:to-[#E5C46D] text-navy-950 text-sm sm:text-base font-black shadow-[0_4px_25px_rgba(212,175,55,0.5)] transition-all duration-200 transform hover:scale-105 border border-gold-300"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3BA2F] to-[#D4AF37] hover:from-[#DFB742] hover:to-[#E5C46D] text-navy-950 text-sm sm:text-base font-black shadow-[0_4px_30px_rgba(212,175,55,0.55)] transition-all duration-200 transform hover:scale-105 border border-gold-300 cursor-pointer"
               >
-                Admissions 2026–27 →
+                <span>Admissions 2026–27</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
             </div>
           </Reveal>
 
-          {/* Interactive Slide Pagination Bars */}
-          <div className="flex items-center justify-center gap-2.5 mt-6 z-30">
-            {HERO_SLIDES.map((slide, idx) => {
-              const isCurrent = idx === currentSlide;
-              return (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => setCurrentSlide(idx)}
-                  aria-label={`Jump to slide ${idx + 1}`}
-                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    isCurrent
-                      ? 'w-10 bg-gold-400 shadow-[0_0_12px_rgba(212,175,55,0.9)]'
-                      : 'w-3 bg-white/40 hover:bg-white/80'
-                  }`}
-                />
-              );
-            })}
+          {/* Tagline Indicator Dots */}
+          <div className="flex items-center justify-center gap-2 mt-2 z-30">
+            {TAGLINES.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setCurrentTagIndex(idx)}
+                aria-label={`Show message ${idx + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === currentTagIndex
+                    ? 'w-8 bg-gold-400 shadow-[0_0_10px_rgba(212,175,55,0.9)]'
+                    : 'w-2 bg-white/40 hover:bg-white/80'
+                }`}
+              />
+            ))}
           </div>
 
         </div>
       </div>
 
-      {/* 3. Bottom Campus Info Bar */}
-      <div className="relative z-30 w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent py-4 px-4 md:px-8 border-t border-white/10">
+      {/* ========================================================================= */}
+      {/* 3. BOTTOM CAMPUS INFO STRIP */}
+      {/* ========================================================================= */}
+      <div className="relative z-30 w-full bg-gradient-to-t from-black/95 via-black/75 to-transparent py-4 px-4 md:px-8 border-t border-white/10">
         <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
             <span className="px-3.5 py-1.5 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300">
               <Sparkles className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-              <span>{HERO_SLIDES[currentSlide].highlightBadge}</span>
+              <span>{activeTag.badge}</span>
             </span>
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 font-medium">
               <MapPin className="w-3.5 h-3.5 text-gold-400" />
-              {HERO_SLIDES[currentSlide].locationBadge}
+              {activeTag.location}
             </span>
           </div>
 
           <div className="flex items-center gap-4 text-xs text-gold-300/90 font-medium">
             <span className="flex items-center gap-1.5">
-              <Award className="w-3.5 h-3.5 text-gold-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
               NAAC 'A' Grade &bull; UGC Recognized &bull; Estd. 1998
             </span>
           </div>
