@@ -257,6 +257,14 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     },
   ];
 
+  // Leadership 4 Side Menu Items
+  const leadershipMenuItems = [
+    { id: 'chancellor', label: 'Chancellor', name: 'Dr. Ravuri Venkataswamy', role: 'Founder & Chancellor' },
+    { id: 'pro-chancellor', label: 'Pro Chancellor', name: 'Shri R.V. Srinivas', role: 'Pro Chancellor' },
+    { id: 'vice-chancellor', label: 'Vice Chancellor', name: 'Will be updated soon', role: 'Executive Academic Leadership' },
+    { id: 'principal', label: 'Principal', name: 'Dr. Matam Mohan Babu', role: 'Principal & Professor' },
+  ];
+
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
       {/* 1. Regal Header Banner */}
@@ -459,264 +467,307 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* TAB 2: LEADERSHIP */}
+        {/* TAB 2: LEADERSHIP WITH DEDICATED SIDE MENU BAR */}
         {/* ========================================================================= */}
         {activeMainTab === 'leadership' && (
           <div className="space-y-8 animate-fadeIn">
-            {/* Leadership Sub Tabs: Chancellor, Pro Chancellor, Vice Chancellor, Principal */}
-            <div className="flex items-center justify-center gap-2 sm:gap-3 border-b border-slate-200 pb-4 flex-wrap">
-              {[
-                { id: 'chancellor', label: "Chancellor", sub: 'Dr. Ravuri Venkataswamy' },
-                { id: 'pro-chancellor', label: "Pro Chancellor", sub: 'Shri R.V. Srinivas' },
-                { id: 'vice-chancellor', label: "Vice Chancellor", sub: 'Will be updated soon' },
-                { id: 'principal', label: "Principal", sub: 'Dr. Matam Mohan Babu' },
-              ].map((subTab) => (
-                <button
-                  key={subTab.id}
-                  onClick={() => setLeadershipSubTab(subTab.id as any)}
-                  className={`px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold transition-all ${
-                    leadershipSubTab === subTab.id
-                      ? 'bg-navy-950 text-gold-300 shadow-md scale-105'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                  }`}
-                >
-                  <div>{subTab.label}</div>
-                  <div className="text-[10px] opacity-75 font-normal">{subTab.sub}</div>
-                </button>
-              ))}
+            {/* Header Description Card */}
+            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                    Executive & Academic Leadership
+                  </span>
+                  <h3 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                    University Leadership
+                  </h3>
+                  <p className="text-xs md:text-sm text-slate-600 mt-1 font-normal">
+                    Guiding RVS University's academic excellence, research innovations, and institutional modernization.
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-50 border border-gold-300 text-gold-900 text-xs font-bold">
+                  <Users className="w-4 h-4 text-gold-600" />
+                  <span>Executive Leadership</span>
+                </div>
+              </div>
             </div>
 
-            {/* Leader 1: Chancellor (Dr. Ravuri Venkataswamy) */}
-            {leadershipSubTab === 'chancellor' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                  <div className="lg:col-span-4 space-y-4">
-                    <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
-                      <img
-                        src="/images/chairman.jpg"
-                        alt="Dr. Ravuri Venkataswamy, Chancellor"
-                        className="w-full h-[440px] object-cover object-top"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-serif text-xl font-bold text-white">
-                          Dr. Ravuri Venkataswamy
-                        </h3>
-                        <p className="text-xs text-gold-300 font-semibold mt-0.5">
-                          Founder & Chancellor, RVS University
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
-                      <div className="flex items-center gap-2 text-gold-700 font-bold">
-                        <GraduationCap className="w-4 h-4 text-gold-600" />
-                        <span>Honorary Ph.D. in Education</span>
-                      </div>
-                      <p className="text-slate-600 leading-relaxed font-normal">
-                        Conferred by Johnson & Wales University, Rhode Island, USA for seminal research on Education in India.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-8 space-y-6">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                        Chancellor's Desk
-                      </span>
-                      <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950 mt-1">
-                        Dr. Ravuri Venkataswamy
-                      </h2>
-                      <p className="text-sm font-semibold text-gold-600 mt-1">
-                        Founder & Chancellor, RVS University & SV Group of Institutions
-                      </p>
-                      <div className="h-1 w-20 bg-gold-500 rounded-full mt-3" />
-                    </div>
-
-                    <div className="space-y-4 text-slate-600 text-sm md:text-base leading-relaxed font-normal">
-                      <p>
-                        <strong className="text-navy-950">Dr. R. Venkataswamy</strong>, S/o. late Sri R. Kanakaiah, is a renowned Educationist and Philanthropist. With a keen vision to promote quality higher education in Andhra Pradesh under the noble motto of <em className="text-gold-700">“Education for Peace & Global Empowerment”</em>, he established <strong className="text-navy-950">“Srinivasa Educational Academy”</strong> in the year 1998.
-                      </p>
-                      <p>
-                        He established <strong className="text-navy-950">Sri Venkateswara School of Nursing & Sri Srinivasa MPHW (F) Training Institute in 1986</strong> which is affiliated to Director of Medical Education, Hyderabad and recognized by Indian Nursing Council, New Delhi. In the year 1992 he started <strong className="text-navy-950">Sri R.K.M. Law College</strong>, affiliated to S.V. University, Tirupathi and recognized by Bar Council of India, New Delhi.
-                      </p>
-                      <p>
-                        With this profound experience and dedication to technical excellence, he founded <strong className="text-navy-950">RVS University (formerly SVCET) in 1998</strong>. It is approved by AICTE, New Delhi, accredited by NBA under Tier-I, and conferred Autonomous status. Ranked <strong className="text-gold-700">3rd in Andhra Pradesh and 30th in India</strong> by CSR-GHRDC Survey.
-                      </p>
-                      <p>
-                        The university campus spanning <strong className="text-navy-950">40+ Acres of lush green academic infrastructure</strong> is located on R.V.S. Nagar, Chittoor. Johnson & Wales University, Rhode Island, USA conferred an <strong className="text-gold-700">Honorary Degree, Doctor of Philosophy – Ph.D. in Education</strong> on him in recognition of his transformative contributions.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Leader 2: Pro Chancellor (Shri R.V. Srinivas) */}
-            {leadershipSubTab === 'pro-chancellor' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                  <div className="lg:col-span-4 space-y-4">
-                    <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
-                      <img
-                        src="/images/vice-chairman.jpg"
-                        alt="Shri R.V. Srinivas, Pro Chancellor"
-                        className="w-full h-[440px] object-cover object-top"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-serif text-xl font-bold text-white">
-                          Shri R.V. Srinivas
-                        </h3>
-                        <p className="text-xs text-gold-300 font-semibold mt-0.5">
-                          Pro Chancellor, RVS University
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
-                      <div className="flex items-center gap-2 text-gold-700 font-bold">
-                        <Award className="w-4 h-4 text-gold-600" />
-                        <span>B.Tech. (Mech), MBA (UK)</span>
-                      </div>
-                      <p className="text-slate-600 leading-relaxed font-normal">
-                        Leading the modernisation, digital transformation, and international collaborative network of 23 group institutions.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-8 space-y-6">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                        Pro Chancellor's Desk
-                      </span>
-                      <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950 mt-1">
-                        Shri R.V. Srinivas
-                      </h2>
-                      <p className="text-sm font-semibold text-gold-600 mt-1">
-                        Pro Chancellor, RVS University & SV Group of Institutions
-                      </p>
-                      <div className="h-1 w-20 bg-gold-500 rounded-full mt-3" />
-                    </div>
-
-                    <div className="space-y-4 text-slate-600 text-sm md:text-base leading-relaxed font-normal">
-                      <p>
-                        <strong className="text-navy-950">Sri. R.V. Srinivas</strong>, Pro Chancellor, RVS University, is a visionary entrepreneur and institutional leader. He holds a <strong className="text-navy-950">B.Tech in Mechanical Engineering</strong> and completed his <strong className="text-navy-950">MBA in the United Kingdom</strong>.
-                      </p>
-                      <p>
-                        Under his dynamic stewardship, the Srinivasa Educational Academy guides <strong className="text-navy-950">23 prestigious institutions</strong> across Andhra Pradesh and Telangana, spanning Engineering, Computing, Pharmacy, Management, Law, Nursing, and Allied Health Sciences.
-                      </p>
-                      <p>
-                        His strategic initiatives have established state-of-the-art AI and Robotics labs, high-speed campus fiber backbones, the AICTE ATAL IDEA Lab, international academic partnerships in the USA and Europe, and stellar 95%+ campus placements.
-                      </p>
-                    </div>
-
-                    {/* 23 Group Institutions List */}
-                    <div className="pt-6 border-t border-slate-200">
-                      <h4 className="font-serif text-lg font-bold text-navy-950 mb-3 flex items-center gap-2">
-                        <Building2 className="w-5 h-5 text-gold-600" />
-                        <span>23 Group Institutions under Srinivasa Educational Academy</span>
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
-                        {groupInstitutions.map((inst, idx) => (
-                          <div key={idx} className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                            <div className="font-bold text-navy-950">{idx + 1}. {inst.name}</div>
-                            <div className="text-slate-500 mt-0.5">{inst.location} • {inst.courses}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Leader 3: Vice Chancellor (Will be updated soon) */}
-            {leadershipSubTab === 'vice-chancellor' && (
-              <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-6">
-                <div className="w-20 h-20 rounded-full bg-gold-500/10 border-2 border-gold-400/50 flex items-center justify-center mx-auto text-gold-600 shadow-inner">
-                  <GraduationCap className="w-10 h-10 text-gold-600" />
-                </div>
-                <div className="max-w-xl mx-auto space-y-2">
-                  <span className="inline-block px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider">
-                    Executive Academic Leadership
+            {/* 2-Column Layout: Left Side Menu Bar + Right Detail View */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Side Menu Bar */}
+              <div className="lg:col-span-4 bg-white rounded-3xl p-4 md:p-5 border border-slate-200 shadow-lg sticky top-20">
+                <div className="pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Leadership Menu
                   </span>
-                  <h3 className="font-serif text-3xl font-extrabold text-navy-950">
-                    Vice Chancellor
-                  </h3>
-                  <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
-                  <p className="text-base text-slate-800 font-bold">
-                    Will be updated soon
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                    The profile, appointment notification, and vision address from the Vice Chancellor of RVS University are currently being finalized and will be published shortly.
-                  </p>
+                  <span className="text-[11px] font-semibold text-gold-600 bg-gold-50 px-2 py-0.5 rounded-full border border-gold-200">
+                    Executive
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  {leadershipMenuItems.map((item) => {
+                    const isActive = leadershipSubTab === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => setLeadershipSubTab(item.id as any)}
+                        className={`w-full text-left p-3.5 rounded-2xl transition-all flex items-center justify-between group ${
+                          isActive
+                            ? 'bg-navy-950 text-white shadow-md border border-gold-500/30 font-bold'
+                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-transparent'
+                        }`}
+                      >
+                        <div className="pr-2">
+                          <div className={`text-xs md:text-sm ${isActive ? 'text-gold-300 font-bold' : 'text-navy-950 font-semibold group-hover:text-gold-700'}`}>
+                            {item.label}
+                          </div>
+                          <div className={`text-[11px] mt-0.5 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                            {item.name}
+                          </div>
+                        </div>
+                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-gold-400 translate-x-1' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
-            )}
 
-            {/* Leader 4: Principal */}
-            {leadershipSubTab === 'principal' && (
-              <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                  <div className="lg:col-span-4 space-y-4">
-                    <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
-                      <img
-                        src="/images/principal.jpg"
-                        alt="Dr. Matam Mohan Babu, Principal"
-                        className="w-full h-[440px] object-cover object-top"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="font-serif text-xl font-bold text-white">
-                          Dr. Matam Mohan Babu
-                        </h3>
-                        <p className="text-xs text-gold-300 font-semibold mt-0.5">
-                          Principal & Professor of Civil Engineering
-                        </p>
-                      </div>
-                    </div>
+              {/* Right Content Area: Profile Card */}
+              <div className="lg:col-span-8 space-y-6">
+                {/* Leader 1: Chancellor (Dr. Ravuri Venkataswamy) */}
+                {leadershipSubTab === 'chancellor' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 animate-fadeIn">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                      <div className="lg:col-span-5 space-y-4">
+                        <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
+                          <img
+                            src="/images/chairman.jpg"
+                            alt="Dr. Ravuri Venkataswamy, Chancellor"
+                            className="w-full h-[400px] object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
+                          <div className="absolute bottom-4 left-4 right-4 text-white">
+                            <h3 className="font-serif text-lg font-bold text-white">
+                              Dr. Ravuri Venkataswamy
+                            </h3>
+                            <p className="text-xs text-gold-300 font-semibold mt-0.5">
+                              Founder & Chancellor, RVS University
+                            </p>
+                          </div>
+                        </div>
 
-                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
-                      <div className="flex items-center gap-2 text-gold-700 font-bold">
-                        <BookOpen className="w-4 h-4 text-gold-600" />
-                        <span>Ph.D., M.Tech, B.Tech</span>
+                        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                          <div className="flex items-center gap-2 text-gold-700 font-bold">
+                            <GraduationCap className="w-4 h-4 text-gold-600" />
+                            <span>Honorary Ph.D. in Education</span>
+                          </div>
+                          <p className="text-slate-600 leading-relaxed font-normal">
+                            Conferred by Johnson & Wales University, Rhode Island, USA for seminal research on Education in India.
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-slate-600 leading-relaxed font-normal">
-                        Over 25+ years of distinguished pedagogical, research, and institutional administration experience.
-                      </p>
+
+                      <div className="lg:col-span-7 space-y-5">
+                        <div>
+                          <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                            Chancellor's Desk
+                          </span>
+                          <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                            Dr. Ravuri Venkataswamy
+                          </h2>
+                          <p className="text-xs font-semibold text-gold-600 mt-0.5">
+                            Founder & Chancellor, RVS University & SV Group of Institutions
+                          </p>
+                          <div className="h-1 w-16 bg-gold-500 rounded-full mt-2.5" />
+                        </div>
+
+                        <div className="space-y-3.5 text-slate-600 text-xs md:text-sm leading-relaxed font-normal">
+                          <p>
+                            <strong className="text-navy-950">Dr. R. Venkataswamy</strong>, S/o. late Sri R. Kanakaiah, is a renowned Educationist and Philanthropist. With a keen vision to promote quality higher education in Andhra Pradesh under the noble motto of <em className="text-gold-700">“Education for Peace & Global Empowerment”</em>, he established <strong className="text-navy-950">“Srinivasa Educational Academy”</strong> in the year 1998.
+                          </p>
+                          <p>
+                            He established <strong className="text-navy-950">Sri Venkateswara School of Nursing & Sri Srinivasa MPHW (F) Training Institute in 1986</strong> which is affiliated to Director of Medical Education, Hyderabad and recognized by Indian Nursing Council, New Delhi. In the year 1992 he started <strong className="text-navy-950">Sri R.K.M. Law College</strong>, affiliated to S.V. University, Tirupathi and recognized by Bar Council of India, New Delhi.
+                          </p>
+                          <p>
+                            With this profound experience and dedication to technical excellence, he founded <strong className="text-navy-950">RVS University (formerly SVCET) in 1998</strong>. It is approved by AICTE, New Delhi, accredited by NBA under Tier-I, and conferred Autonomous status. Ranked <strong className="text-gold-700">3rd in Andhra Pradesh and 30th in India</strong> by CSR-GHRDC Survey.
+                          </p>
+                          <p>
+                            The university campus spanning <strong className="text-navy-950">40+ Acres of lush green academic infrastructure</strong> is located on R.V.S. Nagar, Chittoor. Johnson & Wales University, Rhode Island, USA conferred an <strong className="text-gold-700">Honorary Degree, Doctor of Philosophy – Ph.D. in Education</strong> on him in recognition of his transformative contributions.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                )}
 
-                  <div className="lg:col-span-8 space-y-6">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
-                        Principal's Desk
+                {/* Leader 2: Pro Chancellor (Shri R.V. Srinivas) */}
+                {leadershipSubTab === 'pro-chancellor' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 animate-fadeIn">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                      <div className="lg:col-span-5 space-y-4">
+                        <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
+                          <img
+                            src="/images/vice-chairman.jpg"
+                            alt="Shri R.V. Srinivas, Pro Chancellor"
+                            className="w-full h-[400px] object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
+                          <div className="absolute bottom-4 left-4 right-4 text-white">
+                            <h3 className="font-serif text-lg font-bold text-white">
+                              Shri R.V. Srinivas
+                            </h3>
+                            <p className="text-xs text-gold-300 font-semibold mt-0.5">
+                              Pro Chancellor, RVS University
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                          <div className="flex items-center gap-2 text-gold-700 font-bold">
+                            <Award className="w-4 h-4 text-gold-600" />
+                            <span>B.Tech. (Mech), MBA (UK)</span>
+                          </div>
+                          <p className="text-slate-600 leading-relaxed font-normal">
+                            Leading the modernisation, digital transformation, and international collaborative network of 23 group institutions.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-7 space-y-5">
+                        <div>
+                          <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                            Pro Chancellor's Desk
+                          </span>
+                          <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                            Shri R.V. Srinivas
+                          </h2>
+                          <p className="text-xs font-semibold text-gold-600 mt-0.5">
+                            Pro Chancellor, RVS University & SV Group of Institutions
+                          </p>
+                          <div className="h-1 w-16 bg-gold-500 rounded-full mt-2.5" />
+                        </div>
+
+                        <div className="space-y-3.5 text-slate-600 text-xs md:text-sm leading-relaxed font-normal">
+                          <p>
+                            <strong className="text-navy-950">Sri. R.V. Srinivas</strong>, Pro Chancellor, RVS University, is a visionary entrepreneur and institutional leader. He holds a <strong className="text-navy-950">B.Tech in Mechanical Engineering</strong> and completed his <strong className="text-navy-950">MBA in the United Kingdom</strong>.
+                          </p>
+                          <p>
+                            Under his dynamic stewardship, the Srinivasa Educational Academy guides <strong className="text-navy-950">23 prestigious institutions</strong> across Andhra Pradesh and Telangana, spanning Engineering, Computing, Pharmacy, Management, Law, Nursing, and Allied Health Sciences.
+                          </p>
+                          <p>
+                            His strategic initiatives have established state-of-the-art AI and Robotics labs, high-speed campus fiber backbones, the AICTE ATAL IDEA Lab, international academic partnerships in the USA and Europe, and stellar 95%+ campus placements.
+                          </p>
+                        </div>
+
+                        {/* 23 Group Institutions List */}
+                        <div className="pt-4 border-t border-slate-200">
+                          <h4 className="font-serif text-sm font-bold text-navy-950 mb-2.5 flex items-center gap-2">
+                            <Building2 className="w-4 h-4 text-gold-600" />
+                            <span>23 Group Institutions under Srinivasa Educational Academy</span>
+                          </h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-2 custom-scrollbar">
+                            {groupInstitutions.map((inst, idx) => (
+                              <div key={idx} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px]">
+                                <div className="font-bold text-navy-950">{idx + 1}. {inst.name}</div>
+                                <div className="text-slate-500 mt-0.5">{inst.location} • {inst.courses}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Leader 3: Vice Chancellor (Will be updated soon) */}
+                {leadershipSubTab === 'vice-chancellor' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-14 border border-slate-200 shadow-xl text-center space-y-6 animate-fadeIn">
+                    <div className="w-20 h-20 rounded-full bg-gold-500/10 border-2 border-gold-400/50 flex items-center justify-center mx-auto text-gold-600 shadow-inner">
+                      <GraduationCap className="w-10 h-10 text-gold-600" />
+                    </div>
+                    <div className="max-w-xl mx-auto space-y-2">
+                      <span className="inline-block px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider">
+                        Executive Academic Leadership
                       </span>
-                      <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-navy-950 mt-1">
-                        Dr. Matam Mohan Babu
-                      </h2>
-                      <p className="text-sm font-semibold text-gold-600 mt-1">
-                        Principal, RVS University (Autonomous), Chittoor
+                      <h3 className="font-serif text-3xl font-extrabold text-navy-950">
+                        Vice Chancellor
+                      </h3>
+                      <div className="h-1 w-16 bg-gold-500 rounded-full mx-auto my-3" />
+                      <p className="text-base text-slate-800 font-bold">
+                        Will be updated soon
                       </p>
-                      <div className="h-1 w-20 bg-gold-500 rounded-full mt-3" />
-                    </div>
-
-                    <div className="space-y-4 text-slate-600 text-sm md:text-base leading-relaxed font-normal">
-                      <p>
-                        Welcome to <strong className="text-navy-950">RVS University</strong>. As the head of this prestigious institution, it gives me immense pride to witness our students consistently achieving new milestones in academia, research, competitive examinations, and global corporate recruitments.
-                      </p>
-                      <p>
-                        Our pedagogical framework is aligned with the <strong className="text-navy-950">National Education Policy (NEP 2020)</strong>, offering students choice-based credit systems (CBCS), minor and honors degrees, hands-on capstone projects, and direct industry mentorship.
-                      </p>
-                      <p>
-                        We place immense emphasis on research, patent filings, ATAL IDEA lab innovations, and holistic student development through technical societies and sports championships.
+                      <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                        The profile, appointment notification, and vision address from the Vice Chancellor of RVS University are currently being finalized and will be published shortly.
                       </p>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* Leader 4: Principal */}
+                {leadershipSubTab === 'principal' && (
+                  <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200 shadow-xl text-navy-950 animate-fadeIn">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                      <div className="lg:col-span-5 space-y-4">
+                        <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-gold-400/40 bg-navy-950">
+                          <img
+                            src="/images/principal.jpg"
+                            alt="Dr. Matam Mohan Babu, Principal"
+                            className="w-full h-[400px] object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-70" />
+                          <div className="absolute bottom-4 left-4 right-4 text-white">
+                            <h3 className="font-serif text-lg font-bold text-white">
+                              Dr. Matam Mohan Babu
+                            </h3>
+                            <p className="text-xs text-gold-300 font-semibold mt-0.5">
+                              Principal & Professor of Civil Engineering
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs">
+                          <div className="flex items-center gap-2 text-gold-700 font-bold">
+                            <BookOpen className="w-4 h-4 text-gold-600" />
+                            <span>Ph.D., M.Tech, B.Tech</span>
+                          </div>
+                          <p className="text-slate-600 leading-relaxed font-normal">
+                            Over 25+ years of distinguished pedagogical, research, and institutional administration experience.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-7 space-y-5">
+                        <div>
+                          <span className="text-xs font-bold uppercase tracking-widest text-gold-700 font-sans">
+                            Principal's Desk
+                          </span>
+                          <h2 className="font-serif text-2xl md:text-3xl font-extrabold text-navy-950 mt-1">
+                            Dr. Matam Mohan Babu
+                          </h2>
+                          <p className="text-xs font-semibold text-gold-600 mt-0.5">
+                            Principal, RVS University (Autonomous), Chittoor
+                          </p>
+                          <div className="h-1 w-16 bg-gold-500 rounded-full mt-2.5" />
+                        </div>
+
+                        <div className="space-y-3.5 text-slate-600 text-xs md:text-sm leading-relaxed font-normal">
+                          <p>
+                            Welcome to <strong className="text-navy-950">RVS University</strong>. As the head of this prestigious institution, it gives me immense pride to witness our students consistently achieving new milestones in academia, research, competitive examinations, and global corporate recruitments.
+                          </p>
+                          <p>
+                            Our pedagogical framework is aligned with the <strong className="text-navy-950">National Education Policy (NEP 2020)</strong>, offering students choice-based credit systems (CBCS), minor and honors degrees, hands-on capstone projects, and direct industry mentorship.
+                          </p>
+                          <p>
+                            We place immense emphasis on research, patent filings, ATAL IDEA lab innovations, and holistic student development through technical societies and sports championships.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         )}
 
