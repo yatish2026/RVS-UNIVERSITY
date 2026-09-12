@@ -139,28 +139,31 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
           </button>
 
           {/* Center Logo & Welcome Branding */}
-          <div className="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto space-y-6 animate-fadeIn">
-            {/* Logo with Golden Aura */}
-            <div className="relative">
-              <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-white/95 p-3.5 shadow-[0_0_60px_rgba(212,175,55,0.45)] border-2 border-gold-400 flex items-center justify-center transform transition-transform hover:scale-105 duration-300">
+          <div className="relative z-10 flex flex-col items-center text-center max-w-lg mx-auto space-y-6">
+            {/* Logo Container Landing from Top */}
+            <div className="relative animate-logo-drop">
+              {/* Expanding Gold Ring on Landing */}
+              <div className="absolute inset-0 rounded-3xl border-2 border-gold-400/80 pointer-events-none animate-gold-ring" />
+              
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-white/95 p-3.5 shadow-[0_0_70px_rgba(212,175,55,0.65)] border-2 border-gold-400 flex items-center justify-center transform transition-transform duration-300">
                 <img
                   src="/images/logo.png"
                   alt="RVS University Official Logo"
-                  className="w-full h-full object-contain filter drop-shadow"
+                  className="w-full h-full object-contain filter drop-shadow-md"
                 />
               </div>
-              <span className="absolute -bottom-2.5 px-3 py-0.5 rounded-full bg-gold-500 text-navy-950 text-[10px] font-black uppercase tracking-wider shadow-md">
+              <span className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 text-navy-950 text-[10px] font-black uppercase tracking-wider shadow-lg whitespace-nowrap border border-gold-300">
                 Estd. 1998
               </span>
             </div>
 
-            {/* University Name & Welcome Heading */}
-            <div className="space-y-2 pt-2">
+            {/* University Name & Welcome Heading (Staggered reveal) */}
+            <div className="space-y-2 pt-2 animate-text-reveal-1">
               <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-gold-400 font-sans">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: '6s' }} />
                 <span>Empowering Global Leaders</span>
               </div>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6BE] via-[#D4AF37] to-[#FFF4D0]">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6BE] via-[#D4AF37] to-[#FFF4D0] drop-shadow-sm">
                 Welcome to RVS University
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto font-light leading-relaxed">
@@ -168,32 +171,35 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
               </p>
             </div>
 
-            {/* Accreditation Badges Strip */}
-            <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold text-slate-300">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gold-300">
-                <Award className="w-3 h-3 text-gold-400" />
+            {/* Accreditation Badges Strip (Staggered reveal) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold text-slate-300 animate-text-reveal-2">
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
+                <Award className="w-3.5 h-3.5 text-gold-400" />
                 NAAC Grade A+
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gold-300">
-                <ShieldCheck className="w-3 h-3 text-gold-400" />
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
                 NBA Tier-I
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gold-300">
-                <GraduationCap className="w-3 h-3 text-gold-400" />
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-gold-500/30 text-gold-300 backdrop-blur-sm">
+                <GraduationCap className="w-3.5 h-3.5 text-gold-400" />
                 AICTE Approved
               </span>
             </div>
 
-            {/* Loading Progress Bar */}
-            <div className="w-64 sm:w-80 space-y-2 pt-2">
-              <div className="h-1.5 w-full bg-navy-900/80 rounded-full overflow-hidden border border-gold-500/30 p-0.5">
+            {/* Loading Progress Bar (Staggered reveal) */}
+            <div className="w-64 sm:w-80 space-y-2 pt-2 animate-text-reveal-3">
+              <div className="h-1.5 w-full bg-navy-900/80 rounded-full overflow-hidden border border-gold-500/40 p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-gold-500 via-amber-300 to-gold-400 rounded-full transition-all duration-75 shadow-[0_0_12px_rgba(212,175,55,0.8)]"
+                  className="h-full bg-gradient-to-r from-gold-500 via-amber-300 to-gold-400 rounded-full transition-all duration-75 shadow-[0_0_15px_rgba(212,175,55,0.9)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
               <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                <span>Initializing Portal...</span>
+                <span className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping" />
+                  <span>Initializing Portal...</span>
+                </span>
                 <span>{Math.round(progress)}%</span>
               </div>
             </div>
