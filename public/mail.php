@@ -56,7 +56,7 @@ if (empty($fullName) || empty($phone)) {
 }
 
 // Target email address specified by user
-$toEmail = "yatish.techie@dialsmart.in";
+$toEmail = "yatish.techie@dailsmart.in, yatish.techie@dialsmart.in";
 $subject = "🎓 [New Admission Lead 2026–27] " . $fullName . " (" . $course . ")";
 
 // Build HTML email body
