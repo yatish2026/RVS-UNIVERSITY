@@ -8,19 +8,19 @@ interface WelcomePreloaderProps {
 const NOTICES = [
   {
     id: 1,
-    tag: 'Admissions Open 2026–27',
-    title: 'Choose Your Programme • SVCTPU & RVSPU',
-    image: '/images/admissions-programmes-overview.jpg',
-    alt: 'RVS University and SVCET Admissions Open Existing & New B.Tech Programmes',
-    code: 'EAPCET: SVCTPU / RVSPU',
-  },
-  {
-    id: 2,
     tag: 'New B.Tech Programmes',
     title: 'Specialized Engineering Disciplines (Code: RVSPU)',
     image: '/images/admission-announcement-banner.png',
     alt: 'RVS University New B.Tech Programmes and EAPCET RVSPU Admission Announcement',
     code: 'EAPCET: RVSPU',
+  },
+  {
+    id: 2,
+    tag: 'Admissions Open 2026–27',
+    title: 'Choose Your Programme • SVCTPU & RVSPU',
+    image: '/images/admissions-programmes-overview.jpg',
+    alt: 'RVS University and SVCET Admissions Open Existing & New B.Tech Programmes',
+    code: 'EAPCET: SVCTPU / RVSPU',
   },
 ];
 
