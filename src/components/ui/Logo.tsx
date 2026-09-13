@@ -18,9 +18,9 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   // Standard Tailwind sizing classes with fixed dimensions
   const logoDimensions = {
-    sm: 'w-8 h-8 md:w-9 md:h-9 min-w-[32px] min-h-[32px]',
-    md: 'w-10 h-10 md:w-11 md:h-11 min-w-[38px] min-h-[38px]',
-    lg: 'w-13 h-13 md:w-16 md:h-16 min-w-[52px] min-h-[52px]',
+    sm: 'w-8 h-8 md:w-9 md:h-9 min-w-[32px] min-h-[32px] max-w-[36px] max-h-[36px]',
+    md: 'w-10 h-10 md:w-11 md:h-11 min-w-[38px] min-h-[38px] max-w-[44px] max-h-[44px]',
+    lg: 'w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 min-w-[44px] min-h-[44px] max-w-[56px] max-h-[56px]',
   };
 
   // Typography sizing

@@ -12,8 +12,8 @@ export const Footer: React.FC = () => {
       {/* Top Institutional Banner inside Footer */}
       <div className="border-b border-navy-850 py-12">
         <div className="container-custom flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-          <div className="max-w-xl">
-            <Logo variant="light" size="lg" />
+          <div className="max-w-xl w-full">
+            <Logo variant="light" size="md" className="max-w-full" />
             <p className="mt-4 text-xs text-slate-400 leading-relaxed font-light">
               RVS University is a premier multidisciplinary institution established under the Andhra Pradesh Private Universities Act, dedicated to fostering next-generation leaders across computing, engineering, management, and healthcare.
             </p>
