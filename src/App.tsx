@@ -515,6 +515,7 @@ export const App: React.FC = () => {
           <DepartmentDetailPage
             departmentId={departmentId}
             onBackToHome={handleBackToHome}
+            onBackToSchool={(schoolId) => handleSelectCategory(schoolId)}
             onSelectDepartment={(dId) => {
               setDepartmentId(dId);
               window.location.hash = `dept-${dId}`;

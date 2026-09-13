@@ -16,12 +16,14 @@ import civilDeptImg from '../../assets/dept/civil-dept1.webp';
 interface DepartmentDetailPageProps {
   departmentId?: string;
   onBackToHome: () => void;
+  onBackToSchool?: (schoolId: string) => void;
   onSelectDepartment?: (deptId: string) => void;
 }
 
 export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
   departmentId = 'civil',
   onBackToHome,
+  onBackToSchool,
   onSelectDepartment,
 }) => {
   const [activeTab, setActiveTab] = useState<DepartmentTab>('profile');
@@ -35,6 +37,37 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
   const [activePlacementYear, setActivePlacementYear] = useState<string>('2023-2024');
 
   const deptData: DepartmentDetailData = getDepartmentData(departmentId);
+
+  // Helper to map department to its parent school catalog
+  const getSchoolIdForDept = (dId: string, schoolName?: string): string => {
+    const normalizedId = (dId || '').toLowerCase().trim();
+    if (['csm', 'cse', 'ai', 'aiml', 'cse-aiml', 'cse-ai', 'cse-ml', 'scse'].includes(normalizedId)) return 'school-scse';
+    if (['civil', 'ce', 'mechanical', 'mech', 'eee', 'ece', 'soet', 'deee', 'dme', 'dece'].includes(normalizedId)) return 'school-soet';
+    if (['ds', 'csd', 'said', 'data-science', 'cse-ds'].includes(normalizedId)) return 'school-said';
+    if (['it', 'iot', 'csc', 'cyber', 'cyber-security', 'cse-cyber', 'bca', 'mca', 'scis'].includes(normalizedId)) return 'school-scis';
+    if (['mba', 'bba', 'soms', 'management'].includes(normalizedId)) return 'school-soms';
+    if (['sahs', 'allied', 'health'].includes(normalizedId)) return 'school-sahs';
+
+    if (schoolName) {
+      const s = schoolName.toLowerCase();
+      if (s.includes('scse') || s.includes('computer science')) return 'school-scse';
+      if (s.includes('soet') || s.includes('engineering and technology') || s.includes('engineering & technology')) return 'school-soet';
+      if (s.includes('said') || s.includes('ai and data science') || s.includes('ai & data science')) return 'school-said';
+      if (s.includes('scis') || s.includes('computing') || s.includes('information sciences')) return 'school-scis';
+      if (s.includes('soms') || s.includes('management studies') || s.includes('management')) return 'school-soms';
+      if (s.includes('sahs') || s.includes('allied health')) return 'school-sahs';
+    }
+    return 'school-soet';
+  };
+
+  const handleReturnBack = () => {
+    const schoolId = getSchoolIdForDept(departmentId, deptData.schoolName);
+    if (onBackToSchool) {
+      onBackToSchool(schoolId);
+    } else {
+      window.location.hash = `course-${schoolId}`;
+    }
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -80,15 +113,23 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
             <div className="space-y-3 max-w-3xl">
-              {/* Breadcrumb Strip */}
+              {/* Breadcrumb Strip: Home > School > Department */}
               <div className="flex items-center gap-2 text-xs font-semibold text-gold-300/90 flex-wrap">
-                <button onClick={onBackToHome} className="hover:underline flex items-center gap-1">
+                <button 
+                  onClick={onBackToHome} 
+                  className="hover:text-gold-200 hover:underline flex items-center gap-1 cursor-pointer"
+                >
                   Home
                 </button>
-                <span>&gt;</span>
-                <span className="text-slate-300">{deptData.schoolName}</span>
-                <span>&gt;</span>
-                <span className="text-gold-400 font-bold">{deptData.shortName}</span>
+                <span className="text-slate-400">&gt;</span>
+                <button 
+                  onClick={handleReturnBack} 
+                  className="hover:text-gold-200 hover:underline text-slate-300 cursor-pointer text-left font-medium"
+                >
+                  {deptData.schoolName}
+                </button>
+                <span className="text-slate-400">&gt;</span>
+                <span className="text-gold-400 font-bold">{deptData.name || deptData.shortName}</span>
               </div>
 
               {/* Department Title */}
@@ -121,10 +162,10 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
               <Button
                 variant="ghost-white"
                 size="md"
-                onClick={onBackToHome}
+                onClick={handleReturnBack}
                 icon={<ArrowLeft className="w-4 h-4" />}
               >
-                Return to Home
+                Return Back
               </Button>
             </div>
 

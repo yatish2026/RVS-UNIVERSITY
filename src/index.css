@@ -319,30 +319,15 @@
   animation: text-slide-up-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both;
 }
 
-/* --- Leadership Page Dynamic Motion (One side text, other side pic landing) --- */
-@keyframes leader-pic-land {
+/* --- Leadership Dynamic Motion (Simultaneous Full Screen Edge Entrance) --- */
+@keyframes slide-in-left-screen {
   0% {
     opacity: 0;
-    transform: translateX(45px) scale(0.92);
+    transform: translateX(-100vw);
     filter: blur(8px);
   }
   65% {
-    opacity: 1;
-    transform: translateX(-4px) scale(1.02);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: blur(0px);
-  }
-}
-
-@keyframes leader-text-slide {
-  0% {
-    opacity: 0;
-    transform: translateX(-45px);
-    filter: blur(6px);
+    opacity: 0.9;
   }
   100% {
     opacity: 1;
@@ -351,10 +336,38 @@
   }
 }
 
+@keyframes slide-in-right-screen {
+  0% {
+    opacity: 0;
+    transform: translateX(100vw);
+    filter: blur(8px);
+  }
+  65% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left-screen 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right-screen 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
 .animate-leader-pic {
-  animation: leader-pic-land 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-in-left-screen 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
 }
 
 .animate-leader-text {
-  animation: leader-text-slide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-in-right-screen 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
 }
