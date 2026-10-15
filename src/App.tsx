@@ -15,6 +15,7 @@ import { CampusLifeDetailPage, CampusLifeTab } from './components/pages/CampusLi
 import { ExamPortalPage, ExamPortalTab } from './components/pages/ExamPortalPage';
 import { DepartmentDetailPage } from './components/pages/DepartmentDetailPage';
 import { AcademicsDetailPage, AcademicTab } from './components/pages/AcademicsDetailPage';
+import { AcademicSchoolsPage } from './components/pages/AcademicSchoolsPage';
 import { InternationalRelationsPage, IRTab } from './components/pages/InternationalRelationsPage';
 import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDetailPage';
 import { AdmissionsModal } from './components/modals/AdmissionsModal';
@@ -25,6 +26,7 @@ import { ALL_DEGREE_CATEGORIES } from './data/coursesCatalog';
 export const App: React.FC = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
   const [departmentId, setDepartmentId] = useState<string | null>(null);
+  const [isSchoolsView, setIsSchoolsView] = useState(false);
   const [academicTab, setAcademicTab] = useState<AcademicTab | null>(null);
   const [irTab, setIrTab] = useState<IRTab | null>(null);
   const [researchTab, setResearchTab] = useState<ResearchTab | null>(null);
@@ -34,22 +36,23 @@ export const App: React.FC = () => {
   const [isAdmissionsModalOpen, setIsAdmissionsModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
+  // Master reset helper to ensure no conflicting page views remain active
+  const resetAllViews = () => {
+    setSelectedCourseId(null);
+    setDepartmentId(null);
+    setIsSchoolsView(false);
+    setAcademicTab(null);
+    setIrTab(null);
+    setResearchTab(null);
+    setAboutTab(null);
+    setCampusLifeTab(null);
+    setExamPortalTab(null);
+  };
+
   // Sync with URL hash
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-
-      // Master reset helper to ensure no conflicting page views remain active
-      const resetAllViews = () => {
-        setSelectedCourseId(null);
-        setDepartmentId(null);
-        setAcademicTab(null);
-        setIrTab(null);
-        setResearchTab(null);
-        setAboutTab(null);
-        setCampusLifeTab(null);
-        setExamPortalTab(null);
-      };
 
       // 0. Check Directorate of Research hashes
       const researchTabs: ResearchTab[] = [
@@ -95,12 +98,18 @@ export const App: React.FC = () => {
         return;
       }
 
+      // 0.2 Check Schools standalone page
+      if (hash === '#schools' || hash === '#academic-schools' || hash === '#schools-page' || hash === '#all-schools' || hash === '#departments') {
+        resetAllViews();
+        setIsSchoolsView(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
       // 1. Check Academics hashes & compliance shortcuts
       const academicTabs: AcademicTab[] = [
         'mandatory-disclosure', 'board-of-studies', 'academic-calendars', 'naac-ssr',
-        'aqar', 'about-library', 'librarians-desk',
-        'library-rules', 'library-resources', 'library-rfid', 'library-gallery',
-        'library-publications', 'library-services'
+        'ranking-accreditation', 'iqac', 'aqar', 'exam-section'
       ];
       
       if (hash === '#academics' || hash === '#academic') {
@@ -120,22 +129,18 @@ export const App: React.FC = () => {
         }
       }
 
-      // Standalone Academics compliance & library shortcuts
+      // Standalone Academics compliance shortcuts
       const complianceMap: Record<string, AcademicTab> = {
-        '#naac': 'naac-ssr',
-        '#naac-ssr': 'naac-ssr',
-        '#aqar': 'aqar',
         '#mandatory-disclosure': 'mandatory-disclosure',
         '#board-of-studies': 'board-of-studies',
         '#academic-calendars': 'academic-calendars',
-        '#about-library': 'about-library',
-        '#librarians-desk': 'librarians-desk',
-        '#library-rules': 'library-rules',
-        '#library-resources': 'library-resources',
-        '#library-rfid': 'library-rfid',
-        '#library-gallery': 'library-gallery',
-        '#library-publications': 'library-publications',
-        '#library-services': 'library-services',
+        '#calendars': 'academic-calendars',
+        '#naac': 'naac-ssr',
+        '#naac-ssr': 'naac-ssr',
+        '#aqar': 'aqar',
+        '#ranking-accreditation': 'ranking-accreditation',
+        '#about-ranking-accreditation': 'ranking-accreditation',
+        '#exam-section': 'exam-section',
       };
       if (complianceMap[hash]) {
         resetAllViews();
@@ -383,11 +388,12 @@ export const App: React.FC = () => {
         const scrollToTarget = () => {
           const targetEl = document.querySelector(hash);
           if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth' });
+            const top = targetEl.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: Math.max(0, top - 85), behavior: 'smooth' });
           }
         };
         scrollToTarget();
-        setTimeout(scrollToTarget, 100);
+        setTimeout(scrollToTarget, 120);
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -484,7 +490,13 @@ export const App: React.FC = () => {
 
       {/* Conditional Sub-Pages or Full Homepage Flow */}
       <main className="flex-grow">
-        {researchTab ? (
+        {isSchoolsView ? (
+          // Standalone Full-Width Academic Schools Showcase Page (No Left Sidebar!)
+          <AcademicSchoolsPage
+            onBackToHome={handleBackToHome}
+            onSelectSchool={(schoolId) => handleSelectCategory(schoolId)}
+          />
+        ) : researchTab ? (
           // Standalone Directorate of Research Sub-Page
           <ResearchDetailPage
             activeTab={researchTab}
@@ -506,6 +518,12 @@ export const App: React.FC = () => {
             activeTab={academicTab}
             onBackToHome={handleBackToHome}
             onSelectTab={(tab) => {
+              if (tab === 'iqac') {
+                resetAllViews();
+                setAboutTab('about-iqac');
+                window.location.hash = 'about-iqac';
+                return;
+              }
               setAcademicTab(tab);
               window.location.hash = `academic-${tab}`;
             }}
@@ -579,9 +597,9 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* Comprehensive Institutional Footer */}
-      <Footer />
-    </div>
+        {/* Comprehensive Institutional Footer */}
+        <Footer />
+      </div>
   );
 };
 

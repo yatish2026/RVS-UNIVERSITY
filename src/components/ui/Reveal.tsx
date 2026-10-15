@@ -84,7 +84,7 @@ export const Reveal: React.FC<RevealProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out ${
+      className={`transition-[transform,opacity] will-change-[transform,opacity] ease-out ${
         isVisible ? getVisibleTransform() : getInitialTransform()
       } ${className}`}
       style={{

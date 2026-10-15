@@ -89,57 +89,57 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
   const CategoryIcon = iconLookup[category.iconName] || GraduationCap;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950 overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950 overflow-x-hidden">
       {/* Top Hero Banner with Prominent School Visual */}
-      <div className="relative bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b border-gold-500/20 shadow-xl">
+      <div className="relative bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b-2 border-[#E5D3BD] shadow-sm">
         <div className="container-custom relative z-10 px-4 md:px-8">
           
           {/* Breadcrumb Strip: Home > School */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-gold-300/90 flex-wrap mb-4">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#6E5D4F] flex-wrap mb-4">
             <button 
               onClick={onBackToHome} 
-              className="hover:text-gold-200 hover:underline flex items-center gap-1 cursor-pointer"
+              className="hover:text-[#9C6019] hover:underline flex items-center gap-1 cursor-pointer font-bold"
             >
-              <Home className="w-3.5 h-3.5" />
+              <Home className="w-3.5 h-3.5 text-[#9C6019]" />
               <span>Home</span>
             </button>
-            <span className="text-slate-400">&gt;</span>
-            <span className="text-gold-400 font-bold">{category.title}</span>
+            <span className="text-[#AD9A88]">&gt;</span>
+            <span className="text-[#9C6019] font-bold">{category.title}</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left: School Title & Info */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/40 text-[#8B4513] text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
                 <span>{category.levelBadge}</span>
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611] leading-tight">
                 {category.title}
               </h1>
 
-              <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
                 {category.description}
               </p>
 
               {/* Highlights Strip */}
-              <div className="flex flex-wrap items-center gap-5 pt-2 text-xs md:text-sm text-slate-200 border-t border-navy-800/80">
+              <div className="flex flex-wrap items-center gap-5 pt-2 text-xs md:text-sm text-[#4A3828] border-t border-[#E5D3BD]">
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-gold-400" />
-                  <span className="font-semibold">{category.courses.length} Specialized Offerings</span>
+                  <GraduationCap className="w-4 h-4 text-[#9C6019]" />
+                  <span className="font-bold">{category.courses.length} Specialized Offerings</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-gold-400" />
-                  <span>AICTE / UGC Approved</span>
+                  <ShieldCheck className="w-4 h-4 text-[#9C6019]" />
+                  <span className="font-semibold">AICTE / UGC Approved</span>
                 </div>
               </div>
 
               <div className="pt-2">
                 <button
                   onClick={onBackToHome}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-gold-500 hover:text-navy-950 text-gold-300 text-xs font-bold border border-gold-400/40 backdrop-blur-md transition-all self-start shadow-md cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF3E7] hover:bg-[#C6832B] hover:text-white text-[#9C6019] text-xs font-bold border border-[#D4BC9F] transition-all self-start shadow-sm cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Return Back</span>
@@ -174,17 +174,17 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
       </div>
 
       {/* 2.5 Sticky Academic Schools Navigation Switcher */}
-      <div className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+      <div className="bg-[#FFFDF9]/95 backdrop-blur-md border-b-2 border-[#E5D3BD] sticky top-0 z-30 shadow-sm">
         <div className="container-custom px-4 md:px-8">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-3">
             {allCategories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-bold whitespace-nowrap transition-all duration-200 ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs md:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   category.id === cat.id
-                    ? 'bg-navy-950 text-gold-300 font-black shadow-md'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-navy-950 border border-slate-200'
+                    ? 'bg-[#C6832B] text-white font-black shadow-md'
+                    : 'bg-[#FAF3E7] text-[#5C4837] hover:bg-[#F5ECE0] hover:text-[#1D1611] border border-[#D4BC9F]'
                 }`}
               >
                 {cat.title}
@@ -286,7 +286,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         {(course.id === 'soet-civil' || course.id.includes('civil')) ? (
                           <a
                             href="#dept-civil"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore Civil Dept Portal (Full Syllabus & Faculty)</span>
@@ -295,7 +295,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id === 'soet-eee' || course.id.includes('eee') || course.id.includes('electrical')) ? (
                           <a
                             href="#dept-eee"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore EEE Dept Portal (Full Syllabus & Faculty)</span>
@@ -304,7 +304,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id === 'soet-mech' || course.id.includes('mech') || course.id.includes('mechanical')) ? (
                           <a
                             href="#dept-mech"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore Mechanical Dept Portal (Full Syllabus & Faculty)</span>
@@ -313,7 +313,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id === 'soet-ece' || course.id.includes('ece') || course.id.includes('electronics') || course.id.includes('ebm') || course.id.includes('biomedical')) ? (
                           <a
                             href="#dept-ece"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore ECE Dept Portal (Full Syllabus & Faculty)</span>
@@ -322,7 +322,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('csm') || course.id.includes('aiml') || course.id.includes('cse-ai') || course.id.includes('machine-learning') || course.name.toLowerCase().includes('machine learning')) ? (
                           <a
                             href="#dept-csm"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE(AI&ML) Dept Portal (Full Syllabus & Faculty)</span>
@@ -331,7 +331,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('ai') || course.id.includes('robotics') || course.id.includes('intelligence')) ? (
                           <a
                             href="#dept-ai"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore AI Dept Portal (Full Syllabus & Faculty)</span>
@@ -340,7 +340,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('it') || course.name.toLowerCase().includes('information technology')) ? (
                           <a
                             href="#dept-it"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore IT Dept Portal (Full Syllabus & Faculty)</span>
@@ -349,7 +349,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('iot') || course.name.toLowerCase().includes('internet of things') || course.name.toLowerCase().includes('(iot)')) ? (
                           <a
                             href="#dept-iot"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE(IoT) Dept Portal (Full Syllabus & Faculty)</span>
@@ -358,7 +358,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('cyber') || course.id.includes('csc') || course.name.toLowerCase().includes('cyber security')) ? (
                           <a
                             href="#dept-csc"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE(Cyber Security) Dept Portal (Full Syllabus & Faculty)</span>
@@ -367,7 +367,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('ds') || course.id.includes('data-science') || course.name.toLowerCase().includes('data science')) ? (
                           <a
                             href="#dept-ds"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE(Data Science) Dept Portal (Full Syllabus & Faculty)</span>
@@ -376,7 +376,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('mba') || course.id.includes('bba') || course.id.includes('management') || course.name.toLowerCase().includes('business administration') || course.name.toLowerCase().includes('mba')) ? (
                           <a
                             href="#dept-mba"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore Management Studies (MBA) Dept Portal (Full Syllabus & Faculty)</span>
@@ -385,7 +385,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('bca') || course.name.toLowerCase().includes('bachelor of computer application')) ? (
                           <a
                             href="#dept-bca"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore BCA Dept Portal (Full Syllabus & Faculty)</span>
@@ -394,7 +394,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('mca') || course.name.toLowerCase().includes('master of computer application') || course.name.toLowerCase().includes('mca')) ? (
                           <a
                             href="#dept-mca"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore MCA Dept Portal (Full Syllabus & Faculty)</span>
@@ -403,7 +403,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (course.id.includes('cse') || course.id.includes('computer') || course.id.includes('scse') || course.id.includes('software')) ? (
                           <a
                             href="#dept-cse"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE Dept Portal (Full Syllabus & Faculty)</span>
@@ -412,7 +412,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                         ) : (
                           <a
                             href="#admissions"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-navy-950 hover:bg-gold-500 text-gold-300 hover:text-navy-950 font-bold text-xs transition-all border border-gold-500/30 shadow-md"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
                           >
                             <GraduationCap className="w-3.5 h-3.5" />
                             <span>Explore Programme Curriculum & Details</span>

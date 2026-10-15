@@ -61,7 +61,7 @@ execSync(`powershell -Command "${psZipImages}"`, { stdio: 'inherit' });
 fs.rmSync(stagingImages, { recursive: true, force: true });
 console.log(`✅ Successfully created: rvs-images-only.zip (${(fs.statSync(zipImages).size / (1024 * 1024)).toFixed(2)} MB)`);
 
-// 6. Create rvs-quick-update.zip (Ultra-lightweight ~1.5 MB: ONLY index.html, mail.php, .htaccess, and core JS/CSS)
+// 6. Create rvs-quick-update.zip (Lightweight: index.html, mail.php, .htaccess, api/, core JS/CSS, leadership photos, and logo)
 const zipQuick = path.join(projectRoot, 'rvs-quick-update.zip');
 if (fs.existsSync(zipQuick)) {
   fs.unlinkSync(zipQuick);
@@ -71,17 +71,36 @@ if (fs.existsSync(stagingQuick)) {
   fs.rmSync(stagingQuick, { recursive: true, force: true });
 }
 fs.mkdirSync(path.join(stagingQuick, 'assets'), { recursive: true });
+fs.mkdirSync(path.join(stagingQuick, 'images'), { recursive: true });
 
 // Copy root files
 fs.copyFileSync(path.join(distDir, 'index.html'), path.join(stagingQuick, 'index.html'));
-fs.copyFileSync(path.join(distDir, 'mail.php'), path.join(stagingQuick, 'mail.php'));
-fs.copyFileSync(path.join(distDir, '.htaccess'), path.join(stagingQuick, '.htaccess'));
+if (fs.existsSync(path.join(distDir, 'mail.php'))) {
+  fs.copyFileSync(path.join(distDir, 'mail.php'), path.join(stagingQuick, 'mail.php'));
+}
+if (fs.existsSync(path.join(distDir, '.htaccess'))) {
+  fs.copyFileSync(path.join(distDir, '.htaccess'), path.join(stagingQuick, '.htaccess'));
+}
+if (fs.existsSync(path.join(distDir, 'api'))) {
+  fs.cpSync(path.join(distDir, 'api'), path.join(stagingQuick, 'api'), { recursive: true });
+}
+
+// Copy updated leadership photos in images/
+if (fs.existsSync(path.join(distDir, 'images', 'chairman.jpg'))) {
+  fs.copyFileSync(path.join(distDir, 'images', 'chairman.jpg'), path.join(stagingQuick, 'images', 'chairman.jpg'));
+}
+if (fs.existsSync(path.join(distDir, 'images', 'vice-chairman.jpg'))) {
+  fs.copyFileSync(path.join(distDir, 'images', 'vice-chairman.jpg'), path.join(stagingQuick, 'images', 'vice-chairman.jpg'));
+}
 
 // Copy core JS and CSS and announcement banner assets from dist/assets
 const assetFiles = fs.readdirSync(path.join(distDir, 'assets'));
 for (const file of assetFiles) {
   if (
     file.startsWith('index-') ||
+    file.startsWith('Chairman') ||
+    file.startsWith('V Chairman') ||
+    file.startsWith('SVCET1') ||
     file.startsWith('admission-announcement') ||
     file.startsWith('admissions-programmes') ||
     file.startsWith('logo-') ||
@@ -96,6 +115,24 @@ execSync(`powershell -Command "${psZipQuick}"`, { stdio: 'inherit' });
 fs.rmSync(stagingQuick, { recursive: true, force: true });
 console.log(`✅ Successfully created: rvs-quick-update.zip (${(fs.statSync(zipQuick).size / (1024 * 1024)).toFixed(2)} MB)`);
 
-// 7. Clean staging directory
+// 7. Create rvs-syllabus-pdfs.zip (contains the syllabus/ folder with all 19 official PDFs)
+const zipSyllabus = path.join(projectRoot, 'rvs-syllabus-pdfs.zip');
+if (fs.existsSync(zipSyllabus)) {
+  fs.unlinkSync(zipSyllabus);
+}
+const stagingSyllabus = path.join(projectRoot, 'staging-syllabus');
+if (fs.existsSync(stagingSyllabus)) {
+  fs.rmSync(stagingSyllabus, { recursive: true, force: true });
+}
+fs.mkdirSync(path.join(stagingSyllabus, 'syllabus'), { recursive: true });
+fs.cpSync(path.join(projectRoot, 'public', 'syllabus'), path.join(stagingSyllabus, 'syllabus'), { recursive: true });
+
+const psZipSyllabus = `Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory('${stagingSyllabus}', '${zipSyllabus}', [System.IO.Compression.CompressionLevel]::Optimal, $false)`;
+execSync(`powershell -Command "${psZipSyllabus}"`, { stdio: 'inherit' });
+fs.rmSync(stagingSyllabus, { recursive: true, force: true });
+console.log(`✅ Successfully created: rvs-syllabus-pdfs.zip (${(fs.statSync(zipSyllabus).size / (1024 * 1024)).toFixed(2)} MB)`);
+
+// 8. Clean staging directory
 fs.rmSync(stagingCore, { recursive: true, force: true });
 console.log('🎉 Packaging complete!');
+

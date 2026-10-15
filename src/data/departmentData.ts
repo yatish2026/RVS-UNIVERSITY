@@ -77,6 +77,7 @@ export interface SyllabusDownloadDoc {
   badge?: string;
   downloadFileName?: string;
   description?: string;
+  isComingSoon?: boolean;
 }
 
 export interface DepartmentDetailData {
@@ -688,24 +689,25 @@ export const CIVIL_DEPARTMENT_DATA: DepartmentDetailData = {
   },
   syllabusDownloads: [
     {
-      title: 'B.Tech Civil Engineering R20 Academic Regulations & Syllabus',
-      regulation: 'R20 Autonomous CBCS',
-      size: '5.4 MB',
-      fileUrl: '/syllabus/b tech R20-EEE DEPARTMENT.pdf',
-      downloadFileName: 'BTech_Civil_R20_Academic_Regulations_Syllabus.pdf',
+      title: 'B.Tech Civil Engineering - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      regulation: 'R26 Regulations',
+      size: '35.7 MB',
+      fileUrl: '/syllabus/01. CE.pdf',
+      downloadFileName: 'B.Tech_Civil_Engineering_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       level: 'B.Tech Under Graduate',
-      badge: 'Official Syllabus',
-      description: 'Comprehensive 4-Year B.Tech Civil Engineering curriculum book with all 8 semesters theory and laboratory course syllabi, structural analysis, survey, and geotechnical engineering courses.',
+      badge: 'Official Syllabus (R26)',
+      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Civil Engineering approved by the Academic Council & Board of Studies.',
     },
     {
-      title: 'M.Tech Structural Engineering Course Curriculum & Scheme',
-      regulation: 'M.Tech Autonomous Regulations',
-      size: '1.8 MB',
-      fileUrl: '/syllabus/M.Tech (PE & ED) FINAL EEE DEPARTMENT.pdf',
-      downloadFileName: 'MTech_Structural_Engineering_Syllabus.pdf',
+      title: 'M.Tech Structural Engineering - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      regulation: 'M.Tech Regulations',
+      size: 'Updating Soon',
+      fileUrl: '#',
+      downloadFileName: '',
       level: 'M.Tech Post Graduate',
-      badge: 'M.Tech Structural Engg',
-      description: 'Advanced structural dynamics, finite element analysis, earthquake-resistant design, bridge engineering, and research project dissertation guidelines.',
+      badge: 'Updating Soon',
+      isComingSoon: true,
+      description: 'Link will be updated soon. Authorized M.Tech Structural Engineering curriculum will be available for download shortly.',
     },
   ],
   association: {
@@ -840,11 +842,11 @@ export const EEE_DEPARTMENT_DATA: DepartmentDetailData = {
     phone: '+91 94400 45288',
     room: 'Electrical Sciences Block, Room 101, RVS University Campus',
     image: hodEeeImg,
-    message: 'Welcome to the Department of Electrical and Electronics Engineering (EEE) at RVS University. Established in 1998, our department is accredited by NBA & NAAC and recognized as a research centre by JNTUA. We are dedicated to providing experiential engineering education in power systems, electric vehicles, renewable smart microgrids, and industrial automation.',
+    message: 'Welcome to the Department of Electrical and Electronics Engineering (EEE) at RVS University. Established in 1998, our department is accredited by NBA and recognized as a research centre by JNTUA. We are dedicated to providing experiential engineering education in power systems, electric vehicles, renewable smart microgrids, and industrial automation.',
   },
   profile: {
-    nbaAccreditation: 'Accredited by NBA & NAAC • JNTUA Research Centre • Autonomous Since 2012',
-    overview: `The Department of Electrical and Electronics Engineering (EEE) at RVS University was established in 1998 and has since grown to offer Diploma, B.Tech, and M.Tech programs. Accredited by NBA and NAAC, and recognized as a research center by JNTUA, the department has achieved autonomous status since 2012. With a robust faculty team comprising experienced professors holding PhDs and M.Tech degrees, the department adheres to AICTE norms, maintaining a faculty-student ratio of 1:15. It boasts well-equipped laboratories, including Electrical Circuits, Machines, Power Systems, and Power Electronics Labs, as well as advanced facilities like Embedded Systems and Simulation Labs. The department also integrates skill-oriented courses and licensed software such as MATLAB, PSIM, and SKM Power Tools to provide practical and research-oriented education.
+    nbaAccreditation: 'Accredited by NBA • JNTUA Research Centre • Autonomous Since 2012',
+    overview: `The Department of Electrical and Electronics Engineering (EEE) at RVS University was established in 1998 and has since grown to offer Diploma, B.Tech, and M.Tech programs. Accredited by NBA, and recognized as a research center by JNTUA, the department has achieved autonomous status since 2012. With a robust faculty team comprising experienced professors holding PhDs and M.Tech degrees, the department adheres to AICTE norms, maintaining a faculty-student ratio of 1:15. It boasts well-equipped laboratories, including Electrical Circuits, Machines, Power Systems, and Power Electronics Labs, as well as advanced facilities like Embedded Systems and Simulation Labs. The department also integrates skill-oriented courses and licensed software such as MATLAB, PSIM, and SKM Power Tools to provide practical and research-oriented education.
 
 The department actively fosters academic excellence through seminars, conferences, guest lectures, and technical workshops. It has received significant grants, including Rs. 7.25 Lakhs under MODROBS for lab modernization and Rs. 23 Lakhs under the Women Scientist Scheme for advanced research projects. Students gain real-world exposure through industrial visits, technical training, and projects, preparing them for placements in top organizations like Infosys, Wipro, Siemens, Toshiba, and APTRANSCO. Faculty members are actively engaged in research, publishing in reputed journals, and contributing to consultancy projects. The department’s commitment to quality education, state-of-the-art infrastructure, and a focus on student and faculty development ensures its position as a leader in Electrical and Electronics Engineering education.`,
     objectives: [
@@ -857,7 +859,7 @@ The department actively fosters academic excellence through seminars, conference
       'To encourage lifelong learning and advanced education by motivating students and faculty to engage in higher studies, cutting-edge research, and participation in national and international conferences.',
     ],
     strengths: [
-      'Accreditation and Recognition (Accredited by NBA & NAAC, Autonomous status since 2012, JNTUA Recognized Research Center)',
+      'Accreditation and Recognition (Accredited by NBA, Autonomous status since 2012, JNTUA Recognized Research Center)',
       'Experienced and Qualified Faculty (AICTE compliant 1:15 faculty-student ratio with Doctorate and M.Tech research guides)',
       'State-of-the-Art Infrastructure (Modernized with ₹7.25 Lakhs AICTE MODROBS grant & licensed MATLAB, PSIM, SKM Power Tools)',
       'Conduction of high-impact workshops, national seminars, technical symposiums, and expert guest lectures',
@@ -1462,64 +1464,25 @@ M4: To nurture the personality traits among the students in different dimensions
   },
   syllabusDownloads: [
     {
-      title: 'B.Tech EEE R23 Detailed Regulations & Syllabus (2025–26)',
-      regulation: 'Autonomous R23 Scheme',
-      size: '29.2 MB',
-      fileUrl: '/syllabus/eee-b-tech-r23-detailed-2025 EEE DEPARTMENT.pdf',
-      downloadFileName: 'BTech_EEE_R23_Detailed_Syllabus_2025_26.pdf',
+      title: 'B.Tech Electrical & Electronics Engineering - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      regulation: 'R26 Regulations',
+      size: '35.5 MB',
+      fileUrl: '/syllabus/02. EEE.pdf',
+      downloadFileName: 'B.Tech_EEE_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       level: 'B.Tech Under Graduate',
-      badge: 'Complete Official PDF (29.2 MB)',
-      description: 'Comprehensive 2025–26 academic regulations, complete 8-semester course structure, detailed syllabus for all theory & lab courses, textbook references, and grading scheme approved by the Board of Studies.',
+      badge: 'Official Syllabus (R26)',
+      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Electrical & Electronics Engineering approved by the Academic Council & Board of Studies.',
     },
     {
-      title: 'B.Tech EEE R20 Academic Regulations & Course Structure',
-      regulation: 'Autonomous R20 CBCS',
-      size: '5.1 MB',
-      fileUrl: '/syllabus/b tech R20-EEE DEPARTMENT.pdf',
-      downloadFileName: 'BTech_EEE_R20_Academic_Regulations_Course_Structure.pdf',
-      level: 'B.Tech Under Graduate',
-      badge: 'Autonomous R20 (5.1 MB)',
-      description: 'Complete 4-Year B.Tech Electrical & Electronics Engineering CBCS curriculum, honors degree pools, minor tracks, and course outcome (CO-PO) articulation matrix.',
-    },
-    {
-      title: 'B.Tech EEE R17 Curriculum & Course Structure',
-      regulation: 'Autonomous R17 Scheme',
-      size: '3.8 MB',
-      fileUrl: '/syllabus/b tech R17-EEE EEE DEPARTMENT.pdf',
-      downloadFileName: 'BTech_EEE_R17_Curriculum_Course_Structure.pdf',
-      level: 'B.Tech Under Graduate',
-      badge: 'R17 Archive (3.8 MB)',
-      description: 'Official autonomous curriculum scheme for B.Tech EEE R17 batch including core electrical machinery, power engineering, and elective subjects.',
-    },
-    {
-      title: 'M.Tech Power Electronics & Electrical Drives (PE & ED) Final Syllabus',
-      regulation: 'Post Graduate Autonomous',
-      size: '1.6 MB',
-      fileUrl: '/syllabus/M.Tech (PE & ED) FINAL EEE DEPARTMENT.pdf',
-      downloadFileName: 'MTech_Power_Electronics_Electrical_Drives_Final_Syllabus.pdf',
+      title: 'M.Tech Power Electronics & Electrical Drives - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      regulation: 'M.Tech Regulations',
+      size: 'Updating Soon',
+      fileUrl: '#',
+      downloadFileName: '',
       level: 'M.Tech Post Graduate',
-      badge: 'PG Specialization (1.6 MB)',
-      description: 'Master of Technology (PE & ED) full syllabus covering advanced power semiconductor devices, modern electrical motor drives, switched-mode power supplies, and dissertation work.',
-    },
-    {
-      title: 'M.Tech EEE R20 Course Curriculum & Syllabi',
-      regulation: 'M.Tech R20 CBCS',
-      size: '620 KB',
-      fileUrl: '/syllabus/Mtech-R20-EEE DEPARTMENT.pdf',
-      downloadFileName: 'MTech_EEE_R20_Curriculum_Syllabus.pdf',
-      level: 'M.Tech Post Graduate',
-      badge: 'M.Tech R20 (620 KB)',
-      description: 'M.Tech Electrical & Electronics Engineering R20 regulation curriculum, program electives, research methodology, and audit courses.',
-    },
-    {
-      title: 'M.Tech EEE R15 Regulation Syllabus',
-      regulation: 'M.Tech R15 Scheme',
-      size: '910 KB',
-      fileUrl: '/syllabus/mtechR15-EEE DEPARTMENT.pdf',
-      downloadFileName: 'MTech_EEE_R15_Regulation_Syllabus.pdf',
-      level: 'M.Tech Post Graduate',
-      badge: 'M.Tech R15 Archive (910 KB)',
-      description: 'Complete academic curriculum and syllabus book for M.Tech EEE R15 autonomous regulations.',
+      badge: 'Updating Soon',
+      isComingSoon: true,
+      description: 'Link will be updated soon. Master of Technology curriculum will be available for download shortly.',
     },
   ],
   association: {
@@ -1727,6 +1690,129 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
 
   if (deptId === 'cse' || deptId === 'computer' || deptId === 'scse' || deptId === 'soet-cse' || deptId === 'dcse') {
     return CSE_DEPARTMENT_DATA;
+  }
+
+  // Branch syllabus directory for specialized B.Tech engineering programmes
+  const specializedBranchMap: Record<string, {
+    name: string;
+    shortName: string;
+    degreeName: string;
+    syllabusTitle: string;
+    fileUrl: string;
+    size: string;
+    downloadFileName: string;
+    overview: string;
+  }> = {
+    'csbs': {
+      name: 'Department of Computer Science and Business Systems',
+      shortName: 'CSBS',
+      degreeName: 'B.Tech in Computer Science and Business Systems',
+      syllabusTitle: 'B.Tech Computer Science & Business Systems - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/12. CSBS.pdf',
+      size: '34.6 MB',
+      downloadFileName: 'B.Tech_CSBS_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of Computer Science and Business Systems offers an industry-oriented curriculum bridging computing systems, enterprise architecture, financial analytics, and business strategy.',
+    },
+    'aids': {
+      name: 'Department of Artificial Intelligence and Data Science',
+      shortName: 'AI & DS',
+      degreeName: 'B.Tech in Artificial Intelligence and Data Science',
+      syllabusTitle: 'B.Tech Artificial Intelligence & Data Science - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/13. AI&DS.pdf',
+      size: '34.6 MB',
+      downloadFileName: 'B.Tech_AIDS_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of Artificial Intelligence and Data Science delivers cutting-edge programs integrating neural intelligence, deep statistical modeling, big data analytics, and cognitive systems.',
+    },
+    'quantum': {
+      name: 'Department of CSE (Quantum Computing)',
+      shortName: 'CSE (QC)',
+      degreeName: 'B.Tech CSE in Quantum Computing',
+      syllabusTitle: 'B.Tech CSE (Quantum Computing) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/15. CSE (QC).pdf',
+      size: '36.6 MB',
+      downloadFileName: 'B.Tech_CSE_Quantum_Computing_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of CSE (Quantum Computing) spearheads next-generation quantum algorithms, Qiskit programming, quantum cryptography, and quantum computational physics.',
+    },
+    'aide': {
+      name: 'Department of CSE (AI & Data Engineering)',
+      shortName: 'CSE (AI&DE)',
+      degreeName: 'B.Tech CSE in AI & Data Engineering',
+      syllabusTitle: 'B.Tech CSE (AI & Data Engineering) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/16. AI&DE.pdf',
+      size: '36.2 MB',
+      downloadFileName: 'B.Tech_CSE_AI_Data_Eng_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of CSE (AI & Data Engineering) focuses on high-throughput data streaming, lakehouse architectures, distributed pipelines, and enterprise data mesh systems.',
+    },
+    'air': {
+      name: 'Department of CSE (AI & Robotics)',
+      shortName: 'CSE (AI&R)',
+      degreeName: 'B.Tech CSE in AI & Robotics',
+      syllabusTitle: 'B.Tech CSE (AI & Robotics) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/17. CSE (AI&R).pdf',
+      size: '35.2 MB',
+      downloadFileName: 'B.Tech_CSE_AI_Robotics_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of CSE (AI & Robotics) offers specialized training in autonomous robotics, sensor fusion, robotic vision, ROS controllers, and industrial manipulator kinematics.',
+    },
+    'cca': {
+      name: 'Department of CSE (Cloud Computing and Automation)',
+      shortName: 'CSE (CC&A)',
+      degreeName: 'B.Tech CSE in Cloud Computing and Automation',
+      syllabusTitle: 'B.Tech CSE (Cloud Computing & Automation) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/18. CSE (CC&A).pdf',
+      size: '21.8 MB',
+      downloadFileName: 'B.Tech_CSE_Cloud_Automation_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of CSE (Cloud Computing and Automation) prepares students in multi-cloud engineering (AWS, Azure, GCP), Kubernetes orchestration, Infrastructure as Code, and DevOps.',
+    },
+    'ece-dt': {
+      name: 'Department of ECE (Drone Technology)',
+      shortName: 'ECE (DT)',
+      degreeName: 'B.Tech ECE with Specialization in Drone Technology',
+      syllabusTitle: 'B.Tech ECE (Drone Technology) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
+      fileUrl: '/syllabus/19. ECE (DT).pdf',
+      size: '32.6 MB',
+      downloadFileName: 'B.Tech_ECE_Drone_Technology_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      overview: 'The Department of ECE (Drone Technology) provides specialized curriculum in unmanned aerial vehicle (UAV) electronics, autonomous avionics, flight simulators, and drone telemetry.',
+    },
+  };
+
+  // Check alias matches for specialized branches
+  const norm = deptId.toLowerCase().replace(/^dept-/, '').replace(/^school-/, '').replace(/^scis-/, '').replace(/^said-/, '').replace(/^soet-/, '');
+  let matchedBranch = specializedBranchMap[norm];
+
+  if (!matchedBranch) {
+    if (norm.includes('csbs')) matchedBranch = specializedBranchMap['csbs'];
+    else if (norm.includes('aids') || (norm.includes('ai') && norm.includes('ds'))) matchedBranch = specializedBranchMap['aids'];
+    else if (norm.includes('quantum') || norm.includes('qc')) matchedBranch = specializedBranchMap['quantum'];
+    else if (norm.includes('data-eng') || norm.includes('aide') || norm.includes('de')) matchedBranch = specializedBranchMap['aide'];
+    else if (norm.includes('robotics') || norm.includes('air')) matchedBranch = specializedBranchMap['air'];
+    else if (norm.includes('cloud') || norm.includes('cca') || norm.includes('automation')) matchedBranch = specializedBranchMap['cca'];
+    else if (norm.includes('drone') || norm.includes('ece-dt') || norm.includes('dt')) matchedBranch = specializedBranchMap['ece-dt'];
+  }
+
+  if (matchedBranch) {
+    return {
+      ...CSE_DEPARTMENT_DATA,
+      id: deptId,
+      name: matchedBranch.name,
+      shortName: matchedBranch.shortName,
+      degreeName: matchedBranch.degreeName,
+      profile: {
+        ...CSE_DEPARTMENT_DATA.profile,
+        overview: matchedBranch.overview,
+      },
+      syllabusDownloads: [
+        {
+          title: matchedBranch.syllabusTitle,
+          regulation: 'R26 Regulations',
+          size: matchedBranch.size,
+          fileUrl: matchedBranch.fileUrl,
+          downloadFileName: matchedBranch.downloadFileName,
+          level: 'B.Tech Under Graduate',
+          badge: 'Official Syllabus (R26)',
+          description: `Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for ${matchedBranch.degreeName} approved by the Academic Council & Board of Studies.`,
+        },
+      ],
+    };
   }
 
   // Generate generic template for other departments until user provides full data

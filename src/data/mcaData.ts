@@ -21,7 +21,7 @@ export const MCA_DEPARTMENT_DATA: DepartmentDetailData = {
     message: 'Welcome to the Department of Master of Computer Applications (MCA) at RVS University. Established in 2004-05 with an intake of 120 students and affiliated to JNTUA, our department is dedicated to developing competent software professionals, innovators, and lifelong learners. By combining foundational computing principles with enterprise full-stack development, AI/GenAI architectures, cloud microservices, and live industry projects, we empower our postgraduates to lead software solutions across global technology enterprises.',
   },
   profile: {
-    nbaAccreditation: 'AICTE Approved | Affiliated to JNTUA | Autonomous Status | NAAC A+ Grade',
+    nbaAccreditation: 'AICTE Approved | Affiliated to JNTUA | Autonomous Status',
     overview: 'Master of Computer Applications Department (MCA) was established in the year 2004-05 with an intake of 120 students, with the approval of AICTE and affiliated to the JNTU, Ananthapuramu. Within a short span time the department has grown to a commendable level in terms of infrastructural and academic standards on par with other premier institutions in the country. The department has been acquiring latest hardware and software.\n\nThe department is formidable with both experienced and young committed faculty. Majority of the faculty members are actively involved in research and development activities. The faculty has attended many training programs conducted by various organizations. The college management encourages the faculty members to attend workshops, conferences, seminars to update their knowledge.',
     objectives: [
       'Provide fundamental technical knowledge in software systems, full-stack architecture, and cloud data engineering.',
@@ -437,14 +437,15 @@ export const MCA_DEPARTMENT_DATA: DepartmentDetailData = {
   },
   syllabusDownloads: [
     {
-      title: 'MCA R25 Academic Regulation & Detailed Curriculum (2025)',
+      title: 'Master of Computer Applications (MCA) - Academic Regulations & Syllabus',
       level: 'Postgraduate (MCA)',
-      regulation: 'R25 Autonomous',
-      fileUrl: '/syllabus/mca-r25-detailed-2025.pdf',
-      downloadFileName: 'MCA_R25_Regulation_Syllabus.pdf',
-      size: '2.45 MB',
-      badge: 'Official R25 Curriculum',
-      description: 'Official 2-Year MCA autonomous curriculum covering Data Structures, Java Enterprise, Python, Full-Stack Web Development, Cloud Computing, AI/GenAI, Software Engineering, Mobile App Dev, and Capstone Major Projects.',
+      regulation: 'Autonomous Regulations',
+      fileUrl: '#',
+      downloadFileName: '',
+      size: 'Updating Soon',
+      badge: 'Updating Soon',
+      isComingSoon: true,
+      description: 'Link will be updated soon. Authorized Master of Computer Applications (MCA) syllabus will be uploaded shortly.',
     },
   ],
   association: {

@@ -141,31 +141,31 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
   const currentMeta = tabMeta[activeTab] || tabMeta.hostels;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950">
       {/* Top Hero Banner with Prominent Thematic Image */}
-      <div className="relative bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b border-gold-500/20 shadow-xl">
+      <div className="relative bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b-2 border-[#E5D3BD] shadow-sm">
         <div className="container-custom relative z-10 px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left: Text & Badges */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/40 text-[#8B4513] text-xs font-bold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
                 <span>{currentMeta.eyebrow}</span>
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611] leading-tight">
                 {currentMeta.title}
               </h1>
 
-              <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
                 {currentMeta.subtitle}
               </p>
 
               <div className="pt-2">
                 <button
                   onClick={onBackToHome}
-                  className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 hover:text-gold-300 transition-colors"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#9C6019] hover:text-[#7E4B11] transition-colors cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Return to Homepage</span>
@@ -175,8 +175,8 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
 
             {/* Right: Crisp, High-Resolution Thematic Visual Image Card */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-gold-400/40 group bg-navy-950">
-                <div className="h-56 sm:h-64 md:h-72 w-full overflow-hidden bg-navy-950">
+              <div className="relative rounded-3xl overflow-hidden shadow-md border-2 border-[#D4BC9F] group bg-[#FFFDF9]">
+                <div className="h-56 sm:h-64 md:h-72 w-full overflow-hidden bg-[#FAF3E7]">
                   <img
                     src={currentMeta.image}
                     alt={currentMeta.title}
@@ -566,33 +566,32 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
         {activeTab === 'tech-clubs' && (
           <div className="space-y-12">
             {/* Featured Visual Innovation Banner with Honeycomb Collage */}
-            <div className="bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] rounded-3xl p-8 md:p-12 border border-gold-400/30 text-white shadow-2xl overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] rounded-3xl p-8 md:p-12 border-2 border-[#E5D3BD] text-[#1D1611] shadow-md overflow-hidden relative">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                 <div className="lg:col-span-7 space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40 text-xs font-bold uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40 text-xs font-bold uppercase tracking-wider">
+                    <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
                     <span>Experiential Learning & Innovation Hub</span>
                   </div>
-                  <h2 className="font-serif text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                  <h2 className="font-serif text-3xl sm:text-4xl font-black text-[#1D1611] leading-tight">
                     From Hands-on Labs <br />
-                    <span className="gold-gradient-text">To Industry-Ready Innovators.</span>
+                    <span className="text-[#9C6019]">To Industry-Ready Innovators.</span>
                   </h2>
-                  <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                  <p className="text-[#5C4837] text-sm sm:text-base font-normal leading-relaxed">
                     At RVS University, education extends far beyond textbooks. Our students gain practical mastery through AICTE ATAL Idea Labs, advanced mechanical workshops, material testing apparatus, high-performance computing centers, and interdisciplinary hackathons.
                   </p>
                   <div className="grid grid-cols-3 gap-3 pt-2">
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                      <div className="text-xl font-serif font-black text-gold-400">50+</div>
-                      <div className="text-[11px] text-slate-300 font-medium">Advanced Labs</div>
+                    <div className="p-3 rounded-xl bg-[#FAF3E7] border border-[#E5D3BD] text-center">
+                      <div className="text-xl font-serif font-black text-[#9C6019]">50+</div>
+                      <div className="text-[11px] text-[#6E5D4F] font-bold">Advanced Labs</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                      <div className="text-xl font-serif font-black text-gold-400">100%</div>
-                      <div className="text-[11px] text-slate-300 font-medium">Practical Immersion</div>
+                    <div className="p-3 rounded-xl bg-[#FAF3E7] border border-[#E5D3BD] text-center">
+                      <div className="text-xl font-serif font-black text-[#9C6019]">100%</div>
+                      <div className="text-[11px] text-[#6E5D4F] font-bold">Practical Immersion</div>
                     </div>
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                      <div className="text-xl font-serif font-black text-gold-400">24/7</div>
-                      <div className="text-[11px] text-slate-300 font-medium">Lab Access</div>
+                    <div className="p-3 rounded-xl bg-[#FAF3E7] border border-[#E5D3BD] text-center">
+                      <div className="text-xl font-serif font-black text-[#9C6019]">24/7</div>
+                      <div className="text-[11px] text-[#6E5D4F] font-bold">Lab Access</div>
                     </div>
                   </div>
                 </div>

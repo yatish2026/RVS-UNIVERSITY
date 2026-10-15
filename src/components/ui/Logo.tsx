@@ -47,16 +47,18 @@ export const Logo: React.FC<LogoProps> = ({
           <span
             className={`font-serif font-black tracking-tight leading-none whitespace-nowrap ${titleSizes[size]}`}
           >
-            <span className="text-[#FF4D4D] font-black drop-shadow-sm">R</span>
-            <span className="text-[#CE93D8] font-black drop-shadow-sm">V</span>
-            <span className="text-[#81C784] font-black drop-shadow-sm">S</span>{' '}
-            <span className="text-gold-400 font-extrabold drop-shadow-sm">UNIVERSITY</span>
+            <span className="text-[#D81E5B] font-black drop-shadow-sm">R</span>
+            <span className="text-[#8B1E8B] font-black drop-shadow-sm">V</span>
+            <span className="text-[#00875A] font-black drop-shadow-sm">S</span>{' '}
+            <span className="text-[#C6832B] font-extrabold drop-shadow-sm">UNIVERSITY</span>
           </span>
           {showCaption !== false && (
             <span
-              className="hidden sm:block text-[7.5px] sm:text-[8.5px] md:text-[9.5px] font-bold tracking-wider text-slate-200 uppercase mt-0.5 whitespace-nowrap drop-shadow-sm"
+              className={`hidden sm:block text-[7.5px] sm:text-[8.5px] md:text-[9.5px] font-bold tracking-wider uppercase mt-0.5 whitespace-nowrap drop-shadow-sm ${
+                variant === 'light' ? 'text-[#EBDDCF]' : 'text-[#5C4228]'
+              }`}
             >
-              FIND YOUR PLACE <span className="text-gold-400 font-bold">•</span> FOLLOW YOUR PASSION
+              FIND YOUR PLACE <span className="text-[#C6832B] font-bold">•</span> FOLLOW YOUR PASSION
             </span>
           )}
         </div>

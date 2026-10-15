@@ -338,14 +338,15 @@ export const BCA_DEPARTMENT_DATA: DepartmentDetailData = {
   },
   syllabusDownloads: [
     {
-      title: 'BCA R25 Academic Regulation & Detailed Curriculum (2025)',
+      title: 'Bachelor of Computer Applications (BCA) - Academic Regulations & Syllabus',
       level: 'Undergraduate (BCA)',
-      regulation: 'R25 Autonomous',
-      fileUrl: '/syllabus/bca-r25-detailed-2025.pdf',
-      downloadFileName: 'BCA_R25_Regulation_Syllabus.pdf',
-      size: '1.95 MB',
-      badge: 'Official R25 Curriculum',
-      description: 'Official 3-Year BCA autonomous curriculum covering C/C++, Java, Full-Stack Web Development, DBMS, Python, GenAI, Cloud Computing, Operating Systems, and Project Exhibition.',
+      regulation: 'Autonomous Regulations',
+      fileUrl: '#',
+      downloadFileName: '',
+      size: 'Updating Soon',
+      badge: 'Updating Soon',
+      isComingSoon: true,
+      description: 'Link will be updated soon. Authorized Bachelor of Computer Applications (BCA) syllabus will be uploaded shortly.',
     },
   ],
   association: {

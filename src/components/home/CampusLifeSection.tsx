@@ -108,7 +108,7 @@ export const CampusLifeSection: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* Campus Features 8-Card Grid */}
+        {/* Campus Features 8-Card Grid (Sharp Rectangular Design, Only Main Heading) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {campusFeatures.map((item, idx) => {
             const Icon = item.icon;
@@ -120,7 +120,7 @@ export const CampusLifeSection: React.FC = () => {
               >
                 <a
                   href={item.href}
-                  className="group relative rounded-3xl overflow-hidden bg-navy-950 text-white shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-[380px] justify-between p-6 border border-slate-200/90 hover:border-gold-400 block cursor-pointer transform hover:-translate-y-1.5"
+                  className="group relative rounded-none overflow-hidden bg-navy-950 text-white shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col h-[340px] sm:h-[360px] justify-between p-6 border border-[#D4BC9F] hover:border-[#9C6019] block cursor-pointer transform hover:-translate-y-1"
                 >
                   {/* Background Image */}
                   <img
@@ -130,30 +130,23 @@ export const CampusLifeSection: React.FC = () => {
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/65 to-navy-950/25" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
 
                   {/* Top Tag & Icon */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/95 text-navy-950 border border-slate-200/90 shadow-md">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-none bg-white text-[#1D1611] border border-[#D4BC9F] shadow-sm">
                       {item.tag}
                     </span>
-                    <div className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-gold-300 group-hover:bg-gold-500 group-hover:text-navy-950 transition-all shadow-sm">
+                    <div className="w-9 h-9 rounded-none bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#9C6019] group-hover:text-white transition-all shadow-sm">
                       <Icon className="w-4 h-4" />
                     </div>
                   </div>
 
-                  {/* Bottom Content */}
-                  <div className="relative z-10 space-y-2">
-                    <h3 className="font-serif text-lg font-bold text-white leading-snug group-hover:text-gold-300 transition-colors">
+                  {/* Bottom Content - Only Main Heading */}
+                  <div className="relative z-10">
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-white leading-snug group-hover:text-[#F0D19E] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-slate-200 line-clamp-2 font-light leading-relaxed">
-                      {item.description}
-                    </p>
-                    <div className="pt-2 flex items-center gap-1 text-xs font-bold text-gold-300 group-hover:text-gold-200 group-hover:translate-x-1 transition-all">
-                      <span>Explore Facility</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
                   </div>
                 </a>
               </Reveal>

@@ -19,11 +19,11 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles = {
-    gold: 'bg-gold-50 text-gold-700 border border-gold-300/80',
-    navy: 'bg-navy-900 text-gold-400 border border-navy-700',
-    blue: 'bg-blue-50 text-blue-700 border border-blue-200',
-    slate: 'bg-slate-100 text-slate-700 border border-slate-200',
-    'outline-gold': 'bg-transparent text-gold-600 border border-gold-400',
+    gold: 'bg-[#FAF3E7] text-[#9C6019] border border-[#D4BC9F] font-semibold',
+    navy: 'bg-[#2D1E12] text-[#D4973F] border border-[#5C4837]',
+    blue: 'bg-[#FAF3E7] text-[#2D1E12] border border-[#D4BC9F]',
+    slate: 'bg-[#F5ECE0] text-[#5C4837] border border-[#E5D3BD]',
+    'outline-gold': 'bg-transparent text-[#9C6019] border border-[#C6832B] font-semibold',
   };
 
   return (

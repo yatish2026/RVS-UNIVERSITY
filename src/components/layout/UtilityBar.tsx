@@ -18,18 +18,18 @@ export const UtilityBar: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-navy-950 text-slate-300 border-b border-navy-800 text-[11.5px] relative z-50 select-none">
+    <div className="bg-[#FAF3E7] text-[#4A3828] border-b border-[#E5D3BD] text-[11.5px] relative z-50 select-none">
       <div className="container-custom flex items-center justify-between h-[38px] md:h-[40px] px-4 md:px-8">
         {/* Left Side: Institutional Status / Helpline */}
         <div className="flex items-center gap-3 md:gap-5 flex-shrink-0">
-          <div className="hidden sm:flex items-center gap-1.5 font-medium text-slate-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <div className="hidden sm:flex items-center gap-1.5 font-semibold text-[#4A3828]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
             <span className="truncate">R.V.S Nagar, Chittoor, AP – 517127</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-1 text-slate-400 before:content-['•'] before:mr-2 before:text-slate-600">
+          <div className="hidden md:flex items-center gap-1 text-[#6E5D4F] before:content-['•'] before:mr-2 before:text-[#AD9A88]">
             <span>Admissions:</span>
-            <a href="tel:+919669660155" className="text-gold-400 hover:text-gold-300 font-bold flex items-center gap-1 transition-colors">
+            <a href="tel:+919669660155" className="text-[#9C6019] hover:text-[#7E4B11] font-bold flex items-center gap-1 transition-colors">
               <Phone className="w-3 h-3" />
               +91 9669660155
             </a>
@@ -46,21 +46,21 @@ export const UtilityBar: React.FC = () => {
                   <button
                     onClick={() => setActiveDropdown(isOpen ? null : link.name)}
                     onMouseEnter={() => setActiveDropdown(link.name)}
-                    className={`flex items-center gap-1 px-2 py-1 rounded transition-colors whitespace-nowrap font-medium text-[11.5px] ${
-                      isOpen ? 'text-white bg-navy-800' : 'text-slate-300 hover:text-white hover:bg-navy-900'
+                    className={`flex items-center gap-1 px-2 py-1 rounded transition-colors whitespace-nowrap font-semibold text-[11.5px] ${
+                      isOpen ? 'text-[#9C6019] bg-[#EBDBC8]' : 'text-[#4A3828] hover:text-[#9C6019] hover:bg-[#F3E5D3]'
                     }`}
                   >
                     <span>{link.name}</span>
-                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? 'rotate-180 text-gold-400' : 'text-slate-400'}`} />
+                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#9C6019]' : 'text-[#7A695A]'}`} />
                   </button>
 
                   {/* Dropdown Menu */}
                   {isOpen && (
                     <div 
                       onMouseLeave={() => setActiveDropdown(null)}
-                      className="absolute right-0 top-full mt-1 w-64 bg-navy-900 border border-navy-700 rounded-xl shadow-2xl py-2 z-50 animate-fadeIn"
+                      className="absolute right-0 top-full mt-1 w-64 bg-[#FFFDF9] border-2 border-[#D4BC9F] rounded-xl shadow-2xl py-2 z-50 animate-fadeIn text-[#1D1611]"
                     >
-                      <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gold-400 border-b border-navy-800">
+                      <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[#9C6019] border-b border-[#E5D3BD]">
                         {link.name}
                       </div>
                       <div className="py-1">
@@ -69,7 +69,7 @@ export const UtilityBar: React.FC = () => {
                             key={sIdx}
                             href={sub.href}
                             onClick={() => setActiveDropdown(null)}
-                            className="flex items-center justify-between px-3 py-1.5 text-xs text-slate-200 hover:text-gold-300 hover:bg-navy-800 transition-colors"
+                            className="flex items-center justify-between px-3 py-1.5 text-xs font-semibold text-[#2D1E12] hover:text-[#9C6019] hover:bg-[#FAF3E7] transition-colors"
                           >
                             <span>{sub.name}</span>
                             <ExternalLink className="w-3 h-3 opacity-40 group-hover:opacity-100" />
@@ -86,15 +86,15 @@ export const UtilityBar: React.FC = () => {
               <a
                 key={idx}
                 href={link.href}
-                className={`flex items-center gap-1 px-2 py-0.5 rounded transition-all whitespace-nowrap font-medium text-[11.5px] ${
+                className={`flex items-center gap-1 px-2 py-0.5 rounded transition-all whitespace-nowrap font-semibold text-[11.5px] ${
                   link.highlight
-                    ? 'bg-gold-500/20 text-gold-300 border border-gold-500/40 hover:bg-gold-500 hover:text-navy-950 font-bold shadow-sm'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40 hover:bg-[#C6832B] hover:text-white font-bold shadow-sm'
+                    : 'text-[#4A3828] hover:text-[#9C6019]'
                 }`}
               >
                 <span>{link.name}</span>
                 {link.badge && (
-                  <span className="text-[9px] bg-blue-500/30 text-blue-300 border border-blue-400/30 px-1 rounded font-bold">
+                  <span className="text-[9px] bg-[#C6832B]/20 text-[#8B4513] border border-[#C6832B]/40 px-1 rounded font-bold">
                     {link.badge}
                   </span>
                 )}

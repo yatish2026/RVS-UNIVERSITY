@@ -5,15 +5,7 @@ import { Reveal } from '../ui/Reveal';
 
 export const StatisticsSection: React.FC = () => {
   return (
-    <section id="statistics" className="py-20 lg:py-28 bg-navy-950 text-white relative overflow-hidden">
-      {/* Background Decorative Pattern */}
-      <div 
-        className="absolute inset-0 opacity-5 pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(#D4AF37 1px, transparent 1px)', backgroundSize: '32px 32px' }}
-      />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="statistics" className="py-20 lg:py-28 bg-white text-[#1D1611] relative overflow-hidden border-y border-[#E8DED3]">
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <Reveal direction="fade">
@@ -21,10 +13,17 @@ export const StatisticsSection: React.FC = () => {
             <SectionHeading
               number="04"
               eyebrow="University By The Numbers"
-              title="A Legacy of Measurable Impact"
+              title={
+                <>
+                  A Legacy of{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B57321] via-[#D4973F] to-[#C6832B]">
+                    Measurable Impact
+                  </span>
+                </>
+              }
               subtitle="Our benchmarks in student achievements, career outcomes, research footprint, and institutional infrastructure speak for themselves."
               align="center"
-              variant="light"
+              variant="dark"
             />
           </div>
         </Reveal>
@@ -37,19 +36,19 @@ export const StatisticsSection: React.FC = () => {
               direction="zoom"
               delay={idx * 60}
             >
-              <div className="p-6 sm:p-7 rounded-3xl bg-navy-900/80 border border-navy-750 hover:border-gold-500/60 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between h-full group shadow-lg">
+              <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E8DED3] hover:border-[#C6832B] shadow-[0_4px_20px_rgba(29,22,17,0.04)] hover:shadow-[0_12px_32px_rgba(198,131,43,0.12)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between h-full group">
                 <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-gold-400 font-mono mb-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#8B5E34] font-mono mb-2">
                     {stat.label}
                   </div>
-                  <div className="flex items-baseline gap-1 text-3xl sm:text-4xl lg:text-[42px] font-serif font-extrabold text-white group-hover:text-gold-300 transition-colors my-1.5">
-                    {stat.prefix && <span className="text-gold-400 text-2xl sm:text-3xl">{stat.prefix}</span>}
+                  <div className="flex items-baseline gap-1 text-3xl sm:text-4xl lg:text-[42px] font-serif font-extrabold text-[#1D1611] group-hover:text-[#9C6019] transition-colors my-1.5">
+                    {stat.prefix && <span className="text-[#C6832B] text-2xl sm:text-3xl">{stat.prefix}</span>}
                     <span>{stat.value}</span>
-                    {stat.suffix && <span className="text-gold-400 text-xl sm:text-2xl font-sans ml-1">{stat.suffix}</span>}
+                    {stat.suffix && <span className="text-[#C6832B] text-xl sm:text-2xl font-sans ml-1 font-bold">{stat.suffix}</span>}
                   </div>
                 </div>
 
-                <p className="text-xs lg:text-sm text-slate-300 leading-relaxed pt-4 border-t border-navy-800/80">
+                <p className="text-xs lg:text-sm text-[#5C4837] leading-relaxed pt-4 border-t border-[#EFE5D8]">
                   {stat.description}
                 </p>
               </div>

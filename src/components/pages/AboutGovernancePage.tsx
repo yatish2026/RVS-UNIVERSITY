@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
+import chancellorPhoto from '../../assets/Chairman Photo copy.jpg.jpeg';
+import proChancellorPhoto from '../../assets/V Chairman Photo copy.jpg.jpeg';
 
 // Reusable scroll-observer card that triggers dynamic entrance animations from both scroll directions
 const LeadershipScrollCard: React.FC<{
@@ -188,7 +190,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       badge: 'QUALITY & RECOGNITIONS',
       icon: <Award className="w-3.5 h-3.5 text-gold-400" />,
       title: 'Rankings, Accreditations & Approvals',
-      subtitle: 'NAAC Grade A+, Tier-I NBA, AICTE New Delhi, UGC 2(f) & 12(B), and national benchmarks validating academic excellence.',
+      subtitle: 'Tier-I NBA, AICTE New Delhi, UGC 2(f) & 12(B), and national benchmarks validating academic excellence.',
     },
     iqac: {
       badge: 'QUALITY ASSURANCE CELL',
@@ -246,28 +248,28 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
 
   // Governance 9 Side Menu Items
   const governanceMenuItems = [
-    { id: 'sponsoring-body', label: 'Sponsoring Body', subtitle: 'Srinivasa Educational Academy (Est. 1998)', role: 'Statutory Sponsoring Society' },
-    { id: 'governing-body', label: 'Governing Body', subtitle: 'Apex Governing Body', role: 'Apex University Authority' },
-    { id: 'board-of-management', label: 'Board of Management', subtitle: 'Executive Administration & Management', role: 'Executive Management' },
-    { id: 'academic-council', label: 'Academic Council Members', subtitle: 'Curriculum & Academic Regulation', role: 'Chief Academic Authority' },
-    { id: 'finance-committee', label: 'Finance Committee', subtitle: 'Budgeting, Audits & Resource Planning', role: 'Financial Governance' },
-    { id: 'planning-monitoring', label: 'Planning and Monitoring Board', subtitle: 'Strategic Roadmap & Infrastructure', role: 'Development Planning' },
-    { id: 'research-innovation', label: 'Research and Innovation Council', subtitle: 'R&D, Patents & ATAL IDEA Lab', role: 'Research & Incubation' },
-    { id: 'board-of-examination', label: 'Board of Examination', subtitle: 'Evaluation, Moderation & Exam Integrity', role: 'Autonomous Exam Cell' },
-    { id: 'board-of-studies', label: 'Board of Studies', subtitle: 'Departmental Syllabi & Industry Alignment', role: 'Curriculum Boards' },
+    { id: 'sponsoring-body', label: 'Sponsoring Body', subtitle: 'Srinivasa Educational Academy (Est. 1998)', role: 'Statutory Sponsoring Society', badge: 'Society' },
+    { id: 'governing-body', label: 'Governing Body', subtitle: 'Apex Governing Body', role: 'Apex University Authority', badge: 'Apex' },
+    { id: 'board-of-management', label: 'Board of Management', subtitle: 'Executive Administration & Management', role: 'Executive Management', badge: 'Executive' },
+    { id: 'academic-council', label: 'Academic Council Members', subtitle: 'Curriculum & Academic Regulation', role: 'Chief Academic Authority', badge: 'Council' },
+    { id: 'finance-committee', label: 'Finance Committee', subtitle: 'Budgeting, Audits & Resource Planning', role: 'Financial Governance', badge: 'Finance' },
+    { id: 'planning-monitoring', label: 'Planning and Monitoring Board', subtitle: 'Strategic Roadmap & Infrastructure', role: 'Development Planning', badge: 'Planning' },
+    { id: 'research-innovation', label: 'Research and Innovation Council', subtitle: 'R&D, Patents & ATAL IDEA Lab', role: 'Research & Incubation', badge: 'R&D' },
+    { id: 'board-of-examination', label: 'Board of Examination', subtitle: 'Evaluation, Moderation & Exam Integrity', role: 'Autonomous Exam Cell', badge: 'Exam Cell' },
+    { id: 'board-of-studies', label: 'Board of Studies', subtitle: 'Departmental Syllabi & Industry Alignment', role: 'Curriculum Boards', badge: 'BOS' },
   ];
 
   // IQAC 9 Side Menu Items
   const iqacMenuItems = [
-    { id: 'about-iqac', label: 'About IQAC', subtitle: 'Vision, Quality Objectives & Framework' },
-    { id: 'members-committee', label: 'Members and Committee', subtitle: 'Internal Quality Assurance Cell Composition' },
-    { id: 'meeting-minutes', label: 'Meeting Minutes', subtitle: 'Quarterly Proceedings & Action Taken Reports' },
-    { id: 'annual-report', label: 'Annual Report', subtitle: 'AQAR & Institutional Quality Audits' },
-    { id: 'naac-certificate', label: 'NAAC Certificate', subtitle: 'Grade A+ Certificate & Accreditations' },
-    { id: 'aaa', label: 'AAA', subtitle: 'Academic & Administrative Audit Reports' },
-    { id: 'idp', label: 'IDP', subtitle: 'Institutional Development Plan (2026–2035)' },
-    { id: 'useful-links', label: 'Useful Links', subtitle: 'NAAC, NBA, UGC, AICTE & NIRF Portals' },
-    { id: 'downloads', label: 'Downloads', subtitle: 'Quality Templates, Forms & Feedback Rubrics' },
+    { id: 'about-iqac', label: 'About IQAC', subtitle: 'Vision, Quality Objectives & Framework', badge: 'Overview' },
+    { id: 'members-committee', label: 'Members and Committee', subtitle: 'Internal Quality Assurance Cell Composition', badge: 'Committee' },
+    { id: 'meeting-minutes', label: 'Meeting Minutes', subtitle: 'Quarterly Proceedings & Action Taken Reports', badge: 'Minutes' },
+    { id: 'annual-report', label: 'Annual Report (AQAR)', subtitle: 'AQAR & Institutional Quality Audits', badge: 'AQAR' },
+    { id: 'naac-certificate', label: 'NAAC Certificate & SSR', subtitle: 'Accreditation Details (Will be updated soon)', badge: 'SSR' },
+    { id: 'aaa', label: 'Academic Audit (AAA)', subtitle: 'Academic & Administrative Audit Reports', badge: 'AAA' },
+    { id: 'idp', label: 'Institutional Plan (IDP)', subtitle: 'Institutional Development Plan (2026–2035)', badge: 'IDP' },
+    { id: 'useful-links', label: 'Useful Links & Policies', subtitle: 'NAAC, NBA, UGC, AICTE & NIRF Portals', badge: 'Policies' },
+    { id: 'downloads', label: 'Downloads & Rubrics', subtitle: 'Quality Templates, Forms & Feedback Rubrics', badge: 'Rubrics' },
   ];
 
   // Accreditation Seals / Badges (The 8 official uploaded images)
@@ -297,12 +299,12 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       tag: 'AICTE Approved',
     },
     {
-      title: 'NAAC Accredited Grade A+',
+      title: 'NAAC Accreditation',
       category: 'Institutional Quality Benchmark',
       image: '/images/accreditations/naac-a-plus-badge.png',
-      alt: 'NAAC Accredited with Grade A+ Official Seal',
-      description: 'Conferred prestigious Grade A+ by NAAC, UGC for excellence in teaching-learning and research.',
-      tag: 'Grade A+',
+      alt: 'NAAC Accreditation Seal',
+      description: 'NAAC institutional accreditation and quality assessment details will be updated soon.',
+      tag: 'Will be updated soon',
     },
     {
       title: 'NBA (Washington Accord Tier-I)',
@@ -339,49 +341,49 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950">
       {/* 1. Regal Header Banner (Dynamic for each section - Image 2 Reference) */}
-      <div className="bg-gradient-to-r from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-10 md:pb-14 border-b border-gold-500/20 shadow-xl transition-all duration-300">
+      <div className="bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-10 md:pb-14 border-b-2 border-[#E5D3BD] shadow-sm transition-all duration-300">
         <div className="container-custom px-4 md:px-8">
           {/* Breadcrumb Navigation: [Home] -> [About Us] -> [Section] */}
-          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-4 flex-wrap font-sans">
+          <nav className="flex items-center gap-2 text-xs text-[#6E5D4F] mb-4 flex-wrap font-sans">
             <button 
               onClick={onBackToHome}
-              className="hover:text-gold-300 transition-colors flex items-center gap-1 font-semibold cursor-pointer"
+              className="hover:text-[#9C6019] transition-colors flex items-center gap-1 font-bold cursor-pointer"
             >
-              <Home className="w-3.5 h-3.5" />
+              <Home className="w-3.5 h-3.5 text-[#9C6019]" />
               <span>Home</span>
             </button>
-            <span className="text-slate-500">&gt;</span>
+            <span className="text-[#AD9A88]">&gt;</span>
             <a 
               href="#about-overview" 
-              className="hover:text-gold-300 transition-colors font-semibold"
+              className="hover:text-[#9C6019] transition-colors font-semibold"
             >
               About Us
             </a>
-            <span className="text-slate-500">&gt;</span>
-            <span className="text-gold-400 font-bold">
+            <span className="text-[#AD9A88]">&gt;</span>
+            <span className="text-[#9C6019] font-bold">
               {activeMainTab === 'governance' ? 'Governance' : currentBanner.title}
             </span>
           </nav>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/40 text-[#8B4513] text-xs font-bold uppercase tracking-wider mb-2">
                 {currentBanner.icon}
                 <span>{currentBanner.badge}</span>
               </div>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611]">
                 {currentBanner.title}
               </h1>
-              <p className="text-sm md:text-base text-slate-300 mt-2 max-w-2xl font-light">
+              <p className="text-sm md:text-base text-[#5C4837] mt-2 max-w-2xl font-normal">
                 {currentBanner.subtitle}
               </p>
             </div>
 
             <button
               onClick={onBackToHome}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-gold-500 hover:text-navy-950 text-gold-300 text-xs font-bold border border-gold-400/40 backdrop-blur-md transition-all self-start md:self-auto shadow-md cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FAF3E7] hover:bg-[#C6832B] hover:text-white text-[#9C6019] text-xs font-bold border border-[#D4BC9F] transition-all self-start md:self-auto shadow-sm cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Return Back</span>
@@ -400,8 +402,8 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 href={tab.href}
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold whitespace-nowrap transition-all duration-200 ${
                   activeMainTab === tab.id
-                    ? 'bg-navy-950 text-gold-300 font-black shadow-md'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-navy-950 border border-slate-200'
+                    ? 'bg-[#C6832B] text-white font-black shadow-md'
+                    : 'bg-[#FAF3E7] text-[#5C4837] hover:bg-[#F5ECE0] hover:text-[#1D1611] border border-[#D4BC9F]'
                 }`}
               >
                 {tab.icon}
@@ -436,7 +438,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     <strong className="text-navy-950">RVS University</strong> (established under the aegis of <strong className="text-navy-950">Srinivasa Educational Academy</strong> in 1998) stands as a premier seat of higher learning and technological empowerment in Andhra Pradesh. Spanning an expansive <strong className="text-navy-950">65+ Acre Smart Campus</strong> in Chittoor, the university is committed to academic rigor, experiential industry immersion, and human-centric innovation.
                   </p>
                   <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                    With autonomous governance, NBA Tier-1 accreditation, NAAC Grade A+, and AICTE approval, RVS University guides over <strong className="text-navy-950">4,500+ students</strong> across 49+ undergraduate, postgraduate, and doctoral degree programs.
+                    With autonomous governance, NBA Tier-1 accreditation, and AICTE approval, RVS University guides over <strong className="text-navy-950">4,500+ students</strong> across 49+ undergraduate, postgraduate, and doctoral degree programs.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
@@ -458,7 +460,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 <div className="lg:col-span-5 space-y-4">
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-gold-400/40 bg-navy-950">
                     <img
-                      src="/images/chairman.jpg"
+                      src={chancellorPhoto}
                       alt="RVS University Chancellor Dr. Ravuri Venkataswamy"
                       className="w-full h-[400px] object-cover object-top"
                     />
@@ -584,7 +586,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   >
                     <div className="relative rounded-3xl overflow-hidden shadow-2xl border-3 border-gold-400/50 bg-navy-950 group">
                       <img
-                        src="/images/chairman.jpg"
+                        src={chancellorPhoto}
                         alt="Dr. Ravuri Venkataswamy, Chancellor SV Group of Educational Institutions"
                         className="w-full h-[450px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
@@ -722,7 +724,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   >
                     <div className="relative rounded-3xl overflow-hidden shadow-2xl border-3 border-gold-400/50 bg-navy-950 group">
                       <img
-                        src="/images/vice-chairman.jpg"
+                        src={proChancellorPhoto}
                         alt="Shri R.V. Srinivas, B.Tech., MBA (UK), Pro Chancellor"
                         className="w-full h-[420px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
@@ -797,7 +799,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     {/* Institutional Leadership Summary */}
                     <div className="space-y-3 text-slate-700 text-xs sm:text-sm leading-relaxed">
                       <p>
-                        Under his dynamic leadership <strong className="text-navy-950 font-semibold">“Sri Venkateswara College of Engineering & Technology (SVCET)”</strong> became the <strong className="text-gold-800 font-bold">Youngest College in Andhra Pradesh to get NBA Accredited</strong>. The institution has achieved NAAC Grade A+ accreditation, Tier-I NBA accreditation, UGC autonomous status, and recognition under sections 12(B) and 2(F).
+                        Under his dynamic leadership <strong className="text-navy-950 font-semibold">“Sri Venkateswara College of Engineering & Technology (SVCET)”</strong> became the <strong className="text-gold-800 font-bold">Youngest College in Andhra Pradesh to get NBA Accredited</strong>. The institution has achieved Tier-I NBA accreditation, UGC autonomous status, and recognition under sections 12(B) and 2(F).
                       </p>
                       <p>
                         More than <strong className="text-navy-950 font-bold">280 foreign students</strong> from Malaysia, Sudan, Tanzania, UAE, Kuwait, Nepal, Bhutan, and Sri Lanka pursue studies across group campuses. He has also instituted scholarships for students nominated by the <strong>Royal Government of Bhutan</strong> and led community outreach through charitable trusts.
@@ -898,20 +900,20 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         {/* CHANCELLOR FULL PROFILE MODAL (KNOW MORE POPUP) */}
         {/* ========================================================================= */}
         {isChancellorModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md animate-fadeIn">
-            <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-gold-400/40 shadow-2xl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fadeIn">
+            <div className="bg-[#FFFDF9] rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border-2 border-[#D4BC9F] shadow-2xl">
               
               {/* Modal Top Header */}
-              <div className="bg-gradient-to-r from-navy-950 via-[#102444] to-navy-950 text-white p-6 border-b border-gold-500/30 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#FAF3E7] text-[#1D1611] p-6 border-b-2 border-[#E5D3BD] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 border border-gold-400/40 flex items-center justify-center text-gold-300">
-                    <Sparkles className="w-5 h-5 text-gold-400" />
+                  <div className="w-10 h-10 rounded-xl bg-[#C6832B]/15 border border-[#C6832B]/40 flex items-center justify-center text-[#9C6019]">
+                    <Sparkles className="w-5 h-5 text-[#C6832B]" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-sans">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#9C6019] font-sans">
                       Founder Chancellor Profile & Biography
                     </span>
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1D1611]">
                       Dr. Ravuri Venkataswamy
                     </h3>
                   </div>
@@ -919,7 +921,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
 
                 <button
                   onClick={() => setIsChancellorModalOpen(false)}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-500 hover:text-navy-950 text-slate-300 flex items-center justify-center transition-all cursor-pointer"
+                  className="w-9 h-9 rounded-full bg-[#E5D3BD]/60 hover:bg-[#D4BC9F] text-[#5C4837] hover:text-[#1D1611] flex items-center justify-center transition-all border border-[#D4BC9F] cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1032,20 +1034,20 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
         {/* PRO CHANCELLOR FULL PROFILE MODAL (KNOW MORE POPUP) */}
         {/* ========================================================================= */}
         {isProChancellorModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md animate-fadeIn">
-            <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-gold-400/40 shadow-2xl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fadeIn">
+            <div className="bg-[#FFFDF9] rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border-2 border-[#D4BC9F] shadow-2xl">
               
               {/* Modal Top Header */}
-              <div className="bg-gradient-to-r from-navy-950 via-[#102444] to-navy-950 text-white p-6 border-b border-gold-500/30 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#FAF3E7] text-[#1D1611] p-6 border-b-2 border-[#E5D3BD] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 border border-gold-400/40 flex items-center justify-center text-gold-300">
-                    <Award className="w-5 h-5 text-gold-400" />
+                  <div className="w-10 h-10 rounded-xl bg-[#C6832B]/15 border border-[#C6832B]/40 flex items-center justify-center text-[#9C6019]">
+                    <Award className="w-5 h-5 text-[#C6832B]" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-sans">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#9C6019] font-sans">
                       Executive Profile & Biography
                     </span>
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1D1611]">
                       Shri R.V. Srinivas, B.Tech., MBA (UK)
                     </h3>
                   </div>
@@ -1053,7 +1055,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
 
                 <button
                   onClick={() => setIsProChancellorModalOpen(false)}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-500 hover:text-navy-950 text-slate-300 flex items-center justify-center transition-all cursor-pointer"
+                  className="w-9 h-9 rounded-full bg-[#E5D3BD]/60 hover:bg-[#D4BC9F] text-[#5C4837] hover:text-[#1D1611] flex items-center justify-center transition-all border border-[#D4BC9F] cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1130,7 +1132,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                       The College has made its mark as an Institute of Excellence globally, hosting more than <strong>280 foreign students</strong> from Malaysia, Sudan, Tanzania, UAE, Kuwait, Nepal, Bhutan, and Sri Lanka. Extended technical assistance to the <strong>Royal Government of Bhutan</strong> in nursing education through scholarships.
                     </p>
                     <p>
-                      Accredited by <strong>National Assessment and Accreditation Council (NAAC) with Grade 'A+'</strong>, accredited by <strong>NBA under Tier-I</strong>, and granted <strong>Autonomous status by UGC</strong> from 2011-12. The college is recognized under <strong>UGC 12(B) and 2(F)</strong>.
+                      Accredited by <strong>NBA under Tier-I</strong>, and granted <strong>Autonomous status by UGC</strong> from 2011-12. The college is recognized under <strong>UGC 12(B) and 2(F)</strong>.
                     </p>
                     <p>
                       Premier recruiters include <strong>Infosys, Wipro, Accenture, CSC, KPIT Cummins, Robert Bosch, and Mahindra Satyam</strong>.
@@ -1192,18 +1194,19 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
           <div className="space-y-8 animate-fadeIn">
             {/* 2-Column Layout: Left Side Menu Bar + Right Detail View */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Side Menu Bar */}
-              <div className="lg:col-span-4 bg-white rounded-3xl p-4 md:p-5 border border-slate-200 shadow-lg sticky top-20">
-                <div className="pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Governance Menu
+              {/* Left Side Menu Bar - Sharp Card Design matching Image 2 */}
+              <div className="lg:col-span-4 bg-white rounded-none p-4 md:p-5 border border-[#D4BC9F] shadow-lg sticky top-24">
+                <div className="pb-3 mb-3 border-b border-[#E5D3BD] flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9C6019] font-sans flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-none bg-[#C6832B]" />
+                    GOVERNANCE MENU
                   </span>
-                  <span className="text-[11px] font-semibold text-gold-600 bg-gold-50 px-2 py-0.5 rounded-full border border-gold-200">
-                    Statutory
+                  <span className="text-[10px] bg-[#FAF3E7] text-[#8B4513] px-2.5 py-0.5 rounded-none font-bold border border-[#D4BC9F]">
+                    {governanceMenuItems.length} Sections
                   </span>
                 </div>
 
-                <div className="space-y-1.5 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
+                <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
                   {governanceMenuItems.map((item) => {
                     const isActive = governanceSubTab === item.id;
 
@@ -1211,21 +1214,29 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                       <button
                         key={item.id}
                         onClick={() => setGovernanceSubTab(item.id as any)}
-                        className={`w-full text-left p-3.5 rounded-2xl transition-all flex items-center justify-between group cursor-pointer ${
+                        className={`w-full text-left px-3.5 py-3 rounded-none text-xs md:text-sm font-semibold transition-all duration-150 flex items-center justify-between group cursor-pointer border ${
                           isActive
-                            ? 'bg-navy-950 text-white shadow-md border border-gold-500/30 font-bold'
-                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-transparent'
+                            ? 'bg-[#9C6019] text-white border-[#9C6019] font-bold shadow-md'
+                            : 'bg-[#FAF3E7] hover:bg-[#9C6019] text-[#1D1611] hover:text-white border-[#D4BC9F] hover:border-[#9C6019]'
                         }`}
                       >
-                        <div className="pr-2">
-                          <div className={`text-xs md:text-sm ${isActive ? 'text-gold-300 font-bold' : 'text-navy-950 font-semibold group-hover:text-gold-700'}`}>
-                            {item.label}
-                          </div>
-                          <div className={`text-[11px] mt-0.5 line-clamp-1 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
-                            {item.role}
-                          </div>
+                        <div className="flex items-center gap-2 truncate pr-2">
+                          <span className={`font-serif text-sm font-black flex-shrink-0 ${isActive ? 'text-white' : 'text-[#C6832B] group-hover:text-white'}`}>
+                            »
+                          </span>
+                          <span className="truncate">{item.label}</span>
                         </div>
-                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-gold-400 translate-x-1' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                        {item.badge && (
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-none border flex-shrink-0 ml-2 ${
+                              isActive
+                                ? 'bg-white text-[#9C6019] border-white font-black'
+                                : 'bg-[#EFE2D2] text-[#8B4513] border-[#D4BC9F] group-hover:bg-white/20 group-hover:text-white group-hover:border-white/40'
+                            }`}
+                          >
+                            {item.badge}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -1362,7 +1373,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 </div>
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-gold-900 text-xs font-bold shadow-sm self-start sm:self-auto">
                   <Award className="w-4 h-4 text-gold-600" />
-                  <span>NAAC Grade A+ & NBA Tier-I</span>
+                  <span>NBA Tier-I & UGC Autonomous</span>
                 </div>
               </div>
 
@@ -1407,39 +1418,48 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
           <div className="space-y-8 animate-fadeIn">
             {/* 2-Column Layout: Left Side Menu Bar + Right Content Panel */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Side Menu Bar */}
-              <div className="lg:col-span-4 bg-white rounded-3xl p-4 md:p-5 border border-slate-200 shadow-lg sticky top-20">
-                <div className="pb-3 mb-3 border-b border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    IQAC Menu
+              {/* Left Side Menu Bar - Sharp Card Design matching Image 2 */}
+              <div className="lg:col-span-4 bg-white rounded-none p-4 md:p-5 border border-[#D4BC9F] shadow-lg sticky top-24">
+                <div className="pb-3 mb-3 border-b border-[#E5D3BD] flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9C6019] font-sans flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-none bg-[#C6832B]" />
+                    IQAC MENU
                   </span>
-                  <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
-                    Quality Cell
+                  <span className="text-[10px] bg-[#FAF3E7] text-[#8B4513] px-2.5 py-0.5 rounded-none font-bold border border-[#D4BC9F]">
+                    {iqacMenuItems.length} Sections
                   </span>
                 </div>
 
-                <div className="space-y-1.5 max-h-[580px] overflow-y-auto pr-1 custom-scrollbar">
+                <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
                   {iqacMenuItems.map((item) => {
                     const isActive = iqacSubTab === item.id;
                     return (
                       <button
                         key={item.id}
                         onClick={() => setIqacSubTab(item.id as any)}
-                        className={`w-full text-left p-3 rounded-2xl transition-all flex items-center justify-between group ${
+                        className={`w-full text-left px-3.5 py-3 rounded-none text-xs md:text-sm font-semibold transition-all duration-150 flex items-center justify-between group cursor-pointer border ${
                           isActive
-                            ? 'bg-navy-950 text-white shadow-md border border-gold-500/30 font-bold'
-                            : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-transparent'
+                            ? 'bg-[#9C6019] text-white border-[#9C6019] font-bold shadow-md'
+                            : 'bg-[#FAF3E7] hover:bg-[#9C6019] text-[#1D1611] hover:text-white border-[#D4BC9F] hover:border-[#9C6019]'
                         }`}
                       >
-                        <div className="pr-2">
-                          <div className={`text-xs md:text-sm ${isActive ? 'text-gold-300 font-bold' : 'text-navy-950 font-semibold group-hover:text-gold-700'}`}>
-                            {item.label}
-                          </div>
-                          <div className={`text-[11px] mt-0.5 line-clamp-1 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
-                            {item.subtitle}
-                          </div>
+                        <div className="flex items-center gap-2 truncate pr-2">
+                          <span className={`font-serif text-sm font-black flex-shrink-0 ${isActive ? 'text-white' : 'text-[#C6832B] group-hover:text-white'}`}>
+                            »
+                          </span>
+                          <span className="truncate">{item.label}</span>
                         </div>
-                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-gold-400 translate-x-1' : 'text-slate-400 group-hover:translate-x-0.5'}`} />
+                        {item.badge && (
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-none border flex-shrink-0 ml-2 ${
+                              isActive
+                                ? 'bg-white text-[#9C6019] border-white font-black'
+                                : 'bg-[#EFE2D2] text-[#8B4513] border-[#D4BC9F] group-hover:bg-white/20 group-hover:text-white group-hover:border-white/40'
+                            }`}
+                          >
+                            {item.badge}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -1587,35 +1607,25 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                       <span className="text-xs font-bold uppercase tracking-wider text-gold-700">Accreditation</span>
                       <h4 className="font-serif text-2xl md:text-3xl font-bold text-navy-950 mt-1">NAAC Certificate</h4>
                       <p className="text-xs md:text-sm text-slate-600 mt-1">
-                        Official NAAC Accreditation Certificate and Peer Team Evaluation Report.
+                        National Assessment and Accreditation Council (NAAC) institutional quality assurance.
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                      <div className="md:col-span-5 flex justify-center">
-                        <div className="p-4 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
-                          <img
-                            src="/images/accreditations/naac-a-plus-badge.png"
-                            alt="NAAC Accredited Grade A+ Seal"
-                            className="max-h-48 mx-auto object-contain drop-shadow-md"
-                          />
-                          <div className="text-xs font-bold text-navy-950">
-                            NAAC Accredited with Grade A+
-                          </div>
-                        </div>
+                    <div className="p-8 md:p-12 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center mx-auto text-amber-700 shadow-inner">
+                        <Award className="w-8 h-8 text-amber-600" />
                       </div>
-
-                      <div className="md:col-span-7 space-y-4">
-                        <div className="p-6 rounded-2xl bg-amber-50/60 border border-amber-200/80 space-y-2">
-                          <h5 className="font-serif font-bold text-navy-950 text-base">Accreditation Status</h5>
-                          <p className="text-xs text-slate-700 leading-relaxed">
-                            RVS University has been conferred <strong className="text-navy-950">Grade 'A+'</strong> by NAAC in recognition of supreme quality in curriculum, research infrastructure, and graduate employability.
-                          </p>
-                          <div className="pt-2 text-xs text-slate-500 font-semibold">
-                            Status: Certificate download will be updated soon
-                          </div>
-                        </div>
+                      <div className="max-w-md mx-auto space-y-2">
+                        <h4 className="font-serif text-xl font-bold text-navy-950">
+                          Will be updated soon
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                          NAAC accreditation details and official certificate will be updated soon.
+                        </p>
                       </div>
+                      <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
+                        Quality Assurance Portfolio
+                      </span>
                     </div>
                   </div>
                 )}
@@ -1805,59 +1815,59 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
               </div>
 
               {/* Right: Interactive Enquiry Card */}
-              <div className="lg:col-span-6 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white p-8 rounded-3xl border border-gold-400/30 shadow-xl space-y-5">
+              <div className="lg:col-span-6 bg-[#FFFDF9] text-[#1D1611] p-8 rounded-3xl border-2 border-[#D4BC9F] shadow-xl space-y-5">
                 <div className="space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gold-400">Quick Enquiry</span>
-                  <h4 className="font-serif text-2xl font-bold text-white">Have a Question for Us?</h4>
-                  <p className="text-xs text-slate-300 font-light">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9C6019]">Quick Enquiry</span>
+                  <h4 className="font-serif text-2xl font-bold text-[#1D1611]">Have a Question for Us?</h4>
+                  <p className="text-xs text-[#5C4837] font-normal">
                     Our admissions & academic counseling team will get back to you immediately.
                   </p>
                 </div>
 
                 <form className="space-y-3 text-xs" onSubmit={(e) => { e.preventDefault(); alert('Thank you for reaching out! Our team will contact you shortly.'); }}>
                   <div>
-                    <label className="block text-slate-300 mb-1 font-medium">Full Name</label>
+                    <label className="block text-[#4A3828] mb-1 font-bold">Full Name</label>
                     <input
                       type="text"
                       required
                       placeholder="Enter your name"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-navy-900 border border-navy-750 text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] text-[#1D1611] placeholder:text-[#8C7A6B] focus:outline-none focus:border-[#C6832B]"
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-slate-300 mb-1 font-medium">Phone Number</label>
+                      <label className="block text-[#4A3828] mb-1 font-bold">Phone Number</label>
                       <input
                         type="tel"
                         required
                         placeholder="Your phone"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-navy-900 border border-navy-750 text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] text-[#1D1611] placeholder:text-[#8C7A6B] focus:outline-none focus:border-[#C6832B]"
                       />
                     </div>
                     <div>
-                      <label className="block text-slate-300 mb-1 font-medium">Email Address</label>
+                      <label className="block text-[#4A3828] mb-1 font-bold">Email Address</label>
                       <input
                         type="email"
                         required
                         placeholder="Your email"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-navy-900 border border-navy-750 text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] text-[#1D1611] placeholder:text-[#8C7A6B] focus:outline-none focus:border-[#C6832B]"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-slate-300 mb-1 font-medium">Message / Query</label>
+                    <label className="block text-[#4A3828] mb-1 font-bold">Message / Query</label>
                     <textarea
                       rows={3}
                       required
                       placeholder="How can we assist you?"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-navy-900 border border-navy-750 text-white placeholder-slate-500 focus:outline-none focus:border-gold-400 custom-scrollbar"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] text-[#1D1611] placeholder:text-[#8C7A6B] focus:outline-none focus:border-[#C6832B] custom-scrollbar resize-none"
                     />
                   </div>
                   <Button
                     variant="gold"
                     size="md"
                     type="submit"
-                    className="w-full justify-center"
+                    className="w-full justify-center font-bold"
                   >
                     Submit Message
                   </Button>

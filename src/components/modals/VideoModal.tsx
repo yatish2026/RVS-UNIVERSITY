@@ -68,22 +68,22 @@ export const VideoModal: React.FC<VideoModalProps> = ({
       />
 
       {/* Video Container Box - Compact Max Width (max-w-3xl) */}
-      <div className="relative w-full max-w-2xl lg:max-w-3xl bg-[#0A192F] text-white rounded-2xl border border-gold-400/50 shadow-[0_20px_60px_rgba(0,0,0,0.85)] overflow-hidden z-10 flex flex-col my-auto max-h-[92vh]">
+      <div className="relative w-full max-w-2xl lg:max-w-3xl bg-[#FFFDF9] text-[#1D1611] rounded-2xl border-2 border-[#D4BC9F] shadow-[0_20px_60px_rgba(77,54,31,0.25)] overflow-hidden z-10 flex flex-col my-auto max-h-[92vh]">
         
         {/* Compact Video Header Bar */}
-        <div className="bg-gradient-to-r from-navy-950 via-[#102444] to-navy-950 px-4 py-3 sm:px-5 sm:py-3 border-b border-gold-400/30 flex items-center justify-between gap-3">
+        <div className="bg-[#FAF3E7] px-4 py-3 sm:px-5 sm:py-3 border-b-2 border-[#E5D3BD] flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-400/50 flex items-center justify-center text-gold-400 flex-shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-[#C6832B]/15 border border-[#C6832B]/40 flex items-center justify-center text-[#9C6019] flex-shrink-0">
               <Film className="w-4 h-4" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-gold-400 flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-gold-400" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#9C6019] flex items-center gap-1">
+                  <Sparkles className="w-2.5 h-2.5 text-[#C6832B]" />
                   Official Video Prospectus
                 </span>
               </div>
-              <h3 className="font-serif text-xs sm:text-sm md:text-base font-bold text-white truncate">
+              <h3 className="font-serif text-xs sm:text-sm md:text-base font-bold text-[#1D1611] truncate">
                 {title}
               </h3>
             </div>
@@ -91,7 +91,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors border border-white/20 cursor-pointer flex-shrink-0"
+            className="p-1.5 rounded-full bg-[#E5D3BD]/60 hover:bg-[#D4BC9F] text-[#5C4837] hover:text-[#1D1611] transition-colors border border-[#D4BC9F] cursor-pointer flex-shrink-0"
             aria-label="Close Video"
           >
             <X className="w-4 h-4" />
@@ -118,13 +118,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({
         </div>
 
         {/* Compact Cinema Bottom Bar with Video Switcher */}
-        <div className="px-4 py-2.5 sm:px-5 bg-navy-950 border-t border-navy-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300">
+        <div className="px-4 py-2.5 sm:px-5 bg-[#FAF3E7] border-t-2 border-[#E5D3BD] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#5C4837]">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-300 text-[10px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               Full HD
             </span>
-            <span className="text-slate-400 hidden sm:inline">RVS University Smart Campus Tour</span>
+            <span className="text-[#7A695A] hidden sm:inline">RVS University Smart Campus Tour</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -133,8 +133,8 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               onClick={() => setCurrentVideo('/videos/prospectus.mp4')}
               className={`px-2.5 py-1 rounded text-[10px] font-semibold transition-all cursor-pointer ${
                 currentVideo === '/videos/prospectus.mp4'
-                  ? 'bg-gold-500 text-navy-950 font-bold'
-                  : 'bg-navy-800 text-slate-300 hover:bg-navy-700'
+                  ? 'bg-[#C6832B] text-white font-bold shadow-sm'
+                  : 'bg-[#FFFDF9] text-[#5C4837] hover:bg-[#F5ECE0] border border-[#D4BC9F]'
               }`}
             >
               Prospectus Video
@@ -143,8 +143,8 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               onClick={() => setCurrentVideo('/videos/videobanner.mp4')}
               className={`px-2.5 py-1 rounded text-[10px] font-semibold transition-all cursor-pointer ${
                 currentVideo === '/videos/videobanner.mp4'
-                  ? 'bg-gold-500 text-navy-950 font-bold'
-                  : 'bg-navy-800 text-slate-300 hover:bg-navy-700'
+                  ? 'bg-[#C6832B] text-white font-bold shadow-sm'
+                  : 'bg-[#FFFDF9] text-[#5C4837] hover:bg-[#F5ECE0] border border-[#D4BC9F]'
               }`}
             >
               Campus Tour
@@ -153,7 +153,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
             <a
               href="#admissions"
               onClick={onClose}
-              className="px-3 py-1 rounded-full bg-gradient-to-r from-gold-500 to-amber-500 hover:from-gold-400 hover:to-amber-400 text-navy-950 font-bold text-[10px] uppercase tracking-wider transition-all ml-1"
+              className="px-3 py-1 rounded-full bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-[10px] uppercase tracking-wider transition-all ml-1"
             >
               Apply →
             </a>

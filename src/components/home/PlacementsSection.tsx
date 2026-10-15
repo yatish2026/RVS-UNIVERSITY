@@ -41,20 +41,14 @@ export const PlacementsSection: React.FC = () => {
   return (
     <section 
       id="placements" 
-      className="relative py-20 lg:py-28 bg-gradient-to-b from-[#050D1A] via-[#08162B] to-[#040A14] text-white border-y border-gold-500/20 overflow-hidden scroll-mt-20"
+      className="relative py-20 lg:py-28 bg-white text-[#1D1611] border-b border-[#E8DED3] overflow-hidden scroll-mt-20"
     >
       {/* Anchor for direct navbar jumping */}
       <div id="placement-highlights" className="absolute -top-24 left-0 w-1 h-1 pointer-events-none" />
 
-      {/* Ambient Lighting Orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Grid Pattern Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-        style={{ backgroundImage: 'radial-gradient(#D4AF37 1px, transparent 1px)', backgroundSize: '36px 36px' }}
-      />
+      {/* Subtle Ambient Lighting Orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C6832B]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#D4BC9F]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container-custom px-4 md:px-8 relative z-10">
         
@@ -62,43 +56,45 @@ export const PlacementsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-14">
           <div className="lg:col-span-7 space-y-4">
             <Reveal direction="left" delay={100}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/15 border border-gold-400/30 text-gold-300 text-xs font-bold uppercase tracking-[0.2em] shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/10 border border-[#C6832B]/30 text-[#8B4513] text-xs font-bold uppercase tracking-[0.2em] shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-[#C6832B]" />
                 <span>CORPORATE CAREERS & EXCELLENCE</span>
               </div>
             </Reveal>
 
             <Reveal direction="left" delay={150}>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
-                Where Industry Titans Hire <br />
-                <span className="gold-gradient-text">Next-Gen Talent.</span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1D1611] leading-tight">
+                Where <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B57321] via-[#D4973F] to-[#C6832B]">Industry Titans</span> Hire <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B57321] via-[#D4973F] to-[#C6832B]">
+                  Next-Gen Talent.
+                </span>
               </h2>
             </Reveal>
 
             <Reveal direction="left" delay={200}>
-              <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
                 Empowering graduates through cutting-edge industry training, real-world internships, and exceptional placement drives across Fortune 500 multinationals.
               </p>
             </Reveal>
           </div>
 
-          {/* Glowing Metrics Glass Cards */}
+          {/* Glowing Metrics Cards */}
           <div className="lg:col-span-5">
             <Reveal direction="right" delay={200}>
-              <div className="grid grid-cols-3 gap-3.5 p-4 rounded-3xl bg-white/[0.04] border border-gold-400/25 backdrop-blur-xl shadow-2xl">
-                <div className="text-center p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <div className="text-xl sm:text-2xl font-serif font-black gold-gradient-text">₹28 LPA</div>
-                  <div className="text-[10px] sm:text-xs text-slate-400 font-bold mt-0.5">Highest CTC</div>
+              <div className="grid grid-cols-3 gap-3.5 p-4 rounded-3xl bg-white border border-[#E8DED3] shadow-lg">
+                <div className="text-center p-3 rounded-2xl bg-[#FAF7F2] border border-[#E8DED3]">
+                  <div className="text-xl sm:text-2xl font-serif font-black text-[#C6832B]">₹28 LPA</div>
+                  <div className="text-[10px] sm:text-xs text-[#6E5D4F] font-bold mt-0.5">Highest CTC</div>
                 </div>
 
-                <div className="text-center p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <div className="text-xl sm:text-2xl font-serif font-black text-white">95%+</div>
-                  <div className="text-[10px] sm:text-xs text-slate-400 font-bold mt-0.5">Placement Track</div>
+                <div className="text-center p-3 rounded-2xl bg-[#FAF7F2] border border-[#E8DED3]">
+                  <div className="text-xl sm:text-2xl font-serif font-black text-[#1D1611]">95%+</div>
+                  <div className="text-[10px] sm:text-xs text-[#6E5D4F] font-bold mt-0.5">Placement Track</div>
                 </div>
 
-                <div className="text-center p-3 rounded-2xl bg-white/[0.03] border border-white/5">
-                  <div className="text-xl sm:text-2xl font-serif font-black text-white">250+</div>
-                  <div className="text-[10px] sm:text-xs text-slate-400 font-bold mt-0.5">Recruiters</div>
+                <div className="text-center p-3 rounded-2xl bg-[#FAF7F2] border border-[#E8DED3]">
+                  <div className="text-xl sm:text-2xl font-serif font-black text-[#1D1611]">250+</div>
+                  <div className="text-[10px] sm:text-xs text-[#6E5D4F] font-bold mt-0.5">Recruiters</div>
                 </div>
               </div>
             </Reveal>
@@ -108,24 +104,27 @@ export const PlacementsSection: React.FC = () => {
         {/* ========================================================================= */}
         {/* PANORAMIC DEPARTMENT BATCH ACHIEVERS SPOTLIGHT */}
         {/* ========================================================================= */}
-        <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-transparent border border-gold-400/30 backdrop-blur-xl">
+        <div className="mb-16 p-6 sm:p-8 rounded-3xl bg-white border border-[#E8DED3] shadow-xl">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
-                <Award className="w-3.5 h-3.5 text-gold-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6832B]/10 text-[#8B4513] text-xs font-bold uppercase tracking-wider mb-2 border border-[#C6832B]/30">
+                <Award className="w-3.5 h-3.5 text-[#C6832B]" />
                 <span>Department-Wise Achievers Spotlight</span>
               </div>
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-                Team of Achievers — Academic Year 2025–2026
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1D1611]">
+                Team of Achievers —{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B57321] via-[#D4973F] to-[#C6832B]">
+                  Academic Year 2025–2026
+                </span>
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl font-light">
+              <p className="text-xs sm:text-sm text-[#5C4837] mt-1 max-w-3xl font-normal">
                 Comprehensive department-wise cohort celebrations across Engineering, Computer Applications (MCA), and Management Studies (MBA).
               </p>
             </div>
 
             <button
               onClick={() => setIsCollageModalOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-xs shadow-gold-glow transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs shadow-md transition-all cursor-pointer"
             >
               <Eye className="w-4 h-4" />
               <span>Expand Full Resolution Photo</span>
@@ -134,16 +133,16 @@ export const PlacementsSection: React.FC = () => {
 
           <div 
             onClick={() => setIsCollageModalOpen(true)}
-            className="rounded-2xl overflow-hidden border border-white/20 relative group cursor-pointer shadow-2xl"
+            className="rounded-2xl overflow-hidden border border-[#E8DED3] relative group cursor-pointer shadow-xl"
           >
             <img
               src={deptAchieversCollage}
               alt="Department wise placement achievers 2025-2026"
               className="w-full h-auto max-h-[520px] object-cover object-center group-hover:scale-[1.01] transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-navy-950/30 group-hover:bg-navy-950/10 transition-colors flex items-center justify-center">
-              <div className="px-5 py-2.5 rounded-full bg-black/75 text-gold-300 border border-gold-400/40 text-xs font-bold backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity shadow-xl flex items-center gap-2">
-                <Eye className="w-4 h-4" />
+            <div className="absolute inset-0 bg-[#1D1611]/30 group-hover:bg-[#1D1611]/10 transition-colors flex items-center justify-center">
+              <div className="px-5 py-2.5 rounded-full bg-black/80 text-white border border-[#D4BC9F]/40 text-xs font-bold backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity shadow-xl flex items-center gap-2">
+                <Eye className="w-4 h-4 text-[#D4973F]" />
                 <span>Click to inspect full panoramic view</span>
               </div>
             </div>
@@ -155,34 +154,37 @@ export const PlacementsSection: React.FC = () => {
         {/* ========================================================================= */}
         <div className="space-y-4 mb-16">
           <div className="text-center mb-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gold-400/90 font-sans">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B5E34] font-sans">
               250+ Global Recruiting Partners
             </span>
-            <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
-              Top Corporate Recruiters & Technology Leaders
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1D1611] mt-1">
+              Top Corporate Recruiters &{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B57321] via-[#D4973F] to-[#C6832B]">
+                Technology Leaders
+              </span>
             </h3>
           </div>
 
           {/* Row 1: Moving Left (Continuous Smooth Loop) */}
           <div className="relative w-full overflow-hidden py-1">
-            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#050D1A] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#050D1A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             
             <div className="animate-marquee-left flex gap-4">
               {[...row1Companies, ...row1Companies, ...row1Companies].map((company, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-3.5 px-6 py-4 rounded-2xl bg-white/[0.05] border border-white/10 hover:border-gold-400 hover:bg-gold-500/15 backdrop-blur-md shadow-lg group transition-all duration-300 flex-shrink-0 cursor-pointer"
+                  className="flex items-center gap-3.5 px-6 py-4 rounded-2xl bg-white border border-[#E8DED3] hover:border-[#C6832B] hover:shadow-lg backdrop-blur-md shadow-sm group transition-all duration-300 flex-shrink-0 cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center group-hover:bg-gold-500 group-hover:text-navy-950 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#FAF3E7] text-[#9C6019] flex items-center justify-center group-hover:bg-[#C6832B] group-hover:text-white transition-colors">
                     <Building2 className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-serif font-extrabold text-sm md:text-base tracking-wide text-white group-hover:text-gold-300 transition-colors block">
+                    <span className="font-serif font-extrabold text-sm md:text-base tracking-wide text-[#1D1611] group-hover:text-[#9C6019] transition-colors block">
                       {company.name}
                     </span>
-                    <span className="text-[11px] font-bold text-gold-400/90 font-mono">
-                      {company.package} &bull; <span className="text-slate-400 font-normal">{company.tier}</span>
+                    <span className="text-[11px] font-bold text-[#C6832B] font-mono">
+                      {company.package} &bull; <span className="text-[#7A695A] font-normal">{company.tier}</span>
                     </span>
                   </div>
                 </div>
@@ -192,24 +194,24 @@ export const PlacementsSection: React.FC = () => {
 
           {/* Row 2: Moving Right (Continuous Smooth Loop) */}
           <div className="relative w-full overflow-hidden py-1">
-            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#050D1A] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#050D1A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             
             <div className="animate-marquee-right flex gap-4">
               {[...row2Companies, ...row2Companies, ...row2Companies].map((company, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-3.5 px-6 py-4 rounded-2xl bg-white/[0.05] border border-white/10 hover:border-gold-400 hover:bg-gold-500/15 backdrop-blur-md shadow-lg group transition-all duration-300 flex-shrink-0 cursor-pointer"
+                  className="flex items-center gap-3.5 px-6 py-4 rounded-2xl bg-white border border-[#E8DED3] hover:border-[#C6832B] hover:shadow-lg backdrop-blur-md shadow-sm group transition-all duration-300 flex-shrink-0 cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center group-hover:bg-gold-500 group-hover:text-navy-950 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#FAF3E7] text-[#9C6019] flex items-center justify-center group-hover:bg-[#C6832B] group-hover:text-white transition-colors">
                     <Award className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="font-serif font-extrabold text-sm md:text-base tracking-wide text-white group-hover:text-gold-300 transition-colors block">
+                    <span className="font-serif font-extrabold text-sm md:text-base tracking-wide text-[#1D1611] group-hover:text-[#9C6019] transition-colors block">
                       {company.name}
                     </span>
-                    <span className="text-[11px] font-bold text-gold-400/90 font-mono">
-                      {company.package} &bull; <span className="text-slate-400 font-normal">{company.tier}</span>
+                    <span className="text-[11px] font-bold text-[#C6832B] font-mono">
+                      {company.package} &bull; <span className="text-[#7A695A] font-normal">{company.tier}</span>
                     </span>
                   </div>
                 </div>
@@ -221,50 +223,49 @@ export const PlacementsSection: React.FC = () => {
         {/* Bottom Placement Pillars & CTA */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Reveal direction="up" delay={100}>
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-gold-400/40 backdrop-blur-md transition-all space-y-2.5">
-              <div className="flex items-center gap-2.5 text-white font-bold text-sm">
-                <CheckCircle2 className="w-4 h-4 text-gold-400" />
+            <div className="p-6 rounded-2xl bg-white border border-[#E8DED3] hover:border-[#C6832B] transition-all space-y-2.5 shadow-sm hover:shadow-md">
+              <div className="flex items-center gap-2.5 text-[#1D1611] font-bold text-sm">
+                <CheckCircle2 className="w-4 h-4 text-[#C6832B]" />
                 <span>Industry Capstone Internships</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
+              <p className="text-xs text-[#5C4837] leading-relaxed font-normal">
                 Mandatory 6-month capstones with Fortune 500 companies allowing students to convert internships into full-time pre-placement offers (PPOs).
               </p>
             </div>
           </Reveal>
 
           <Reveal direction="up" delay={200}>
-            <div className="p-6 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-gold-400/40 backdrop-blur-md transition-all space-y-2.5">
-              <div className="flex items-center gap-2.5 text-white font-bold text-sm">
-                <CheckCircle2 className="w-4 h-4 text-gold-400" />
+            <div className="p-6 rounded-2xl bg-white border border-[#E8DED3] hover:border-[#C6832B] transition-all space-y-2.5 shadow-sm hover:shadow-md">
+              <div className="flex items-center gap-2.5 text-[#1D1611] font-bold text-sm">
+                <CheckCircle2 className="w-4 h-4 text-[#C6832B]" />
                 <span>Full-Stack & AI Training Labs</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
+              <p className="text-xs text-[#5C4837] leading-relaxed font-normal">
                 Continuous bootcamps in Data Structures, Cloud Architecture, Generative AI, and soft-skills training from the 2nd year onwards.
               </p>
             </div>
           </Reveal>
 
           <Reveal direction="up" delay={300}>
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-gold-500/15 via-white/[0.04] to-transparent border border-gold-400/40 backdrop-blur-md flex flex-col justify-between">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FAF3E7] via-white to-[#F5ECE0] border border-[#D4BC9F] flex flex-col justify-between shadow-sm hover:shadow-md">
               <div>
-                <div className="flex items-center gap-2 text-gold-300 font-bold text-sm mb-1.5">
-                  <Sparkles className="w-4 h-4 text-gold-400" />
+                <div className="flex items-center gap-2 text-[#9C6019] font-bold text-sm mb-1.5">
+                  <Sparkles className="w-4 h-4 text-[#C6832B]" />
                   <span>Admissions 2026–27 Open</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed font-light">
+                <p className="text-xs text-[#5C4837] leading-relaxed font-normal">
                   Secure your seat at RVS University and unlock world-class career placements across Fortune 500 tech leaders.
                 </p>
               </div>
 
               <div className="pt-4">
-                <Button
-                  variant="gold"
-                  size="sm"
+                <a
                   href="#admissions"
-                  icon={<ArrowRight className="w-4 h-4" />}
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-xs font-bold shadow-md transition-all cursor-pointer"
                 >
-                  Apply for 2026 Admissions
-                </Button>
+                  <span>Apply for 2026 Admissions</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </Reveal>

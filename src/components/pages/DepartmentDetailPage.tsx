@@ -105,42 +105,42 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950">
       
       {/* 1. Top Department Header Banner */}
-      <div className="relative bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-12 overflow-hidden border-b border-gold-500/20 shadow-xl">
+      <div className="relative bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-12 overflow-hidden border-b-2 border-[#E5D3BD] shadow-sm">
         <div className="container-custom relative z-10 px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             
             <div className="space-y-3 max-w-3xl">
               {/* Breadcrumb Strip: Home > School > Department */}
-              <div className="flex items-center gap-2 text-xs font-semibold text-gold-300/90 flex-wrap">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#6E5D4F] flex-wrap">
                 <button 
                   onClick={onBackToHome} 
-                  className="hover:text-gold-200 hover:underline flex items-center gap-1 cursor-pointer"
+                  className="hover:text-[#9C6019] hover:underline flex items-center gap-1 cursor-pointer font-bold"
                 >
                   Home
                 </button>
-                <span className="text-slate-400">&gt;</span>
+                <span className="text-[#AD9A88]">&gt;</span>
                 <button 
                   onClick={handleReturnBack} 
-                  className="hover:text-gold-200 hover:underline text-slate-300 cursor-pointer text-left font-medium"
+                  className="hover:text-[#9C6019] hover:underline text-[#6E5D4F] cursor-pointer text-left font-semibold"
                 >
                   {deptData.schoolName}
                 </button>
-                <span className="text-slate-400">&gt;</span>
-                <span className="text-gold-400 font-bold">{deptData.name || deptData.shortName}</span>
+                <span className="text-[#AD9A88]">&gt;</span>
+                <span className="text-[#9C6019] font-bold">{deptData.name || deptData.shortName}</span>
               </div>
 
               {/* Department Title */}
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611] leading-tight">
                 {deptData.name}
               </h1>
 
               {/* NBA Accreditation Tag */}
               <div className="flex flex-wrap items-center gap-3 pt-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-500/40 text-xs font-bold uppercase tracking-wider">
-                  <Award className="w-3.5 h-3.5 text-gold-400" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40 text-xs font-bold uppercase tracking-wider">
+                  <Award className="w-3.5 h-3.5 text-[#9C6019]" />
                   <span>{deptData.profile.nbaAccreditation}</span>
                 </span>
                 <span className="text-xs text-slate-300 font-medium">
@@ -606,7 +606,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-serif text-xl sm:text-2xl font-bold text-navy-950">
-                        {activeFacultyTab === 'btech' ? 'B.Tech Faculty Members' : activeFacultyTab === 'diploma' ? 'Diploma (DCE) Faculty Members' : 'M.Tech Structural Engineering Faculty'}
+                        {activeFacultyTab === 'btech' ? `${deptData.shortName} B.Tech Faculty Members` : activeFacultyTab === 'diploma' ? `${deptData.shortName} Diploma Faculty Members` : `${deptData.shortName} M.Tech / PG Faculty Members`}
                       </h3>
                       <p className="text-xs text-slate-500">Qualified professors, associate professors, and research guides.</p>
                     </div>
@@ -621,7 +621,6 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                           <th className="py-3.5 px-6">Designation</th>
                           <th className="py-3.5 px-6 text-center">Qualification</th>
                           <th className="py-3.5 px-6 text-center">Experience (Years)</th>
-                          <th className="py-3.5 px-6">Specialization / Domain</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 text-xs md:text-sm text-slate-700">
@@ -637,7 +636,6 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                             <td className="py-3 px-6 text-slate-700 font-medium">{f.designation}</td>
                             <td className="py-3 px-6 text-center font-mono font-bold text-gold-800">{f.qualification}</td>
                             <td className="py-3 px-6 text-center font-bold text-navy-950">{f.experience} Yrs</td>
-                            <td className="py-3 px-6 text-slate-600 text-xs">{f.specialization || 'Civil Engineering'}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -889,9 +887,6 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                     <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-navy-950 mt-1">
                       Syllabus & Academic Regulations
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
-                      Download full official syllabus books and curriculum schemes for all autonomous regulations (R23, R20, R17, M.Tech) for {deptData.name}. All files are complete, unabridged official PDF documents.
-                    </p>
                   </div>
 
                   {/* Quick Search */}
@@ -1014,80 +1009,75 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                               {doc.title}
                             </h4>
 
-                            {/* Description */}
-                            {doc.description && (
-                              <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-3">
-                                {doc.description}
-                              </p>
-                            )}
-
                             {/* Metadata Pills */}
                             <div className="flex items-center gap-3 text-xs text-slate-600 font-medium pt-1">
                               <span className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-700 font-semibold">
                                 {doc.level}
                               </span>
                               <span>&bull;</span>
-                              <span className="inline-flex items-center gap-1 font-mono font-bold text-slate-700">
-                                <FileText className="w-3.5 h-3.5 text-rose-600" />
-                                PDF Document ({doc.size})
-                              </span>
+                              {doc.isComingSoon || doc.fileUrl === '#' || !doc.fileUrl ? (
+                                <span className="inline-flex items-center gap-1 font-bold text-amber-700">
+                                  <Clock className="w-3.5 h-3.5 text-amber-600" />
+                                  Link will update soon
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 font-mono font-bold text-slate-700">
+                                  <FileText className="w-3.5 h-3.5 text-rose-600" />
+                                  PDF Document ({doc.size})
+                                </span>
+                              )}
                             </div>
                           </div>
 
                           {/* Action Buttons */}
                           <div className="pt-6 mt-5 border-t border-slate-100 space-y-2.5">
-                            <div className="flex items-center gap-3">
-                              {/* Primary Download Button */}
-                              <a
-                                href={encodeURI(doc.fileUrl)}
-                                download={doc.downloadFileName || `${doc.title}.pdf`}
-                                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-extrabold text-xs shadow-md hover:shadow-lg transition-all"
-                              >
-                                <Download className="w-4 h-4" />
-                                <span>Download Full PDF ({doc.size})</span>
-                              </a>
+                            {doc.isComingSoon || doc.fileUrl === '#' || !doc.fileUrl ? (
+                              <div className="flex items-center gap-3">
+                                <div className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-100 text-slate-500 font-bold text-xs border border-slate-200 cursor-not-allowed select-none">
+                                  <Clock className="w-4 h-4 text-amber-500" />
+                                  <span>Link Will Update Soon</span>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-3">
+                                {/* Primary Download Button */}
+                                <a
+                                  href={encodeURI(doc.fileUrl)}
+                                  download={doc.downloadFileName || `${doc.title}.pdf`}
+                                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-extrabold text-xs shadow-md hover:shadow-lg transition-all"
+                                >
+                                  <Download className="w-4 h-4" />
+                                  <span>Download Full PDF ({doc.size})</span>
+                                </a>
 
-                              {/* Preview in In-page Modal */}
-                              <button
-                                onClick={() => setPreviewPdfDoc(doc)}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl bg-navy-950 hover:bg-navy-900 text-gold-300 font-bold text-xs shadow-sm hover:shadow-md transition-all"
-                                title="Preview PDF in browser modal"
-                              >
-                                <Eye className="w-4 h-4" />
-                                <span className="hidden sm:inline">Preview</span>
-                              </button>
+                                {/* Preview in In-page Modal */}
+                                <button
+                                  onClick={() => setPreviewPdfDoc(doc)}
+                                  className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl bg-navy-950 hover:bg-navy-900 text-gold-300 font-bold text-xs shadow-sm hover:shadow-md transition-all"
+                                  title="Preview PDF in browser modal"
+                                >
+                                  <Eye className="w-4 h-4" />
+                                  <span className="hidden sm:inline">Preview</span>
+                                </button>
 
-                              {/* Open in New Tab */}
-                              <a
-                                href={encodeURI(doc.fileUrl)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-navy-950 font-bold text-xs transition-all border border-slate-200"
-                                title="Open PDF in new tab"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
-                            </div>
+                                {/* Open in New Tab */}
+                                <a
+                                  href={encodeURI(doc.fileUrl)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-navy-950 font-bold text-xs transition-all border border-slate-200"
+                                  title="Open PDF in new tab"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                </a>
+                              </div>
+                            )}
                           </div>
                         </div>
                       ))}
                     </div>
                   );
                 })()}
-
-                {/* 4. Academic Council & BOS Notice Box */}
-                <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 space-y-3 text-xs text-slate-600">
-                  <div className="flex items-center gap-2 font-bold text-navy-950 text-sm">
-                    <ShieldCheck className="w-4 h-4 text-gold-600" />
-                    <span>Academic Regulation & Syllabus Guidelines</span>
-                  </div>
-                  <p className="leading-relaxed">
-                    All syllabus PDF documents published on this portal represent the authorized complete curriculum approved by the Department Board of Studies (BOS) and Academic Council of RVS University. Syllabi comply with AICTE model curriculum, NBA Tier-I outcome-based education (OBE) criteria, and NEP 2020 multi-disciplinary guidelines.
-                  </p>
-                  <p className="text-slate-500 italic">
-                    For verification of previous batch archives or hardcopy transcripts, contact the Controller of Examinations (COE) or the HOD Office.
-                  </p>
-                </div>
 
               </div>
             )}
@@ -1376,17 +1366,17 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
             {activeTab === 'student-corner' && (
               <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/90 shadow-xl space-y-8">
                 {/* Visual Showcase Banner */}
-                <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white border border-gold-400/30 shadow-lg">
+                <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] border-2 border-[#E5D3BD] shadow-sm">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
                     <div className="lg:col-span-7 space-y-3">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40 text-xs font-bold uppercase tracking-wider">
-                        <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40 text-xs font-bold uppercase tracking-wider">
+                        <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
                         <span>Student Development & Innovation</span>
                       </div>
-                      <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
+                      <h3 className="font-serif text-2xl sm:text-3xl font-black text-[#1D1611]">
                         Vibrant Student Life & Practical Labs
                       </h3>
-                      <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                      <p className="text-[#5C4837] text-xs sm:text-sm font-normal leading-relaxed">
                         Department students participate in specialized technical clubs, national symposiums, hackathons, and industry capstone internships. From hands-on workshop fabrications to graduation ceremonies, our students lead with excellence.
                       </p>
                     </div>

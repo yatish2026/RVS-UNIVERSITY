@@ -74,28 +74,28 @@ export const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({
   const currentTabInfo = tabContentMap[activeTab] || tabContentMap.overview;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950">
       {/* Top Hero Banner */}
-      <div className="relative bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b border-gold-500/20 shadow-xl">
+      <div className="relative bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b-2 border-[#E5D3BD] shadow-sm">
         <div className="container-custom relative z-10 px-4 md:px-8">
           <div className="max-w-4xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/40 text-[#8B4513] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
               <span>Directorate of Research & Development</span>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611] leading-tight">
               Directorate of Research
             </h1>
 
-            <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed">
+            <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed">
               Fostering innovation, interdisciplinary discovery, sponsored research initiatives, and doctoral scholarly excellence across RVS University.
             </p>
 
             <div className="pt-2">
               <button
                 onClick={onBackToHome}
-                className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 hover:text-gold-300 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#9C6019] hover:text-[#7E4B11] transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Return to Homepage</span>

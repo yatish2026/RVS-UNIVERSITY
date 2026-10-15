@@ -81,31 +81,31 @@ export const ExamPortalPage: React.FC<ExamPortalPageProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-navy-950">
+    <div className="min-h-screen bg-[#FAF6F0] text-navy-950">
       {/* Top Hero Banner with Examination Cell Visual */}
-      <div className="relative bg-gradient-to-br from-[#0A192F] via-[#102444] to-[#0A192F] text-white pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b border-gold-500/20 shadow-xl">
+      <div className="relative bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] pt-28 md:pt-32 pb-12 md:pb-16 overflow-hidden border-b-2 border-[#E5D3BD] shadow-sm">
         <div className="container-custom relative z-10 px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left: Info & Badges */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
-                <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/40 text-[#8B4513] text-xs font-bold uppercase tracking-wider">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#9C6019]" />
                 <span>Controller of Examinations (Autonomous)</span>
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-white leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-[#1D1611] leading-tight">
                 RVS University Examination Portal
               </h1>
 
-              <p className="text-sm md:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
                 Access online semester results, downloadable marks memos, official exam schedules, revaluation circulars, and autonomous evaluation rules.
               </p>
 
               <div className="pt-2">
                 <button
                   onClick={onBackToHome}
-                  className="inline-flex items-center gap-2 text-xs font-bold text-gold-400 hover:text-gold-300 transition-colors"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#9C6019] hover:text-[#7E4B11] transition-colors cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Return to Homepage</span>
@@ -115,14 +115,14 @@ export const ExamPortalPage: React.FC<ExamPortalPageProps> = ({
 
             {/* Right: Visual Image Card */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-gold-400/40 group bg-navy-950">
-                <div className="h-56 sm:h-64 md:h-72 w-full overflow-hidden bg-navy-950">
+              <div className="relative rounded-3xl overflow-hidden shadow-md border-2 border-[#D4BC9F] group bg-[#FFFDF9]">
+                <div className="h-56 sm:h-64 md:h-72 w-full overflow-hidden bg-[#FAF3E7]">
                   <img
                     src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80"
                     alt="University Evaluation & Examination Center"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF9]/60 via-transparent to-transparent" />
                 </div>
                 <div className="absolute bottom-3 left-4 right-4 text-xs font-bold text-white flex items-center justify-between">
                   <span className="text-gold-300 uppercase tracking-wider text-[11px] font-sans">

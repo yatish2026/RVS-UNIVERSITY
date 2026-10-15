@@ -87,7 +87,7 @@ export const INTERNATIONAL_RELATIONS_DATA: InternationalRelationsData = {
       { value: '11+', label: 'Global Partner MoUs', sub: 'USA, Germany, Malaysia, Ethiopia, Bhutan' },
       { value: '100%', label: 'Dedicated Visa & IR Support', sub: 'FRRO & on-campus international housing' },
     ],
-    aboutCampus: 'The goal of RVS University’s establishment was to offer top-notch higher education that matched or exceeded global standards. It continuously looks for and implements cutting-edge techniques to raise the standard of higher education. With students from all around the world, the campus boasts a multicultural vibe. Professors with expertise and experience are highly encouraged to develop the students. The incredibly driven youth on campus are a continuous source of admiration. RVS University’s unwavering quest of excellence is motivated by the global standards it has set in the fields of learning.\n\nRVS University (Autonomous Campus), Chittoor, offers Thirteen (13) UG and Eight (8) PG programs in Engineering and Technology, MBA and MCA. The institution is ranked with 198 Among Top Engineering Colleges by NIRF 2022, MHRD, Govt. of India. RVS University is also NBA Accredited under Tier-I for five years up to 27.02.2028 and Accredited by NAAC with A+ Grade Accredited Institution.',
+    aboutCampus: 'The goal of RVS University’s establishment was to offer top-notch higher education that matched or exceeded global standards. It continuously looks for and implements cutting-edge techniques to raise the standard of higher education. With students from all around the world, the campus boasts a multicultural vibe. Professors with expertise and experience are highly encouraged to develop the students. The incredibly driven youth on campus are a continuous source of admiration. RVS University’s unwavering quest of excellence is motivated by the global standards it has set in the fields of learning.\n\nRVS University (Autonomous Campus), Chittoor, offers Thirteen (13) UG and Eight (8) PG programs in Engineering and Technology, MBA and MCA. The institution is ranked with 198 Among Top Engineering Colleges by NIRF 2022, MHRD, Govt. of India. RVS University is also NBA Accredited under Tier-I for five years up to 27.02.2028 and Autonomous Institution approved by AICTE.',
   },
   admissions: {
     howToApply: 'The RVS University Admissions branch oversees the whole application process for International Students. All of the information required to enroll in any of the University’s many programs is available on this page, along with details on important procedures.',
@@ -97,11 +97,11 @@ export const INTERNATIONAL_RELATIONS_DATA: InternationalRelationsData = {
     scholarshipInfo: 'RVS University takes great satisfaction in its ability to offer an education that is highly sought after both domestically and internationally. The growing number of international students attending RVS University to pursue higher education is evidence of this. Additionally, worthy applicants are given access to appealing merit and international cooperation scholarships.',
     ugLinks: [
       { label: 'UG Online Application Form', url: '#international-admission-apply', type: 'online' },
-      { label: 'Download UG Application Form (PDF)', url: '/syllabus/ug-international-application.pdf', type: 'download' },
+      { label: 'Apply for UG International Admission', url: '#admissions-modal', type: 'online' },
     ],
     pgLinks: [
       { label: 'PG Online Application Form', url: '#international-admission-apply', type: 'online' },
-      { label: 'Download PG Application Form (PDF)', url: '/syllabus/pg-international-application.pdf', type: 'download' },
+      { label: 'Apply for PG International Admission', url: '#admissions-modal', type: 'online' },
     ],
   },
   btechEligibility: {

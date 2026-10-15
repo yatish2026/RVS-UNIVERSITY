@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, ArrowRight, GraduationCap } from 'lucide-react';
 import noticeBanner1 from '../../assets/admission-announcement-banner.png';
 import noticeBanner2 from '../../assets/admissions-programmes-overview.jpg';
-import rvsLogo from '../../assets/logo.png';
+import rvsLogo from '../../assets/rvs-official-logo.png';
 
 interface WelcomePreloaderProps {
   onComplete?: () => void;
@@ -125,6 +125,18 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
     setIsNoticeClosing(false);
   };
 
+  // Listen for custom trigger to reopen notices from moving ticker/banner
+  useEffect(() => {
+    const handleCustomOpen = (e: Event) => {
+      const customEvent = e as CustomEvent<{ index?: number }>;
+      handleReopenNotices(customEvent.detail?.index ?? 0);
+    };
+    window.addEventListener('open-admission-notices', handleCustomOpen);
+    return () => {
+      window.removeEventListener('open-admission-notices', handleCustomOpen);
+    };
+  }, []);
+
   const currentNotice = NOTICES[currentIndex];
 
   return (
@@ -134,26 +146,26 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
       {/* ========================================================================= */}
       {phase === 'splash' && (
         <div
-          className={`fixed inset-0 z-[200] flex flex-col items-center justify-center p-4 bg-[#080E18] text-white transition-opacity duration-500 select-none ${
+          className={`fixed inset-0 z-[200] flex flex-col items-center justify-center p-4 bg-gradient-to-br from-[#FAF3E7] via-[#FFFDF9] to-[#F5ECE0] text-[#1D1611] transition-opacity duration-500 select-none ${
             splashFading ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
           }`}
         >
           {/* Subtle Geometric Matrix / Dot Pattern */}
           <div 
-            className="absolute inset-0 opacity-15 pointer-events-none"
+            className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(#D4AF37 1px, transparent 1px)',
+              backgroundImage: 'radial-gradient(#C6832B 1px, transparent 1px)',
               backgroundSize: '28px 28px'
             }}
           />
 
-          {/* Subtle Ambient Golden Center Glow */}
-          <div className="absolute w-[450px] h-[450px] bg-[#D4AF37]/10 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+          {/* Subtle Ambient Center Glow */}
+          <div className="absolute w-[450px] h-[450px] bg-[#C6832B]/10 rounded-full blur-[100px] pointer-events-none animate-pulse" />
 
           {/* Top Skip Button */}
           <button
             onClick={finishSplash}
-            className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-white/5 hover:bg-[#D4AF37] hover:text-navy-950 text-[#D4AF37] text-xs font-bold border border-[#D4AF37]/30 backdrop-blur-md transition-all cursor-pointer shadow-md"
+            className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-[#FAF3E7] hover:bg-[#C6832B] hover:text-white text-[#9C6019] text-xs font-bold border border-[#D4BC9F] backdrop-blur-md transition-all cursor-pointer shadow-sm"
           >
             Skip Intro →
           </button>
@@ -163,14 +175,14 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
             
             {/* Top Logo: Animated Drop from Top down into place */}
             <div className="relative animate-logo-drop flex items-center justify-center">
-              {/* Outer Dashed / Dotted Golden Orbit Ring */}
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border border-dashed border-[#D4AF37]/60 p-2 flex items-center justify-center shadow-[0_0_50px_rgba(212,175,55,0.35)] animate-spin-slow" style={{ animationDuration: '25s' }}>
+              {/* Outer Dashed / Dotted Orbit Ring */}
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border border-dashed border-[#C6832B]/60 p-2 flex items-center justify-center shadow-[0_0_40px_rgba(198,131,43,0.25)] animate-spin-slow" style={{ animationDuration: '25s' }}>
                 {/* Inner Solid White Circular Badge with Emblem */}
-                <div className="w-full h-full rounded-full bg-white p-2.5 sm:p-3 shadow-xl flex items-center justify-center">
+                <div className="w-full h-full rounded-full bg-white p-1.5 sm:p-2 shadow-md flex items-center justify-center overflow-hidden border border-[#D4BC9F]">
                   <img
                     src={rvsLogo}
                     alt="RVS University Emblem"
-                    className="w-full h-full object-contain filter drop-shadow-sm"
+                    className="w-full h-full object-contain rounded-full block"
                   />
                 </div>
               </div>
@@ -178,42 +190,44 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
 
             {/* Pill Tag: ✧ WELCOME TO ✧ */}
             <div className="animate-text-reveal-1 pt-1">
-              <div className="inline-flex items-center gap-2 px-5 py-1 rounded-full border border-[#D4AF37]/40 bg-[#0A192F]/80 text-[#D4AF37] text-xs font-bold uppercase tracking-[0.25em] shadow-sm backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-5 py-1 rounded-full border border-[#D4BC9F] bg-[#FFFDF9] text-[#9C6019] text-xs font-bold uppercase tracking-[0.25em] shadow-sm">
                 <span className="text-[10px]">✧</span>
                 <span>WELCOME TO</span>
                 <span className="text-[10px]">✧</span>
               </div>
             </div>
 
-            {/* University Name: RVS in White, UNIVERSITY in Gold */}
+            {/* University Name: RVS in Brand Colors, UNIVERSITY in Sand Ochre */}
             <div className="space-y-3 animate-text-reveal-2">
               <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none">
-                <span className="text-white">RVS </span>
-                <span className="text-[#D4AF37]">UNIVERSITY</span>
+                <span className="text-[#D81E5B]">R</span>
+                <span className="text-[#8B1E8B]">V</span>
+                <span className="text-[#00875A]">S </span>
+                <span className="text-[#C6832B]">UNIVERSITY</span>
               </h1>
 
               {/* Sub-location & Estd */}
-              <p className="text-[11px] sm:text-xs md:text-sm text-slate-300 font-sans tracking-[0.2em] uppercase font-medium">
+              <p className="text-[11px] sm:text-xs md:text-sm text-[#6E5D4F] font-sans tracking-[0.2em] uppercase font-bold">
                 CHITTOOR, ANDHRA PRADESH • ESTD. 1998
               </p>
 
-              {/* Sanskrit Motto Quote in Gold Italic */}
-              <p className="font-serif italic text-[#E2B855] text-xs sm:text-sm md:text-base pt-1 font-normal tracking-wide">
+              {/* Sanskrit Motto Quote */}
+              <p className="font-serif italic text-[#8B4513] text-xs sm:text-sm md:text-base pt-1 font-semibold tracking-wide">
                 “विद्या सर्वस्य भूषणम् • Knowledge is the Supreme Ornament”
               </p>
             </div>
 
             {/* Bottom Progress Bar */}
             <div className="w-72 sm:w-96 space-y-2 pt-4 animate-text-reveal-3">
-              <div className="h-1.5 w-full bg-[#0F223D] rounded-full overflow-hidden border border-[#D4AF37]/30 p-0.5">
+              <div className="h-2 w-full bg-[#E5D3BD] rounded-full overflow-hidden border border-[#D4BC9F] p-0.5">
                 <div
-                  className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3BA2F] to-[#D4AF37] rounded-full transition-all duration-75 shadow-[0_0_15px_rgba(212,175,55,0.9)]"
+                  className="h-full bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] rounded-full transition-all duration-75 shadow-sm"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-400 font-sans">
+              <div className="flex items-center justify-between text-[11px] text-[#6E5D4F] font-sans font-medium">
                 <span>Entering Campus Portal...</span>
-                <span className="font-mono text-[#D4AF37] font-semibold">{Math.round(progress)}%</span>
+                <span className="font-mono text-[#9C6019] font-bold">{Math.round(progress)}%</span>
               </div>
             </div>
 
@@ -226,21 +240,31 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
       {/* ========================================================================= */}
       {phase === 'notices' && (
         <div
-          className={`fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-4 w-full h-full max-w-full pointer-events-none transition-all duration-300 ease-in-out select-none ${
-            isNoticeClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100 animate-fadeIn'
+          className={`fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-4 w-full h-full max-w-full transition-all duration-300 ease-in-out select-none ${
+            isNoticeClosing ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
           }`}
         >
+          {/* Dark Blurred Backdrop Overlay - Clicking outside closes modal */}
+          <div
+            onClick={handleDismissAllNotices}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-pointer z-0 transition-opacity"
+            aria-label="Click outside to close notice"
+          />
+
           {/* Centered Modal Card - Fully responsive for mobile (max-w-[94vw]) & desktop */}
-          <div className="relative pointer-events-auto w-full max-w-[94vw] sm:max-w-[480px] bg-[#0A192F] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.95)] border-2 border-gold-400/80 overflow-hidden flex flex-col my-auto animate-scaleUp">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative z-10 w-full max-w-[94vw] sm:max-w-[480px] bg-[#FFFDF9] rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_rgba(77,54,31,0.35)] border-2 border-[#D4BC9F] overflow-hidden flex flex-col my-auto animate-scaleUp text-[#1D1611]"
+          >
             
             {/* Top Bar with Step Indicators & Cancel Button */}
-            <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-navy-950 via-[#0E203C] to-navy-950 border-b border-gold-500/30">
+            <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#FAF3E7] border-b border-[#E5D3BD]">
               <div className="flex items-center gap-1.5 sm:gap-2 truncate">
-                <span className="w-2 h-2 rounded-full bg-gold-400 animate-pulse flex-shrink-0" />
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-gold-300 font-sans truncate">
+                <span className="w-2 h-2 rounded-full bg-[#C6832B] animate-pulse flex-shrink-0" />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#9C6019] font-sans truncate">
                   {currentNotice.tag}
                 </span>
-                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40">
+                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40">
                   {currentIndex + 1} of {NOTICES.length}
                 </span>
               </div>
@@ -249,7 +273,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
               <div className="flex items-center gap-1">
                 <button
                   onClick={handleCancelCurrentNotice}
-                  className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/10 hover:bg-red-500 text-slate-300 hover:text-white transition-all text-xs font-bold cursor-pointer"
+                  className="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#F5ECE0] hover:bg-red-500 text-[#1D1611] hover:text-white transition-all text-xs font-bold cursor-pointer"
                   aria-label={currentIndex === 0 ? "Close & View Next Notice" : "Close Notice"}
                   title={currentIndex === 0 ? "Next Notice (Esc)" : "Close (Esc)"}
                 >
@@ -273,7 +297,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
               {currentIndex > 0 && (
                 <button
                   onClick={() => setCurrentIndex(currentIndex - 1)}
-                  className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+                  className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FFFDF9]/90 hover:bg-[#C6832B] text-[#1D1611] hover:text-white border border-[#D4BC9F] flex items-center justify-center shadow-md transition-all cursor-pointer"
                   aria-label="Previous Notice"
                   title="Previous Notice"
                 >
@@ -285,7 +309,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
               {currentIndex < NOTICES.length - 1 && (
                 <button
                   onClick={() => setCurrentIndex(currentIndex + 1)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-navy-950/80 hover:bg-navy-950 text-gold-300 border border-gold-400/50 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FFFDF9]/90 hover:bg-[#C6832B] text-[#1D1611] hover:text-white border border-[#D4BC9F] flex items-center justify-center shadow-md transition-all cursor-pointer"
                   aria-label="Next Notice"
                   title="Next Notice"
                 >
@@ -295,7 +319,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
             </div>
 
             {/* Bottom Actions Bar */}
-            <div className="flex items-center justify-between gap-2 px-3.5 sm:px-4 py-2.5 bg-navy-950 border-t border-navy-800 text-xs">
+            <div className="flex items-center justify-between gap-2 px-3.5 sm:px-4 py-2.5 bg-[#FAF3E7] border-t border-[#E5D3BD] text-xs">
               {/* Pagination Dots */}
               <div className="flex items-center gap-1.5">
                 {NOTICES.map((n, idx) => (
@@ -304,8 +328,8 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
                     onClick={() => setCurrentIndex(idx)}
                     className={`h-2 rounded-full transition-all cursor-pointer ${
                       currentIndex === idx
-                        ? 'w-5 bg-gold-400'
-                        : 'w-2 bg-slate-600 hover:bg-slate-400'
+                        ? 'w-5 bg-[#C6832B]'
+                        : 'w-2 bg-[#D4BC9F] hover:bg-[#B57321]'
                     }`}
                     aria-label={`Go to Notice ${idx + 1}`}
                   />
@@ -318,22 +342,22 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
                   <>
                     <button
                       onClick={handleDismissAllNotices}
-                      className="px-2.5 py-1 text-[11px] text-slate-400 hover:text-white cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] text-[#6E5D4F] hover:text-[#1D1611] cursor-pointer font-semibold"
                     >
                       Skip All
                     </button>
                     <button
                       onClick={handleCancelCurrentNotice}
-                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white font-bold text-xs border border-white/20 transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-[#FFFDF9] hover:bg-[#EBDBC8] text-[#1D1611] font-bold text-xs border border-[#D4BC9F] transition-all cursor-pointer"
                     >
                       <span>Next Notice</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
+                      <ChevronRight className="w-3.5 h-3.5 text-[#9C6019]" />
                     </button>
                   </>
                 ) : (
                   <button
                     onClick={handleDismissAllNotices}
-                    className="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white font-bold text-xs border border-white/20 transition-all cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-[#FFFDF9] hover:bg-[#EBDBC8] text-[#1D1611] font-bold text-xs border border-[#D4BC9F] transition-all cursor-pointer"
                   >
                     Cancel / Close
                   </button>
@@ -342,7 +366,7 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
                 <a
                   href="#admissions"
                   onClick={handleDismissAllNotices}
-                  className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3BA2F] to-[#D4AF37] hover:from-[#DFB742] hover:to-[#E5C46D] text-navy-950 font-black text-xs shadow-gold-glow border border-gold-300 transition-all cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-black text-xs shadow-md border border-gold-300 transition-all cursor-pointer whitespace-nowrap"
                 >
                   <span>Apply Now</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -352,27 +376,6 @@ export const WelcomePreloader: React.FC<WelcomePreloaderProps> = ({ onComplete }
 
           </div>
         </div>
-      )}
-
-      {/* ========================================================================= */}
-      {/* 3. FLOATING QUICK BADGE (To Reopen Notices Anytime) */}
-      {/* ========================================================================= */}
-      {hasDismissedOnce && phase === 'dismissed' && (
-        <button
-          onClick={() => handleReopenNotices(0)}
-          className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#0B192C] via-[#0F284E] to-[#0B192C] text-gold-300 hover:text-white border-2 border-gold-400/60 shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-md transition-all duration-300 transform hover:scale-105 group cursor-pointer animate-fadeIn"
-          aria-label="View Admissions Announcements"
-          title="Click to view Admissions & B.Tech Programmes Notices"
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-500"></span>
-          </span>
-          <GraduationCap className="w-4 h-4 text-gold-400" />
-          <span className="text-xs font-bold uppercase tracking-wider font-sans">
-            Admissions Notices <span className="text-gold-400">(SVCTPU / RVSPU)</span>
-          </span>
-        </button>
       )}
     </>
   );

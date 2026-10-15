@@ -1,196 +1,318 @@
 import React from 'react';
 import { 
   MapPin, Phone, Mail, Facebook, 
-  Instagram, Youtube, ArrowRight, ShieldCheck, Heart 
+  Instagram, Youtube, ArrowRight 
 } from 'lucide-react';
 import { Logo } from '../ui/Logo';
-import { UNIVERSITY_INFO } from '../../data/universityData';
+import svcetCampusImg from '../../assets/SVCET1.png';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-navy-950 text-slate-300 border-t border-navy-800 text-sm">
-      {/* Top Institutional Banner inside Footer */}
-      <div className="border-b border-navy-850 py-12">
-        <div className="container-custom flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-          <div className="max-w-xl w-full">
-            <Logo variant="light" size="md" className="max-w-full" />
-            <p className="mt-4 text-xs text-slate-400 leading-relaxed font-light">
-              RVS University is a premier multidisciplinary institution established under the Andhra Pradesh Private Universities Act, dedicated to fostering next-generation leaders across computing, engineering, management, and healthcare.
-            </p>
-          </div>
+    <footer className="relative bg-[#0A0704] text-white overflow-hidden border-t-2 border-[#D4BC9F]/40 select-none">
+      {/* 1. CAMPUS PHOTO BACKGROUND (SVCET1.png, Visible around 70%) */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center scale-105 transition-all duration-300"
+        style={{ 
+          backgroundImage: `url(${svcetCampusImg})`,
+          opacity: 0.70,
+          filter: 'brightness(0.92) contrast(1.08)'
+        }}
+      />
+      
+      {/* Translucent Dark Vignette - Keeps Sunset 70% Visible while Text Remains Pristine */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/50 via-black/35 to-black/65" />
+      <div className="absolute top-0 right-1/4 w-96 h-48 bg-amber-500/15 blur-[100px] pointer-events-none" />
 
-          {/* Social Links — Only Instagram, YouTube & Facebook */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans">
-              Connect With Us:
-            </span>
-            <div className="flex items-center gap-3">
-              {/* 1. Instagram */}
-              <a
-                href="https://www.instagram.com/rvsuniversityofficial/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="RVS University Official Instagram"
-                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-pink-400 hover:border-pink-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-
-              {/* 2. YouTube */}
-              <a
-                href="https://www.youtube.com/@rvs_university"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="RVS University Official YouTube Channel"
-                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-red-500 hover:border-red-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-
-              {/* 3. Facebook */}
-              <a
-                href="https://www.facebook.com/p/RVSUniversityofficial-61593336956152/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="RVS University Official Facebook Page"
-                className="w-10 h-10 rounded-xl bg-navy-900 border border-navy-800 flex items-center justify-center text-slate-300 hover:text-blue-400 hover:border-blue-500/50 hover:bg-navy-850 transition-all shadow-sm hover:scale-105"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
+      <div className="relative z-10 container-custom px-4 md:px-8">
+        
+        {/* ========================================================================= */}
+        {/* TOP INSTITUTIONAL BAR & CONNECT WITH US */}
+        {/* ========================================================================= */}
+        <div className="border-b border-white/15 py-10 md:py-12">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            
+            {/* Left: Official University Logo & Summary Paragraph */}
+            <div className="max-w-xl w-full space-y-3">
+              <Logo variant="light" size="md" className="max-w-full" />
+              <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
+                RVS University is a premier multidisciplinary institution established under the Andhra Pradesh Private Universities Act, dedicated to fostering next-generation leaders across computing, engineering, management, and healthcare.
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Main Multi-Column Footer Links */}
-      <div className="py-16">
-        <div className="container-custom grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
-          {/* Column 1: About */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              About RVS
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#about-overview" className="hover:text-gold-300 transition-colors">Overview</a></li>
-              <li><a href="#about-leadership" className="hover:text-gold-300 transition-colors">Leadership</a></li>
-              <li><a href="#about-governance" className="hover:text-gold-300 transition-colors">Governance</a></li>
-              <li><a href="#about-administration" className="hover:text-gold-300 transition-colors">Administration</a></li>
-              <li><a href="#about-ranking-accreditation" className="hover:text-gold-300 transition-colors">Ranking & Accreditation</a></li>
-              <li><a href="#about-iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
-              <li><a href="#contact-us" className="hover:text-gold-300 transition-colors">Contact Us</a></li>
-            </ul>
-          </div>
+            {/* Right: Connect With Us & Social Media Icons */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-300 font-sans drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                Connect With Us:
+              </span>
+              <div className="flex items-center gap-3">
+                {/* 1. Instagram */}
+                <a
+                  href="https://www.instagram.com/rvsuniversityofficial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="RVS University Official Instagram"
+                  className="w-10 h-10 rounded-xl bg-white/10 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-600 text-white border border-white/20 hover:border-pink-400 backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
+                  title="Instagram"
+                >
+                  <Instagram className="w-5 h-5 transition-transform group-hover:scale-110" />
+                </a>
 
-          {/* Column 2: 6 Academic Schools */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Academic Schools
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#course-school-soet" className="hover:text-gold-300 transition-colors">Engineering & Tech (SOET)</a></li>
-              <li><a href="#course-school-scse" className="hover:text-gold-300 transition-colors">Computer Science (SCSE)</a></li>
-              <li><a href="#course-school-said" className="hover:text-gold-300 transition-colors">AI & Data Science (SAID)</a></li>
-              <li><a href="#course-school-scis" className="hover:text-gold-300 transition-colors">Computing & Info (SCIS)</a></li>
-              <li><a href="#course-school-soms" className="hover:text-gold-300 transition-colors">Management Studies (SOMS)</a></li>
-              <li><a href="#course-school-sahs" className="hover:text-gold-300 transition-colors">Allied Health Sciences (SAHS)</a></li>
-            </ul>
-          </div>
+                {/* 2. YouTube */}
+                <a
+                  href="https://www.youtube.com/@rvs_university"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="RVS University Official YouTube Channel"
+                  className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#FF0000] text-white border border-white/20 hover:border-[#FF0000] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
+                  title="YouTube"
+                >
+                  <Youtube className="w-5 h-5 transition-transform group-hover:scale-110" />
+                </a>
 
-          {/* Column 3: Admissions */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Admissions 2026
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">B.Tech Engineering</a></li>
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">MBA & BBA Programs</a></li>
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">BCA & MCA Programs</a></li>
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">Allied Health & Paramedical</a></li>
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">Scholarship Matrix</a></li>
-              <li><a href="#admissions" className="hover:text-gold-300 transition-colors">International Admissions</a></li>
-            </ul>
-          </div>
-
-          {/* Column 4: Campus Life Hub */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Campus Life Hub
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#gallery" className="text-gold-300 hover:text-white font-medium transition-colors">Campus Photo Gallery (15+ Photos)</a></li>
-              <li><a href="#academic-about-library" className="hover:text-gold-300 transition-colors">Central Digital Library (85k+ Books)</a></li>
-              <li><a href="#hostels" className="hover:text-gold-300 transition-colors">Hostels & Dining (375 Rooms)</a></li>
-              <li><a href="#sports" className="hover:text-gold-300 transition-colors">Sports Complex & Stadium</a></li>
-              <li><a href="#health" className="hover:text-gold-300 transition-colors">Health Center & Ambulance</a></li>
-              <li><a href="#safety" className="hover:text-gold-300 transition-colors">Safety & Transport Fleet</a></li>
-              <li><a href="#tech-clubs" className="hover:text-gold-300 transition-colors">Technical Societies</a></li>
-              <li><a href="#cultural-fest" className="hover:text-gold-300 transition-colors">SELESTA Cultural Fest</a></li>
-            </ul>
-          </div>
-
-          {/* Column 5: Portals & Compliance */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Quick Portals
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li><a href="#exam-portal" className="text-gold-300 hover:text-white font-semibold">Exam Portal & Results</a></li>
-              <li><a href="#exam-schedules" className="hover:text-gold-300 transition-colors">Exam Schedules & Timetables</a></li>
-              <li><a href="#exam-notifications" className="hover:text-gold-300 transition-colors">Exam Notifications</a></li>
-              <li><a href="#research-overview" className="hover:text-gold-300 transition-colors">Directorate of Research</a></li>
-              <li><a href="#academic-about-library" className="hover:text-gold-300 transition-colors">Central Digital Library</a></li>
-              <li><a href="#atal-idea-lab" className="hover:text-gold-300 transition-colors">ATAL IDEA Lab</a></li>
-              <li><a href="#about-iqac" className="hover:text-gold-300 transition-colors">IQAC Cell</a></li>
-            </ul>
-          </div>
-
-          {/* Column 6: Contact Information */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-sans border-b border-navy-850 pb-2">
-              Contact Campus
-            </h4>
-            <div className="space-y-3 text-xs text-slate-300">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" />
-                <span className="leading-tight">
-                  {UNIVERSITY_INFO.address}
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" />
-                <div className="flex flex-col gap-1">
-                  <a href={`tel:${UNIVERSITY_INFO.phone}`} className="hover:text-gold-300">
-                    {UNIVERSITY_INFO.phone}
-                  </a>
-                  <a href={`tel:${UNIVERSITY_INFO.altPhone}`} className="hover:text-gold-300">
-                    {UNIVERSITY_INFO.altPhone}
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <a href={`mailto:${UNIVERSITY_INFO.email}`} className="hover:text-gold-300 truncate">
-                  {UNIVERSITY_INFO.email}
+                {/* 3. Facebook */}
+                <a
+                  href="https://www.facebook.com/p/RVSUniversityofficial-61593336956152/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="RVS University Official Facebook Page"
+                  className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1877F2] text-white border border-white/20 hover:border-[#1877F2] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
+                  title="Facebook"
+                >
+                  <Facebook className="w-5 h-5 transition-transform group-hover:scale-110" />
                 </a>
               </div>
             </div>
+
           </div>
         </div>
+
+        {/* ========================================================================= */}
+        {/* MAIN 6-COLUMN FOOTER LINKS (Spacious, Sharp Arrow Bullets, High Legibility) */}
+        {/* ========================================================================= */}
+        <div className="py-14 md:py-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6 xl:gap-8">
+            
+            {/* COLUMN 1: ABOUT RVS */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                About RVS
+              </h4>
+              <ul className="space-y-2.5 pt-1">
+                {[
+                  { label: 'Overview', href: '#about-overview' },
+                  { label: 'Leadership', href: '#about-leadership' },
+                  { label: 'Governance', href: '#about-governance' },
+                  { label: 'Administration', href: '#about-administration' },
+                  { label: 'Ranking & Accreditation', href: '#about-ranking-accreditation' },
+                  { label: 'IQAC Cell', href: '#about-iqac' },
+                  { label: 'Contact Us', href: '#contact-us' },
+                ].map((item, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={item.href}
+                      className="group flex items-center gap-2 text-slate-100 hover:text-amber-300 font-medium text-[13px] sm:text-[13.5px] transition-colors leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] cursor-pointer"
+                    >
+                      <span className="text-[#C6832B] group-hover:text-amber-300 font-black text-sm transition-transform group-hover:translate-x-1 flex-shrink-0">
+                        ›
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 2: ACADEMIC SCHOOLS */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                Academic Schools
+              </h4>
+              <ul className="space-y-2.5 pt-1">
+                {[
+                  { label: 'Engineering & Tech (SOET)', href: '#course-school-soet' },
+                  { label: 'Computer Science (SCSE)', href: '#course-school-scse' },
+                  { label: 'AI & Data Science (SAID)', href: '#course-school-said' },
+                  { label: 'Computing & Info (SCIS)', href: '#course-school-scis' },
+                  { label: 'Management Studies (SOMS)', href: '#course-school-soms' },
+                  { label: 'Allied Health Sciences (SAHS)', href: '#course-school-sahs' },
+                ].map((item, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={item.href}
+                      className="group flex items-center gap-2 text-slate-100 hover:text-amber-300 font-medium text-[13px] sm:text-[13.5px] transition-colors leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] cursor-pointer"
+                    >
+                      <span className="text-[#C6832B] group-hover:text-amber-300 font-black text-sm transition-transform group-hover:translate-x-1 flex-shrink-0">
+                        ›
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 3: ADMISSIONS 2026 */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                Admissions 2026
+              </h4>
+              <ul className="space-y-2.5 pt-1">
+                {[
+                  { label: 'B.Tech Engineering', href: '#admissions' },
+                  { label: 'MBA & BBA Programs', href: '#admissions' },
+                  { label: 'BCA & MCA Programs', href: '#admissions' },
+                  { label: 'Allied Health & Paramedical', href: '#admissions' },
+                  { label: 'Scholarship Matrix', href: '#admissions' },
+                  { label: 'International Admissions', href: '#admissions' },
+                ].map((item, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={item.href}
+                      className="group flex items-center gap-2 text-slate-100 hover:text-amber-300 font-medium text-[13px] sm:text-[13.5px] transition-colors leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] cursor-pointer"
+                    >
+                      <span className="text-[#C6832B] group-hover:text-amber-300 font-black text-sm transition-transform group-hover:translate-x-1 flex-shrink-0">
+                        ›
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 4: CAMPUS LIFE HUB */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                Campus Life Hub
+              </h4>
+              <ul className="space-y-2.5 pt-1">
+                {[
+                  { label: 'Campus Photo Gallery (15+ Photos)', href: '#gallery' },
+                  { label: 'Central Digital Library (85k+ Books)', href: '#academic-about-library' },
+                  { label: 'Hostels & Dining (375 Rooms)', href: '#hostels' },
+                  { label: 'Sports Complex & Stadium', href: '#sports' },
+                  { label: 'Health Center & Ambulance', href: '#health' },
+                  { label: 'Safety & Transport Fleet', href: '#safety' },
+                  { label: 'Technical Societies', href: '#tech-clubs' },
+                  { label: 'SELESTA Cultural Fest', href: '#cultural-fest' },
+                ].map((item, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={item.href}
+                      className="group flex items-center gap-2 text-slate-100 hover:text-amber-300 font-medium text-[13px] sm:text-[13.5px] transition-colors leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] cursor-pointer"
+                    >
+                      <span className="text-[#C6832B] group-hover:text-amber-300 font-black text-sm transition-transform group-hover:translate-x-1 flex-shrink-0">
+                        ›
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 5: QUICK PORTALS */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                Quick Portals
+              </h4>
+              <ul className="space-y-2.5 pt-1">
+                {[
+                  { label: 'Exam Portal & Results', href: '#exam-portal' },
+                  { label: 'Exam Schedules & Timetables', href: '#exam-schedules' },
+                  { label: 'Exam Notifications', href: '#exam-notifications' },
+                  { label: 'Directorate of Research', href: '#research-overview' },
+                  { label: 'Central Digital Library', href: '#academic-about-library' },
+                  { label: 'ATAL IDEA Lab', href: '#atal-idea-lab' },
+                  { label: 'IQAC Cell', href: '#about-iqac' },
+                ].map((item, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={item.href}
+                      className="group flex items-center gap-2 text-slate-100 hover:text-amber-300 font-medium text-[13px] sm:text-[13.5px] transition-colors leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] cursor-pointer"
+                    >
+                      <span className="text-[#C6832B] group-hover:text-amber-300 font-black text-sm transition-transform group-hover:translate-x-1 flex-shrink-0">
+                        ›
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* COLUMN 6: CONTACT CAMPUS */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-white tracking-wide border-b-2 border-[#C6832B] pb-2 inline-block drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                Contact Campus
+              </h4>
+              <div className="space-y-3 pt-1 text-slate-100 text-[13px] sm:text-[13.5px] leading-relaxed">
+                
+                {/* Campus Address with Red MapPin */}
+                <div className="flex items-start gap-2.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
+                  <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-1" />
+                  <span className="font-medium">
+                    R.V.S Nagar, Tirupathi Road, Chittoor, Andhra Pradesh – 517127
+                  </span>
+                </div>
+
+                {/* Telephone with Red Phone */}
+                <div className="flex items-start gap-2.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
+                  <Phone className="w-4 h-4 text-red-500 flex-shrink-0 mt-1" />
+                  <div className="flex flex-col gap-0.5">
+                    <a href="tel:+919669660155" className="hover:text-amber-300 font-bold transition-colors">
+                      +91 9669660155
+                    </a>
+                    <a href="tel:+919669660214" className="hover:text-amber-300 font-bold transition-colors">
+                      +91 9669660214
+                    </a>
+                  </div>
+                </div>
+
+                {/* Email with Red Mail */}
+                <div className="flex items-center gap-2.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
+                  <Mail className="w-4 h-4 text-red-500 flex-shrink-0" />
+                  <a href="mailto:info@rvsu.org" className="hover:text-amber-300 font-bold transition-colors truncate">
+                    info@rvsu.org
+                  </a>
+                </div>
+
+                {/* Bold Golden "Get Directions" CTA Button */}
+                <div className="pt-2">
+                  <a
+                    href="https://maps.google.com/?q=RVS+University+Chittoor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 w-full px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-500 text-black font-extrabold text-[11.5px] uppercase tracking-wider shadow-lg hover:shadow-amber-500/30 transition-all transform hover:scale-[1.02] cursor-pointer"
+                  >
+                    <span>Get Directions</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-black" />
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
-      {/* Bottom Copyright & Legal Strip */}
-      <div className="border-t border-navy-900 bg-navy-950/90 py-6">
-        <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
+      {/* ========================================================================= */}
+      {/* BOTTOM COPYRIGHT & LEGAL STRIP */}
+      {/* ========================================================================= */}
+      <div className="relative z-10 border-t border-white/10 bg-black/75 backdrop-blur-md py-5">
+        <div className="container-custom px-4 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300 font-medium">
           <div>
-            © {new Date().getFullYear()} RVS University, Chittoor. All Rights Reserved.
+            © {new Date().getFullYear()} RVS University, Chittoor. All Rights Reserved. • UGC Autonomous & AICTE Approved
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <a href="#privacy-policy" className="hover:text-gold-300 transition-colors">Privacy Policy</a>
-            <a href="#terms-of-use" className="hover:text-gold-300 transition-colors">Terms of Use</a>
-            <a href="#accessibility" className="hover:text-gold-300 transition-colors">Accessibility</a>
-            <a href="#anti-ragging" className="hover:text-gold-300 transition-colors">Anti-Ragging Policy</a>
-            <a href="#sitemap" className="hover:text-gold-300 transition-colors">Sitemap</a>
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-slate-300">
+            <a href="#privacy-policy" className="hover:text-amber-400 transition-colors cursor-pointer">Privacy Policy</a>
+            <a href="#terms-of-use" className="hover:text-amber-400 transition-colors cursor-pointer">Terms of Use</a>
+            <a href="#accessibility" className="hover:text-amber-400 transition-colors cursor-pointer">Accessibility</a>
+            <a href="#anti-ragging" className="hover:text-amber-400 transition-colors cursor-pointer">Anti-Ragging Policy</a>
+            <a href="#sitemap" className="hover:text-amber-400 transition-colors cursor-pointer">Sitemap</a>
           </div>
         </div>
       </div>

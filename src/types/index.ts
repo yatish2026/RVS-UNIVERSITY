@@ -3,6 +3,8 @@ export interface NavSubItem {
   href: string;
   description?: string;
   badge?: string;
+  isExternal?: boolean;
+  download?: boolean;
   subItems?: NavSubItem[];
 }
 
@@ -16,6 +18,7 @@ export interface NavItem {
   label: string;
   href: string;
   hasDropdown?: boolean;
+  items?: NavSubItem[];
   megaMenu?: {
     featuredCard?: {
       title: string;

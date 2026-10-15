@@ -21,7 +21,7 @@ export const CSE_CYBER_DEPARTMENT_DATA: DepartmentDetailData = {
     message: 'Welcome to the Department of Computer Science and Engineering (Cyber Security) at RVS University. Established with a rich legacy since 1998 and consistently accredited by NBA since 2006, our department delivers a rigorous, hands-on curriculum blending foundational computational principles with advanced defensive and offensive cyber security techniques. Through state-of-the-art security operations centers (SOC), ethical hacking sandboxes, cryptography labs, and active partnerships with global technology leaders, our mission is to develop elite cyber security professionals who safeguard digital ecosystems worldwide.',
   },
   profile: {
-    nbaAccreditation: 'Accredited by NBA Since 2006 | NAAC A+ Grade | Autonomous Status',
+    nbaAccreditation: 'Accredited by NBA Since 2006 | Autonomous Status | AICTE Approved',
     overview: 'The Department of Computer Science and Engineering (Cyber Security) was established in 1998, and the Department of Computer Science and Engineering (CSE) at RVS University has witnessed significant growth. The department\'s undergraduate program intake has steadily increased over the years, reflecting its growing reputation. The B.Tech. program itself has been consistently accredited by the National Board of Accreditation (NBA) since 2006, a testament to its quality.\n\nThe CSE department offers a hands-on, industry-oriented B.Tech. program in Computer Science and Engineering (Cyber Security). The curriculum is designed to equip students with the theoretical knowledge and practical skills necessary for success in the ever-evolving IT industry. The department boasts state-of-the-art labs, well-equipped classrooms, and a well-stocked library to facilitate a rich learning experience. Additionally, the department\'s active student chapters and its choice-based elective system allow students to explore their areas of interest.',
     objectives: [
       'Industry-Oriented Education: The curriculum is designed to meet the ever-changing needs of the IT industry, offering students a blend of theoretical and practical knowledge in areas such as algorithms, programming, operating systems, AI, machine learning, and more.',
@@ -280,24 +280,14 @@ export const CSE_CYBER_DEPARTMENT_DATA: DepartmentDetailData = {
   },
   syllabusDownloads: [
     {
-      title: 'B.Tech CSE (Cyber Security) R23 Regulation & Detailed Syllabus (2025)',
+      title: 'B.Tech CSE (Cyber Security) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
       level: 'Undergraduate (B.Tech)',
-      regulation: 'R23 Autonomous',
-      fileUrl: '/syllabus/cse-cs-b-tech-r23-detailed-2025.pdf',
-      downloadFileName: 'B.Tech_R23_CSE_CyberSecurity_Syllabus.pdf',
-      size: '10.18 MB',
-      badge: 'Official R23 Curriculum',
-      description: 'Official 4-Year B.Tech curriculum covering Ethical Hacking, Network Security, Applied Cryptography, Digital Forensics, Cloud Security, Threat Hunting, and Core Computer Science.',
-    },
-    {
-      title: 'B.Tech CSE (Cyber Security) R20 Regulation & Syllabus',
-      level: 'Undergraduate (B.Tech)',
-      regulation: 'R20 Autonomous',
-      fileUrl: '/syllabus/cse-cyber-security-btech-r20.pdf',
-      downloadFileName: 'B.Tech_R20_CSE_CyberSecurity_Syllabus.pdf',
-      size: '3.24 MB',
-      badge: 'R20 Archive',
-      description: 'Comprehensive 4-Year B.Tech CSE (Cyber Security) syllabus under autonomous R20 academic regulations.',
+      regulation: 'R26 Regulations',
+      fileUrl: '/syllabus/08. CSE (CSC).pdf',
+      downloadFileName: 'B.Tech_CSE_Cyber_Security_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
+      size: '35.3 MB',
+      badge: 'Official Syllabus (R26)',
+      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Cyber Security) approved by the Academic Council & Board of Studies.',
     },
   ],
   association: {

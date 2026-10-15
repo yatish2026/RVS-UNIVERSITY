@@ -1,6 +1,4 @@
 import { NavItem } from '../types';
-import campusLife3Img from '../assets/3.png';
-import irBannerImg from '../assets/international-relations-banner.png';
 
 export const UTILITY_BAR_LINKS = [
   { name: 'Exam Portal', href: '#exam-portal', highlight: true },
@@ -38,156 +36,151 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   },
   {
     id: 'about',
-    label: 'About',
+    label: 'About Us',
     href: '#about-overview',
     hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Chancellor Dr. Ravuri Venkataswamy',
-        description: 'Founder & Chancellor, RVS University. Guiding a 28-year legacy of academic innovation across 23 group institutions.',
-        image: '/images/chairman.jpg',
-        linkText: 'Explore Chancellor & Leadership →',
+    items: [
+      { name: 'Overview', href: '#about-overview' },
+      {
+        name: 'Leadership',
         href: '#about-leadership',
+        subItems: [
+          { name: 'Founder & Chancellor', href: '#about-leadership' },
+          { name: 'Pro Chancellor', href: '#about-pro-chancellor' },
+          { name: 'Vice Chancellor', href: '#about-vice-chancellor' },
+          { name: 'Principal & Leadership Team', href: '#about-principal' },
+        ],
       },
-      columns: [
-        {
-          title: 'Institutional Pillars',
-          items: [
-            { name: 'Overview', href: '#about-overview', description: 'Vision, Mission, and University Profile' },
-            { name: 'Leadership', href: '#about-leadership', badge: 'Executive', description: 'Chancellor, Pro Chancellor & Vice Chancellor' },
-            { name: 'Governance', href: '#about-governance', description: 'Statutory Body & University Council' },
-            { name: 'Administration', href: '#about-administration', description: 'Administrative Hierarchy & Organisation' },
-          ],
-        },
-        {
-          title: 'Quality & Assurance',
-          items: [
-            { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation', badge: 'NAAC A+ Grade', description: 'NBA, AICTE, NIRF & Recognitions' },
-            { name: 'IQAC', href: '#about-iqac', badge: 'Quality Cell', description: 'Internal Quality Assurance Cell & AQAR' },
-            { name: 'Contact Us', href: '#contact-us', badge: 'Helpline', description: '+91 9669660155 • info@rvsu.org' },
-          ],
-        },
-      ],
-    },
+      {
+        name: 'Governance',
+        href: '#about-governance',
+        subItems: [
+          { name: 'Sponsoring Body', href: '#sponsoring-body' },
+          { name: 'Governing Body', href: '#governing-body' },
+          { name: 'Board of Management', href: '#board-of-management' },
+          { name: 'Academic Council Members', href: '#academic-council' },
+          { name: 'Finance Committee', href: '#finance-committee' },
+          { name: 'Planning and Monitoring Board', href: '#planning-monitoring' },
+          { name: 'Research and Innovation Council', href: '#research-innovation' },
+          { name: 'Board of Examination', href: '#board-of-examination' },
+          { name: 'Board Of Studies', href: '#board-of-studies' },
+        ],
+      },
+      { name: 'Administration', href: '#about-administration' },
+      { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation' },
+      {
+        name: 'IQAC',
+        href: '#about-iqac',
+        subItems: [
+          { name: 'IQAC Cell Overview', href: '#about-iqac' },
+          { name: 'Members Committee', href: '#members-committee' },
+          { name: 'Meeting Minutes', href: '#meeting-minutes' },
+          { name: 'Annual Report (AQAR)', href: '#annual-report' },
+          { name: 'NAAC Certificate & SSR', href: '#naac-certificate' },
+          { name: 'Academic Audit (AAA)', href: '#aaa' },
+          { name: 'Institutional Plan (IDP)', href: '#idp' },
+          { name: 'Useful Links & Policies', href: '#useful-links' },
+        ],
+      },
+      { name: 'Media', href: '#gallery' },
+      { name: 'Contact us', href: '#contact-us' },
+    ],
   },
-
   {
     id: 'departments',
     label: 'Academics',
-    href: '#departments',
+    href: '#schools',
     hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: '6 Academic Schools & 49 Programmes',
-        description: 'Explore 4,579 approved intake seats across Engineering, Computer Sciences, AI & Data Science, Computing, Management & Allied Health.',
-        image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80',
-        linkText: 'Explore All 49 Programmes →',
-        href: '#departments',
+    items: [
+      {
+        name: 'Schools & Programmes',
+        href: '#schools',
+        subItems: [
+          { name: 'School of Engineering & Technology', href: '#schools' },
+          { name: 'School of Computer Science & Applications', href: '#schools' },
+          { name: 'School of Management Studies', href: '#schools' },
+          { name: 'School of Science & Humanities', href: '#schools' },
+          { name: 'School of Allied Health Sciences', href: '#schools' },
+          { name: 'School of Agricultural Sciences', href: '#schools' },
+        ],
       },
-      columns: [
-        {
-          title: 'Engineering & Computing Schools',
-          items: [
-            { name: 'School of Engineering & Tech (SOET)', href: '#course-school-soet', badge: '765 Seats', description: 'Civil, EEE, Mech, ECE, Drone Tech & M.Tech' },
-            { name: 'School of Computer Science & Eng (SCSE)', href: '#course-school-scse', badge: '1044 Seats', description: 'B.Tech CSE, AI, Cloud & B.Sc (Hons) AI' },
-            { name: 'School of AI & Data Science (SAID)', href: '#course-school-said', badge: '906 Seats', description: 'AI & ML, Robotics, Data Eng, Data Science' },
-          ],
-        },
-        {
-          title: 'Computing, Management & Healthcare',
-          items: [
-            { name: 'School of Computing & Info Sciences (SCIS)', href: '#course-school-scis', badge: '804 Seats', description: 'IT, IoT, Quantum, Cyber Security, BCA, MCA' },
-            { name: 'School of Management Studies (SOMS)', href: '#course-school-soms', badge: '180 Seats', description: 'MBA (120 Seats) & BBA (60 Seats)' },
-            { name: 'School of Allied Health Sciences (SAHS)', href: '#course-school-sahs', badge: '880 Seats', description: '14 Clinical & Therapy Bachelor Degrees' },
-          ],
-        },
-      ],
-    },
+      { name: 'Mandatory Disclosure', href: '#mandatory-disclosure' },
+      { name: 'Board of Studies', href: '#board-of-studies' },
+      { name: 'Academic Calendars', href: '#academic-calendars' },
+      { name: 'NAAC Self Study Report', href: '#naac-ssr' },
+      { name: 'Ranking and Accreditation', href: '#about-ranking-accreditation' },
+      {
+        name: 'Exam Section',
+        href: '#exam-portal',
+        subItems: [
+          { name: 'Examination Results', href: '#exam-portal' },
+          { name: 'Timetables & Schedules', href: '#exam-portal' },
+          { name: 'Notifications & Circulars', href: '#exam-portal' },
+          { name: 'Hall Tickets & Revaluation', href: '#exam-portal' },
+        ],
+      },
+    ],
   },
   {
-    id: 'placements',
-    label: 'Placements',
-    href: '#placements',
+    id: 'admissions-nav',
+    label: 'Admissions',
+    href: '#admissions',
     hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: '95%+ Career Placement Track Record',
-        description: 'Top multinational corporations recruit RVS engineers and managers every year.',
-        image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80',
-        linkText: 'Placement Report 2025–26 →',
-        href: '#placement-report',
-      },
-      columns: [
-        {
-          title: 'Placement Center',
-          items: [
-            { name: 'Placement Highlights & Stats', href: '#placement-highlights', description: 'Highest CTC, average packages and offers' },
-            { name: 'Corporate Recruiters & Partners', href: '#recruiters', description: 'Over 250+ Fortune 500 & tech leaders' },
-            { name: 'Training & Career Development', href: '#career-training', description: 'Aptitude, coding bootcamps & soft skills' },
-            { name: 'Industry Internship Cell', href: '#internships', description: 'Paid 6-month capstone industry stints' },
-          ],
-        },
-        {
-          title: 'For Corporate Partners',
-          items: [
-            { name: 'Placement Brochure 2026', href: '#brochure', description: 'Department-wise talent demographics' },
-            { name: 'Host Campus Recruitment', href: '#host-drive', description: 'Facilities for tests, GDs & interviews' },
-            { name: 'Industry Mentorship Program', href: '#industry-mentor', description: 'Collaborate with students on real-world PRDs' },
-            { name: 'Contact Placement Cell', href: '#contact-placement', description: 'Placement director & team contact info' },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    id: 'campus-life',
-    label: 'Campus Life',
-    href: '#campus-life',
-    hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Vibrant 65+ Acre Campus',
-        description: 'Hostel residences for 1,500+ students, Central Digital Library with 85k+ books, Olympic-sized sports complex, and active student societies.',
-        image: campusLife3Img,
-        linkText: 'Explore Campus Life Hub →',
-        href: '#hostels',
-      },
-      columns: [
-        {
-          title: 'Living & Facilities',
-          items: [
-            { name: 'Central Digital Library', href: '#academic-about-library', badge: '85k+ Books', description: '85,000+ print volumes, IEEE/DELNET & RFID smart kiosks' },
-            { name: 'Hostels & Dining Halls', href: '#hostels', badge: '375 Rooms', description: 'AC/Non-AC rooms, 269 Boys & 129 Girls rooms' },
-            { name: 'Sports & Athletic Complex', href: '#sports', description: 'Cricket stadium, indoor badminton & gymnasium' },
-            { name: 'Health Center & Ambulance', href: '#health', description: '24/7 medical team and emergency pharmacy' },
-            { name: 'Campus Safety & Transport', href: '#safety', description: 'CCTV surveillance & extensive bus fleet' },
-          ],
-        },
-        {
-          title: 'Clubs & Culture',
-          items: [
-            { name: 'Photo Gallery', href: '#gallery', badge: '15+ Photos', description: 'Interactive visual tour with motion & animations' },
-            { name: 'Student Technical Societies', href: '#tech-clubs', description: 'Coding club, Robotics, AI builders, IEEE' },
-            { name: 'Cultural Fest & Arts Guild', href: '#cultural-fest', description: 'Music, drama, literary & annual university fest' },
-            { name: 'NSS & Community Outreach', href: '#nss', description: 'Village adoption and social welfare missions' },
-            { name: 'Eco-Friendly Green Campus', href: '#green-campus', description: 'Solar energy, water harvesting & lush greenery' },
-          ],
-        },
-      ],
-    },
+    items: [
+      { name: 'Admissions Overview 2026–27', href: '#admissions' },
+      { name: 'Undergraduate (B.Tech)', href: '#schools' },
+      { name: 'Postgraduate (M.Tech/MBA/MCA)', href: '#schools' },
+      { name: 'Eligibility Criteria & Quotas', href: '#admissions' },
+      { name: 'Fee Structure & Scholarships', href: '#admissions' },
+      { name: 'Apply Online Application', href: '#admissions' },
+    ],
   },
   {
     id: 'directorate-of-research',
     label: 'Research',
     href: '#research-overview',
     hasDropdown: true,
-    simpleDropdown: [
-      { name: 'Overview', href: '#research-overview', description: 'Directorate profile & research ecosystem' },
-      { name: 'Mission', href: '#research-mission', description: 'Research vision, goals & charter' },
-      { name: 'Recent Projects', href: '#research-recent-projects', description: 'Institutional project initiatives' },
-      { name: 'Academic Research', href: '#research-academic-research', description: 'Doctoral & scholarly programs' },
-      { name: 'Funded Research', href: '#research-funded-research', description: 'Sponsored grants & funding agencies' },
-      { name: 'Thrust Area', href: '#research-thrust-area', description: 'Core domains & frontier focus technologies' },
+    items: [
+      { name: 'Overview', href: '#research-overview' },
+      { name: 'Mission & Vision', href: '#research-mission' },
+      { name: 'Recent Projects', href: '#research-recent-projects' },
+      { name: 'Academic Research', href: '#research-academic-research' },
+      { name: 'Funded Research', href: '#research-funded-research' },
+      { name: 'Thrust Areas', href: '#research-thrust-area' },
+    ],
+  },
+  {
+    id: 'placements',
+    label: 'Placements',
+    href: '#placements',
+    hasDropdown: true,
+    items: [
+      { name: 'Placement Highlights & Stats', href: '#placement-highlights' },
+      { name: 'Corporate Recruiters & Partners', href: '#recruiters' },
+      { name: 'Training & Career Development', href: '#career-training' },
+      { name: 'Industry Internship Cell', href: '#internships' },
+      { name: 'Placement Brochure 2026', href: '#brochure' },
+      { name: 'Host Campus Recruitment', href: '#host-drive' },
+      { name: 'Industry Mentorship Program', href: '#industry-mentor' },
+      { name: 'Contact Placement Cell', href: '#contact-placement' },
+    ],
+  },
+  {
+    id: 'campus-life',
+    label: 'Campus Life',
+    href: '#campus-life',
+    hasDropdown: true,
+    items: [
+      { name: 'Central Digital Library', href: '#academic-about-library' },
+      { name: 'Hostels & Dining Halls', href: '#hostels' },
+      { name: 'Sports & Athletic Complex', href: '#sports' },
+      { name: 'Health Center & Ambulance', href: '#health' },
+      { name: 'Campus Safety & Transport', href: '#safety' },
+      { name: 'Photo Gallery', href: '#gallery' },
+      { name: 'Student Technical Societies', href: '#tech-clubs' },
+      { name: 'Cultural Fest & Arts Guild', href: '#cultural-fest' },
+      { name: 'NSS & Community Outreach', href: '#nss' },
+      { name: 'Eco-Friendly Green Campus', href: '#green-campus' },
     ],
   },
   {
@@ -195,33 +188,14 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     label: 'International Relations',
     href: '#international-relations',
     hasDropdown: true,
-    megaMenu: {
-      featuredCard: {
-        title: 'Global Community at RVS University',
-        description: 'Over 300+ international scholars from 62+ countries thriving across our undergraduate and postgraduate degree programs.',
-        image: irBannerImg,
-        linkText: 'Explore International Relations Portal →',
-        href: '#international-relations',
-      },
-      columns: [
-        {
-          title: 'Admissions & Eligibility',
-          items: [
-            { name: 'International Admissions Overview', href: '#international-relations-admissions', description: 'Application forms, visas, guidelines' },
-            { name: 'B.Tech Eligibility (13 Courses)', href: '#international-relations-btech-eligibility', badge: '13 Branches', description: 'Undergraduate engineering admissions' },
-            { name: 'PG Eligibility (M.Tech/MCA/MBA)', href: '#international-relations-pg-eligibility', badge: '8 Programs', description: 'Postgraduate admissions & procedure' },
-            { name: 'International Scholarships', href: '#international-relations-admissions', description: 'Merit-based financial aid for foreign scholars' },
-          ],
-        },
-        {
-          title: 'Global Network & Support',
-          items: [
-            { name: 'Partner Universities (MoUs)', href: '#international-relations-partner-universities', badge: '11 Global MoUs', description: 'USA, Germany, Malaysia, Ethiopia, Bhutan' },
-            { name: 'Student Testimonials (IR)', href: '#international-relations-testimonials', description: 'Stories from international alumni & scholars' },
-            { name: 'International Relations Office', href: '#international-relations-contact', description: 'Nodal officers, contacts & helpdesk' },
-          ],
-        },
-      ],
-    },
+    items: [
+      { name: 'International Admissions Overview', href: '#international-relations-admissions' },
+      { name: 'B.Tech Eligibility (13 Courses)', href: '#international-relations-btech-eligibility' },
+      { name: 'PG Eligibility (M.Tech/MCA/MBA)', href: '#international-relations-pg-eligibility' },
+      { name: 'International Scholarships', href: '#international-relations-admissions' },
+      { name: 'Partner Universities (MoUs)', href: '#international-relations-partner-universities' },
+      { name: 'Student Testimonials (IR)', href: '#international-relations-testimonials' },
+      { name: 'International Relations Office', href: '#international-relations-contact' },
+    ],
   },
 ];
