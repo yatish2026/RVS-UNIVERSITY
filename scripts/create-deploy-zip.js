@@ -110,10 +110,32 @@ for (const file of assetFiles) {
   }
 }
 
+// Copy academic-calendar
+if (fs.existsSync(path.join(distDir, 'academic-calendar'))) {
+  fs.cpSync(path.join(distDir, 'academic-calendar'), path.join(stagingQuick, 'academic-calendar'), { recursive: true });
+}
+
 const psZipQuick = `Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory('${stagingQuick}', '${zipQuick}', [System.IO.Compression.CompressionLevel]::Optimal, $false)`;
 execSync(`powershell -Command "${psZipQuick}"`, { stdio: 'inherit' });
 fs.rmSync(stagingQuick, { recursive: true, force: true });
 console.log(`✅ Successfully created: rvs-quick-update.zip (${(fs.statSync(zipQuick).size / (1024 * 1024)).toFixed(2)} MB)`);
+
+// 6b. Create rvs-academic-calendar-only.zip (tiny ~2.2 MB: contains academic-calendar/ folder for instant upload)
+const zipCalendar = path.join(projectRoot, 'rvs-academic-calendar-only.zip');
+if (fs.existsSync(zipCalendar)) {
+  fs.unlinkSync(zipCalendar);
+}
+const stagingCalendar = path.join(projectRoot, 'staging-calendar');
+if (fs.existsSync(stagingCalendar)) {
+  fs.rmSync(stagingCalendar, { recursive: true, force: true });
+}
+fs.mkdirSync(path.join(stagingCalendar, 'academic-calendar'), { recursive: true });
+fs.cpSync(path.join(projectRoot, 'public', 'academic-calendar'), path.join(stagingCalendar, 'academic-calendar'), { recursive: true });
+
+const psZipCalendar = `Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory('${stagingCalendar}', '${zipCalendar}', [System.IO.Compression.CompressionLevel]::Optimal, $false)`;
+execSync(`powershell -Command "${psZipCalendar}"`, { stdio: 'inherit' });
+fs.rmSync(stagingCalendar, { recursive: true, force: true });
+console.log(`✅ Successfully created: rvs-academic-calendar-only.zip (${(fs.statSync(zipCalendar).size / (1024 * 1024)).toFixed(2)} MB)`);
 
 // 7. Create rvs-syllabus-pdfs.zip (contains the syllabus/ folder with all 19 official PDFs)
 const zipSyllabus = path.join(projectRoot, 'rvs-syllabus-pdfs.zip');
