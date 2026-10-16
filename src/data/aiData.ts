@@ -422,8 +422,8 @@ export const AI_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/14. AI.pdf',
       downloadFileName: 'B.Tech_AI_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '35.7 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Artificial Intelligence approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Artificial Intelligence approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'B.Tech CSE (Artificial Intelligence) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
@@ -432,8 +432,8 @@ export const AI_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/10. CSE (AI).pdf',
       downloadFileName: 'B.Tech_CSE_AI_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '35.7 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Computer Science and Engineering (Artificial Intelligence).',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Computer Science and Engineering (Artificial Intelligence).',
     },
   ],
   association: {

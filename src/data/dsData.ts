@@ -317,8 +317,8 @@ export const CSE_DATA_SCIENCE_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/07. CSE (DS).pdf',
       downloadFileName: 'B.Tech_CSE_Data_Science_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '34.6 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Data Science) approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Data Science) approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'M.Tech CSE (Data Science) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',

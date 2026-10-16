@@ -877,7 +877,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold uppercase tracking-wider text-gold-700 font-mono">
-                        Official Academic Repository
+                        Academic Repository
                       </span>
                       <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -921,7 +921,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                           : 'text-slate-700 hover:text-navy-950'
                       }`}
                     >
-                      All Official Syllabi ({(deptData.syllabusDownloads || []).length})
+                      All Syllabi ({(deptData.syllabusDownloads || []).length})
                     </button>
                     <button
                       onClick={() => setSyllabusFilter('btech')}
@@ -975,7 +975,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                       <div className="text-center py-12 px-4 rounded-3xl bg-slate-50 border border-dashed border-slate-200 space-y-3">
                         <BookMarked className="w-10 h-10 text-slate-400 mx-auto" />
                         <h4 className="font-serif text-lg font-bold text-navy-950">No syllabus documents found</h4>
-                        <p className="text-xs text-slate-500">Try changing your search query or switching to &ldquo;All Official Syllabi&rdquo;.</p>
+                        <p className="text-xs text-slate-500">Try changing your search query or switching to &ldquo;All Syllabi&rdquo;.</p>
                         <Button variant="outline-navy" size="sm" onClick={() => { setSyllabusFilter('all'); setSyllabusSearch(''); }}>
                           Reset Filters
                         </Button>
@@ -1858,7 +1858,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
             {/* Modal Footer Strip */}
             <div className="p-3 sm:p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
               <span>
-                Viewing official document for <strong>{deptData.shortName}</strong> ({previewPdfDoc.level}).
+                Viewing document for <strong>{deptData.shortName}</strong> ({previewPdfDoc.level}).
               </span>
               <div className="flex items-center gap-2">
                 <a

@@ -317,8 +317,8 @@ export const CSE_IOT_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/09. CSE (IOT).pdf',
       downloadFileName: 'B.Tech_CSE_IoT_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '21.6 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Internet of Things) approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Internet of Things) approved by the Academic Council & Board of Studies.',
     },
   ],
   association: {

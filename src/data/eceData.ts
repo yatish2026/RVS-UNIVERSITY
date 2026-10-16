@@ -421,8 +421,8 @@ export const ECE_DEPARTMENT_DATA: DepartmentDetailData = {
       size: '33.9 MB',
       fileUrl: '/syllabus/04. ECE.pdf',
       downloadFileName: 'B.Tech_ECE_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Electronics & Communication Engineering approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Electronics & Communication Engineering approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'B.Tech ECE (Drone Technology) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
@@ -431,8 +431,8 @@ export const ECE_DEPARTMENT_DATA: DepartmentDetailData = {
       size: '32.6 MB',
       fileUrl: '/syllabus/19. ECE (DT).pdf',
       downloadFileName: 'B.Tech_ECE_Drone_Technology_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech ECE with Specialization in Drone Technology approved by the Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech ECE with Specialization in Drone Technology approved by the Board of Studies.',
     },
     {
       title: 'M.Tech VLSI Design - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',

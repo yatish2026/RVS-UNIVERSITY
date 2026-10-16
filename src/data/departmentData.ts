@@ -695,8 +695,8 @@ export const CIVIL_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/01. CE.pdf',
       downloadFileName: 'B.Tech_Civil_Engineering_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       level: 'B.Tech Under Graduate',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Civil Engineering approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Civil Engineering approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'M.Tech Structural Engineering - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
@@ -1470,8 +1470,8 @@ M4: To nurture the personality traits among the students in different dimensions
       fileUrl: '/syllabus/02. EEE.pdf',
       downloadFileName: 'B.Tech_EEE_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       level: 'B.Tech Under Graduate',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Electrical & Electronics Engineering approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Electrical & Electronics Engineering approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'M.Tech Power Electronics & Electrical Drives - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
@@ -1808,8 +1808,8 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
           fileUrl: matchedBranch.fileUrl,
           downloadFileName: matchedBranch.downloadFileName,
           level: 'B.Tech Under Graduate',
-          badge: 'Official Syllabus (R26)',
-          description: `Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for ${matchedBranch.degreeName} approved by the Academic Council & Board of Studies.`,
+          badge: 'Syllabus (R26)',
+          description: `Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for ${matchedBranch.degreeName} approved by the Academic Council & Board of Studies.`,
         },
       ],
     };

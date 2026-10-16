@@ -286,8 +286,8 @@ export const CSE_CYBER_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/08. CSE (CSC).pdf',
       downloadFileName: 'B.Tech_CSE_Cyber_Security_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '35.3 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Cyber Security) approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Cyber Security) approved by the Academic Council & Board of Studies.',
     },
   ],
   association: {

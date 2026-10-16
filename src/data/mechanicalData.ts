@@ -389,8 +389,8 @@ M4 : Creating an ecosystem for continuous development of faculty and students by
       fileUrl: '/syllabus/03. ME.pdf',
       downloadFileName: 'B.Tech_Mechanical_Engineering_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       level: 'B.Tech Under Graduate',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Mechanical Engineering approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Mechanical Engineering approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'M.Tech CAD/CAM - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',

@@ -419,8 +419,8 @@ export const CSE_AIML_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/06. CSE (AI&ML).pdf',
       downloadFileName: 'B.Tech_CSE_AIML_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '37.6 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Artificial Intelligence & Machine Learning) approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Artificial Intelligence & Machine Learning) approved by the Academic Council & Board of Studies.',
     },
   ],
   association: {

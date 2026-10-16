@@ -59,7 +59,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
     },
     'academic-calendars': {
       title: 'Academic Calendars (2026–27)',
-      subtitle: 'Official university instructional working days, mid examinations, semester practicals, and vacation calendars.',
+      subtitle: 'University instructional working days, mid examinations, semester practicals, and vacation calendars.',
       category: 'Academic Schedules',
     },
     'naac-ssr': {
@@ -347,7 +347,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                       Academic Calendars (Academic Year 2026–27)
                     </h2>
                     <p className="text-xs md:text-sm text-slate-600">
-                      Official schedules for instructional working days, mid examinations, semester practicals, and university semester-end exams.
+                      Schedules for instructional working days, mid examinations, semester practicals, and university semester-end exams.
                     </p>
                   </div>
 
@@ -357,7 +357,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                         program: 'I B.Tech II Sem Academic Calendar 2026–27', 
                         sem: 'B.Tech - First Year Second Semester', 
                         date: 'Academic Year 2026–27', 
-                        badge: 'Official PDF',
+                        badge: 'PDF',
                         file: '/academic-calendar/btech-academic-calendar-2026-27.pdf',
                         downloadName: 'I-BTech-II-Sem-Academic-Calendar-2026-27.pdf'
                       },
@@ -365,7 +365,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                         program: 'MBA & MCA Academic Calendar 2026–27', 
                         sem: 'School of Management & SCIS (MBA/MCA)', 
                         date: 'Academic Year 2026–27', 
-                        badge: 'Official PDF',
+                        badge: 'PDF',
                         file: '/academic-calendar/mba-mca-academic-calendar-2026-27.pdf',
                         downloadName: 'MBA-MCA-Academic-Calendar-2026-27.pdf'
                       },

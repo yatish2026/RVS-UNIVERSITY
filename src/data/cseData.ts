@@ -504,8 +504,8 @@ export const CSE_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/05. CSE.pdf',
       downloadFileName: 'B.Tech_CSE_Academic_Regulations_R26_1st_Year_Structure_Syllabi.pdf',
       size: '36.1 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Computer Science and Engineering approved by the Academic Council & Board of Studies.',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech Computer Science and Engineering approved by the Academic Council & Board of Studies.',
     },
     {
       title: 'B.Tech CSE (Cloud Computing & Automation) - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
@@ -514,8 +514,8 @@ export const CSE_DEPARTMENT_DATA: DepartmentDetailData = {
       fileUrl: '/syllabus/18. CSE (CC&A).pdf',
       downloadFileName: 'B.Tech_CSE_Cloud_Computing_Automation_R26_1st_Year_Structure_Syllabi.pdf',
       size: '21.8 MB',
-      badge: 'Official Syllabus (R26)',
-      description: 'Official Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Cloud Computing and Automation).',
+      badge: 'Syllabus (R26)',
+      description: 'Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Detailed Syllabi for B.Tech CSE (Cloud Computing and Automation).',
     },
     {
       title: 'M.Tech Computer Science & Engineering - Academic Regulations (R26) and 1ˢᵗ Year Course Structure & Syllabi',
