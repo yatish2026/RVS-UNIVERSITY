@@ -150,6 +150,99 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
     }
   };
 
+// Complete list of offered courses mapped by Academic School
+const COURSES_BY_SCHOOL: { [schoolName: string]: string[] } = {
+  'School of Computer Science & Engineering (SCSE)': [
+    'B.Tech Computer Science and Engineering',
+    'B.Tech Computer Science and Engineering (Artificial Intelligence)',
+    'B.Tech Artificial Intelligence',
+    'B.Tech CSE (Cloud Computing and Automation)',
+    'M.Tech Computer Science and Engineering',
+    'B.Sc Honours Artificial Intelligence',
+  ],
+  'School of AI & Data Science (SAID)': [
+    'B.Tech CSE (Artificial Intelligence and Machine Learning)',
+    'B.Tech CSE (Artificial Intelligence and Robotics)',
+    'B.Tech CSE (Artificial Intelligence and Data Engineering)',
+    'B.Tech Artificial Intelligence and Data Science',
+    'B.Tech CSE (Data Science)',
+    'M.Tech CSE (Data Science)',
+    'M.Tech CSE (AI & ML)',
+    'M.Tech AI & DS',
+  ],
+  'School of Engineering & Technology (SOET)': [
+    'B.Tech Civil Engineering',
+    'B.Tech Electrical and Electronics Engineering',
+    'B.Tech Mechanical Engineering',
+    'B.Tech Electronics and Communications Engineering',
+    'B.Tech ECE (Drone Technology Specialization)',
+    'M.Tech Structural Engineering',
+    'M.Tech Power Electronics and Electrical Drives',
+    'M.Tech CAD/CAM',
+    'M.Tech VLSI Design',
+  ],
+  'School of Computing & Information Sciences (SCIS)': [
+    'B.Tech Information Technology',
+    'B.Tech CSE (Internet of Things - IoT)',
+    'B.Tech CSE (Quantum Computing)',
+    'B.Tech CSE (Cyber Security)',
+    'B.Tech Computer Science and Business Systems (CSBS)',
+    'Bachelor of Computer Application (BCA)',
+    'Master of Computer Application (MCA)',
+    'B.Sc Honours Cyber Forensics',
+    'B.Sc Honours Quantum Technology',
+    'M.Tech CSE (Cyber Security)',
+  ],
+  'School of Management Studies (SOMS)': [
+    'Master of Business Administration (MBA)',
+    'Bachelor of Business Administration (BBA)',
+  ],
+  'School of Allied Health Sciences (SAHS)': [
+    'Bachelor of Physiotherapy (BPT)',
+    'B.Sc Anaesthesia and Operation Theatre Technology',
+    'Bachelor of Medical Radiology & Imaging Technology (B.Sc RIT)',
+    'Bachelor of Physician Associates (B.Sc PA)',
+    'Bachelor of Optometry (B.Optom)',
+    'Bachelor of Emergency Medical Technologist (Paramedic)',
+    'Bachelor of Occupational Therapy (BOT)',
+    'B.Sc Medical Laboratory Technology (B.Sc MLT)',
+    'B.Sc Renal Dialysis Technology',
+    'B.Sc Cardiac Care Technology',
+    'B.Sc Respiratory Therapy',
+  ],
+};
+
+  const handleSchoolChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSchool = e.target.value;
+    setFormData((prev) => {
+      const schoolCourses = COURSES_BY_SCHOOL[newSchool] || [];
+      const isCurrentCourseInSchool = schoolCourses.includes(prev.course);
+      return {
+        ...prev,
+        school: newSchool,
+        course: isCurrentCourseInSchool ? prev.course : (schoolCourses[0] || ''),
+      };
+    });
+    if (errorMessage) setErrorMessage('');
+  };
+
+  const handleCourseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCourse = e.target.value;
+    let matchingSchool = formData.school;
+    for (const [schoolName, courses] of Object.entries(COURSES_BY_SCHOOL)) {
+      if (courses.includes(selectedCourse)) {
+        matchingSchool = schoolName;
+        break;
+      }
+    }
+    setFormData((prev) => ({
+      ...prev,
+      course: selectedCourse,
+      school: matchingSchool,
+    }));
+    if (errorMessage) setErrorMessage('');
+  };
+
   const schoolsList = [
     {
       name: 'School of Computer Science & Engineering (SCSE)',
@@ -174,14 +267,6 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
     {
       name: 'School of Allied Health Sciences (SAHS)',
       courses: 'BPT Physiotherapy, B.Sc MLT, Imaging, Dialysis, Optometry, OT Tech',
-    },
-    {
-      name: 'Polytechnic & Diploma Engineering',
-      courses: 'Diploma in Civil, EEE, Mechanical, ECE, Computer Engineering',
-    },
-    {
-      name: 'Doctorate & Ph.D. Research Programmes',
-      courses: 'Doctor of Philosophy (Ph.D.) in Engineering, Management & Sciences',
     },
   ];
 
@@ -354,12 +439,10 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
                     name="quota"
                     value={formData.quota}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-xs sm:text-sm focus:outline-none transition-colors"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-xs sm:text-sm focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="Management Quota / Direct Admission">Management Quota / Direct Admission</option>
-                    <option value="Convenor Quota (AP EAPCET / ICET / PGECET)">Convenor Quota (State Counseling)</option>
-                    <option value="Merit Scholarship Quota (Up to 100%)">Merit Scholarship Quota</option>
-                    <option value="NRI / International Scholar Quota">International / NRI Quota</option>
+                    <option value="Convenor Quota (AP EAPCET / ICET / PGECET)">Convenor Quota (AP EAPCET / ICET / PGECET)</option>
                   </select>
                 </div>
               </div>
@@ -373,8 +456,8 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
                 <select
                   name="school"
                   value={formData.school}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-xs sm:text-sm focus:outline-none transition-colors"
+                  onChange={handleSchoolChange}
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-xs sm:text-sm focus:outline-none transition-colors cursor-pointer"
                 >
                   {schoolsList.map((s, idx) => (
                     <option key={idx} value={s.name}>
@@ -385,17 +468,30 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#4A3828]">
-                  Specific Course / Branch Interested In
+                <label className="text-xs font-bold uppercase tracking-wider text-[#4A3828] flex items-center gap-1.5">
+                  <GraduationCap className="w-3.5 h-3.5 text-[#C6832B]" />
+                  <span>Specific Course / Branch Interested In *</span>
                 </label>
-                <input
-                  type="text"
+                <select
                   name="course"
                   value={formData.course}
-                  onChange={handleChange}
-                  placeholder="e.g. B.Tech Computer Science & AI, MBA, BPT, etc."
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-sm placeholder:text-[#8C7A6B] focus:outline-none transition-colors"
-                />
+                  onChange={handleCourseChange}
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF3E7] border-2 border-[#E5D3BD] focus:border-[#C6832B] text-[#1D1611] text-xs sm:text-sm focus:outline-none transition-colors cursor-pointer"
+                >
+                  <option value="">-- Select Specific Course / Branch --</option>
+                  {formData.course && !Object.values(COURSES_BY_SCHOOL).flat().includes(formData.course) && (
+                    <option value={formData.course}>{formData.course}</option>
+                  )}
+                  {Object.entries(COURSES_BY_SCHOOL).map(([schoolName, courses]) => (
+                    <optgroup key={schoolName} label={schoolName}>
+                      {courses.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
               </div>
 
               {/* Row 4: Student Query / Message */}
