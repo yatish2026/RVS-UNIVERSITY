@@ -2,6 +2,7 @@ import hodEeeImg from '../assets/dept/hod-eee.jpg';
 import hodMechImg from '../assets/dept/hod-mech.jpg';
 import eeeDeptImg from '../assets/dept/eee-dept.webp';
 import mechDeptImg from '../assets/dept/mech-dept.jpg';
+import lawBannerImg from '../assets/rvs-campus-sunset-aerial.jpg';
 
 export type DepartmentTab = 
   | 'profile'
@@ -87,6 +88,7 @@ export interface DepartmentDetailData {
   schoolName: string;
   degreeName: string;
   bannerImage?: string;
+  isTemplate?: boolean;
   hod: {
     name: string;
     designation: string;
@@ -1817,26 +1819,28 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
 
   if (deptId === 'law') {
     return {
-      ...CIVIL_DEPARTMENT_DATA,
       id: 'law',
       name: 'School of Law (SOL)',
       shortName: 'School of Law',
       schoolName: 'School of Law (SOL)',
       degreeName: 'Master of Laws (LL.M Programmes)',
+      bannerImage: lawBannerImg,
+      isTemplate: true,
       hod: {
         name: 'Dean / Head of Law',
-        designation: 'Dean & Professor of Law',
-        qualification: 'LL.M, Ph.D in Law',
-        experience: 20,
-        email: 'deanlaw@rvsuniversity.ac.in',
-        phone: '+91 85722 46298',
-        room: 'Law Academic Block, Room 101',
-        message: 'Welcome to the School of Law at RVS University. The school offers specialized Master of Laws (LL.M) degrees in Labour Law, Criminal Jurisprudence, Constitutional Law, Intellectual Property Rights, and Cyber Law & Forensics. Detailed curriculum framework and faculty profiles will be updated soon.',
+        designation: 'School of Law',
+        qualification: '',
+        experience: 0,
+        email: '',
+        phone: '',
+        room: '',
+        message: 'Welcome to the School of Law at RVS University. Academic curriculum, faculty directory, and departmental details will be updated soon.',
       },
       profile: {
-        ...CIVIL_DEPARTMENT_DATA.profile,
-        nbaAccreditation: 'Approved by Regulatory Authorities',
-        overview: 'The School of Law at RVS University offers premier postgraduate legal education dedicated to excellence in judicial reasoning, constitutional governance, intellectual property regimes, and digital cyber forensics. Complete syllabus schemes, faculty directory, and moot court records will be updated soon.',
+        nbaAccreditation: '',
+        overview: 'The School of Law at RVS University offers premier postgraduate legal education dedicated to excellence in judicial reasoning, constitutional governance, intellectual property regimes, and digital cyber forensics. Academic curriculum, faculty directory, and Board of Studies proceedings will be updated soon.',
+        objectives: [],
+        strengths: [],
         coursesOffered: [
           { level: 'Post Graduate (Law)', course: 'LL.M - Labour Law', intake: 20, convenorQuota: 14, bCategory: 6 },
           { level: 'Post Graduate (Law)', course: 'LL.M - Law of Crimes', intake: 20, convenorQuota: 14, bCategory: 6 },
@@ -1844,6 +1848,33 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
           { level: 'Post Graduate (Law)', course: 'LL.M - Intellectual Property Law', intake: 20, convenorQuota: 14, bCategory: 6 },
           { level: 'Post Graduate (Law)', course: 'LL.M - Cyber Law and Forensics', intake: 20, convenorQuota: 14, bCategory: 6 },
         ],
+      },
+      visionMission: {
+        vision: '',
+        mission: '',
+        articulation: '',
+        keyObjectives: [],
+        commitment: '',
+      },
+      outcomes: {
+        peos: [],
+        psos: [],
+        pos: [],
+      },
+      faculty: {
+        btech: [],
+        diploma: [],
+        mtech: [],
+      },
+      publications: [],
+      seminars: [],
+      laboratories: [],
+      syllabusRegulations: {
+        regulation: 'R26 Regulations',
+        title: 'Master of Laws (LL.M) Curriculum',
+        semesters: [],
+        honorsPools: [],
+        minorsTracks: [],
       },
       syllabusDownloads: [
         {
@@ -1902,6 +1933,39 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
           description: 'Detailed course structure and academic syllabi for LL.M in Cyber Law and Forensics will be updated soon upon approval by the Board of Studies.',
         },
       ],
+      association: {
+        name: 'Law Students Association',
+        acronym: 'LSA',
+        tagline: 'Advocacy, Justice and Rule of Law',
+        description: 'Student legal forum activities will be updated soon.',
+        activities: [],
+      },
+      rnd: {
+        patentsFiled: 0,
+        consultancyAreas: [],
+        thrustAreas: [],
+        mous: [],
+      },
+      studentCorner: {
+        clubs: [],
+        achievements: [],
+        internships: [],
+      },
+      placement: {
+        highlights: [],
+        topRecruiters: [],
+        roles: [],
+      },
+      events: [],
+      contact: {
+        department: 'School of Law',
+        hodName: 'Dean / Head of School',
+        officeLocation: 'School of Law Academic Block',
+        email: '',
+        phone: '',
+        altPhone: '',
+        officeHours: '9:00 AM - 5:00 PM',
+      },
     };
   }
 

@@ -3,7 +3,7 @@ import { Target, Eye, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
 
-import whyRvsCollageImg from '../../assets/why-rvs-collage.png';
+import studentHoneycombCollageImg from '../../assets/student-honeycomb-collage.png';
 
 export const WhyRvsSection: React.FC = () => {
   return (
@@ -52,7 +52,7 @@ export const WhyRvsSection: React.FC = () => {
             <Reveal direction="left" delay={200}>
               <div className="relative group rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 transform hover:scale-[1.01]">
                 <img
-                  src={whyRvsCollageImg}
+                  src={studentHoneycombCollageImg}
                   alt="RVS University Student Life & Academic Excellence Montage"
                   loading="lazy"
                   decoding="async"

@@ -44,12 +44,12 @@ import cyberForensicsImg from '../assets/generated/cyber-forensics-lab.jpg';
 import bbaStudioImg from '../assets/generated/bba-business-studio.jpg';
 
 // School of Law photo assets
-import lawSchoolImg from '../assets/SMS_6988.JPG';
-import lawLabourImg from '../assets/064A4797.JPG';
-import lawCrimesImg from '../assets/DSC05458.JPG';
-import lawConstImg from '../assets/064A6024.JPG';
-import lawIpImg from '../assets/064A7604.JPG';
-import lawCyberImg from '../assets/DSC06560.JPG';
+import lawSchoolImg from '../assets/rvs-campus-sunset-aerial.jpg';
+import lawLabourImg from '../assets/064A7319.JPG';
+import lawCrimesImg from '../assets/064A7842.JPG';
+import lawConstImg from '../assets/campus-hero-dsc06293.JPG';
+import lawIpImg from '../assets/DSC06305.JPG';
+import lawCyberImg from '../assets/generated/cyber-forensics-lab.jpg';
 
 export const ALL_DEGREE_CATEGORIES: DegreeCategory[] = [
   {

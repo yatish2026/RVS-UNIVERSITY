@@ -47,6 +47,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
     if (['it', 'iot', 'csc', 'cyber', 'cyber-security', 'cse-cyber', 'bca', 'mca', 'scis'].includes(normalizedId)) return 'school-scis';
     if (['mba', 'bba', 'soms', 'management'].includes(normalizedId)) return 'school-soms';
     if (['sahs', 'allied', 'health'].includes(normalizedId)) return 'school-sahs';
+    if (['law', 'sol', 'llm', 'legal'].includes(normalizedId)) return 'school-law';
 
     if (schoolName) {
       const s = schoolName.toLowerCase();
@@ -56,6 +57,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
       if (s.includes('scis') || s.includes('computing') || s.includes('information sciences')) return 'school-scis';
       if (s.includes('soms') || s.includes('management studies') || s.includes('management')) return 'school-soms';
       if (s.includes('sahs') || s.includes('allied health')) return 'school-sahs';
+      if (s.includes('law') || s.includes('sol')) return 'school-law';
     }
     return 'school-soet';
   };
@@ -230,7 +232,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   </div>
                 ) : (
                   <div className="w-12 h-12 rounded-2xl bg-gold-500 text-navy-950 flex items-center justify-center font-serif font-black text-lg shadow-md flex-shrink-0">
-                    HOD
+                    {deptData.isTemplate ? <Clock className="w-6 h-6 text-navy-950" /> : 'HOD'}
                   </div>
                 )}
                 <div>
@@ -238,27 +240,41 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                     {deptData.hod.name}
                   </h4>
                   <div className="text-[11px] text-gold-300 font-medium">
-                    {deptData.hod.designation} &bull; {deptData.hod.qualification}
+                    {deptData.hod.designation} {deptData.hod.qualification && `• ${deptData.hod.qualification}`}
                   </div>
-                  <div className="text-[10px] text-slate-400">
-                    {deptData.hod.experience} Years Academic Experience
-                  </div>
+                  {deptData.hod.experience > 0 && (
+                    <div className="text-[10px] text-slate-400">
+                      {deptData.hod.experience} Years Academic Experience
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div className="pt-2 border-t border-navy-800 text-[11px] space-y-1.5 text-slate-300">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-                  <a href={`mailto:${deptData.hod.email}`} className="hover:underline truncate">{deptData.hod.email}</a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-                  <span>{deptData.hod.phone}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
-                  <span className="truncate">{deptData.hod.room}</span>
-                </div>
+                {deptData.hod.email ? (
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+                    <a href={`mailto:${deptData.hod.email}`} className="hover:underline truncate">{deptData.hod.email}</a>
+                  </div>
+                ) : null}
+                {deptData.hod.phone ? (
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+                    <span>{deptData.hod.phone}</span>
+                  </div>
+                ) : null}
+                {deptData.hod.room ? (
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+                    <span className="truncate">{deptData.hod.room}</span>
+                  </div>
+                ) : null}
+                {deptData.isTemplate && !deptData.hod.email && !deptData.hod.phone && (
+                  <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+                    <Clock className="w-3.5 h-3.5 text-gold-400 flex-shrink-0" />
+                    <span>Contact details will be updated soon</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -269,10 +285,34 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
           {/* RIGHT MAIN CONTENT AREA */}
           {/* ========================================================================= */}
           <main className="lg:col-span-9 space-y-8">
-            
-            {/* ----------------------------------------------------------------------- */}
-            {/* TAB 1: DEPARTMENT PROFILE */}
-            {/* ----------------------------------------------------------------------- */}
+            {deptData.isTemplate && activeTab !== 'profile' ? (
+              <div className="bg-white rounded-3xl p-8 sm:p-14 border border-slate-200/90 shadow-xl text-center space-y-5 animate-fadeIn">
+                <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-gold-700 flex items-center justify-center mx-auto shadow-sm">
+                  <Clock className="w-8 h-8 text-gold-600 animate-pulse" />
+                </div>
+                <div className="space-y-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gold-700 font-mono">
+                    {deptData.name}
+                  </span>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-navy-950">
+                    {navMenuItems.find(item => item.id === activeTab)?.label || 'Information'} Will Be Updated Soon
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
+                  Official records, curriculum proceedings, and documentation for this section are currently being consolidated and will be published here shortly.
+                </p>
+                <div className="pt-2">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
+                    <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+                    <span>{deptData.schoolName} &bull; Academic Year 2026–27</span>
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* ----------------------------------------------------------------------- */}
+                {/* TAB 1: DEPARTMENT PROFILE */}
+                {/* ----------------------------------------------------------------------- */}
             {activeTab === 'profile' && (
               <div className="space-y-8">
                 {/* Department Feature Visual Banner */}
@@ -292,10 +332,12 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                         {deptData.name}
                       </h3>
                     </div>
-                    <span className="hidden sm:inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40 backdrop-blur-md">
-                      <Award className="w-3.5 h-3.5 text-gold-400" />
-                      NBA Tier-I Accredited
-                    </span>
+                    {deptData.profile.nbaAccreditation ? (
+                      <span className="hidden sm:inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/40 backdrop-blur-md">
+                        <Award className="w-3.5 h-3.5 text-gold-400" />
+                        {deptData.profile.nbaAccreditation}
+                      </span>
+                    ) : null}
                   </div>
                 </div>
 
@@ -310,10 +352,12 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                         Department Profile
                       </h2>
                     </div>
-                    <span className="hidden sm:inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      NBA Tier-I Accredited
-                    </span>
+                    {deptData.profile.nbaAccreditation ? (
+                      <span className="hidden sm:inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        {deptData.profile.nbaAccreditation}
+                      </span>
+                    ) : null}
                   </div>
 
                   <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
@@ -321,41 +365,43 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   </p>
 
                   {/* Objectives & Strengths Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                    
-                    {/* Objectives */}
-                    <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                      <h3 className="font-serif font-bold text-base text-navy-950 flex items-center gap-2">
-                        <Target className="w-4 h-4 text-gold-600" />
-                        <span>Our Objectives</span>
-                      </h3>
-                      <ul className="space-y-2">
-                        {deptData.profile.objectives.map((obj, idx) => (
-                          <li key={idx} className="text-xs text-slate-700 flex items-start gap-2 leading-relaxed">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold-600 mt-1.5 flex-shrink-0" />
-                            <span>{obj}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  {deptData.profile.objectives && deptData.profile.objectives.length > 0 && deptData.profile.strengths && deptData.profile.strengths.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                      
+                      {/* Objectives */}
+                      <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                        <h3 className="font-serif font-bold text-base text-navy-950 flex items-center gap-2">
+                          <Target className="w-4 h-4 text-gold-600" />
+                          <span>Our Objectives</span>
+                        </h3>
+                        <ul className="space-y-2">
+                          {deptData.profile.objectives.map((obj, idx) => (
+                            <li key={idx} className="text-xs text-slate-700 flex items-start gap-2 leading-relaxed">
+                              <span className="w-1.5 h-1.5 rounded-full bg-gold-600 mt-1.5 flex-shrink-0" />
+                              <span>{obj}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    {/* Department Strengths */}
-                    <div className="p-6 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-3">
-                      <h3 className="font-serif font-bold text-base text-navy-950 flex items-center gap-2">
-                        <Award className="w-4 h-4 text-gold-700" />
-                        <span>Department Strength</span>
-                      </h3>
-                      <ul className="space-y-2">
-                        {deptData.profile.strengths.map((str, idx) => (
-                          <li key={idx} className="text-xs text-slate-800 flex items-start gap-2 font-medium leading-relaxed">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                            <span>{str}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      {/* Department Strengths */}
+                      <div className="p-6 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-3">
+                        <h3 className="font-serif font-bold text-base text-navy-950 flex items-center gap-2">
+                          <Award className="w-4 h-4 text-gold-700" />
+                          <span>Department Strength</span>
+                        </h3>
+                        <ul className="space-y-2">
+                          {deptData.profile.strengths.map((str, idx) => (
+                            <li key={idx} className="text-xs text-slate-800 flex items-start gap-2 font-medium leading-relaxed">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                              <span>{str}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                  </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Courses Offered Table Card */}
@@ -1771,7 +1817,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                     <div>
                       <h4 className="font-serif font-bold text-base text-navy-950 mb-2">Student Admissions & Counselling</h4>
                       <p className="text-xs text-slate-700 leading-relaxed">
-                        For undergraduate (B.Tech), diploma (DCE), and postgraduate (M.Tech) admissions in Civil Engineering, please reach out to our admission counselors.
+                        For academic admissions and programme details in {deptData.name}, please reach out to our admission counselors.
                       </p>
                     </div>
 
@@ -1788,6 +1834,9 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   </div>
                 </div>
               </div>
+            )}
+
+              </>
             )}
 
           </main>
