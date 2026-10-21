@@ -26,7 +26,7 @@ export const AcademicSchoolsSection: React.FC<AcademicSchoolsSectionProps> = ({
             <SectionHeading
               eyebrow="Academic Schools & Degree Offerings"
               title="Programs Offered"
-              subtitle="Explore accredited undergraduate, postgraduate, and diploma programs across our 6 specialized academic schools."
+              subtitle="Explore accredited undergraduate, postgraduate, and diploma programs across our 7 specialized academic schools."
               variant="dark"
             />
           </Reveal>

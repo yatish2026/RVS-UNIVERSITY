@@ -134,6 +134,7 @@ export const Footer: React.FC = () => {
                   { label: 'AI & Data Science (SAID)', href: '#course-school-said' },
                   { label: 'Computing & Info (SCIS)', href: '#course-school-scis' },
                   { label: 'Management Studies (SOMS)', href: '#course-school-soms' },
+                  { label: 'School of Law (SOL)', href: '#course-school-law' },
                   { label: 'Allied Health Sciences (SAHS)', href: '#course-school-sahs' },
                 ].map((item, idx) => (
                   <li key={idx}>

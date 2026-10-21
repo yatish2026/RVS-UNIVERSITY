@@ -43,6 +43,14 @@ import bcaAppDevImg from '../assets/generated/bca-app-dev-studio.jpg';
 import cyberForensicsImg from '../assets/generated/cyber-forensics-lab.jpg';
 import bbaStudioImg from '../assets/generated/bba-business-studio.jpg';
 
+// School of Law photo assets
+import lawSchoolImg from '../assets/SMS_6988.JPG';
+import lawLabourImg from '../assets/064A4797.JPG';
+import lawCrimesImg from '../assets/DSC05458.JPG';
+import lawConstImg from '../assets/064A6024.JPG';
+import lawIpImg from '../assets/064A7604.JPG';
+import lawCyberImg from '../assets/DSC06560.JPG';
+
 export const ALL_DEGREE_CATEGORIES: DegreeCategory[] = [
   {
     id: 'school-soet',
@@ -701,6 +709,78 @@ export const ALL_DEGREE_CATEGORIES: DegreeCategory[] = [
         highlights: ['Diabetic Foot & Podiatry Lab', 'CGM & Insulin Pump Suite', 'Endocrinology Ward Attachment'],
         image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80',
         iconName: 'Activity',
+      },
+    ],
+  },
+  {
+    id: 'school-law',
+    title: 'School of Law (SOL)',
+    subtitle: 'Postgraduate Master of Laws (LL.M) Programmes',
+    levelBadge: 'Law (PG) • LL.M Degrees',
+    countLabel: '5 Programmes',
+    iconName: 'Scale',
+    image: lawSchoolImg,
+    description: 'Premier center for postgraduate legal jurisprudence, advanced constitutional governance, corporate and labor arbitration, intellectual property regimes, and digital cyber forensics law.',
+    courses: [
+      {
+        id: 'law-llm-labour',
+        name: 'LL.M - Labour Law',
+        code: 'LL.M (Labour Law)',
+        duration: '2 Years (4 Semesters)',
+        seats: 20,
+        eligibility: 'LL.B (3-Year or 5-Year Integrated Degree) with minimum 50% from any BCI-recognized University',
+        description: 'Advanced study of industrial jurisprudence, employment contracts, trade union administration, wage legislation, social security frameworks, and international labor standards (ILO).',
+        highlights: ['Industrial Dispute Resolution Clinic', 'Arbitration & Collective Bargaining Simulation', 'Comparative Labor Law Research'],
+        image: lawLabourImg,
+        iconName: 'Scale',
+      },
+      {
+        id: 'law-llm-crimes',
+        name: 'LL.M - Law of Crimes',
+        code: 'LL.M (Criminal Law)',
+        duration: '2 Years (4 Semesters)',
+        seats: 20,
+        eligibility: 'LL.B (3-Year or 5-Year Integrated Degree) with minimum 50% from any BCI-recognized University',
+        description: 'Comprehensive analysis of substantive criminal law, comparative criminal procedure, penological theories, forensic evidence admissibility, victimology, and criminological behavior.',
+        highlights: ['Moot Court Criminal Trials', 'Forensic Criminalistics Lab', 'Appellate Court Advocacy Internship'],
+        image: lawCrimesImg,
+        iconName: 'Shield',
+      },
+      {
+        id: 'law-llm-constitutional',
+        name: 'LL.M - Constitutional Law',
+        code: 'LL.M (Constitutional Law)',
+        duration: '2 Years (4 Semesters)',
+        seats: 20,
+        eligibility: 'LL.B (3-Year or 5-Year Integrated Degree) with minimum 50% from any BCI-recognized University',
+        description: 'Constitutional interpretation, federalism, administrative law, fundamental rights adjudication, constitutional morality, and the doctrinal dynamics of the judicial process.',
+        highlights: ['Constitutional Law Colloquium', 'Judicial Clerkship Simulation', 'Human Rights Advocacy Cell'],
+        image: lawConstImg,
+        iconName: 'BookOpen',
+      },
+      {
+        id: 'law-llm-ip',
+        name: 'LL.M - Intellectual Property Law',
+        code: 'LL.M (IP Law)',
+        duration: '2 Years (4 Semesters)',
+        seats: 20,
+        eligibility: 'LL.B (3-Year or 5-Year Integrated Degree) with minimum 50% from any BCI-recognized University',
+        description: 'Patent litigation, copyright regimes, trademark prosecution, industrial designs, trade secrets, technology licensing agreements, and WTO/TRIPS international conventions.',
+        highlights: ['Patent Filing & Drafting Hub', 'Corporate IP Strategy & Valuation', 'Cross-Border IP Dispute Workshops'],
+        image: lawIpImg,
+        iconName: 'Award',
+      },
+      {
+        id: 'law-llm-cyber-forensics',
+        name: 'LL.M - Cyber Law and Forensics',
+        code: 'LL.M (Cyber Law)',
+        duration: '2 Years (4 Semesters)',
+        seats: 20,
+        eligibility: 'LL.B (3-Year or 5-Year Integrated Degree) with minimum 50% from any BCI-recognized University',
+        description: 'Information Technology Act compliance, cybercrime investigation, admissibility of electronic records & digital evidence, data privacy frameworks (DPDP/GDPR), and AI governance.',
+        highlights: ['Digital Forensics Lab Integration', 'Cyber Incident Adjudication Drills', 'Data Privacy Officer Compliance Track'],
+        image: lawCyberImg,
+        iconName: 'ShieldCheck',
       },
     ],
   },

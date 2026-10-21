@@ -1815,6 +1815,96 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
     };
   }
 
+  if (deptId === 'law') {
+    return {
+      ...CIVIL_DEPARTMENT_DATA,
+      id: 'law',
+      name: 'School of Law (SOL)',
+      shortName: 'School of Law',
+      schoolName: 'School of Law (SOL)',
+      degreeName: 'Master of Laws (LL.M Programmes)',
+      hod: {
+        name: 'Dean / Head of Law',
+        designation: 'Dean & Professor of Law',
+        qualification: 'LL.M, Ph.D in Law',
+        experience: 20,
+        email: 'deanlaw@rvsuniversity.ac.in',
+        phone: '+91 85722 46298',
+        room: 'Law Academic Block, Room 101',
+        message: 'Welcome to the School of Law at RVS University. The school offers specialized Master of Laws (LL.M) degrees in Labour Law, Criminal Jurisprudence, Constitutional Law, Intellectual Property Rights, and Cyber Law & Forensics. Detailed curriculum framework and faculty profiles will be updated soon.',
+      },
+      profile: {
+        ...CIVIL_DEPARTMENT_DATA.profile,
+        nbaAccreditation: 'Approved by Regulatory Authorities',
+        overview: 'The School of Law at RVS University offers premier postgraduate legal education dedicated to excellence in judicial reasoning, constitutional governance, intellectual property regimes, and digital cyber forensics. Complete syllabus schemes, faculty directory, and moot court records will be updated soon.',
+        coursesOffered: [
+          { level: 'Post Graduate (Law)', course: 'LL.M - Labour Law', intake: 20, convenorQuota: 14, bCategory: 6 },
+          { level: 'Post Graduate (Law)', course: 'LL.M - Law of Crimes', intake: 20, convenorQuota: 14, bCategory: 6 },
+          { level: 'Post Graduate (Law)', course: 'LL.M - Constitutional Law', intake: 20, convenorQuota: 14, bCategory: 6 },
+          { level: 'Post Graduate (Law)', course: 'LL.M - Intellectual Property Law', intake: 20, convenorQuota: 14, bCategory: 6 },
+          { level: 'Post Graduate (Law)', course: 'LL.M - Cyber Law and Forensics', intake: 20, convenorQuota: 14, bCategory: 6 },
+        ],
+      },
+      syllabusDownloads: [
+        {
+          title: 'LL.M - Labour Law (R26 Curriculum & Course Structure)',
+          level: 'Postgraduate (LL.M)',
+          regulation: 'R26 Regulations',
+          fileUrl: '#',
+          downloadFileName: '',
+          size: 'Will Update Soon',
+          badge: 'Updating Soon',
+          isComingSoon: true,
+          description: 'Detailed course structure and academic syllabi for LL.M in Labour Law will be updated soon upon approval by the Board of Studies.',
+        },
+        {
+          title: 'LL.M - Law of Crimes (R26 Curriculum & Course Structure)',
+          level: 'Postgraduate (LL.M)',
+          regulation: 'R26 Regulations',
+          fileUrl: '#',
+          downloadFileName: '',
+          size: 'Will Update Soon',
+          badge: 'Updating Soon',
+          isComingSoon: true,
+          description: 'Detailed course structure and academic syllabi for LL.M in Law of Crimes will be updated soon upon approval by the Board of Studies.',
+        },
+        {
+          title: 'LL.M - Constitutional Law (R26 Curriculum & Course Structure)',
+          level: 'Postgraduate (LL.M)',
+          regulation: 'R26 Regulations',
+          fileUrl: '#',
+          downloadFileName: '',
+          size: 'Will Update Soon',
+          badge: 'Updating Soon',
+          isComingSoon: true,
+          description: 'Detailed course structure and academic syllabi for LL.M in Constitutional Law will be updated soon upon approval by the Board of Studies.',
+        },
+        {
+          title: 'LL.M - Intellectual Property Law (R26 Curriculum & Course Structure)',
+          level: 'Postgraduate (LL.M)',
+          regulation: 'R26 Regulations',
+          fileUrl: '#',
+          downloadFileName: '',
+          size: 'Will Update Soon',
+          badge: 'Updating Soon',
+          isComingSoon: true,
+          description: 'Detailed course structure and academic syllabi for LL.M in Intellectual Property Law will be updated soon upon approval by the Board of Studies.',
+        },
+        {
+          title: 'LL.M - Cyber Law and Forensics (R26 Curriculum & Course Structure)',
+          level: 'Postgraduate (LL.M)',
+          regulation: 'R26 Regulations',
+          fileUrl: '#',
+          downloadFileName: '',
+          size: 'Will Update Soon',
+          badge: 'Updating Soon',
+          isComingSoon: true,
+          description: 'Detailed course structure and academic syllabi for LL.M in Cyber Law and Forensics will be updated soon upon approval by the Board of Studies.',
+        },
+      ],
+    };
+  }
+
   // Generate generic template for other departments until user provides full data
   const titles: Record<string, string> = {
     cse: 'Department of Computer Science and Engineering',
@@ -1826,6 +1916,7 @@ export const getDepartmentData = (deptId: string): DepartmentDetailData => {
     it: 'Department of Information Technology',
     mba: 'Department of Management Studies (MBA)',
     mca: 'Department of Computer Applications (MCA)',
+    law: 'School of Law (SOL)',
   };
 
   const name = titles[deptId] || `Department of ${deptId.toUpperCase()} Engineering`;

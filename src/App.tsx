@@ -341,6 +341,7 @@ export const App: React.FC = () => {
         else if (hash.includes('eee') || hash.includes('electrical') || hash.includes('deee')) dept = 'eee';
         else if (hash.includes('mech') || hash.includes('mechanical') || hash.includes('dme')) dept = 'mechanical';
         else if (hash.includes('civil') || hash.includes('dept-ce') || hash === '#ce') dept = 'civil';
+        else if (hash.includes('law') || hash.includes('dept-law') || hash.includes('llm') || hash === '#sol') dept = 'law';
         
         resetAllViews();
         setDepartmentId(dept);
@@ -352,7 +353,7 @@ export const App: React.FC = () => {
       if (hash.startsWith('#course-')) {
         let courseId = hash.replace('#course-', '');
         
-        // Map shortcodes & aliases to the 6 official schools
+        // Map shortcodes & aliases to the official schools
         if (courseId === 'soet' || courseId === 'engineering' || courseId === 'eee' || courseId === 'mech' || courseId === 'ece' || courseId === 'drone' || courseId === 'school-engineering') {
           courseId = 'school-soet';
         } else if (courseId === 'civil' || courseId === 'ce') {
@@ -371,6 +372,8 @@ export const App: React.FC = () => {
           courseId = 'school-soms';
         } else if (courseId === 'sahs' || courseId === 'health' || courseId === 'allied-health' || courseId === 'paramedical' || courseId === 'physiotherapy' || courseId === 'bpt' || courseId === 'school-healthcare') {
           courseId = 'school-sahs';
+        } else if (courseId === 'law' || courseId === 'school-law' || courseId === 'llm' || courseId === 'sol' || courseId === 'school-of-law') {
+          courseId = 'school-law';
         }
 
         const exists = ALL_DEGREE_CATEGORIES.some((c) => c.id === courseId);

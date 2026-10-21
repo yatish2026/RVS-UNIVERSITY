@@ -6,7 +6,7 @@ import {
   Binary, Wifi, Database, TrendingUp, Laptop, Terminal, Stethoscope, 
   HeartHandshake, FlaskConical, Activity, Pill, Search, Dna, Atom,
   CreditCard, Target, DollarSign, Heart, Shield, ShieldAlert, Scan,
-  Eye, TestTube, HeartPulse, Building2, Gauge, Home
+  Eye, TestTube, HeartPulse, Building2, Gauge, Home, Scale
 } from 'lucide-react';
 import { DegreeCategory, CourseItem } from '../../types';
 import { Button } from '../ui/Button';
@@ -25,7 +25,7 @@ const iconLookup: Record<string, React.FC<{ className?: string }>> = {
   LineChart, Binary, Wifi, ShieldCheck, Database, TrendingUp,
   Laptop, Terminal, Stethoscope, HeartHandshake, FlaskConical,
   Search, Dna, Atom, CreditCard, Target, DollarSign, Heart, Shield,
-  ShieldAlert, Scan, Eye, TestTube, Gauge
+  ShieldAlert, Scan, Eye, TestTube, Gauge, Scale, BookOpen
 };
 
 // Reusable scroll-observer wrapper for course cards with buttery smooth landing entrance animation
@@ -407,6 +407,15 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                           >
                             <Building className="w-3.5 h-3.5" />
                             <span>Explore CSE Dept Portal (Full Syllabus & Faculty)</span>
+                            <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                          </a>
+                        ) : (course.id.includes('law') || course.id.includes('llm')) ? (
+                          <a
+                            href="#dept-law"
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white font-bold text-xs transition-all shadow-sm"
+                          >
+                            <Scale className="w-3.5 h-3.5" />
+                            <span>Explore School of Law Portal (LL.M Details)</span>
                             <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
                           </a>
                         ) : (

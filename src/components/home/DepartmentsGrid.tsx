@@ -4,7 +4,7 @@ import {
   Activity, Pill, Building, Zap, Radio, Code, Settings, Server, 
   LineChart, Binary, Wifi, ShieldCheck, Database, TrendingUp, 
   Laptop, Terminal, Stethoscope, HeartHandshake, FlaskConical, 
-  ArrowRight, CheckCircle2, Sparkles, Clock, Users, BookOpen, Shield 
+  ArrowRight, CheckCircle2, Sparkles, Clock, Users, BookOpen, Shield, Scale 
 } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ALL_DEGREE_CATEGORIES } from '../../data/coursesCatalog';
@@ -16,7 +16,8 @@ const iconLookup: Record<string, React.FC<{ className?: string }>> = {
   Cpu, Wrench, GraduationCap, Briefcase, Award, HeartPulse,
   Activity, Pill, Building, Zap, Radio, Code, Settings, Server,
   LineChart, Binary, Wifi, ShieldCheck, Database, TrendingUp,
-  Laptop, Terminal, Stethoscope, HeartHandshake, FlaskConical
+  Laptop, Terminal, Stethoscope, HeartHandshake, FlaskConical,
+  BookOpen, Shield, Scale
 };
 
 export const DepartmentsGrid: React.FC = () => {

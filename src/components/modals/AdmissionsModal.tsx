@@ -210,6 +210,13 @@ const COURSES_BY_SCHOOL: { [schoolName: string]: string[] } = {
     'B.Sc Cardiac Care Technology',
     'B.Sc Respiratory Therapy',
   ],
+  'School of Law (SOL)': [
+    'LL.M - Labour Law (20 Seats)',
+    'LL.M - Law of Crimes (20 Seats)',
+    'LL.M - Constitutional Law (20 Seats)',
+    'LL.M - Intellectual Property Law (20 Seats)',
+    'LL.M - Cyber Law and Forensics (20 Seats)',
+  ],
 };
 
   const handleSchoolChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -263,6 +270,10 @@ const COURSES_BY_SCHOOL: { [schoolName: string]: string[] } = {
     {
       name: 'School of Management Studies (SOMS)',
       courses: 'Master of Business Administration (MBA - 120 Seats), BBA (60 Seats)',
+    },
+    {
+      name: 'School of Law (SOL)',
+      courses: 'LL.M (Post Graduate): Labour Law, Law of Crimes, Constitutional Law, Intellectual Property Law, Cyber Law & Forensics (20 Seats Each)',
     },
     {
       name: 'School of Allied Health Sciences (SAHS)',

@@ -49,24 +49,24 @@ export const AcademicSchoolsPage: React.FC<AcademicSchoolsPageProps> = ({
             <div className="max-w-3xl space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C6832B]/15 border border-[#C6832B]/30 text-[#8B4513] text-xs font-bold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5 text-[#9C6019]" />
-                <span>6 Autonomous Schools • 49 Degree Programmes</span>
+                <span>7 Autonomous Schools • 54 Degree Programmes</span>
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-[#1D1611] leading-tight">
                 Academic Schools & Faculties
               </h1>
               <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
-                Explore 49 accredited undergraduate, postgraduate, and research degree programmes across our 6 specialized academic schools.
+                Explore 54 accredited undergraduate, postgraduate, and research degree programmes across our 7 specialized academic schools.
               </p>
             </div>
 
             {/* Quick Metrics Badge */}
             <div className="grid grid-cols-2 gap-3 bg-[#FFFDF9] shadow-sm p-4 sm:p-5 rounded-2xl border border-[#D4BC9F] flex-shrink-0">
               <div className="text-center px-3 py-2 bg-[#FAF3E7] rounded-xl border border-[#E5D3BD]">
-                <div className="font-serif text-2xl font-black text-[#9C6019]">6</div>
+                <div className="font-serif text-2xl font-black text-[#9C6019]">7</div>
                 <div className="text-[11px] text-[#6E5D4F] font-bold">Academic Schools</div>
               </div>
               <div className="text-center px-3 py-2 bg-[#FAF3E7] rounded-xl border border-[#E5D3BD]">
-                <div className="font-serif text-2xl font-black text-[#9C6019]">49</div>
+                <div className="font-serif text-2xl font-black text-[#9C6019]">54</div>
                 <div className="text-[11px] text-[#6E5D4F] font-bold">Degree Programmes</div>
               </div>
             </div>
