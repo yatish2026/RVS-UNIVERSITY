@@ -171,7 +171,7 @@ export const HeroSection: React.FC = () => {
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="text-[#C6832B]">•</span>
-                <span>Counselling Code EAPCET: <strong className="text-amber-300 font-bold">RVSPU / SVCTPU</strong></span>
+                <span>Counselling Code EAPCET: <strong className="text-amber-300 font-bold">RVSPU</strong></span>
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="text-[#C6832B]">•</span>
@@ -188,7 +188,7 @@ export const HeroSection: React.FC = () => {
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="text-[#C6832B]">•</span>
-                <span>Counselling Code EAPCET: <strong className="text-amber-300 font-bold">RVSPU / SVCTPU</strong></span>
+                <span>Counselling Code EAPCET: <strong className="text-amber-300 font-bold">RVSPU</strong></span>
               </span>
               <span className="inline-flex items-center gap-2">
                 <span className="text-[#C6832B]">•</span>

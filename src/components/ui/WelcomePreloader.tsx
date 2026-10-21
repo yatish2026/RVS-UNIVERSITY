@@ -20,10 +20,10 @@ const NOTICES = [
   {
     id: 2,
     tag: 'Admissions Open 2026–27',
-    title: 'Choose Your Programme • SVCTPU & RVSPU',
+    title: 'Choose Your Programme • RVSPU',
     image: noticeBanner2,
-    alt: 'RVS University and SVCET Admissions Open Existing & New B.Tech Programmes',
-    code: 'EAPCET: SVCTPU / RVSPU',
+    alt: 'RVS University Admissions Open Existing & New B.Tech Programmes',
+    code: 'EAPCET: RVSPU',
   },
 ];
 

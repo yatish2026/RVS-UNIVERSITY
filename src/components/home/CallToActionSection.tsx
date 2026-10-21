@@ -49,10 +49,6 @@ export const CallToActionSection: React.FC = () => {
                 <CheckCircle2 className="w-4 h-4 text-[#C6832B] flex-shrink-0" />
                 NEP 2020 Aligned Curriculum
               </span>
-              <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FAF7F2] border border-[#E8DED3] shadow-xs">
-                <CheckCircle2 className="w-4 h-4 text-[#C6832B] flex-shrink-0" />
-                100% Placement Assistance
-              </span>
             </div>
           </Reveal>
 
