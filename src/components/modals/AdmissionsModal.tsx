@@ -304,7 +304,7 @@ const COURSES_BY_SCHOOL: { [schoolName: string]: string[] } = {
               Apply or Enquire for Admission
             </h2>
             <p className="text-xs text-[#5C4837] font-normal">
-              Get official information on seat availability, merit scholarships, fee structures, and direct counseling.
+              Get verified information on seat availability, merit scholarships, fee structures, and direct counseling.
             </p>
           </div>
 

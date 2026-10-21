@@ -190,7 +190,7 @@ export const ResearchDetailPage: React.FC<ResearchDetailPageProps> = ({
                   Section Details Will Be Updated Soon
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
-                  Official data, documentation, and verified records for <strong className="text-navy-950">{menuItems.find(m => m.id === activeTab)?.label}</strong> are currently being consolidated by the Directorate of Research and will be published here shortly.
+                  Documentation, research data, and verified records for <strong className="text-navy-950">{menuItems.find(m => m.id === activeTab)?.label}</strong> are currently being consolidated by the Directorate of Research and will be published here shortly.
                 </p>
               </div>
 

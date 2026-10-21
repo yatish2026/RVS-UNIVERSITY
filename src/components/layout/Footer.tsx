@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
                   href="https://www.instagram.com/rvsuniversityofficial/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="RVS University Official Instagram"
+                  aria-label="RVS University Instagram"
                   className="w-10 h-10 rounded-xl bg-white/10 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-pink-500 hover:to-purple-600 text-white border border-white/20 hover:border-pink-400 backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
                   title="Instagram"
                 >
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
                   href="https://www.youtube.com/@rvs_university"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="RVS University Official YouTube Channel"
+                  aria-label="RVS University YouTube Channel"
                   className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#FF0000] text-white border border-white/20 hover:border-[#FF0000] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
                   title="YouTube"
                 >
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
                   href="https://www.facebook.com/p/RVSUniversityofficial-61593336956152/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="RVS University Official Facebook Page"
+                  aria-label="RVS University Facebook Page"
                   className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#1877F2] text-white border border-white/20 hover:border-[#1877F2] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 shadow-md group cursor-pointer"
                   title="Facebook"
                 >

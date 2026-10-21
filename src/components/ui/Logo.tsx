@@ -36,7 +36,7 @@ export const Logo: React.FC<LogoProps> = ({
       <div className={`relative flex-shrink-0 ${logoDimensions[size]} transition-transform duration-300 group-hover:scale-105 rounded-full overflow-hidden shadow-md border-2 border-gold-400 bg-white p-0.5 aspect-square`}>
         <img
           src={rvsOfficialLogo}
-          alt="RVS University Official Seal"
+          alt="RVS University Seal"
           className="w-full h-full object-contain rounded-full block"
         />
       </div>

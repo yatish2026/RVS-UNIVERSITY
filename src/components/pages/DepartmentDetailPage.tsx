@@ -299,7 +299,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base text-slate-600 max-w-lg mx-auto leading-relaxed">
-                  Official records, curriculum proceedings, and documentation for this section are currently being consolidated and will be published here shortly.
+                  Curriculum proceedings, records, and documentation for this section are currently being consolidated and will be published here shortly.
                 </p>
                 <div className="pt-2">
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
@@ -1678,7 +1678,7 @@ export const DepartmentDetailPage: React.FC<DepartmentDetailPageProps> = ({
               <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200/90 shadow-xl space-y-8">
                 <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 text-white border border-gold-400/40 space-y-3">
                   <span className="text-xs font-bold uppercase tracking-wider text-gold-300 font-mono">
-                    Official Student Body
+                    Department Student Body
                   </span>
                   <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white">
                     {deptData.association?.name || `${deptData.shortName} Department Association`} ({deptData.association?.acronym || 'Association'})

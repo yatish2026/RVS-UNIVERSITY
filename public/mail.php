@@ -143,7 +143,7 @@ $emailHtml = '
             </div>
         </div>
         <div class="footer">
-            Automated lead notification from RVS University official portal.<br>
+            Automated lead notification from RVS University Portal.<br>
             R.V.S. Nagar, Tirupathi Road, Chittoor, Andhra Pradesh - 517127.
         </div>
     </div>

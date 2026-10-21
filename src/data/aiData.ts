@@ -521,7 +521,7 @@ export const AI_DEPARTMENT_DATA: DepartmentDetailData = {
       'First Prize in South India Generative AI Hackathon 2024 (Cash prize of ₹ 50,000)',
       'Top 10 Global Finalist in Kaggle Healthcare Image Classification Challenge 2024',
       '3 Student Research Papers presented at IEEE and Springer International Conferences in 2024-2025',
-      'Over 40 students earned official certifications from NVIDIA Deep Learning Institute (DLI) and AWS Academy in 2024',
+      'Over 40 students earned recognized certifications from NVIDIA Deep Learning Institute (DLI) and AWS Academy in 2024',
     ],
     internships: [
       'Amazon AWS Machine Learning Development Hub, Bengaluru',

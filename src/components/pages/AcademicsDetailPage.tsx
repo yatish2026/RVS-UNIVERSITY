@@ -49,7 +49,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
   const tabMetadata: Record<AcademicTab, { title: string; subtitle: string; category: string }> = {
     'mandatory-disclosure': {
       title: 'Mandatory Disclosure',
-      subtitle: 'Official AICTE, UGC, and State Regulatory statutory disclosures and institutional compliance.',
+      subtitle: 'AICTE, UGC, and State Regulatory statutory disclosures and institutional compliance.',
       category: 'Statutory Compliance',
     },
     'board-of-studies': {
@@ -281,7 +281,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                       Mandatory Disclosure
                     </h2>
                     <p className="text-xs md:text-sm text-slate-600">
-                      Official AICTE, UGC, and State Regulatory compliance disclosures.
+                      AICTE, UGC, and State Regulatory compliance disclosures.
                     </p>
                   </div>
 
@@ -295,7 +295,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                         Mandatory Disclosure
                       </h3>
                       <p className="text-sm text-slate-600 max-w-md mx-auto">
-                        Official regulatory documents and mandatory disclosures will be updated soon.
+                        Regulatory documents and mandatory disclosures will be updated soon.
                       </p>
                     </div>
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-900 text-gold-300 text-xs font-semibold">
@@ -541,7 +541,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                       Exam Section
                     </h2>
                     <p className="text-xs md:text-sm text-slate-600">
-                      Official autonomous examination cell portals for results, schedules, and notifications.
+                      Autonomous examination cell portals for results, schedules, and notifications.
                     </p>
                   </div>
 

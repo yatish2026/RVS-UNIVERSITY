@@ -353,7 +353,7 @@ export const BCA_DEPARTMENT_DATA: DepartmentDetailData = {
     name: 'Department Association for Computing & Technology',
     acronym: 'DACT',
     tagline: 'Innovate. Code. Create.',
-    description: 'DACT is the official student technical and cultural society of the BCA Department. It conducts programming hackathons, project exhibitions, web development battles, and cultural showcases throughout the academic year.',
+    description: 'DACT is the student technical and cultural society of the BCA Department. It conducts programming hackathons, project exhibitions, web development battles, and cultural showcases throughout the academic year.',
     activities: [
       'IT-BUZZ: Technical symposium and software solution pitch competitions',
       'CODE-ZILLA: Annual multi-round competitive programming championship',

@@ -18,7 +18,7 @@ export const NewsEventsSection: React.FC = () => {
                   number="10"
                   eyebrow="Campus Updates"
                   title="News & Circulars"
-                  subtitle="Official notifications, press releases, and academic announcements."
+                  subtitle="Latest notifications, press releases, and academic announcements."
                   variant="dark"
                 />
                 <a

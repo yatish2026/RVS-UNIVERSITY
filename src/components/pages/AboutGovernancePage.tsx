@@ -278,7 +278,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       title: 'Government of Andhra Pradesh',
       category: 'State Statutory Recognition',
       image: '/images/accreditations/ap-govt-logo.png',
-      alt: 'Government of Andhra Pradesh Official Emblem',
+      alt: 'Government of Andhra Pradesh Emblem',
       description: 'Recognized under the Andhra Pradesh Private Universities (Establishment and Regulation) Act.',
       tag: 'Statutory Act',
     },
@@ -885,7 +885,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                         <span>Notification Status: Appointment in Progress</span>
                       </div>
                       <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                        The official profile, vision address, and appointment notification from the <strong>Vice Chancellor</strong> of RVS University are currently being finalized and will be published shortly.
+                        The profile, vision address, and appointment notification from the <strong>Vice Chancellor</strong> of RVS University are currently being finalized and will be published shortly.
                       </p>
                     </div>
                   </div>
@@ -1280,7 +1280,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                             Will be updated soon
                           </h4>
                           <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                            The official details, member directory, and proceedings for <strong className="text-navy-950 font-semibold">{item.label}</strong> will be updated soon.
+                            The details, member directory, and proceedings for <strong className="text-navy-950 font-semibold">{item.label}</strong> will be updated soon.
                           </p>
                         </div>
                       </div>
@@ -1325,7 +1325,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                   <span>Administrative Inquiries & Secretarial Support</span>
                 </div>
                 <p>
-                  For immediate administrative communications, official orders, or departmental verifications, please reach out to the administrative office:
+                  For immediate administrative communications, administrative orders, or departmental verifications, please reach out to the administrative office:
                 </p>
                 <div className="pt-2 flex flex-wrap gap-4 text-navy-950 font-semibold">
                   <span>📞 +91 9669660155</span>
@@ -1368,7 +1368,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     Statutory Seals & Accreditation Badges
                   </h3>
                   <p className="text-xs md:text-sm text-slate-500 mt-0.5">
-                    Official recognitions by Government of India, Government of Andhra Pradesh, NAAC, NBA, and JNTUA.
+                    Recognitions by Government of India, Government of Andhra Pradesh, NAAC, NBA, and JNTUA.
                   </p>
                 </div>
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-gold-900 text-xs font-bold shadow-sm self-start sm:self-auto">
@@ -1533,7 +1533,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                           Will be updated soon
                         </h4>
                         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                          The officially reconstituted IQAC Advisory Council and Departmental Quality Coordinators list will be updated soon.
+                          The reconstituted IQAC Advisory Council and Departmental Quality Coordinators list will be updated soon.
                         </p>
                       </div>
                       <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
@@ -1620,7 +1620,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                           Will be updated soon
                         </h4>
                         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                          NAAC accreditation details and official certificate will be updated soon.
+                          NAAC accreditation details and accreditation certificate will be updated soon.
                         </p>
                       </div>
                       <span className="inline-block px-3.5 py-1 rounded-full bg-slate-200 text-slate-700 text-[11px] font-semibold">
@@ -1789,7 +1789,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-serif font-bold text-navy-950 text-base">Official Email</h4>
+                    <h4 className="font-serif font-bold text-navy-950 text-base">University Email</h4>
                     <p className="text-xs text-slate-500 mb-2">For admissions, general queries & circulars</p>
                     <a href="mailto:info@rvsu.org" className="text-sm font-bold text-blue-900 hover:text-blue-950 transition-colors">
                       info@rvsu.org

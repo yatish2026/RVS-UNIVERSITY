@@ -99,7 +99,7 @@ export const ExamPortalPage: React.FC<ExamPortalPageProps> = ({
               </h1>
 
               <p className="text-sm md:text-base text-[#5C4837] font-normal leading-relaxed max-w-2xl">
-                Access online semester results, downloadable marks memos, official exam schedules, revaluation circulars, and autonomous evaluation rules.
+                Access online semester results, downloadable marks memos, examination schedules, revaluation circulars, and autonomous evaluation rules.
               </p>
 
               <div className="pt-2">
@@ -327,7 +327,7 @@ export const ExamPortalPage: React.FC<ExamPortalPageProps> = ({
             <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200/90 shadow-xl text-navy-950">
               <div className="mb-8">
                 <span className="text-xs font-bold uppercase tracking-wider text-gold-800 font-sans">
-                  Official Timetables & Schedules
+                  Timetables & Schedules
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy-950 mt-1">
                   Upcoming Semester Examination Schedules
@@ -376,7 +376,7 @@ export const ExamPortalPage: React.FC<ExamPortalPageProps> = ({
             <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200/90 shadow-xl text-navy-950">
               <div className="mb-8">
                 <span className="text-xs font-bold uppercase tracking-wider text-gold-800 font-sans">
-                  Official Notifications
+                  Examination Notifications
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-navy-950 mt-1">
                   Examination Circulars & Notifications

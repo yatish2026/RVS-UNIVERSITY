@@ -612,13 +612,13 @@ export const InternationalRelationsPage: React.FC<InternationalRelationsPageProp
                 <div className="border-b border-slate-200 pb-5">
                   <div className="inline-flex items-center gap-2 text-gold-700 text-xs font-extrabold uppercase tracking-wider mb-1">
                     <Phone className="w-4 h-4" />
-                    <span>Official Directory</span>
+                    <span>Contact Directory</span>
                   </div>
                   <h2 className="font-serif text-2xl sm:text-3xl font-black text-navy-950">
                     INTERNATIONAL RELATIONS CONTACT
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                    Contact officials for international admissions, visas, equivalency certificates, and academic collaborations.
+                    Contact our team for international admissions, visas, equivalency certificates, and academic collaborations.
                   </p>
                 </div>
 

@@ -325,7 +325,7 @@ export const CSE_IOT_DEPARTMENT_DATA: DepartmentDetailData = {
     name: 'Internet of Things Engineers Association (IoTEA)',
     acronym: 'IoTEA',
     tagline: 'Connecting Devices. Connecting Lives.',
-    description: 'IoTEA is the official student engineering association of the Department of Computer Science and Engineering (IoT). It brings together students, researchers, and industry leaders to innovate smart connected devices and foster entrepreneurship in the IoT domain.',
+    description: 'IoTEA is the student engineering association of the Department of Computer Science and Engineering (IoT). It brings together students, researchers, and industry leaders to innovate smart connected devices and foster entrepreneurship in the IoT domain.',
     activities: [
       'IOT-FEST: Annual National Level Technical Symposium hosting 500+ participants',
       '24-Hour IoT Circuit Prototyping & Sensor Hackathon with Cash Awards',

@@ -12,7 +12,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
   isOpen,
   onClose,
   videoSrc = '/videos/prospectus.mp4',
-  title = 'RVS University — Official Video Prospectus',
+  title = 'RVS University — Video Prospectus',
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [currentVideo, setCurrentVideo] = useState<string>(videoSrc);
@@ -80,7 +80,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               <div className="flex items-center gap-1.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#9C6019] flex items-center gap-1">
                   <Sparkles className="w-2.5 h-2.5 text-[#C6832B]" />
-                  Official Video Prospectus
+                  Video Prospectus
                 </span>
               </div>
               <h3 className="font-serif text-xs sm:text-sm md:text-base font-bold text-[#1D1611] truncate">

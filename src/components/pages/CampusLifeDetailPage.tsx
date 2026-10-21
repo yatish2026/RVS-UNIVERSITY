@@ -323,7 +323,7 @@ export const CampusLifeDetailPage: React.FC<CampusLifeDetailPageProps> = ({
             <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-200/90 shadow-xl text-navy-950">
               <div className="mb-6">
                 <span className="text-xs font-bold uppercase tracking-wider text-gold-700 font-sans">
-                  Official Accommodation Statistics
+                  Campus Accommodation Statistics
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-navy-950 mt-1">
                   Type of Occupancy & Room Distribution

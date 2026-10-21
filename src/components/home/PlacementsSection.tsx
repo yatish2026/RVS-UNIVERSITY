@@ -320,7 +320,7 @@ export const PlacementsSection: React.FC = () => {
             {/* Modal Footer */}
             <div className="p-3.5 bg-navy-950/90 border-t border-white/10 flex items-center justify-between text-xs">
               <span className="text-slate-400 font-light">
-                Official RVS University Placement Archive &bull; Multi-Corporate Placement Drives
+                RVS University Placement Archive &bull; Multi-Corporate Placement Drives
               </span>
               <button
                 onClick={() => setIsCollageModalOpen(false)}
