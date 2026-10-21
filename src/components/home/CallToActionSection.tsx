@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Phone, ArrowRight, CheckCircle2, Play } from 'lucide-react';
+import { Sparkles, Phone, ArrowRight, Play } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 import { Reveal } from '../ui/Reveal';
@@ -38,19 +38,7 @@ export const CallToActionSection: React.FC = () => {
             </p>
           </Reveal>
 
-          {/* Quick Perks */}
-          <Reveal direction="up" delay={400}>
-            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs sm:text-sm text-[#1D1611] pt-2 font-medium">
-              <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FAF7F2] border border-[#E8DED3] shadow-xs">
-                <CheckCircle2 className="w-4 h-4 text-[#C6832B] flex-shrink-0" />
-                Merit Scholarships Available
-              </span>
-              <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FAF7F2] border border-[#E8DED3] shadow-xs">
-                <CheckCircle2 className="w-4 h-4 text-[#C6832B] flex-shrink-0" />
-                NEP 2020 Aligned Curriculum
-              </span>
-            </div>
-          </Reveal>
+
 
           {/* CTA Buttons Group */}
           <Reveal direction="up" delay={500}>
