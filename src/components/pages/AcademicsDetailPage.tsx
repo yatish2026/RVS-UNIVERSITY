@@ -354,12 +354,12 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                   <div className="space-y-4">
                     {[
                       { 
-                        program: 'I B.Tech II Sem Academic Calendar 2026–27', 
-                        sem: 'B.Tech - First Year Second Semester', 
+                        program: 'I B.Tech Academic Calendar 2026–27', 
+                        sem: 'B.Tech - First Year Academic Calendar', 
                         date: 'Academic Year 2026–27', 
                         badge: 'PDF',
                         file: '/academic-calendar/btech-academic-calendar-2026-27.pdf',
-                        downloadName: 'I-BTech-II-Sem-Academic-Calendar-2026-27.pdf'
+                        downloadName: 'I-BTech-Academic-Calendar-2026-27.pdf'
                       },
                       { 
                         program: 'MBA & MCA Academic Calendar 2026–27', 
