@@ -3,7 +3,7 @@ import {
   ArrowLeft, ArrowRight, BookOpen, FileText, Calendar, Award, 
   CheckCircle2, Download, ExternalLink, QrCode, ShieldCheck, 
   Phone, Mail, ChevronRight, Sparkles, Building2, GraduationCap,
-  Clock, AlertCircle
+  Clock, AlertCircle, Eye
 } from 'lucide-react';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 
@@ -362,6 +362,15 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                         downloadName: 'I-BTech-Academic-Calendar-2026-27.pdf'
                       },
                       { 
+                        program: 'M.TECH Academic Calendar 2026–27', 
+                        sem: 'Post Graduate (M.Tech I & II Semesters)', 
+                        date: 'Academic Year 2026–27', 
+                        badge: 'PDF / Image',
+                        file: '/academic-calendar/mtech-academic-calendar-2026-27.pdf',
+                        imageFile: '/academic-calendar/mtech-academic-calendar-2026-27.jpg',
+                        downloadName: 'MTECH-Academic-Calendar-2026-27.pdf'
+                      },
+                      { 
                         program: 'MBA & MCA Academic Calendar 2026–27', 
                         sem: 'School of Management & SCIS (MBA/MCA)', 
                         date: 'Academic Year 2026–27', 
@@ -383,7 +392,19 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                             <p className="text-xs text-slate-600">{cal.sem} • {cal.date}</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2.5 self-start sm:self-auto">
+                        <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+                          {cal.imageFile && (
+                            <a 
+                              href={cal.imageFile} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-gold-900 text-xs font-bold transition-colors border border-amber-300 shadow-sm"
+                              title="View Original Notification Image"
+                            >
+                              <Eye className="w-3.5 h-3.5 text-gold-700" />
+                              <span>View Image</span>
+                            </a>
+                          )}
                           <a 
                             href={cal.file} 
                             target="_blank" 
