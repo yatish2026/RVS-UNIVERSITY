@@ -1,7 +1,8 @@
 <?php
 /**
  * RVS University — Grievance Appeal Submission Gateway
- * Handles formal grievance registration, stores audit log, and notifies grievance@rvsu.org.
+ * Handles formal grievance registration, stores audit log, attaches uploaded files/images,
+ * and notifies grievance@rvsu.org with full embedded screenshot & download link.
  */
 
 // Set CORS & Security Headers
@@ -39,6 +40,8 @@ $complaintType = isset($data['complaintType']) ? trim(htmlspecialchars($data['co
 $subject       = isset($data['subject']) ? trim(htmlspecialchars($data['subject'])) : '';
 $description   = isset($data['description']) ? trim(htmlspecialchars($data['description'])) : '';
 $fileName      = isset($data['fileName']) ? trim(htmlspecialchars($data['fileName'])) : '';
+$fileType      = isset($data['fileType']) ? trim(htmlspecialchars($data['fileType'])) : '';
+$fileData      = isset($data['fileData']) ? $data['fileData'] : '';
 $dateTime      = date('d M Y, h:i:s A T');
 $ipAddr        = $_SERVER['REMOTE_ADDR'] ?? 'Unknown IP';
 
@@ -48,11 +51,69 @@ if (empty($fullName) || empty($email) || empty($phone) || empty($complaintType) 
     exit();
 }
 
+// 1. Process Attachment (Save to disk + prepare for email attachment & inline preview)
+$savedFileUrl = '';
+$isImage = false;
+$attachments = [];
+
+if (!empty($fileData) && !empty($fileName)) {
+    // Detect image type
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $isImage = in_array($ext, ['png', 'jpg', 'jpeg', 'webp', 'gif']) || strpos($fileType, 'image/') === 0;
+
+    // Save copy to server uploads directory
+    $uploadDir = __DIR__ . '/uploads/grievance';
+    if (!is_dir($uploadDir)) {
+        @mkdir($uploadDir, 0755, true);
+    }
+    
+    // Clean base64 binary
+    $rawBase64 = $fileData;
+    if (strpos($rawBase64, 'base64,') !== false) {
+        $rawBase64 = substr($rawBase64, strpos($rawBase64, 'base64,') + 7);
+    }
+    $binaryData = base64_decode($rawBase64);
+    
+    if ($binaryData !== false) {
+        $safeName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $fileName);
+        $serverFileName = $trackingId . '_' . time() . '_' . $safeName;
+        $targetPath = $uploadDir . '/' . $serverFileName;
+        if (@file_put_contents($targetPath, $binaryData)) {
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+            $host = $_SERVER['HTTP_HOST'] ?? 'rvsu.org';
+            $savedFileUrl = $protocol . '://' . $host . '/api/uploads/grievance/' . $serverFileName;
+        }
+    }
+
+    // Add to email attachment list
+    $attachments[] = [
+        'filename' => $fileName,
+        'type'     => $fileType ?: 'application/octet-stream',
+        'data'     => $fileData
+    ];
+}
+
 $mailer = new RvsuSmtpMailer();
 
-// 1. Send Full Grievance Report TO grievance@rvsu.org (and backup yatishgottapu2026@gmail.com)
+// 2. Prepare Committee Notification Email
 $committeeRecipients = "grievance@rvsu.org, yatishgottapu2026@gmail.com";
 $emailSubject = "⚠️ [Grievance Appeal Lodged] " . $trackingId . " — " . $complaintType . " (" . $fullName . ")";
+
+// Inline image preview block
+$imagePreviewHtml = '';
+if ($isImage && !empty($fileData)) {
+    $imagePreviewHtml = '
+    <div style="margin-top: 22px; background: #FAF3E7; border: 2px solid #C6832B; border-radius: 12px; padding: 18px;">
+        <div style="font-size: 13px; font-weight: 800; color: #9C6019; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+            🖼️ Attached Supporting Screenshot / Image (' . $fileName . '):
+        </div>
+        <div style="text-align: center; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid #D4BC9F;">
+            <img src="' . $fileData . '" style="max-width: 100%; max-height: 550px; height: auto; border-radius: 6px; display: inline-block;" alt="' . $fileName . '" />
+        </div>
+        ' . (!empty($savedFileUrl) ? '<div style="margin-top: 10px; text-align: center;"><a href="' . $savedFileUrl . '" target="_blank" style="color: #0284c7; font-size: 12px; font-weight: bold; text-decoration: underline;">🔗 Click here to view / download full-resolution image in browser</a></div>' : '') . '
+    </div>
+    ';
+}
 
 $committeeHtml = '
 <!DOCTYPE html>
@@ -62,7 +123,7 @@ $committeeHtml = '
     <title>New Grievance Appeal</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 24px; color: #1e293b; }
-        .card { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+        .card { max-width: 640px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
         .header { background: linear-gradient(135deg, #0A192F 0%, #1e3a5f 100%); padding: 30px 24px; text-align: center; border-bottom: 3px solid #C6832B; color: #ffffff; }
         .header h1 { margin: 0; font-size: 21px; font-weight: 800; color: #ffffff; }
         .header p { margin: 6px 0 0; font-size: 13px; color: #F5D5A5; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
@@ -94,7 +155,7 @@ $committeeHtml = '
                 <tr><th>Gender</th><td>' . $gender . '</td></tr>
                 <tr><th>Complaint Category</th><td style="color:#b45309; font-weight:700;">' . $complaintType . '</td></tr>
                 <tr><th>Subject</th><td class="highlight">' . $subject . '</td></tr>
-                <tr><th>Supporting File</th><td>' . (!empty($fileName) ? $fileName : '<em>No file attached</em>') . '</td></tr>
+                <tr><th>Supporting File</th><td>' . (!empty($fileName) ? '<strong>' . $fileName . '</strong> (Attached to email)' : '<em>No file attached</em>') . '</td></tr>
                 <tr><th>Submitted At</th><td>' . $dateTime . '</td></tr>
                 <tr><th>Complainant IP</th><td><code>' . $ipAddr . '</code></td></tr>
             </table>
@@ -103,6 +164,8 @@ $committeeHtml = '
                 <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #64748b;">Grievance Description:</div>
                 <div class="desc-box">' . nl2br($description) . '</div>
             </div>
+
+            ' . $imagePreviewHtml . '
         </div>
         <div class="footer">
             Official Statutory Grievance Appeal Committee • RVS University<br>
@@ -113,9 +176,9 @@ $committeeHtml = '
 </html>
 ';
 
-$committeeMailSent = $mailer->send($committeeRecipients, $emailSubject, $committeeHtml, $email);
+$committeeMailSent = $mailer->send($committeeRecipients, $emailSubject, $committeeHtml, $email, $attachments);
 
-// 2. Send Formal Confirmation Receipt TO the Student FROM grievance@rvsu.org
+// 3. Send Formal Confirmation Receipt TO the Student FROM grievance@rvsu.org
 $studentSubject = "✅ RVS University Grievance Received — Tracking ID: " . $trackingId;
 $studentHtml = '
 <!DOCTYPE html>
@@ -140,6 +203,7 @@ $studentHtml = '
             <p style="font-size: 13px; line-height: 1.6;">
                 <strong>Category:</strong> ' . $complaintType . '<br>
                 <strong>Subject:</strong> ' . $subject . '<br>
+                <strong>Attached Document:</strong> ' . (!empty($fileName) ? $fileName : 'None') . '<br>
                 <strong>Registration Date:</strong> ' . $dateTime . '
             </p>
             <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
@@ -156,7 +220,7 @@ $studentHtml = '
 
 $studentMailSent = $mailer->send($email, $studentSubject, $studentHtml, 'grievance@rvsu.org');
 
-// 3. Store in Audit Log File
+// 4. Store in Audit Log File
 $logFile = __DIR__ . '/grievance_submissions_log.json';
 $currentLogs = [];
 if (file_exists($logFile)) {
@@ -175,6 +239,7 @@ $currentLogs[] = [
     'subject'       => $subject,
     'description'   => $description,
     'fileName'      => $fileName,
+    'fileUrl'       => $savedFileUrl,
     'ip'            => $ipAddr,
     'status'        => 'Submitted',
     'committeeMail' => $committeeMailSent,
@@ -187,5 +252,6 @@ echo json_encode([
     "success"    => true,
     "trackingId" => $trackingId,
     "message"    => "Grievance Appeal registered successfully.",
-    "mailSent"   => $committeeMailSent
+    "mailSent"   => $committeeMailSent,
+    "hasFile"    => !empty($fileName)
 ]);

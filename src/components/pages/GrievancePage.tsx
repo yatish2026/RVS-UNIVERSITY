@@ -126,6 +126,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [fileAttachment, setFileAttachment] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
   const [declaration, setDeclaration] = useState(false);
 
   // Submission State
@@ -201,11 +202,11 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
 
     // Check code matches
     setTimeout(() => {
-      if (enteredOtp.trim() === generatedOtp || enteredOtp.trim() === '123456') {
+      if (enteredOtp.trim() === generatedOtp) {
         setIsEmailVerified(true);
         setOtpError('');
       } else {
-        setOtpError('Invalid verification code. Please check and re-enter, or click Resend.');
+        setOtpError('Invalid verification code. Please check your email inbox and enter the 6-digit code received.');
       }
       setIsVerifying(false);
     }, 400);
@@ -249,6 +250,8 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
       subject: subject.trim(),
       description: description.trim(),
       fileName: fileAttachment ? fileAttachment.name : null,
+      fileType: fileAttachment ? fileAttachment.type : null,
+      fileData: fileBase64,
       submittedAt: new Date().toISOString(),
     };
 
@@ -295,6 +298,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
     setSubject('');
     setDescription('');
     setFileAttachment(null);
+    setFileBase64(null);
     setDeclaration(false);
   };
 
@@ -646,18 +650,6 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                         </div>
                       )}
 
-                      {/* Testing Hint Pill (ensures demo/local testing always works instantly) */}
-                      {generatedOtp && (
-                        <div className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-300 text-amber-900 text-xs flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-2">
-                            <KeyRound className="w-4 h-4 text-[#9C6019]" />
-                            <span>
-                              <strong>Verification OTP:</strong> Use code <code className="bg-white px-2 py-0.5 rounded border border-amber-300 font-mono font-bold text-[#9C6019] text-sm">{generatedOtp}</code> to verify immediately.
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
                       {/* Send OTP Form */}
                       {!otpSent ? (
                         <form onSubmit={handleSendOtp} className="space-y-4">
@@ -986,34 +978,52 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                               accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                               onChange={(e) => {
                                 if (e.target.files && e.target.files[0]) {
-                                  setFileAttachment(e.target.files[0]);
+                                  const file = e.target.files[0];
+                                  setFileAttachment(file);
+                                  const reader = new FileReader();
+                                  reader.onload = () => {
+                                    setFileBase64(reader.result as string);
+                                  };
+                                  reader.readAsDataURL(file);
                                 }
                               }}
-                              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
                             />
                             {fileAttachment ? (
-                              <div className="flex items-center justify-center gap-2 text-xs font-bold text-emerald-800">
-                                <FileCheck className="w-4 h-4 text-emerald-600" />
-                                <span>Attached: {fileAttachment.name} ({(fileAttachment.size / 1024).toFixed(1)} KB)</span>
-                                <button
-                                  type="button"
-                                  onClick={(ev) => {
-                                    ev.stopPropagation();
-                                    setFileAttachment(null);
-                                  }}
-                                  className="text-red-600 hover:underline ml-2 z-10"
-                                >
-                                  Remove
-                                </button>
+                              <div className="space-y-3">
+                                {fileBase64 && fileAttachment.type.startsWith('image/') && (
+                                  <div className="max-w-xs mx-auto overflow-hidden rounded-xl border border-[#D4BC9F] shadow-sm bg-white p-1.5">
+                                    <img
+                                      src={fileBase64}
+                                      alt="Preview"
+                                      className="max-h-48 mx-auto object-contain rounded-lg"
+                                    />
+                                  </div>
+                                )}
+                                <div className="flex items-center justify-center gap-2 text-xs font-bold text-emerald-800">
+                                  <FileCheck className="w-4 h-4 text-emerald-600" />
+                                  <span>Attached: {fileAttachment.name} ({(fileAttachment.size / 1024).toFixed(1)} KB)</span>
+                                  <button
+                                    type="button"
+                                    onClick={(ev) => {
+                                      ev.stopPropagation();
+                                      setFileAttachment(null);
+                                      setFileBase64(null);
+                                    }}
+                                    className="text-red-600 hover:underline ml-2 relative z-20 font-bold"
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
                               </div>
                             ) : (
                               <div className="space-y-1">
                                 <Upload className="w-5 h-5 text-[#9C6019] mx-auto" />
                                 <p className="text-xs font-bold text-[#1D1611]">
-                                  Click or drag & drop supporting file
+                                  Click or drag & drop supporting file / screenshot
                                 </p>
                                 <p className="text-[10px] text-[#7A695A]">
-                                  Supported formats: PDF, JPG, PNG, DOC (Max file size: 5 MB)
+                                  Supported formats: JPG, PNG, PDF, DOC (Max file size: 5 MB)
                                 </p>
                               </div>
                             )}

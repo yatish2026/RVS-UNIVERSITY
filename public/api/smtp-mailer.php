@@ -3,6 +3,7 @@
  * RVS University — Native SMTP Mailer Engine
  * Authenticates directly with mail.rvsu.org:465 (SSL)
  * Account: grievance@rvsu.org
+ * Supports MIME multipart HTML body + file attachments (images, PDFs, documents)
  */
 
 class RvsuSmtpMailer {
@@ -11,7 +12,7 @@ class RvsuSmtpMailer {
     private $user = 'grievance@rvsu.org';
     private $pass = 'grievance@rvsu2026';
     private $fromName = 'RVS University — Grievance Cell';
-    private $timeout = 10;
+    private $timeout = 12;
     private $lastError = '';
 
     public function getLastError() {
@@ -19,9 +20,9 @@ class RvsuSmtpMailer {
     }
 
     /**
-     * Send email via native SSL socket to mail.rvsu.org
+     * Send email via native SSL socket to mail.rvsu.org with optional attachments
      */
-    public function send($to, $subject, $htmlBody, $replyTo = null) {
+    public function send($to, $subject, $htmlBody, $replyTo = null, $attachments = []) {
         $this->lastError = '';
         $recipients = is_array($to) ? $to : array_map('trim', explode(',', $to));
 
@@ -45,7 +46,7 @@ class RvsuSmtpMailer {
         if (!$socket) {
             $this->lastError = "Connection failed: $errstr ($errno). Falling back to PHP mail().";
             $this->logError($this->lastError);
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         stream_set_timeout($socket, $this->timeout);
@@ -55,7 +56,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '220') {
             fclose($socket);
             $this->lastError = "Invalid greeting: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // Send EHLO
@@ -68,7 +69,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '334') {
             fclose($socket);
             $this->lastError = "AUTH LOGIN rejected: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // Username
@@ -77,7 +78,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '334') {
             fclose($socket);
             $this->lastError = "Username rejected: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // Password
@@ -86,7 +87,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '235') {
             fclose($socket);
             $this->lastError = "Password authentication failed: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // MAIL FROM
@@ -95,7 +96,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '250') {
             fclose($socket);
             $this->lastError = "MAIL FROM rejected: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // RCPT TO for each recipient
@@ -115,7 +116,7 @@ class RvsuSmtpMailer {
         if (substr($reply, 0, 3) !== '354') {
             fclose($socket);
             $this->lastError = "DATA rejected: $reply";
-            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
         }
 
         // Build Email Payload
@@ -127,11 +128,44 @@ class RvsuSmtpMailer {
         $headers .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
         $headers .= "Date: " . date('r') . "\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $headers .= "Content-Transfer-Encoding: 8bit\r\n";
-        $headers .= "X-Mailer: RVSU-Grievance-Mailer/1.0\r\n";
+        $headers .= "X-Mailer: RVSU-Grievance-Mailer/1.2\r\n";
 
-        $fullPayload = $headers . "\r\n" . $htmlBody . "\r\n.\r\n";
+        if (!empty($attachments)) {
+            $boundary = "----=_Part_" . md5(uniqid(rand(), true));
+            $headers .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n\r\n";
+
+            // HTML Body Part
+            $fullPayload  = $headers;
+            $fullPayload .= "--$boundary\r\n";
+            $fullPayload .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $fullPayload .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+            $fullPayload .= $htmlBody . "\r\n\r\n";
+
+            // Attachments
+            foreach ($attachments as $att) {
+                $attFilename = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $att['filename'] ?? 'attachment');
+                $attType     = $att['type'] ?? 'application/octet-stream';
+                $attRawData  = $att['data'] ?? '';
+
+                if (strpos($attRawData, 'base64,') !== false) {
+                    $attRawData = substr($attRawData, strpos($attRawData, 'base64,') + 7);
+                }
+                $attRawData = str_replace(["\r", "\n", " "], '', $attRawData);
+                $chunkedBase64 = chunk_split($attRawData);
+
+                $fullPayload .= "--$boundary\r\n";
+                $fullPayload .= "Content-Type: {$attType}; name=\"{$attFilename}\"\r\n";
+                $fullPayload .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
+                $fullPayload .= "Content-Transfer-Encoding: base64\r\n\r\n";
+                $fullPayload .= $chunkedBase64 . "\r\n\r\n";
+            }
+
+            $fullPayload .= "--$boundary--\r\n.\r\n";
+        } else {
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $headers .= "Content-Transfer-Encoding: 8bit\r\n";
+            $fullPayload = $headers . "\r\n" . $htmlBody . "\r\n.\r\n";
+        }
 
         // Send Email Content
         fwrite($socket, $fullPayload);
@@ -146,7 +180,7 @@ class RvsuSmtpMailer {
         }
 
         $this->lastError = "Data transmission error: $reply";
-        return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo);
+        return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
     }
 
     private function sendCommand($socket, $cmd) {
@@ -164,16 +198,46 @@ class RvsuSmtpMailer {
         return trim($reply);
     }
 
-    private function fallbackMail($recipients, $subject, $htmlBody, $replyTo) {
+    private function fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments = []) {
         $toStr = implode(', ', $recipients);
         $headers  = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
         $headers .= "From: {$this->fromName} <{$this->user}>\r\n";
         if ($replyTo) {
             $headers .= "Reply-To: $replyTo\r\n";
         }
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-        return @mail($toStr, $subject, $htmlBody, $headers);
+
+        if (!empty($attachments)) {
+            $boundary = "----=_Part_" . md5(uniqid(rand(), true));
+            $headers .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n";
+
+            $body  = "--$boundary\r\n";
+            $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+            $body .= $htmlBody . "\r\n\r\n";
+
+            foreach ($attachments as $att) {
+                $attFilename = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $att['filename'] ?? 'attachment');
+                $attType     = $att['type'] ?? 'application/octet-stream';
+                $attRawData  = $att['data'] ?? '';
+
+                if (strpos($attRawData, 'base64,') !== false) {
+                    $attRawData = substr($attRawData, strpos($attRawData, 'base64,') + 7);
+                }
+                $attRawData = str_replace(["\r", "\n", " "], '', $attRawData);
+
+                $body .= "--$boundary\r\n";
+                $body .= "Content-Type: {$attType}; name=\"{$attFilename}\"\r\n";
+                $body .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
+                $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+                $body .= chunk_split($attRawData) . "\r\n\r\n";
+            }
+            $body .= "--$boundary--";
+            return @mail($toStr, $subject, $body, $headers);
+        } else {
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+            return @mail($toStr, $subject, $htmlBody, $headers);
+        }
     }
 
     private function logError($msg) {
@@ -182,4 +246,3 @@ class RvsuSmtpMailer {
         @file_put_contents($logFile, $entry, FILE_APPEND);
     }
 }
-
