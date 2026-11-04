@@ -23,9 +23,9 @@ export const UNIVERSITY_INFO = {
   address: 'R.V.S Nagar, Tirupathi Road, Chittoor, Andhra Pradesh – 517127',
   phone: '+91 9669660155',
   altPhone: '+91 9669660214',
-  email: 'info@rvsu.ac.in',
+  email: 'info@rvsu.org',
   altEmail: 'yatish.itops@rvsu.org',
-  admissionsEmail: 'info@rvsu.ac.in',
+  admissionsEmail: 'info@rvsu.org',
   tagline: 'Where Knowledge Meets Possibility',
   subtagline: 'Empowering the next generation with knowledge, innovation and purpose.',
   statsSummary: {

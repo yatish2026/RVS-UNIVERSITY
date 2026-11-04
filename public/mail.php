@@ -2,13 +2,13 @@
 /**
  * RVS University — Admissions Enquiry 2026–27 Mail Gateway
  * Authenticates directly with mail.rvsu.org:465 (SSL)
- * Authenticated Account: yatish.itops@rvsu.org (Password: Yatish@2026)
+ * Primary Authenticated Account: info@rvsu.org (Password: info@2026)
+ * Secondary Authenticated Account: yatish.itops@rvsu.org (Password: Yatish@2026)
  * 
- * Delivers copies to:
- * 1. yatish.itops@rvsu.org
- * 2. info@rvsu.ac.in
- * 3. info@rvsu.org
- * 4. yatishgottapu2026@gmail.com
+ * Delivers copies ONLY to:
+ * 1. info@rvsu.org
+ * 2. yatish.itops@rvsu.org
+ * 3. yatishgottapu2026@gmail.com
  */
 
 // Set CORS & Security Headers
@@ -107,11 +107,10 @@ if (file_exists(__DIR__ . '/api/smtp-mailer.php')) {
 $cleanPhoneDigits = preg_replace('/\D/', '', $phone);
 $waUrl = 'https://wa.me/91' . $cleanPhoneDigits . '?text=' . rawurlencode("Hello " . $fullName . ", thank you for your enquiry at RVS University regarding " . $course . ". We are reaching out from the Admissions Directorate.");
 
-// Target recipients (Dedicated copies to both admissions accounts + personal backup)
+// Target recipients: Only info@rvsu.org, yatish.itops@rvsu.org, and yatishgottapu2026@gmail.com
 $counselorRecipients = [
-    'yatish.itops@rvsu.org',
-    'info@rvsu.ac.in',
     'info@rvsu.org',
+    'yatish.itops@rvsu.org',
     'yatishgottapu2026@gmail.com'
 ];
 $emailSubject = "🎓 [New Admission Enquiry 2026–27] " . $fullName . " — " . $course;
@@ -203,7 +202,7 @@ $counselorHtml = '
             </div>
         </div>
         <div class="footer">
-            Delivered to Admissions Directorate: yatish.itops@rvsu.org & info@rvsu.ac.in<br>
+            Delivered to Admissions Directorate: info@rvsu.org & yatish.itops@rvsu.org<br>
             RVS University • R.V.S. Nagar, Tirupathi Road, Chittoor, Andhra Pradesh - 517127.
         </div>
     </div>
@@ -211,27 +210,32 @@ $counselorHtml = '
 </html>
 ';
 
-// 1. Send via Authenticated SMTP (Dedicated Account: yatish.itops@rvsu.org / Yatish@2026)
-// NO failover to info@rvsu.ac.in as requested by user
+// Send email using Authenticated SMTP via info@rvsu.org (Password: info@2026)
 $mailSent = false;
 
 if (class_exists('RvsuSmtpMailer')) {
-    $mailer = new RvsuSmtpMailer('yatish.itops@rvsu.org', 'Yatish@2026', 'RVS University — Admissions Directorate');
+    // 1. Primary: info@rvsu.org
+    $mailer = new RvsuSmtpMailer('info@rvsu.org', 'info@2026', 'RVS University — Admissions Directorate');
     $mailSent = $mailer->send($counselorRecipients, $emailSubject, $counselorHtml, !empty($email) ? $email : null);
+
+    // 2. Fallback to yatish.itops@rvsu.org if info@rvsu.org authentication has any issue
+    if (!$mailSent) {
+        $fallbackMailer = new RvsuSmtpMailer('yatish.itops@rvsu.org', 'Yatish@2026', 'RVS University — Admissions Directorate');
+        $mailSent = $fallbackMailer->send($counselorRecipients, $emailSubject, $counselorHtml, !empty($email) ? $email : null);
+    }
 }
 
-// 2. Additional direct dispatch for info@rvsu.ac.in and info@rvsu.org via PHP mail()
-// Guarantees delivery even if cPanel Exim email routing is set to remote/local
+// Additional direct local delivery via PHP mail()
 $phpHeaders  = "MIME-Version: 1.0\r\n";
 $phpHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
-$phpHeaders .= "From: RVS University Admissions <yatish.itops@rvsu.org>\r\n";
-$phpHeaders .= "Reply-To: " . (!empty($email) ? "$fullName <$email>" : "yatish.itops@rvsu.org") . "\r\n";
-$phpHeaders .= "X-Mailer: RVSU-Lead-Relay/2.0\r\n";
+$phpHeaders .= "From: RVS University Admissions <info@rvsu.org>\r\n";
+$phpHeaders .= "Reply-To: " . (!empty($email) ? "$fullName <$email>" : "info@rvsu.org") . "\r\n";
+$phpHeaders .= "X-Mailer: RVSU-Portal-Mailer/2.1\r\n";
 
-@mail('info@rvsu.ac.in', $emailSubject, $counselorHtml, $phpHeaders);
 @mail('info@rvsu.org', $emailSubject, $counselorHtml, $phpHeaders);
+@mail('yatish.itops@rvsu.org', $emailSubject, $counselorHtml, $phpHeaders);
 
-// 3. Send Automated Confirmation Receipt TO Student if student email is present
+// Send Automated Confirmation Receipt TO Student if student email is present
 if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $studentSubject = "✅ RVS University — Admission Enquiry Received (" . $leadId . ")";
     $studentHtml = '
@@ -261,7 +265,7 @@ if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 </p>
                 <div style="margin-top: 22px; padding: 14px; background: #FAF6F0; border-radius: 8px; font-size: 12px; color: #5C4837;">
                     <strong>Admissions Helpline:</strong> +91 93908 84218 / 77299 99158 / 96696 60214<br>
-                    <strong>Official Email:</strong> <a href="mailto:info@rvsu.ac.in" style="color:#9C6019;">info@rvsu.ac.in</a> | <a href="mailto:yatish.itops@rvsu.org" style="color:#9C6019;">yatish.itops@rvsu.org</a><br>
+                    <strong>Official Email:</strong> <a href="mailto:info@rvsu.org" style="color:#9C6019;">info@rvsu.org</a> | <a href="mailto:yatish.itops@rvsu.org" style="color:#9C6019;">yatish.itops@rvsu.org</a><br>
                     <strong>Campus Address:</strong> R.V.S. Nagar, Tirupathi Road, Chittoor, Andhra Pradesh - 517127.
                 </div>
             </div>
@@ -273,11 +277,11 @@ if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     </html>';
 
     if (isset($mailer)) {
-        @$mailer->send($email, $studentSubject, $studentHtml, 'yatish.itops@rvsu.org');
+        @$mailer->send($email, $studentSubject, $studentHtml, 'info@rvsu.org');
     }
 }
 
-// 4. Store backup record in JSON lead log on server
+// Store backup record in JSON lead log on server
 $logEntry = [
     'leadId'    => $leadId,
     'timestamp' => time(),
