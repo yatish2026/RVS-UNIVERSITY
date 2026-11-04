@@ -114,26 +114,31 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
     }
 
     try {
-      // Send lead to GoDaddy PHP mail handler with fast timeout
+      // Send lead to GoDaddy PHP mail handler with resilient timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
 
-      const response = await fetch('./mail.php', {
+      const payload = {
+        leadRefId: newLeadRecord.leadRefId,
+        ...formData,
+      };
+
+      const response = await fetch('/api/mail.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
         signal: controller.signal,
       }).catch(async () => {
-        return fetch('/mail.php', {
+        return fetch('./mail.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
         });
       });
 

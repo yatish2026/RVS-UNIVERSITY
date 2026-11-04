@@ -14,9 +14,23 @@ class RvsuSmtpMailer {
     private $port = 465;
     private $user = 'grievance@rvsu.org';
     private $pass = 'grievance@rvsu2026';
-    private $fromName = 'RVS University — Grievance Cell';
+    private $fromName = 'RVS University';
     private $timeout = 15;
     private $lastError = '';
+
+    public function __construct($user = null, $pass = null, $fromName = null, $host = null, $port = null) {
+        if (!empty($user)) $this->user = $user;
+        if (!empty($pass)) $this->pass = $pass;
+        if (!empty($fromName)) $this->fromName = $fromName;
+        if (!empty($host)) $this->host = $host;
+        if (!empty($port)) $this->port = (int)$port;
+    }
+
+    public function setCredentials($user, $pass, $fromName = null) {
+        $this->user = $user;
+        $this->pass = $pass;
+        if (!empty($fromName)) $this->fromName = $fromName;
+    }
 
     public function getLastError() {
         return $this->lastError;
