@@ -329,7 +329,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
               <span className="text-[#D4BC9F]">•</span>
 
               <span className="text-xs text-[#7A695A] font-medium">
-                Convener Email: <a href="mailto:deanlaw@rvsuniversity.ac.in" className="text-[#9C6019] font-bold hover:underline">deanlaw@rvsuniversity.ac.in</a>
+                Official Grievance Email: <a href="mailto:grievance@rvsu.org" className="text-[#9C6019] font-bold hover:underline">grievance@rvsu.org</a>
               </span>
             </div>
           </div>

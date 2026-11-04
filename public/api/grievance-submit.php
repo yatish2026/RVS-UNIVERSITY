@@ -1,7 +1,7 @@
 <?php
 /**
  * RVS University — Grievance Appeal Submission Gateway
- * Handles formal grievance registration, stores audit log, and notifies the committee.
+ * Handles formal grievance registration, stores audit log, and notifies grievance@rvsu.org.
  */
 
 // Set CORS & Security Headers
@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["success" => false, "message" => "Method not allowed. Only POST is accepted."]);
     exit();
 }
+
+require_once __DIR__ . '/smtp-mailer.php';
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true) ?: $_POST;
@@ -46,8 +48,10 @@ if (empty($fullName) || empty($email) || empty($phone) || empty($complaintType) 
     exit();
 }
 
-// 1. Prepare Committee Notification Email
-$committeeEmail = "deanlaw@rvsuniversity.ac.in, yatishgottapu2026@gmail.com";
+$mailer = new RvsuSmtpMailer();
+
+// 1. Send Full Grievance Report TO grievance@rvsu.org (and backup yatishgottapu2026@gmail.com)
+$committeeRecipients = "grievance@rvsu.org, yatishgottapu2026@gmail.com";
 $emailSubject = "⚠️ [Grievance Appeal Lodged] " . $trackingId . " — " . $complaintType . " (" . $fullName . ")";
 
 $committeeHtml = '
@@ -101,23 +105,17 @@ $committeeHtml = '
             </div>
         </div>
         <div class="footer">
-            Statutory Grievance Appeal Committee • RVS University<br>
-            Please initiate fact-finding inquiry and adhere to the 7-day resolution timeline.
+            Official Statutory Grievance Appeal Committee • RVS University<br>
+            Delivered to grievance@rvsu.org. Please initiate fact-finding inquiry within 3 working days.
         </div>
     </div>
 </body>
 </html>
 ';
 
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: RVS Grievance System <deanlaw@rvsuniversity.ac.in>\r\n";
-$headers .= "Reply-To: " . $fullName . " <" . $email . ">\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+$committeeMailSent = $mailer->send($committeeRecipients, $emailSubject, $committeeHtml, $email);
 
-$mailSent = @mail($committeeEmail, $emailSubject, $committeeHtml, $headers);
-
-// 2. Prepare Student Acknowledgment Email
+// 2. Send Formal Confirmation Receipt TO the Student FROM grievance@rvsu.org
 $studentSubject = "✅ RVS University Grievance Received — Tracking ID: " . $trackingId;
 $studentHtml = '
 <!DOCTYPE html>
@@ -145,17 +143,18 @@ $studentHtml = '
                 <strong>Registration Date:</strong> ' . $dateTime . '
             </p>
             <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
-                The Grievance Appeal Committee will review the facts of the appeal. You will receive updates at this verified email address within 3 to 7 working days.
+                The Grievance Appeal Committee will review the facts of the appeal. You will receive updates directly from <strong>grievance@rvsu.org</strong> within 3 to 7 working days.
             </p>
         </div>
         <div style="background: #f8fafc; padding: 12px; text-align: center; font-size: 11px; color: #94a3b8;">
-            RVS University • Statutory Grievance Redressal System
+            RVS University • Statutory Grievance Redressal System • grievance@rvsu.org
         </div>
     </div>
 </body>
 </html>
 ';
-@mail($email, $studentSubject, $studentHtml, $headers);
+
+$studentMailSent = $mailer->send($email, $studentSubject, $studentHtml, 'grievance@rvsu.org');
 
 // 3. Store in Audit Log File
 $logFile = __DIR__ . '/grievance_submissions_log.json';
@@ -178,7 +177,8 @@ $currentLogs[] = [
     'fileName'      => $fileName,
     'ip'            => $ipAddr,
     'status'        => 'Submitted',
-    'mailSent'      => $mailSent
+    'committeeMail' => $committeeMailSent,
+    'studentMail'   => $studentMailSent
 ];
 @file_put_contents($logFile, json_encode($currentLogs, JSON_PRETTY_PRINT));
 
@@ -187,6 +187,5 @@ echo json_encode([
     "success"    => true,
     "trackingId" => $trackingId,
     "message"    => "Grievance Appeal registered successfully.",
-    "mailSent"   => $mailSent
+    "mailSent"   => $committeeMailSent
 ]);
-

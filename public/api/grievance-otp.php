@@ -1,7 +1,7 @@
 <?php
 /**
  * RVS University — Grievance Verification OTP Gateway
- * Dispatches 6-digit verification code to student / complainant email.
+ * Dispatches 6-digit verification code to student / complainant email from grievance@rvsu.org.
  */
 
 // Set CORS & Security Headers
@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["success" => false, "message" => "Method not allowed. Only POST is accepted."]);
     exit();
 }
+
+require_once __DIR__ . '/smtp-mailer.php';
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true) ?: $_POST;
@@ -81,26 +83,20 @@ $htmlMessage = '
         </div>
         <div class="footer">
             RVS University • R.V.S. Nagar, Tirupathi Road, Chittoor, Andhra Pradesh - 517127.<br>
-            Confidential Statutory Grievance Redressal System.
+            Official Statutory Grievance Redressal System • grievance@rvsu.org
         </div>
     </div>
 </body>
 </html>
 ';
 
-// Setup Email Headers for GoDaddy PHP Mail
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: RVS Grievance Redressal Cell <deanlaw@rvsuniversity.ac.in>\r\n";
-$headers .= "Reply-To: deanlaw@rvsuniversity.ac.in\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-
-$mailSent = @mail($email, $subject, $htmlMessage, $headers);
+$mailer = new RvsuSmtpMailer();
+$mailSent = $mailer->send($email, $subject, $htmlMessage, 'grievance@rvsu.org');
 
 http_response_code(200);
 echo json_encode([
     "success"  => true,
-    "message"  => "Verification code dispatched successfully.",
-    "mailSent" => $mailSent
+    "message"  => "Verification code dispatched to " . $email . " from grievance@rvsu.org",
+    "mailSent" => $mailSent,
+    "error"    => $mailer->getLastError()
 ]);
-
