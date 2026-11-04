@@ -15,7 +15,8 @@ export type AcademicTab =
   | 'ranking-accreditation'
   | 'iqac'
   | 'aqar'
-  | 'exam-section';
+  | 'exam-section'
+  | 'research';
 
 interface AcademicsDetailPageProps {
   activeTab: AcademicTab;
@@ -43,6 +44,7 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
     { id: 'iqac', label: 'IQAC', badge: 'Quality Cell' },
     { id: 'aqar', label: 'AQAR' },
     { id: 'exam-section', label: 'Exam Section', badge: 'Portal' },
+    { id: 'research', label: 'Research', badge: 'R&D' },
   ];
 
   // Active Tab Metadata
@@ -86,6 +88,11 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
       title: 'Controller of Examinations & Exam Portal',
       subtitle: 'Central autonomous examination cell handling semester results, timetables, revaluation, and notifications.',
       category: 'Examination Cell',
+    },
+    'research': {
+      title: 'Directorate of Research & Development',
+      subtitle: 'Promoting frontier interdisciplinary inquiry, sponsored grants, academic research, and priority thrust areas.',
+      category: 'Research & Innovation',
     },
   };
 
@@ -623,6 +630,105 @@ export const AcademicsDetailPage: React.FC<AcademicsDetailPageProps> = ({
                       className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-sm cursor-pointer"
                     >
                       Open Exam Portal →
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 9: Research */}
+              {activeTab === 'research' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div className="border-b border-[#E5D3BD] pb-4">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#8B4513] bg-[#C6832B]/15 px-2.5 py-0.5 rounded border border-[#C6832B]/40">
+                        Directorate of Research & Development
+                      </span>
+                    </div>
+                    <h2 className="text-xl md:text-2xl font-bold font-serif text-[#1D1611]">
+                      Research & Innovation Portfolio
+                    </h2>
+                    <p className="text-xs md:text-sm text-[#5C4837] mt-1">
+                      Fostering high-impact interdisciplinary inquiry, doctoral studies, sponsored research grants, and societal problem-solving.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {[
+                      {
+                        title: 'Overview',
+                        href: '#research-overview',
+                        desc: 'Institutional ecosystem driving frontier inquiry and intellectual property.',
+                        badge: 'Directorate'
+                      },
+                      {
+                        title: 'Mission & Vision',
+                        href: '#research-mission',
+                        desc: 'Strategic roadmap, ethics in inquiry, and research charter.',
+                        badge: 'Strategic Vision'
+                      },
+                      {
+                        title: 'Recent Projects',
+                        href: '#research-recent-projects',
+                        desc: 'Multidisciplinary research initiatives across schools & centres.',
+                        badge: 'Projects'
+                      },
+                      {
+                        title: 'Academic Research',
+                        href: '#research-academic-research',
+                        desc: 'Ph.D. programmes, scholar guidelines, and research publications.',
+                        badge: 'Ph.D. & Scholar'
+                      },
+                      {
+                        title: 'Funded Research',
+                        href: '#research-funded-research',
+                        desc: 'Grants from DST, SERB, AICTE, UGC, and industry MoUs.',
+                        badge: 'Grants & Funding'
+                      },
+                      {
+                        title: 'Thrust Areas',
+                        href: '#research-thrust-area',
+                        desc: 'Priority domains in AI, VLSI, smart materials, and sustainability.',
+                        badge: 'Priority Areas'
+                      },
+                    ].map((item, idx) => (
+                      <a
+                        key={idx}
+                        href={item.href}
+                        className="p-5 rounded-2xl bg-[#FFFDF9] hover:bg-[#FAF3E7] border border-[#D4BC9F] hover:border-[#9C6019] transition-all flex flex-col justify-between group shadow-sm cursor-pointer"
+                      >
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40">
+                              {item.badge}
+                            </span>
+                            <ChevronRight className="w-4 h-4 text-[#8A7565] group-hover:text-[#9C6019] group-hover:translate-x-1 transition-all" />
+                          </div>
+                          <h3 className="font-bold text-base text-[#1D1611] group-hover:text-[#9C6019] transition-colors">
+                            {item.title}
+                          </h3>
+                          <p className="text-xs text-[#5C4837] leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                        <div className="mt-4 pt-3 border-t border-[#EFE2D2] flex items-center justify-between text-xs font-bold text-[#9C6019]">
+                          <span>Explore Section</span>
+                          <span>→</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+
+                  <div className="p-6 rounded-2xl bg-gradient-to-r from-[#FAF3E7] to-[#F5ECE0] border-2 border-[#D4BC9F] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      <h4 className="text-sm font-bold text-[#1D1611]">Explore Full Directorate of Research</h4>
+                      <p className="text-xs text-[#5C4837]">View doctoral admission notices, funding schemes, and research ethics.</p>
+                    </div>
+                    <a
+                      href="#research-overview"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-sm cursor-pointer"
+                    >
+                      <span>Open Research Portal</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </div>

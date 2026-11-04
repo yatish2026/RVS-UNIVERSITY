@@ -18,6 +18,7 @@ import { AcademicsDetailPage, AcademicTab } from './components/pages/AcademicsDe
 import { AcademicSchoolsPage } from './components/pages/AcademicSchoolsPage';
 import { InternationalRelationsPage, IRTab } from './components/pages/InternationalRelationsPage';
 import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDetailPage';
+import { GrievancePage, GrievanceTab } from './components/pages/GrievancePage';
 import { AdmissionsModal } from './components/modals/AdmissionsModal';
 import { VideoModal } from './components/modals/VideoModal';
 import { WelcomePreloader } from './components/ui/WelcomePreloader';
@@ -30,6 +31,7 @@ export const App: React.FC = () => {
   const [academicTab, setAcademicTab] = useState<AcademicTab | null>(null);
   const [irTab, setIrTab] = useState<IRTab | null>(null);
   const [researchTab, setResearchTab] = useState<ResearchTab | null>(null);
+  const [grievanceTab, setGrievanceTab] = useState<GrievanceTab | null>(null);
   const [aboutTab, setAboutTab] = useState<AboutPageType | null>(null);
   const [campusLifeTab, setCampusLifeTab] = useState<CampusLifeTab | null>(null);
   const [examPortalTab, setExamPortalTab] = useState<ExamPortalTab | null>(null);
@@ -44,6 +46,7 @@ export const App: React.FC = () => {
     setAcademicTab(null);
     setIrTab(null);
     setResearchTab(null);
+    setGrievanceTab(null);
     setAboutTab(null);
     setCampusLifeTab(null);
     setExamPortalTab(null);
@@ -53,6 +56,27 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
+
+      // 0.0 Check Grievance hashes
+      if (
+        hash === '#grievance' || 
+        hash === '#grievances' || 
+        hash === '#grievance-committee' || 
+        hash === '#grievance-cell' || 
+        hash === '#student-grievance' ||
+        hash === '#grievance-appeal-form' || 
+        hash === '#grievance-form' || 
+        hash === '#grievance-appeal'
+      ) {
+        let tab: GrievanceTab = 'committee';
+        if (hash === '#grievance-appeal-form' || hash === '#grievance-form' || hash === '#grievance-appeal') {
+          tab = 'appeal-form';
+        }
+        resetAllViews();
+        setGrievanceTab(tab);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
 
       // 0. Check Directorate of Research hashes
       const researchTabs: ResearchTab[] = [
@@ -109,7 +133,7 @@ export const App: React.FC = () => {
       // 1. Check Academics hashes & compliance shortcuts
       const academicTabs: AcademicTab[] = [
         'mandatory-disclosure', 'board-of-studies', 'academic-calendars', 'naac-ssr',
-        'ranking-accreditation', 'iqac', 'aqar', 'exam-section'
+        'ranking-accreditation', 'iqac', 'aqar', 'exam-section', 'research'
       ];
       
       if (hash === '#academics' || hash === '#academic') {
@@ -499,6 +523,16 @@ export const App: React.FC = () => {
             onBackToHome={handleBackToHome}
             onSelectSchool={(schoolId) => handleSelectCategory(schoolId)}
           />
+        ) : grievanceTab ? (
+          // Standalone Grievance Redressal Cell Page
+          <GrievancePage
+            activeTab={grievanceTab}
+            onBackToHome={handleBackToHome}
+            onSelectTab={(tab) => {
+              setGrievanceTab(tab);
+              window.location.hash = tab === 'committee' ? 'grievance-committee' : 'grievance-appeal-form';
+            }}
+          />
         ) : researchTab ? (
           // Standalone Directorate of Research Sub-Page
           <ResearchDetailPage
@@ -525,6 +559,12 @@ export const App: React.FC = () => {
                 resetAllViews();
                 setAboutTab('about-iqac');
                 window.location.hash = 'about-iqac';
+                return;
+              }
+              if (tab === 'research') {
+                resetAllViews();
+                setResearchTab('overview');
+                window.location.hash = 'research-overview';
                 return;
               }
               setAcademicTab(tab);

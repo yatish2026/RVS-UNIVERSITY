@@ -19,7 +19,9 @@ export const UTILITY_BAR_LINKS = [
   {
     name: 'Governance & Grievance', 
     dropdown: [
-      { name: 'Student Grievance Cell', href: '#grievances' },
+      { name: 'Grievance Appeal Committee', href: '#grievance-committee' },
+      { name: 'Grievance Appeal Form', href: '#grievance-appeal-form' },
+      { name: 'Student Grievance Cell', href: '#grievance-committee' },
       { name: 'Feedback Form (Students/Parents/Faculty)', href: '#feedback' },
       { name: 'Institutional Code of Conduct', href: '#code-of-conduct' },
       { name: 'Anti-Ragging Committee', href: '#anti-ragging' },
@@ -120,6 +122,18 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
           { name: 'Hall Tickets & Revaluation', href: '#exam-portal' },
         ],
       },
+      {
+        name: 'Research',
+        href: '#research-overview',
+        subItems: [
+          { name: 'Overview', href: '#research-overview' },
+          { name: 'Mission & Vision', href: '#research-mission' },
+          { name: 'Recent Projects', href: '#research-recent-projects' },
+          { name: 'Academic Research', href: '#research-academic-research' },
+          { name: 'Funded Research', href: '#research-funded-research' },
+          { name: 'Thrust Areas', href: '#research-thrust-area' },
+        ],
+      },
     ],
   },
   {
@@ -137,17 +151,13 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    id: 'directorate-of-research',
-    label: 'Research',
-    href: '#research-overview',
+    id: 'grievance',
+    label: 'Grievance',
+    href: '#grievance-committee',
     hasDropdown: true,
     items: [
-      { name: 'Overview', href: '#research-overview' },
-      { name: 'Mission & Vision', href: '#research-mission' },
-      { name: 'Recent Projects', href: '#research-recent-projects' },
-      { name: 'Academic Research', href: '#research-academic-research' },
-      { name: 'Funded Research', href: '#research-funded-research' },
-      { name: 'Thrust Areas', href: '#research-thrust-area' },
+      { name: 'Grievance Committee', href: '#grievance-committee' },
+      { name: 'Grievance Appeal Form', href: '#grievance-appeal-form' },
     ],
   },
   {
