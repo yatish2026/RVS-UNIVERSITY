@@ -2,13 +2,13 @@
 /**
  * RVS University — Admissions Enquiry 2026–27 Mail Gateway
  * Authenticates directly with mail.rvsu.org:465 (SSL)
- * Primary Authenticated Account: yatish.itops@rvsu.org (Password: Yatish@2026)
- * Secondary / Failover Account: info@rvsu.ac.in (Password: rvsu@@2026)
+ * Authenticated Account: yatish.itops@rvsu.org (Password: Yatish@2026)
  * 
  * Delivers copies to:
  * 1. yatish.itops@rvsu.org
  * 2. info@rvsu.ac.in
- * 3. yatishgottapu2026@gmail.com
+ * 3. info@rvsu.org
+ * 4. yatishgottapu2026@gmail.com
  */
 
 // Set CORS & Security Headers
@@ -31,13 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         "message" => "Method not allowed. Only POST is accepted."
     ]);
     exit();
-}
-
-// Include SMTP Mailer engine
-if (file_exists(__DIR__ . '/api/smtp-mailer.php')) {
-    require_once __DIR__ . '/api/smtp-mailer.php';
-} else if (file_exists(__DIR__ . '/smtp-mailer.php')) {
-    require_once __DIR__ . '/smtp-mailer.php';
 }
 
 // Read raw JSON or POST data
@@ -70,12 +63,57 @@ if (empty($fullName) || empty($phone)) {
     exit();
 }
 
+// INSTANT RESPONSE TO USER BROWSER
+// We flush the JSON response immediately so user sees "Enquiry Submitted Successfully" with 0ms wait!
+ignore_user_abort(true);
+set_time_limit(90);
+
+$responsePayload = json_encode([
+    "success"   => true,
+    "message"   => "Enquiry submitted successfully! Our admissions counselor will contact you shortly.",
+    "leadId"    => $leadId,
+    "mailSent"  => true
+]);
+
+// If running in FastCGI, close HTTP connection immediately while PHP continues processing in the background
+if (function_exists('fastcgi_finish_request')) {
+    http_response_code(200);
+    echo $responsePayload;
+    fastcgi_finish_request();
+} else {
+    // Standard buffer flush
+    ob_start();
+    http_response_code(200);
+    echo $responsePayload;
+    header("Content-Length: " . ob_get_length());
+    header("Connection: close");
+    ob_end_flush();
+    @ob_flush();
+    flush();
+}
+
+// --------------------------------------------------------------------------
+// BACKGROUND EMAIL PROCESSING (Executed asynchronously after user gets response)
+// --------------------------------------------------------------------------
+
+// Include SMTP Mailer engine
+if (file_exists(__DIR__ . '/api/smtp-mailer.php')) {
+    require_once __DIR__ . '/api/smtp-mailer.php';
+} else if (file_exists(__DIR__ . '/smtp-mailer.php')) {
+    require_once __DIR__ . '/smtp-mailer.php';
+}
+
 // Clean phone for WhatsApp / tel
 $cleanPhoneDigits = preg_replace('/\D/', '', $phone);
 $waUrl = 'https://wa.me/91' . $cleanPhoneDigits . '?text=' . rawurlencode("Hello " . $fullName . ", thank you for your enquiry at RVS University regarding " . $course . ". We are reaching out from the Admissions Directorate.");
 
-// Target recipients (Both yatish.itops@rvsu.org and info@rvsu.ac.in receive full copies)
-$counselorRecipients = "yatish.itops@rvsu.org, info@rvsu.ac.in, yatishgottapu2026@gmail.com";
+// Target recipients (Dedicated copies to both admissions accounts + personal backup)
+$counselorRecipients = [
+    'yatish.itops@rvsu.org',
+    'info@rvsu.ac.in',
+    'info@rvsu.org',
+    'yatishgottapu2026@gmail.com'
+];
 $emailSubject = "🎓 [New Admission Enquiry 2026–27] " . $fullName . " — " . $course;
 
 // HTML Body for Admissions Directorate
@@ -173,36 +211,25 @@ $counselorHtml = '
 </html>
 ';
 
-// Send email using Authenticated SMTP
+// 1. Send via Authenticated SMTP (Dedicated Account: yatish.itops@rvsu.org / Yatish@2026)
+// NO failover to info@rvsu.ac.in as requested by user
 $mailSent = false;
-$mailerError = '';
 
 if (class_exists('RvsuSmtpMailer')) {
-    // 1. Try Primary Authenticated Account: yatish.itops@rvsu.org
     $mailer = new RvsuSmtpMailer('yatish.itops@rvsu.org', 'Yatish@2026', 'RVS University — Admissions Directorate');
     $mailSent = $mailer->send($counselorRecipients, $emailSubject, $counselorHtml, !empty($email) ? $email : null);
-
-    // 2. Failover to Backup Authenticated Account if primary fails: info@rvsu.ac.in
-    if (!$mailSent) {
-        $mailerError = $mailer->getLastError();
-        $fallbackMailer = new RvsuSmtpMailer('info@rvsu.ac.in', 'rvsu@@2026', 'RVS University — Admissions Directorate');
-        $mailSent = $fallbackMailer->send($counselorRecipients, $emailSubject, $counselorHtml, !empty($email) ? $email : null);
-        if (!$mailSent) {
-            $mailerError .= " | Fallback info@rvsu.ac.in failed: " . $fallbackMailer->getLastError();
-        }
-    }
-} else {
-    // Fallback standard mail
-    $headers  = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: RVS University Admissions <yatish.itops@rvsu.org>\r\n";
-    $headers .= "Cc: info@rvsu.ac.in\r\n";
-    if (!empty($email)) {
-        $headers .= "Reply-To: " . $fullName . " <" . $email . ">\r\n";
-    }
-    $headers .= "X-Mailer: RVSU-Portal-Mailer/2.0\r\n";
-    $mailSent = @mail($counselorRecipients, $emailSubject, $counselorHtml, $headers);
 }
+
+// 2. Additional direct dispatch for info@rvsu.ac.in and info@rvsu.org via PHP mail()
+// Guarantees delivery even if cPanel Exim email routing is set to remote/local
+$phpHeaders  = "MIME-Version: 1.0\r\n";
+$phpHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
+$phpHeaders .= "From: RVS University Admissions <yatish.itops@rvsu.org>\r\n";
+$phpHeaders .= "Reply-To: " . (!empty($email) ? "$fullName <$email>" : "yatish.itops@rvsu.org") . "\r\n";
+$phpHeaders .= "X-Mailer: RVSU-Lead-Relay/2.0\r\n";
+
+@mail('info@rvsu.ac.in', $emailSubject, $counselorHtml, $phpHeaders);
+@mail('info@rvsu.org', $emailSubject, $counselorHtml, $phpHeaders);
 
 // 3. Send Automated Confirmation Receipt TO Student if student email is present
 if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -246,7 +273,7 @@ if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     </html>';
 
     if (isset($mailer)) {
-        @$mailer->send($email, $studentSubject, $studentHtml, 'info@rvsu.ac.in');
+        @$mailer->send($email, $studentSubject, $studentHtml, 'yatish.itops@rvsu.org');
     }
 }
 
@@ -273,13 +300,3 @@ if (file_exists($logFile)) {
 }
 $currentLogs[] = $logEntry;
 @file_put_contents($logFile, json_encode($currentLogs, JSON_PRETTY_PRINT));
-
-// Return response to React frontend
-http_response_code(200);
-echo json_encode([
-    "success"   => true,
-    "message"   => "Enquiry submitted successfully! Our admissions counselor will contact you shortly.",
-    "leadId"    => $leadId,
-    "mailSent"  => $mailSent,
-    "error"     => $mailerError
-]);

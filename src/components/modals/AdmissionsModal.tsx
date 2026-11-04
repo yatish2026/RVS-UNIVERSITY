@@ -75,7 +75,7 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
     if (errorMessage) setErrorMessage('');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -89,70 +89,56 @@ export const AdmissionsModal: React.FC<AdmissionsModalProps> = ({
       return;
     }
 
-    setIsSubmitting(true);
+    const assignedLeadId = 'RVSU-ADM-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
 
     const newLeadRecord = {
-      leadRefId: 'RVSU-' + Math.floor(100000 + Math.random() * 900000),
+      leadRefId: assignedLeadId,
       timestamp: new Date().toISOString(),
       formattedDate: new Date().toLocaleString(),
       ...formData,
     };
 
-    // Save lead in Browser localStorage for instant localhost verification
+    // Save lead in Browser localStorage for instant verification
     try {
       const existingLeads = JSON.parse(localStorage.getItem('RVSU_ADMISSION_LEADS') || '[]');
       existingLeads.unshift(newLeadRecord);
       localStorage.setItem('RVSU_ADMISSION_LEADS', JSON.stringify(existingLeads, null, 2));
-      
-      console.log(
-        '%c🎓 RVS UNIVERSITY — NEW ADMISSION ENQUIRY SUBMITTED',
-        'background: #0A192F; color: #D4AF37; font-size: 14px; font-weight: bold; padding: 6px 12px; border-radius: 6px; border: 1px solid #D4AF37;'
-      );
-      console.table([newLeadRecord]);
     } catch (e) {
       console.warn('LocalStorage save skipped:', e);
     }
 
-    try {
-      // Send lead to GoDaddy PHP mail handler with resilient timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 12000);
+    // INSTANT UI FEEDBACK: Immediately transition to success state with zero lag
+    setLeadRefId(assignedLeadId);
+    setIsSuccess(true);
+    setIsSubmitting(false);
 
-      const payload = {
-        leadRefId: newLeadRecord.leadRefId,
-        ...formData,
-      };
+    // Background asynchronous network transmission
+    const payload = {
+      leadRefId: assignedLeadId,
+      ...formData,
+    };
 
-      const response = await fetch('/api/mail.php', {
+    fetch('/api/mail.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {
+      return fetch('./mail.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify(payload),
-        signal: controller.signal,
-      }).catch(async () => {
-        return fetch('./mail.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
+        keepalive: true,
       });
-
-      clearTimeout(timeoutId);
-      const result = await response?.json().catch(() => null);
-
-      setIsSuccess(true);
-      setLeadRefId(result?.leadId || newLeadRecord.leadRefId);
-    } catch (err) {
-      setIsSuccess(true);
-      setLeadRefId(newLeadRecord.leadRefId);
-    } finally {
-      setIsSubmitting(false);
-    }
+    }).catch((err) => {
+      console.warn('Background mailer dispatched:', err);
+    });
   };
 
 // Complete list of offered courses mapped by Academic School
