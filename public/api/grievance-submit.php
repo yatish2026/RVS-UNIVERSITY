@@ -2,7 +2,12 @@
 /**
  * RVS University — Grievance Appeal Submission Gateway
  * Handles formal grievance registration, stores audit log, attaches uploaded files/images,
- * and notifies grievance@rvsu.org with full embedded screenshot & download link.
+ * and notifies grievance@rvsu.org with full embedded attachment & download link.
+ * 
+ * Strict transport-safe:
+ * - Content-Transfer-Encoding: quoted-printable
+ * - No oversized raw base64 in HTML lines (prevents Exim line length limit 2048 errors)
+ * - Safe MIME attachments with 76-character chunking
  */
 
 // Set CORS & Security Headers
@@ -51,13 +56,12 @@ if (empty($fullName) || empty($email) || empty($phone) || empty($complaintType) 
     exit();
 }
 
-// 1. Process Attachment (Save to disk + prepare for email attachment & inline preview)
+// 1. Process Attachment (Save to server disk + prepare safe MIME attachment)
 $savedFileUrl = '';
 $isImage = false;
 $attachments = [];
 
 if (!empty($fileData) && !empty($fileName)) {
-    // Detect image type
     $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $isImage = in_array($ext, ['png', 'jpg', 'jpeg', 'webp', 'gif']) || strpos($fileType, 'image/') === 0;
 
@@ -72,6 +76,7 @@ if (!empty($fileData) && !empty($fileName)) {
     if (strpos($rawBase64, 'base64,') !== false) {
         $rawBase64 = substr($rawBase64, strpos($rawBase64, 'base64,') + 7);
     }
+    $rawBase64 = str_replace(["\r", "\n", " "], '', $rawBase64);
     $binaryData = base64_decode($rawBase64);
     
     if ($binaryData !== false) {
@@ -85,11 +90,11 @@ if (!empty($fileData) && !empty($fileName)) {
         }
     }
 
-    // Add to email attachment list
+    // Add as safe chunked MIME attachment for Gmail/Roundcube
     $attachments[] = [
         'filename' => $fileName,
         'type'     => $fileType ?: 'application/octet-stream',
-        'data'     => $fileData
+        'data'     => $rawBase64
     ];
 }
 
@@ -99,18 +104,21 @@ $mailer = new RvsuSmtpMailer();
 $committeeRecipients = "grievance@rvsu.org, yatishgottapu2026@gmail.com";
 $emailSubject = "⚠️ [Grievance Appeal Lodged] " . $trackingId . " — " . $complaintType . " (" . $fullName . ")";
 
-// Inline image preview block
-$imagePreviewHtml = '';
-if ($isImage && !empty($fileData)) {
-    $imagePreviewHtml = '
-    <div style="margin-top: 22px; background: #FAF3E7; border: 2px solid #C6832B; border-radius: 12px; padding: 18px;">
-        <div style="font-size: 13px; font-weight: 800; color: #9C6019; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-            🖼️ Attached Supporting Screenshot / Image (' . $fileName . '):
+// Attachment Section in Email (Clean URL link & attachment indicator - No raw base64 line overflows!)
+$attachmentSectionHtml = '';
+if (!empty($fileName)) {
+    $attachmentSectionHtml = '
+    <div style="margin-top: 20px; background: #FAF3E7; border: 2px solid #C6832B; border-radius: 12px; padding: 18px;">
+        <div style="font-size: 13px; font-weight: 800; color: #9C6019; margin-bottom: 8px;">
+            📎 Supporting File / Screenshot Attached:
         </div>
-        <div style="text-align: center; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid #D4BC9F;">
-            <img src="' . $fileData . '" style="max-width: 100%; max-height: 550px; height: auto; border-radius: 6px; display: inline-block;" alt="' . $fileName . '" />
+        <div style="font-size: 13px; color: #1D1611; font-weight: 600; margin-bottom: 12px;">
+            ' . $fileName . '
         </div>
-        ' . (!empty($savedFileUrl) ? '<div style="margin-top: 10px; text-align: center;"><a href="' . $savedFileUrl . '" target="_blank" style="color: #0284c7; font-size: 12px; font-weight: bold; text-decoration: underline;">🔗 Click here to view / download full-resolution image in browser</a></div>' : '') . '
+        <p style="font-size: 12px; color: #5C4837; margin: 0 0 12px;">
+            The file has been attached directly to this email and saved on the server.
+        </p>
+        ' . (!empty($savedFileUrl) ? '<div><a href="' . $savedFileUrl . '" target="_blank" style="display: inline-block; background: #0A192F; color: #D4AF37; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-weight: bold; font-size: 12px; border: 1px solid #D4AF37;">🔗 View / Download File in Browser</a></div>' : '') . '
     </div>
     ';
 }
@@ -165,7 +173,7 @@ $committeeHtml = '
                 <div class="desc-box">' . nl2br($description) . '</div>
             </div>
 
-            ' . $imagePreviewHtml . '
+            ' . $attachmentSectionHtml . '
         </div>
         <div class="footer">
             Official Statutory Grievance Appeal Committee • RVS University<br>
