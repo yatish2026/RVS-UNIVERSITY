@@ -145,10 +145,10 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-30 w-full bg-[#120C08]/95 backdrop-blur-md border-t border-[#D4BC9F]/40 py-2 sm:py-2.5 px-2 sm:px-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
         <div className="w-full flex items-center gap-2 sm:gap-3.5 overflow-hidden px-1 sm:px-2">
           {/* Static Pill Trigger Button */}
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('open-admission-notices', { detail: { index: 0 } }))}
+          <a
+            href="#admissions"
             className="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#B57321] via-[#C6832B] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-[11px] font-bold uppercase tracking-wider shadow-md transition-all cursor-pointer whitespace-nowrap border border-gold-300/80 hover:scale-105"
-            title="Click to view announcement modal"
+            title="Admissions 2026–27 Open"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-200 opacity-75"></span>
@@ -156,13 +156,13 @@ export const HeroSection: React.FC = () => {
             </span>
             <GraduationCap className="w-3.5 h-3.5 text-white" />
             <span>NOTICE</span>
-          </button>
+          </a>
 
           {/* Smooth Continuous Infinite Marquee Track */}
-          <div
-            onClick={() => window.dispatchEvent(new CustomEvent('open-admission-notices', { detail: { index: 0 } }))}
+          <a
+            href="#admissions"
             className="flex-1 overflow-hidden whitespace-nowrap cursor-pointer group"
-            title="Click to view full notice announcements"
+            title="Admissions 2026–27 Open — Click to Apply"
           >
             <div className="inline-flex animate-marquee-left items-center gap-8 text-xs font-semibold text-slate-100 group-hover:text-amber-300 transition-colors">
               <span className="inline-flex items-center gap-2">
@@ -178,7 +178,7 @@ export const HeroSection: React.FC = () => {
                 <span>Admissions Helpline: +91 93908 84218 / 77299 99158 / 96696 60214</span>
               </span>
               <span className="inline-flex items-center gap-1 text-amber-300 font-bold underline underline-offset-2">
-                [Click to View Notice Modal]
+                [Click to Apply Online]
               </span>
 
               {/* Seamless loop repetition */}
@@ -195,10 +195,10 @@ export const HeroSection: React.FC = () => {
                 <span>Admissions Helpline: +91 93908 84218 / 77299 99158 / 96696 60214</span>
               </span>
               <span className="inline-flex items-center gap-1 text-amber-300 font-bold underline underline-offset-2">
-                [Click to View Notice Modal]
+                [Click to Apply Online]
               </span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>

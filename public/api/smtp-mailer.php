@@ -163,6 +163,7 @@ class RvsuSmtpMailer {
                 $attFilename = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $att['filename'] ?? 'attachment.dat');
                 $attType     = $att['type'] ?? 'application/octet-stream';
                 $attRawData  = $att['data'] ?? '';
+                $attCid      = $att['cid'] ?? null;
 
                 if (strpos($attRawData, 'base64,') !== false) {
                     $attRawData = substr($attRawData, strpos($attRawData, 'base64,') + 7);
@@ -173,7 +174,12 @@ class RvsuSmtpMailer {
 
                 $fullPayload .= "--$boundary\r\n";
                 $fullPayload .= "Content-Type: {$attType}; name=\"{$attFilename}\"\r\n";
-                $fullPayload .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
+                if ($attCid) {
+                    $fullPayload .= "Content-Disposition: inline; filename=\"{$attFilename}\"\r\n";
+                    $fullPayload .= "Content-ID: <{$attCid}>\r\n";
+                } else {
+                    $fullPayload .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
+                }
                 $fullPayload .= "Content-Transfer-Encoding: base64\r\n\r\n";
                 $fullPayload .= $chunkedBase64 . "\r\n\r\n";
             }

@@ -37,6 +37,7 @@ $data = json_decode($rawInput, true) ?: $_POST;
 $trackingId    = isset($data['trackingId']) ? trim(htmlspecialchars($data['trackingId'])) : 'RVS-GRV-' . rand(1000, 9999);
 $fullName      = isset($data['fullName']) ? trim(htmlspecialchars($data['fullName'])) : '';
 $email         = isset($data['email']) ? trim(filter_var($data['email'], FILTER_SANITIZE_EMAIL)) : '';
+$isEmailVerified = !empty($data['isEmailVerified']);
 $phone         = isset($data['phone']) ? trim(htmlspecialchars($data['phone'])) : '';
 $regNumber     = isset($data['regNumber']) ? trim(htmlspecialchars($data['regNumber'])) : '';
 $programme     = isset($data['programme']) ? trim(htmlspecialchars($data['programme'])) : '';
@@ -91,11 +92,15 @@ if (!empty($fileData) && !empty($fileName)) {
     }
 
     // Add as safe chunked MIME attachment for Gmail/Roundcube
-    $attachments[] = [
+    $attItem = [
         'filename' => $fileName,
-        'type'     => $fileType ?: 'application/octet-stream',
+        'type'     => $fileType ?: ($isImage ? 'image/jpeg' : 'application/octet-stream'),
         'data'     => $rawBase64
     ];
+    if ($isImage) {
+        $attItem['cid'] = 'rvsu_grievance_proof';
+    }
+    $attachments[] = $attItem;
 }
 
 $mailer = new RvsuSmtpMailer();
@@ -104,7 +109,7 @@ $mailer = new RvsuSmtpMailer();
 $committeeRecipients = "grievance@rvsu.org, yatishgottapu2026@gmail.com";
 $emailSubject = "⚠️ [Grievance Appeal Lodged] " . $trackingId . " — " . $complaintType . " (" . $fullName . ")";
 
-// Attachment Section in Email (Clean URL link & attachment indicator - No raw base64 line overflows!)
+// Attachment Section in Email (Image Preview + Link + MIME attachment)
 $attachmentSectionHtml = '';
 if (!empty($fileName)) {
     $attachmentSectionHtml = '
@@ -114,11 +119,24 @@ if (!empty($fileName)) {
         </div>
         <div style="font-size: 13px; color: #1D1611; font-weight: 600; margin-bottom: 12px;">
             ' . $fileName . '
-        </div>
+        </div>';
+
+    if ($isImage) {
+        $imgDisplaySrc = !empty($savedFileUrl) ? $savedFileUrl : 'cid:rvsu_grievance_proof';
+        $attachmentSectionHtml .= '
+        <div style="margin: 14px 0; text-align: center; background: #ffffff; padding: 14px; border-radius: 8px; border: 1px solid #D4BC9F;">
+            <div style="font-size: 11px; font-weight: 700; color: #7A695A; text-transform: uppercase; margin-bottom: 8px;">📷 Uploaded Screenshot / Document Preview:</div>
+            <a href="' . (!empty($savedFileUrl) ? $savedFileUrl : '#') . '" target="_blank">
+                <img src="' . $imgDisplaySrc . '" alt="' . htmlspecialchars($fileName) . '" style="max-width: 100%; max-height: 420px; border-radius: 6px; border: 1px solid #C6832B; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.12);" />
+            </a>
+        </div>';
+    }
+
+    $attachmentSectionHtml .= '
         <p style="font-size: 12px; color: #5C4837; margin: 0 0 12px;">
-            The file has been attached directly to this email and saved on the server.
+            This file has been attached directly to this email and securely stored on the server.
         </p>
-        ' . (!empty($savedFileUrl) ? '<div><a href="' . $savedFileUrl . '" target="_blank" style="display: inline-block; background: #0A192F; color: #D4AF37; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-weight: bold; font-size: 12px; border: 1px solid #D4AF37;">🔗 View / Download File in Browser</a></div>' : '') . '
+        ' . (!empty($savedFileUrl) ? '<div><a href="' . $savedFileUrl . '" target="_blank" style="display: inline-block; background: #0A192F; color: #D4AF37; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-weight: bold; font-size: 12px; border: 1px solid #D4AF37;">🔗 View / Download Full Image in Browser</a></div>' : '') . '
     </div>
     ';
 }
@@ -156,14 +174,14 @@ $committeeHtml = '
             <h2 style="font-size: 17px; margin: 0 0 12px; color: #0A192F;">Appeal Tracking ID: <span style="color:#C6832B;">' . $trackingId . '</span></h2>
             <table>
                 <tr><th>Full Name</th><td class="highlight">' . $fullName . '</td></tr>
-                <tr><th>Verified Email</th><td><a href="mailto:' . $email . '">' . $email . '</a></td></tr>
+                <tr><th>Email Address</th><td><a href="mailto:' . $email . '">' . $email . '</a> ' . ($isEmailVerified ? '<span style="background:#D1FAE5; color:#065F46; font-size:10px; font-weight:700; padding:2px 8px; border-radius:9999px; margin-left:6px; border:1px solid #A7F3D0;">✓ OTP Verified</span>' : '<span style="background:#FEF3C7; color:#92400E; font-size:10px; font-weight:700; padding:2px 8px; border-radius:9999px; margin-left:6px; border:1px solid #FDE68A;">Direct (Unverified)</span>') . '</td></tr>
                 <tr><th>Phone Number</th><td><a href="tel:' . $phone . '">' . $phone . '</a></td></tr>
                 <tr><th>Registration No</th><td>' . $regNumber . '</td></tr>
                 <tr><th>Programme</th><td>' . $programme . '</td></tr>
                 <tr><th>Gender</th><td>' . $gender . '</td></tr>
                 <tr><th>Complaint Category</th><td style="color:#b45309; font-weight:700;">' . $complaintType . '</td></tr>
                 <tr><th>Subject</th><td class="highlight">' . $subject . '</td></tr>
-                <tr><th>Supporting File</th><td>' . (!empty($fileName) ? '<strong>' . $fileName . '</strong> (Attached to email)' : '<em>No file attached</em>') . '</td></tr>
+                <tr><th>Supporting File</th><td>' . (!empty($fileName) ? '<strong>' . $fileName . '</strong>' . ($isImage ? ' (Preview below & attached)' : ' (Attached to email)') : '<em>No file attached</em>') . '</td></tr>
                 <tr><th>Submitted At</th><td>' . $dateTime . '</td></tr>
                 <tr><th>Complainant IP</th><td><code>' . $ipAddr . '</code></td></tr>
             </table>

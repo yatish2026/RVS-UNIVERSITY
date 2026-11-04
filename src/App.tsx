@@ -21,7 +21,6 @@ import { ResearchDetailPage, ResearchTab } from './components/pages/ResearchDeta
 import { GrievancePage, GrievanceTab } from './components/pages/GrievancePage';
 import { AdmissionsModal } from './components/modals/AdmissionsModal';
 import { VideoModal } from './components/modals/VideoModal';
-import { WelcomePreloader } from './components/ui/WelcomePreloader';
 import { ALL_DEGREE_CATEGORIES } from './data/coursesCatalog';
 
 export const App: React.FC = () => {
@@ -496,9 +495,6 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Initial Welcome Splash Animation */}
-      <WelcomePreloader />
-
       {/* Quick Admissions Enquiry & Application Modal */}
       <AdmissionsModal
         isOpen={isAdmissionsModalOpen}
