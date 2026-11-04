@@ -151,6 +151,7 @@ class RvsuSmtpMailer {
         $qpBody = $this->encodeQuotedPrintable($htmlBody);
 
         // Build Email Headers
+        $msgId = '<' . time() . '.' . md5(uniqid(rand(), true)) . '@rvsu.org>';
         $headers  = "From: =?UTF-8?B?" . base64_encode($this->fromName) . "?= <{$this->user}>\r\n";
         $headers .= "To: " . implode(', ', $recipients) . "\r\n";
         if ($replyTo) {
@@ -158,8 +159,9 @@ class RvsuSmtpMailer {
         }
         $headers .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
         $headers .= "Date: " . date('r') . "\r\n";
+        $headers .= "Message-ID: $msgId\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "X-Mailer: RVSU-Grievance-Mailer/1.3\r\n";
+        $headers .= "X-Mailer: RVSU-Portal-Mailer/2.1\r\n";
 
         if (!empty($attachments)) {
             $boundary = "----=_NextPart_" . md5(uniqid(rand(), true));
@@ -240,8 +242,10 @@ class RvsuSmtpMailer {
         $toStr = implode(', ', $recipients);
         $qpBody = $this->encodeQuotedPrintable($htmlBody);
 
+        $msgId = '<' . time() . '.' . md5(uniqid(rand(), true)) . '@rvsu.org>';
         $headers  = "MIME-Version: 1.0\r\n";
         $headers .= "From: {$this->fromName} <{$this->user}>\r\n";
+        $headers .= "Message-ID: $msgId\r\n";
         if ($replyTo) {
             $headers .= "Reply-To: $replyTo\r\n";
         }
