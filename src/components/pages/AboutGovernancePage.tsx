@@ -181,7 +181,7 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
       badge: 'STATUTORY BODIES',
       icon: <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />,
       title: 'Governance',
-      subtitle: 'Statutory governance framework, Apex Governing Body, Board of Management, Academic Council, and statutory authorities established under Act No. 12 of 2024.',
+      subtitle: '',
     },
     administration: {
       badge: 'ADMINISTRATIVE STRUCTURE',
@@ -249,17 +249,17 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
     { id: 'contact-us', label: 'Contact Us', href: '#contact-us', icon: <Phone className="w-4 h-4" /> },
   ];
 
-  // Governance 9 Side Menu Items
+  // Governance 9 Side Menu Items (badges removed as requested)
   const governanceMenuItems = [
-    { id: 'sponsoring-body', label: 'Sponsoring Body', subtitle: 'Srinivasa Educational Academy (Est. 1998)', role: 'Statutory Sponsoring Society', badge: 'Society' },
-    { id: 'governing-body', label: 'Governing Body', subtitle: 'Apex Governing Body', role: 'Apex University Authority', badge: 'Apex' },
-    { id: 'board-of-management', label: 'Board of Management', subtitle: 'Executive Administration & Management', role: 'Executive Management', badge: 'Executive' },
-    { id: 'academic-council', label: 'Academic Council Members', subtitle: 'Curriculum & Academic Regulation', role: 'Chief Academic Authority', badge: 'Council' },
-    { id: 'finance-committee', label: 'Finance Committee', subtitle: 'Budgeting, Audits & Resource Planning', role: 'Financial Governance', badge: 'Finance' },
-    { id: 'planning-monitoring', label: 'Planning and Monitoring Board', subtitle: 'Strategic Roadmap & Infrastructure', role: 'Development Planning', badge: 'Planning' },
-    { id: 'research-innovation', label: 'Research and Innovation Council', subtitle: 'R&D, Patents & ATAL IDEA Lab', role: 'Research & Incubation', badge: 'R&D' },
-    { id: 'board-of-examination', label: 'Board of Examination', subtitle: 'Evaluation, Moderation & Exam Integrity', role: 'Autonomous Exam Cell', badge: 'Exam Cell' },
-    { id: 'board-of-studies', label: 'Board of Studies', subtitle: 'Departmental Syllabi & Industry Alignment', role: 'Curriculum Boards', badge: 'BOS' },
+    { id: 'sponsoring-body', label: 'Sponsoring Body', subtitle: 'Srinivasa Educational Academy (Est. 1998)', role: 'Statutory Sponsoring Society' },
+    { id: 'governing-body', label: 'Governing Body', subtitle: 'Governing Body', role: 'University Authority' },
+    { id: 'board-of-management', label: 'Board of Management', subtitle: 'Executive Administration & Management', role: 'Executive Management' },
+    { id: 'academic-council', label: 'Academic Council Members', subtitle: 'Curriculum & Academic Regulation', role: 'Academic Authority' },
+    { id: 'finance-committee', label: 'Finance Committee', subtitle: 'Budgeting, Audits & Resource Planning', role: 'Financial Governance' },
+    { id: 'planning-monitoring', label: 'Planning and Monitoring Board', subtitle: 'Strategic Roadmap & Infrastructure', role: 'Development Planning' },
+    { id: 'research-innovation', label: 'Research and Innovation Council', subtitle: 'R&D, Patents & ATAL IDEA Lab', role: 'Research & Incubation' },
+    { id: 'board-of-examination', label: 'Board of Examination', subtitle: 'Evaluation, Moderation & Exam Integrity', role: 'Examination Cell' },
+    { id: 'board-of-studies', label: 'Board of Studies', subtitle: 'Departmental Syllabi & Industry Alignment', role: 'Curriculum Boards' },
   ];
 
   // IQAC 9 Side Menu Items
@@ -1229,17 +1229,6 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                           </span>
                           <span className="truncate">{item.label}</span>
                         </div>
-                        {item.badge && (
-                          <span
-                            className={`text-[10px] font-bold px-2 py-0.5 rounded-none border flex-shrink-0 ml-2 ${
-                              isActive
-                                ? 'bg-white text-[#9C6019] border-white font-black'
-                                : 'bg-[#EFE2D2] text-[#8B4513] border-[#D4BC9F] group-hover:bg-white/20 group-hover:text-white group-hover:border-white/40'
-                            }`}
-                          >
-                            {item.badge}
-                          </span>
-                        )}
                       </button>
                     );
                   })}
