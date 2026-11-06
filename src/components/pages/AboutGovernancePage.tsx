@@ -11,6 +11,7 @@ import chancellorPhoto from '../../assets/Chairman Photo copy.jpg.jpeg';
 import proChancellorPhoto from '../../assets/V Chairman Photo copy.jpg.jpeg';
 import { GoverningBodySection } from '../governance/GoverningBodySection';
 import { AcademicCouncilSection } from '../governance/AcademicCouncilSection';
+import { BoardOfManagementSection } from '../governance/BoardOfManagementSection';
 
 // Reusable scroll-observer card that triggers dynamic entrance animations from both scroll directions
 const LeadershipScrollCard: React.FC<{
@@ -1245,12 +1246,14 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 </div>
               </div>
 
-              {/* Right Content Area: Governing Body, Academic Council, or "Will be updated soon" for remaining */}
+              {/* Right Content Area: Governing Body, Academic Council, Board of Management, or "Will be updated soon" for remaining */}
               <div className="lg:col-span-8 space-y-6">
                 {governanceSubTab === 'governing-body' ? (
                   <GoverningBodySection />
                 ) : governanceSubTab === 'academic-council' ? (
                   <AcademicCouncilSection />
+                ) : governanceSubTab === 'board-of-management' ? (
+                  <BoardOfManagementSection />
                 ) : (
                   governanceMenuItems.map((item) => {
                     if (governanceSubTab !== item.id) return null;

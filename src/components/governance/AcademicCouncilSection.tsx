@@ -714,3 +714,4 @@ const RowItem: React.FC<{ member: AcademicCouncilMember }> = ({ member }) => {
     </tr>
   );
 };
+
