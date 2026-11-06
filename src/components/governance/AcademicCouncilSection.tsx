@@ -93,6 +93,7 @@ export const ACADEMIC_COUNCIL_MEMBERS: AcademicCouncilMember[] = [
     category: 'Member of the Board of Management',
     position: 'Member',
     hasPhotoCard: true,
+    photoImage: '/images/governance/dr-m-chandrasekhar.jpg',
     shortRole: 'Professor (HAG), NIT Warangal | Board of Management',
     subGroup: 'Two (2) members of the Board of Management',
   },
@@ -404,14 +405,7 @@ export const AcademicCouncilSection: React.FC = () => {
                     {member.sNo}.
                   </td>
                   <td className="py-3 px-4 sm:px-5 font-semibold text-navy-950 border-r border-slate-200">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span>{member.name}</span>
-                      {member.hasPhotoCard && (
-                        <span className="text-[10px] bg-[#FAF3E7] text-[#8B4513] font-bold px-1.5 py-0.5 rounded border border-[#D4BC9F]">
-                          Photo Above
-                        </span>
-                      )}
-                    </div>
+                    <span>{member.name}</span>
                   </td>
                   <td className="py-3 px-4 sm:px-5 text-slate-700 leading-snug border-r border-slate-200">
                     {member.category}
@@ -620,14 +614,7 @@ const RowItem: React.FC<{ member: AcademicCouncilMember }> = ({ member }) => {
         {member.sNo}.
       </td>
       <td className="py-3 px-4 sm:px-5 font-semibold text-navy-950 border-r border-slate-200">
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span>{member.name}</span>
-          {member.hasPhotoCard && (
-            <span className="text-[10px] bg-[#FAF3E7] text-[#8B4513] font-bold px-1.5 py-0.5 rounded border border-[#D4BC9F]">
-              Photo Above
-            </span>
-          )}
-        </div>
+        <span>{member.name}</span>
       </td>
       <td className="py-3 px-4 sm:px-5 text-slate-700 leading-snug border-r border-slate-200">
         {member.category}

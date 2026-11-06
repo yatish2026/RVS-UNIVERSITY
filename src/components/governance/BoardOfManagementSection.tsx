@@ -71,6 +71,7 @@ export const BOARD_OF_MANAGEMENT_MEMBERS: BoardOfManagementMember[] = [
     category: 'nominated by the Sponsoring Body',
     position: 'Member',
     hasPhotoCard: true,
+    photoImage: '/images/governance/dr-m-chandrasekhar.jpg',
     shortRole: 'Professor (HAG), NIT Warangal',
     subGroup: 'Three (3) persons of whom one shall be a distinguished academician who is not a member of the Governing Body. (to be nominated by the Sponsoring Body)',
   },
@@ -80,6 +81,7 @@ export const BOARD_OF_MANAGEMENT_MEMBERS: BoardOfManagementMember[] = [
     category: 'nominated by the Sponsoring Body',
     position: 'Member',
     hasPhotoCard: true,
+    photoImage: '/images/governance/sri-a-prakash-ambavaram.jpg',
     shortRole: 'Vice-Chairman, Council for Social Development, Tirupati',
     subGroup: 'Three (3) persons of whom one shall be a distinguished academician who is not a member of the Governing Body. (to be nominated by the Sponsoring Body)',
   },
@@ -391,14 +393,7 @@ const RowItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }) => {
         {member.sNo}.
       </td>
       <td className="py-3 px-4 sm:px-5 font-semibold text-navy-950 border-r border-slate-200">
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span>{member.name}</span>
-          {member.hasPhotoCard && (
-            <span className="text-[10px] bg-[#FAF3E7] text-[#8B4513] font-bold px-1.5 py-0.5 rounded border border-[#D4BC9F]">
-              Photo Above
-            </span>
-          )}
-        </div>
+        <span>{member.name}</span>
       </td>
       <td className="py-3 px-4 sm:px-5 text-slate-700 leading-snug border-r border-slate-200">
         {member.category}
