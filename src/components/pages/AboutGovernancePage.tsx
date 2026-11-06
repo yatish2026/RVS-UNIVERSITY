@@ -9,6 +9,8 @@ import { Button } from '../ui/Button';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 import chancellorPhoto from '../../assets/Chairman Photo copy.jpg.jpeg';
 import proChancellorPhoto from '../../assets/V Chairman Photo copy.jpg.jpeg';
+import { GoverningBodySection } from '../governance/GoverningBodySection';
+import { AcademicCouncilSection } from '../governance/AcademicCouncilSection';
 
 // Reusable scroll-observer card that triggers dynamic entrance animations from both scroll directions
 const LeadershipScrollCard: React.FC<{
@@ -1243,50 +1245,56 @@ export const AboutGovernancePage: React.FC<AboutGovernancePageProps> = ({
                 </div>
               </div>
 
-              {/* Right Content Area: Clean "Will be updated soon" Display */}
+              {/* Right Content Area: Governing Body, Academic Council, or "Will be updated soon" for remaining */}
               <div className="lg:col-span-8 space-y-6">
-                {governanceMenuItems.map((item) => {
-                  if (governanceSubTab !== item.id) return null;
+                {governanceSubTab === 'governing-body' ? (
+                  <GoverningBodySection />
+                ) : governanceSubTab === 'academic-council' ? (
+                  <AcademicCouncilSection />
+                ) : (
+                  governanceMenuItems.map((item) => {
+                    if (governanceSubTab !== item.id) return null;
 
-                  return (
-                    <div key={item.id} className="bg-white rounded-3xl p-6 sm:p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
-                      {/* Top Header of the Statutory Body */}
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
-                        <div>
-                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
-                            <ShieldCheck className="w-3.5 h-3.5 text-gold-600" />
-                            <span>{item.role}</span>
+                    return (
+                      <div key={item.id} className="bg-white rounded-3xl p-6 sm:p-8 md:p-12 border border-slate-200 shadow-xl space-y-6 animate-fadeIn">
+                        {/* Top Header of the Statutory Body */}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-6">
+                          <div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-100 text-gold-900 border border-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
+                              <ShieldCheck className="w-3.5 h-3.5 text-gold-600" />
+                              <span>{item.role}</span>
+                            </div>
+                            <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-navy-950">
+                              {item.label}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-500 mt-1 font-normal">
+                              {item.subtitle}
+                            </p>
                           </div>
-                          <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-navy-950">
-                            {item.label}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-slate-500 mt-1 font-normal">
-                            {item.subtitle}
-                          </p>
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-300 text-gold-900 text-xs font-bold self-start sm:self-auto">
+                            <Clock className="w-3.5 h-3.5 text-gold-600" />
+                            <span>Statutory Council</span>
+                          </span>
                         </div>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-300 text-gold-900 text-xs font-bold self-start sm:self-auto">
-                          <Clock className="w-3.5 h-3.5 text-gold-600" />
-                          <span>Statutory Council</span>
-                        </span>
-                      </div>
 
-                      {/* Clean "Will be updated soon" Placeholder Card */}
-                      <div className="p-8 md:p-14 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
-                        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
-                          <Landmark className="w-8 h-8 text-gold-600" />
-                        </div>
-                        <div className="max-w-md mx-auto space-y-2">
-                          <h4 className="font-serif text-xl sm:text-2xl font-bold text-navy-950">
-                            Will be updated soon
-                          </h4>
-                          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
-                            The details, member directory, and proceedings for <strong className="text-navy-950 font-semibold">{item.label}</strong> will be updated soon.
-                          </p>
+                        {/* Clean "Will be updated soon" Placeholder Card */}
+                        <div className="p-8 md:p-14 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-300 text-center space-y-4">
+                          <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-300 flex items-center justify-center mx-auto text-gold-700 shadow-inner">
+                            <Landmark className="w-8 h-8 text-gold-600" />
+                          </div>
+                          <div className="max-w-md mx-auto space-y-2">
+                            <h4 className="font-serif text-xl sm:text-2xl font-bold text-navy-950">
+                              Will be updated soon
+                            </h4>
+                            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
+                              The details, member directory, and proceedings for <strong className="text-navy-950 font-semibold">{item.label}</strong> will be updated soon.
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
