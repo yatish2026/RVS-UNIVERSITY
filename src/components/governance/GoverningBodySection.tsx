@@ -100,7 +100,7 @@ export const GOVERNING_BODY_MEMBERS: GoverningMember[] = [
     name: 'Dr. R. Shalini, Member, Srinivasa Educational Academy, RVS Nagar, Chittoor (AP).',
     category: 'A member of the Sponsoring Body',
     position: 'Member',
-    hasPhotoCard: true,
+    hasPhotoCard: false,
     shortRole: 'Member, Srinivasa Educational Academy',
   },
 ];
@@ -110,7 +110,7 @@ export const GoverningBodySection: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      {/* SECTION 1: PHOTO BOXES OF MARKED MEMBERS */}
+      {/* SECTION 1: PHOTO BOXES OF MARKED MEMBERS (5-Column Grid) */}
       <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#D4BC9F]/60 shadow-lg space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
           <div>
@@ -127,8 +127,8 @@ export const GoverningBodySection: React.FC = () => {
           </div>
         </div>
 
-        {/* Responsive Grid for Photo Cards (Compact & Elegant) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+        {/* Responsive 5-Column Grid for Photo Cards (5 Dignitaries) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
           {photoCardMembers.map((member) => (
             <PhotoCardItem key={member.sNo} member={member} />
           ))}

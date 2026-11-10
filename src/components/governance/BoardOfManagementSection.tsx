@@ -192,8 +192,8 @@ export const BoardOfManagementSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Responsive Grid for Photo Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {/* Responsive 5-Column Grid for Photo Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
           {photoCardMembers.map((member) => (
             <PhotoCardItem key={member.sNo} member={member} />
           ))}
@@ -274,9 +274,9 @@ const PhotoCardItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="group bg-[#FDFBF7] rounded-2xl border border-[#D4BC9F] shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
-      {/* Photo Box Container */}
-      <div className="relative aspect-[3/4] w-full bg-gradient-to-br from-[#FAF3E7] via-[#F5EADB] to-[#EBDBC2] border-b border-[#D4BC9F] overflow-hidden flex items-center justify-center">
+    <div className="group bg-[#FDFBF7] rounded-xl border border-[#D4BC9F] shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
+      {/* Photo Box Container (Compact & Professional) */}
+      <div className="relative aspect-[4/5] w-full bg-gradient-to-br from-[#FAF3E7] via-[#F5EADB] to-[#EBDBC2] border-b border-[#D4BC9F] overflow-hidden flex items-center justify-center">
         {member.photoImage && !imgError ? (
           <img
             src={member.photoImage}
@@ -285,18 +285,18 @@ const PhotoCardItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }
             className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full p-5 flex flex-col items-center justify-center text-center">
-            <div className="w-20 h-20 rounded-full bg-white/90 border-2 border-dashed border-[#C6832B] shadow-inner flex items-center justify-center text-[#9C6019] mb-3 group-hover:scale-110 transition-transform duration-300">
-              <User className="w-10 h-10 text-[#9C6019]" />
+          <div className="w-full h-full p-3 flex flex-col items-center justify-center text-center">
+            <div className="w-14 h-14 rounded-full bg-white/90 border-2 border-dashed border-[#C6832B] shadow-inner flex items-center justify-center text-[#9C6019] mb-2 group-hover:scale-110 transition-transform duration-300">
+              <User className="w-7 h-7 text-[#9C6019]" />
             </div>
-            <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-[#FAF3E7] text-[#8B4513] border border-[#D4BC9F]">
+            <span className="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-[#FAF3E7] text-[#8B4513] border border-[#D4BC9F]">
               Photo Box
             </span>
           </div>
         )}
 
         {/* Position Badge Overlay */}
-        <div className="absolute top-2.5 right-2.5">
+        <div className="absolute top-2 right-2">
           <span
             className={`text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-md ${
               member.position === 'Special Invitee'
@@ -311,13 +311,13 @@ const PhotoCardItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }
         </div>
       </div>
 
-      {/* Member Details: Name & Short Role only, Category removed as requested */}
-      <div className="p-4 flex-1 flex flex-col justify-center space-y-1 bg-white">
-        <h4 className="font-serif text-sm sm:text-base font-bold text-navy-950 group-hover:text-[#9C6019] transition-colors leading-snug line-clamp-2">
+      {/* Member Details: Compact & Clean */}
+      <div className="p-2.5 sm:p-3 flex-1 flex flex-col justify-center space-y-0.5 bg-white text-center">
+        <h4 className="font-serif text-xs sm:text-sm font-bold text-navy-950 group-hover:text-[#9C6019] transition-colors leading-snug line-clamp-2">
           {member.name.split(',')[0]}
         </h4>
         {member.shortRole && (
-          <p className="text-[11px] font-semibold text-[#8B4513] mt-1 line-clamp-2">
+          <p className="text-[10px] sm:text-[11px] font-semibold text-[#8B4513] line-clamp-2">
             {member.shortRole}
           </p>
         )}
