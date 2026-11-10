@@ -462,12 +462,9 @@ const PhotoCardItem: React.FC<{ member: AcademicCouncilMember }> = ({ member }) 
           />
         ) : (
           <div className="w-full h-full p-3 flex flex-col items-center justify-center text-center">
-            <div className="w-14 h-14 rounded-full bg-white/90 border-2 border-dashed border-[#C6832B] shadow-inner flex items-center justify-center text-[#9C6019] mb-2 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-14 h-14 rounded-full bg-white/90 border-2 border-dashed border-[#C6832B] shadow-inner flex items-center justify-center text-[#9C6019] group-hover:scale-110 transition-transform duration-300">
               <User className="w-7 h-7 text-[#9C6019]" />
             </div>
-            <span className="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-[#FAF3E7] text-[#8B4513] border border-[#D4BC9F]">
-              Photo Box
-            </span>
           </div>
         )}
 
