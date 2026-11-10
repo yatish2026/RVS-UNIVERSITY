@@ -246,27 +246,7 @@ export const BoardOfManagementSection: React.FC = () => {
                   Category (A) - Ex-Officio Members
                 </td>
               </tr>
-
-              {/* Row 1: Vice Chancellor */}
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo === 1).map((member) => (
-                <RowItem key={member.sNo} member={member} />
-              ))}
-
-              {/* Sub-group: Deans / Directors /Heads */}
-              <tr className="bg-slate-100 border-y border-slate-300">
-                <td
-                  colSpan={4}
-                  className="py-2 px-4 font-bold text-xs text-navy-950 italic"
-                >
-                  Deans / Directors /Heads of the Departments of the University (4 members from all the three categories to be nominated by the Sponsoring Body)
-                </td>
-              </tr>
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo >= 2 && m.sNo <= 5).map((member) => (
-                <RowItem key={member.sNo} member={member} />
-              ))}
-
-              {/* Row 6: Registrar */}
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo === 6).map((member) => (
+              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo <= 6).map((member) => (
                 <RowItem key={member.sNo} member={member} />
               ))}
 
@@ -279,43 +259,7 @@ export const BoardOfManagementSection: React.FC = () => {
                   Category (B) - Nominated Members
                 </td>
               </tr>
-
-              {/* Sub-group: Three (3) persons... */}
-              <tr className="bg-slate-100 border-y border-slate-300">
-                <td
-                  colSpan={4}
-                  className="py-2 px-4 font-bold text-xs text-navy-950 italic"
-                >
-                  Three (3) persons of whom one shall be a distinguished academician who is not a member of the Governing Body. (to be nominated by the Sponsoring Body)
-                </td>
-              </tr>
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo >= 7 && m.sNo <= 9).map((member) => (
-                <RowItem key={member.sNo} member={member} />
-              ))}
-
-              {/* Sub-group: Four (4) eminent persons... */}
-              <tr className="bg-slate-100 border-y border-slate-300">
-                <td
-                  colSpan={4}
-                  className="py-2 px-4 font-bold text-xs text-navy-950 italic"
-                >
-                  Four (4) eminent persons, one each from the fields of Management / Finance / Science and Technology / Public Administration who are not members of the Governing Body (to be nominated by the Sponsoring Body)
-                </td>
-              </tr>
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo >= 10 && m.sNo <= 13).map((member) => (
-                <RowItem key={member.sNo} member={member} />
-              ))}
-
-              {/* Sub-group: Special Invitees nominated by the Sponsoring Body */}
-              <tr className="bg-slate-100 border-y border-slate-300">
-                <td
-                  colSpan={4}
-                  className="py-2 px-4 font-bold text-xs text-navy-950 italic"
-                >
-                  Special Invitees nominated by the Sponsoring Body
-                </td>
-              </tr>
-              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo >= 14 && m.sNo <= 16).map((member) => (
+              {BOARD_OF_MANAGEMENT_MEMBERS.filter((m) => m.sNo >= 7).map((member) => (
                 <RowItem key={member.sNo} member={member} />
               ))}
             </tbody>
