@@ -291,21 +291,6 @@ const PhotoCardItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }
             </div>
           </div>
         )}
-
-        {/* Position Badge Overlay */}
-        <div className="absolute top-2 right-2">
-          <span
-            className={`text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-md ${
-              member.position === 'Special Invitee'
-                ? 'bg-purple-900 text-white border border-purple-700'
-                : member.position === 'Chairperson'
-                ? 'bg-[#9C6019] text-white border border-[#784308]'
-                : 'bg-navy-950 text-white border border-slate-700'
-            }`}
-          >
-            {member.position}
-          </span>
-        </div>
       </div>
 
       {/* Member Details: Compact & Clean */}
