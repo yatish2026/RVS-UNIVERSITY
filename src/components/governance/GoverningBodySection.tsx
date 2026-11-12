@@ -72,7 +72,7 @@ export const GOVERNING_BODY_MEMBERS: GoverningMember[] = [
   },
   {
     sNo: 8,
-    name: 'Mr. TN Sreenivas, Vice Chairman, CII Tirupati Zone, Chief Operating Officer, Exafluence Global Analytics Pvt. Ltd.',
+    name: 'Sri. TN Sreenivas, Vice Chairman, CII Tirupati Zone, Chief Operating Officer, Exafluence Global Analytics Pvt. Ltd.',
     category: 'Nominee of the Confederation of Indian Industry (CII)',
     position: 'Member',
     hasPhotoCard: true,
@@ -100,7 +100,7 @@ export const GOVERNING_BODY_MEMBERS: GoverningMember[] = [
     name: 'Dr. R. Shalini, Member, Srinivasa Educational Academy, RVS Nagar, Chittoor (AP).',
     category: 'A member of the Sponsoring Body',
     position: 'Member',
-    hasPhotoCard: true,
+    hasPhotoCard: false,
     shortRole: 'Member, Srinivasa Educational Academy',
   },
 ];
