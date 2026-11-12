@@ -281,8 +281,10 @@ const PhotoCardItem: React.FC<{ member: BoardOfManagementMember }> = ({ member }
           <img
             src={member.photoImage}
             alt={member.name}
+            loading="lazy"
+            decoding="async"
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full p-3 flex flex-col items-center justify-center text-center">
