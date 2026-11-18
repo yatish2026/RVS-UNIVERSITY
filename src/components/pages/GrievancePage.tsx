@@ -3,7 +3,8 @@ import {
   Users, FileText, Shield, CheckCircle2, AlertCircle, ArrowLeft, 
   Send, RefreshCw, KeyRound, Mail, Phone, Hash, GraduationCap, 
   User, Upload, FileCheck, Copy, Check, Clock, HelpCircle, 
-  Building2, Sparkles, AlertTriangle, ExternalLink
+  Building2, Sparkles, AlertTriangle, ExternalLink, ChevronRight,
+  HeartHandshake, Scale, Layers
 } from 'lucide-react';
 import { UNIVERSITY_INFO } from '../../data/universityData';
 
@@ -39,59 +40,136 @@ const COMPLAINT_TYPES = [
   '20. Other Complaints',
 ];
 
-// Official Committee Members Data
-const COMMITTEE_MEMBERS = [
+// Five-Level Student Response Mechanism Data
+interface EscalationLevel {
+  level: number;
+  title: string;
+  authority: string;
+  description: string;
+}
+
+const FIVE_LEVEL_MECHANISM: EscalationLevel[] = [
   {
-    sno: 1,
-    name: 'Dr. K. Sundeep Kumar',
-    designation: 'Professor & Dean, CSE',
-    role: 'Convener',
-    isConvener: true,
+    level: 1,
+    title: 'Level 1 – Class In-Charge',
+    authority: 'Class In-Charge',
+    description: 'Students shall initially approach their respective Class In-Charge for any grievance, concern or difficulty.',
   },
   {
-    sno: 2,
-    name: 'Dr. Y. N. Vijaya Kumar',
-    designation: 'HOD, EEE',
-    role: 'Member',
-    isConvener: false,
+    level: 2,
+    title: 'Level 2 – Head of the Department (HoD)',
+    authority: 'Head of the Department (HoD)',
+    description: 'If the grievance is not satisfactorily resolved at Level 1, students may approach the concerned Head of the Department.',
   },
   {
-    sno: 3,
-    name: 'Dr. P. Jyotheeswari',
-    designation: 'HOD, CSE',
-    role: 'Member',
-    isConvener: false,
+    level: 3,
+    title: 'Level 3 – Student Welfare Officer',
+    authority: 'Student Welfare Officer (Boys/Girls)',
+    description: 'If the issue remains unresolved at Level 2, students may approach the designated Student Welfare Officer (Boys/Girls), as applicable, for further assistance and intervention.',
   },
   {
-    sno: 4,
-    name: 'Prof. N. Sendhil Kumar',
-    designation: 'Dean, TSD',
-    role: 'Member',
-    isConvener: false,
+    level: 4,
+    title: 'Level 4 – Dean of the Concerned School',
+    authority: 'Dean of the Concerned School',
+    description: 'Unresolved grievances at Level 3, may be escalated to the Dean of the respective School for appropriate action.',
   },
   {
-    sno: 5,
-    name: 'Mr. K. Sreenivasulu',
-    designation: 'Librarian',
-    role: 'Member',
-    isConvener: false,
-  },
-  {
-    sno: 6,
-    name: 'Dr. C. Ahilan',
-    designation: 'Professor, M.E',
-    role: 'Member',
-    isConvener: false,
+    level: 5,
+    title: 'Level 5 – Vice-Chancellor',
+    authority: 'Vice-Chancellor',
+    description: 'Grievances remaining unresolved at the preceding levels may be brought to the notice of the Vice-Chancellor for final institutional consideration and resolution.',
   },
 ];
 
-// Roles & Responsibilities specified
-const ROLES_RESPONSIBILITIES = [
-  'To receive Grievance from faculty, staff and students/parents.',
-  'To find the facts of the grievances.',
-  'To suggest remedial and preventive measures.',
-  'To review the suggestions/complaints raised by the students during periodical counseling.',
-  'To review the outgoing students feedback.',
+// Student Welfare Committee Data
+interface StudentWelfareMember {
+  sno: number;
+  name: string;
+  designation: string;
+  role: 'Chairperson' | 'Member' | 'Member Secretary';
+  email?: string;
+  isChairperson?: boolean;
+}
+
+const STUDENT_WELFARE_COMMITTEE: StudentWelfareMember[] = [
+  {
+    sno: 1,
+    name: 'Dr. M Mohan Babu',
+    designation: 'Vice – Chancellor',
+    role: 'Chairperson',
+    email: 'vicechancellor@rvsu.org',
+    isChairperson: true,
+  },
+  {
+    sno: 2,
+    name: 'Dr. K A Ajmath',
+    designation: 'Student Welfare Officer (Boys)',
+    role: 'Member',
+    email: 'StudentWelfareOfficer@rvsu.org',
+  },
+  {
+    sno: 3,
+    name: 'Dr. V Nirupama',
+    designation: 'Student Welfare Officer (Girls)',
+    role: 'Member',
+  },
+  {
+    sno: 4,
+    name: 'Dr. C K Selvi',
+    designation: 'HoD-Mathematics',
+    role: 'Member',
+    email: 'hodmathematics@rvsu.org',
+  },
+  {
+    sno: 5,
+    name: 'Dr. P. Gopi Krishna',
+    designation: 'HoD-Chemistry',
+    role: 'Member',
+    email: 'hodchemistry@rvsu.org',
+  },
+  {
+    sno: 6,
+    name: 'Dr. X. John Paul',
+    designation: 'HoD-English',
+    role: 'Member',
+    email: 'hodenglish@rvsu.org',
+  },
+  {
+    sno: 7,
+    name: 'Dr. K Komala',
+    designation: 'Dean I/c - Humanities & Sciences',
+    role: 'Member Secretary',
+    email: 'DeanHumanities@rvsu.org',
+  },
+];
+
+// General Instructions Data
+const GENERAL_INSTRUCTIONS = [
+  {
+    code: 'a',
+    title: 'Open Communication',
+    text: 'Students are encouraged to communicate their concerns openly and without hesitation.',
+  },
+  {
+    code: 'b',
+    title: 'Fairness & Confidentiality',
+    text: 'Every grievance shall be addressed with due sensitivity, fairness, impartiality and confidentiality.',
+  },
+  {
+    code: 'c',
+    title: 'Escalation Hierarchy',
+    text: 'Students shall ordinarily follow the prescribed escalation hierarchy to facilitate systematic and timely resolution.',
+  },
+  {
+    code: 'd',
+    title: 'Urgent / Sensitive Matters',
+    text: 'Urgent or sensitive matters requiring immediate attention may be reported directly to the appropriate higher authority.',
+  },
+  {
+    code: 'e',
+    title: 'Anti-Retaliation Protection',
+    text: 'No student shall be subjected to discrimination or retaliation for raising a genuine grievance in good faith.',
+  },
 ];
 
 export const GrievancePage: React.FC<GrievancePageProps> = ({
@@ -375,21 +453,21 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
             </button>
           </div>
 
-          {/* TAB 1: GRIEVANCE COMMITTEE */}
+          {/* TAB 1: GRIEVANCE COMMITTEE / STUDENT WELFARE & RESPONSE MECHANISM */}
           {activeTab === 'committee' && (
             <div className="space-y-10 animate-fadeIn">
-              {/* Committee Table Card */}
+              {/* Header & Preamble Card */}
               <div className="p-6 md:p-8 rounded-3xl bg-[#FFFDF9] border border-[#D4BC9F] shadow-sm space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFE2D2] pb-5">
                   <div>
                     <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#C6832B]/15 px-3 py-1 rounded border border-[#C6832B]/40">
-                      Institutional Governance
+                      Institutional Governance & Welfare
                     </span>
                     <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#1D1611] mt-2">
-                      Grievance Appeal Committee
+                      Five-Level Student Response Mechanism & Committee
                     </h2>
                     <p className="text-xs md:text-sm text-[#5C4837] mt-1">
-                      Constituted in accordance with UGC Regulations for prompt and unbiased resolution of grievances.
+                      Committed to an open, fair, transparent, and student-centric university environment.
                     </p>
                   </div>
 
@@ -398,66 +476,165 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                       onSelectTab('appeal-form');
                       window.location.hash = 'grievance-appeal-form';
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all cursor-pointer self-start sm:self-auto"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#B57321] to-[#9C6019] hover:from-[#9C6019] hover:to-[#7E4B11] text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all cursor-pointer self-start sm:self-auto flex-shrink-0"
                   >
                     <span>File an Appeal Online</span>
                     <ArrowLeft className="w-4 h-4 rotate-180" />
                   </button>
                 </div>
 
+                {/* Institutional Preamble Callout */}
+                <div className="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#FAF3E7] border border-[#E5D3BD] shadow-inner space-y-2.5">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-[#C6832B]/15 text-[#9C6019] border border-[#C6832B]/40 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Shield className="w-5 h-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm md:text-base font-semibold text-[#1D1611] leading-relaxed">
+                        To ensure a student-friendly, transparent and responsive academic environment, the institution has established a Five-Level Student Response Mechanism to address academic, administrative and other student-related concerns.
+                      </p>
+                      <p className="text-xs md:text-sm text-[#8B4513] font-medium">
+                        All students are hereby advised to follow the student response procedure outlined below:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Five-Level Student Response Mechanism Section */}
+              <div className="p-6 md:p-8 rounded-3xl bg-[#FFFDF9] border border-[#D4BC9F] shadow-sm space-y-6">
+                <div className="flex items-center justify-between flex-wrap gap-2 border-b border-[#EFE2D2] pb-4">
+                  <div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#C6832B]/15 px-3 py-1 rounded border border-[#C6832B]/40">
+                      Step-by-Step Escalation Hierarchy
+                    </span>
+                    <h3 className="font-serif text-xl md:text-2xl font-bold text-[#1D1611] mt-2">
+                      Five-Level Student Response Mechanism
+                    </h3>
+                  </div>
+                  <span className="text-xs font-medium text-[#7A695A] bg-[#FAF3E7] px-3 py-1.5 rounded-lg border border-[#E5D3BD]">
+                    Levels 1 through 5
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {FIVE_LEVEL_MECHANISM.map((step, idx) => (
+                    <div
+                      key={step.level}
+                      className="p-5 rounded-2xl bg-[#FAF6F0] hover:bg-[#FAF0E2]/60 border border-[#E5D3BD] hover:border-[#C6832B]/60 transition-all shadow-sm flex flex-col md:flex-row md:items-center gap-4 group"
+                    >
+                      <div className="flex items-center gap-3 md:w-64 flex-shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C6832B] to-[#8B4513] text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                          L{step.level}
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#8B4513]">
+                            Stage 0{step.level}
+                          </span>
+                          <h4 className="font-bold text-sm md:text-base text-[#1D1611] leading-tight">
+                            {step.authority}
+                          </h4>
+                        </div>
+                      </div>
+
+                      <div className="hidden md:flex items-center text-[#C6832B] px-1">
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+
+                      <div className="flex-1">
+                        <p className="text-xs md:text-sm text-[#3D2C1E] leading-relaxed font-medium">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Student Welfare Committee Table Card */}
+              <div className="p-6 md:p-8 rounded-3xl bg-[#FFFDF9] border border-[#D4BC9F] shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EFE2D2] pb-4">
+                  <div>
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#C6832B]/15 px-3 py-1 rounded border border-[#C6832B]/40">
+                      Statutory Body
+                    </span>
+                    <h3 className="font-serif text-xl md:text-2xl font-bold text-[#1D1611] mt-2">
+                      Student Welfare Committee
+                    </h3>
+                    <p className="text-xs md:text-sm text-[#5C4837] mt-1">
+                      Constituted committee members overseeing student grievance resolution and welfare.
+                    </p>
+                  </div>
+                  <span className="text-xs font-semibold text-[#8B4513] bg-[#FAF3E7] px-3 py-1.5 rounded-lg border border-[#E5D3BD] self-start sm:self-auto">
+                    Total: {STUDENT_WELFARE_COMMITTEE.length} Members
+                  </span>
+                </div>
+
                 {/* Table */}
-                <div className="overflow-x-auto rounded-2xl border border-[#E5D3BD]">
+                <div className="overflow-x-auto rounded-2xl border border-[#E5D3BD] shadow-sm">
                   <table className="w-full text-left text-sm border-collapse">
                     <thead>
                       <tr className="bg-[#FAF3E7] text-[#1D1611] border-b border-[#E5D3BD]">
                         <th className="py-3.5 px-4 font-bold text-xs uppercase tracking-wider text-[#7A695A] w-16 text-center">
-                          S.No
+                          S.No.
                         </th>
                         <th className="py-3.5 px-6 font-bold text-xs uppercase tracking-wider text-[#7A695A]">
-                          Name
+                          Name and Designation
                         </th>
-                        <th className="py-3.5 px-6 font-bold text-xs uppercase tracking-wider text-[#7A695A]">
-                          Designation
-                        </th>
-                        <th className="py-3.5 px-6 font-bold text-xs uppercase tracking-wider text-[#7A695A] text-right">
+                        <th className="py-3.5 px-6 font-bold text-xs uppercase tracking-wider text-[#7A695A] w-48 text-center">
                           Role
+                        </th>
+                        <th className="py-3.5 px-6 font-bold text-xs uppercase tracking-wider text-[#7A695A]">
+                          Email Address
                         </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#EFE2D2] bg-[#FFFDF9]">
-                      {COMMITTEE_MEMBERS.map((member) => (
-                        <tr 
-                          key={member.sno} 
+                      {STUDENT_WELFARE_COMMITTEE.map((member) => (
+                        <tr
+                          key={member.sno}
                           className={`hover:bg-[#FAF6F0] transition-colors ${
-                            member.isConvener ? 'bg-[#FAF0E2]/40 font-semibold' : ''
+                            member.isChairperson ? 'bg-[#FAF0E2]/50 font-semibold' : ''
                           }`}
                         >
                           <td className="py-4 px-4 text-center text-xs font-bold text-[#8A7565]">
                             {member.sno}
                           </td>
                           <td className="py-4 px-6 text-[#1D1611]">
-                            <div className="flex items-center gap-2">
-                              <span className="font-bold text-sm md:text-base">{member.name}</span>
-                              {member.isConvener && (
-                                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#C6832B]/15 text-[#8B4513] border border-[#C6832B]/40">
-                                  Lead
-                                </span>
-                              )}
+                            <div className="flex flex-col">
+                              <span className="font-bold text-sm md:text-base text-[#1D1611]">
+                                {member.name}
+                              </span>
+                              <span className="text-xs text-[#6B5542] mt-0.5">
+                                {member.designation}
+                              </span>
                             </div>
                           </td>
-                          <td className="py-4 px-6 text-[#5C4837] text-xs md:text-sm">
-                            {member.designation}
-                          </td>
-                          <td className="py-4 px-6 text-right">
-                            <span 
+                          <td className="py-4 px-6 text-center">
+                            <span
                               className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                                member.isConvener 
-                                  ? 'bg-[#9C6019] text-white' 
+                                member.isChairperson
+                                  ? 'bg-[#9C6019] text-white shadow-sm'
+                                  : member.role === 'Member Secretary'
+                                  ? 'bg-[#E5D3BD] text-[#4A3525] font-semibold border border-[#C6832B]/30'
                                   : 'bg-[#F0E6D8] text-[#5C4837]'
                               }`}
                             >
                               {member.role}
                             </span>
+                          </td>
+                          <td className="py-4 px-6 text-xs md:text-sm">
+                            {member.email ? (
+                              <a
+                                href={`mailto:${member.email}`}
+                                className="inline-flex items-center gap-1.5 text-[#9C6019] hover:text-[#7A490F] font-medium hover:underline"
+                              >
+                                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+                                <span>{member.email}</span>
+                              </a>
+                            ) : (
+                              <span className="text-[#A08E7E] italic">—</span>
+                            )}
                           </td>
                         </tr>
                       ))}
@@ -466,67 +643,59 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                 </div>
               </div>
 
-              {/* Roles & Responsibilities Section */}
+              {/* General Instructions Section */}
               <div className="p-6 md:p-8 rounded-3xl bg-[#FAF3E7] border border-[#D4BC9F] shadow-sm space-y-6">
                 <div>
                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#FFFDF9] px-3 py-1 rounded border border-[#C6832B]/40">
-                    Mandate & Objectives
+                    Student Guidelines
                   </span>
                   <h3 className="font-serif text-xl md:text-2xl font-bold text-[#1D1611] mt-2">
-                    Roles & Responsibilities
+                    General Instructions
                   </h3>
                   <p className="text-xs md:text-sm text-[#5C4837] mt-1">
-                    The Grievance Appeal Committee exercises the following statutory and procedural duties:
+                    Please observe the following guidelines when presenting grievances:
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {ROLES_RESPONSIBILITIES.map((role, idx) => (
-                    <div 
-                      key={idx}
-                      className="p-4 rounded-2xl bg-[#FFFDF9] border border-[#E5D3BD] flex items-start gap-3.5 shadow-sm"
+                  {GENERAL_INSTRUCTIONS.map((item) => (
+                    <div
+                      key={item.code}
+                      className="p-4 rounded-2xl bg-[#FFFDF9] border border-[#E5D3BD] flex items-start gap-3.5 shadow-sm hover:border-[#C6832B]/50 transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-[#C6832B]/15 text-[#9C6019] border border-[#C6832B]/40 flex items-center justify-center flex-shrink-0 font-bold text-xs mt-0.5">
-                        0{idx + 1}
+                      <div className="w-8 h-8 rounded-xl bg-[#C6832B]/15 text-[#9C6019] border border-[#C6832B]/40 flex items-center justify-center flex-shrink-0 font-bold text-xs uppercase mt-0.5">
+                        {item.code}
                       </div>
-                      <p className="text-xs md:text-sm text-[#2D1E12] font-medium leading-relaxed">
-                        {role}
-                      </p>
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-[#8B4513]">
+                          {item.title}
+                        </h4>
+                        <p className="text-xs md:text-sm text-[#2D1E12] font-medium leading-relaxed">
+                          {item.text}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Grievance Redressal Mechanism & SLA Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-2xl bg-[#FFFDF9] border border-[#D4BC9F] space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#C6832B]/15 text-[#9C6019] flex items-center justify-center">
-                    <Clock className="w-5 h-5" />
+              {/* Management Assurance Banner */}
+              <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#FFFDF9] via-[#FAF3E7] to-[#F5E8D3] border-2 border-[#C6832B]/50 shadow-md space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C6832B] to-[#9C6019] text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <HeartHandshake className="w-6 h-6" />
                   </div>
-                  <h4 className="font-bold text-base text-[#1D1611]">Step 1: Submission & Receipt</h4>
-                  <p className="text-xs text-[#5C4837] leading-relaxed">
-                    Student submits appeal with verified Gmail ID. A unique tracking reference is generated and acknowledged within 24 hours.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-[#FFFDF9] border border-[#D4BC9F] space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#C6832B]/15 text-[#9C6019] flex items-center justify-center">
-                    <Shield className="w-5 h-5" />
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#FFFDF9] px-3 py-1 rounded border border-[#C6832B]/40 inline-block">
+                      Institutional Commitment
+                    </span>
+                    <h3 className="font-serif text-lg md:text-xl font-bold text-[#1D1611]">
+                      Management Assurance
+                    </h3>
+                    <p className="text-xs md:text-sm text-[#3D2C1E] leading-relaxed font-medium">
+                      The Management assures all students that their concerns will be heard, respected and addressed promptly and fairly. All students are encouraged to utilise this mechanism responsibly and contribute to a supportive, harmonious and student-centric campus environment.
+                    </p>
                   </div>
-                  <h4 className="font-bold text-base text-[#1D1611]">Step 2: Fact-Finding Hearing</h4>
-                  <p className="text-xs text-[#5C4837] leading-relaxed">
-                    The Committee reviews facts, examines documentary evidence, and invites the complainant for confidential counseling if required.
-                  </p>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-[#FFFDF9] border border-[#D4BC9F] space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#C6832B]/15 text-[#9C6019] flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-bold text-base text-[#1D1611]">Step 3: Redressal & Action</h4>
-                  <p className="text-xs text-[#5C4837] leading-relaxed">
-                    Remedial or corrective measures are formally issued within 7–10 working days with written communication to the appellant.
-                  </p>
                 </div>
               </div>
             </div>
