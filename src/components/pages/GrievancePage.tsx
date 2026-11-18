@@ -457,9 +457,9 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
           {/* TAB 1: GRIEVANCE COMMITTEE / STUDENT WELFARE & RESPONSE MECHANISM */}
           {activeTab === 'committee' && (
             <div className="space-y-10 animate-fadeIn">
-              {/* Header & Preamble Card */}
-              <div className="p-6 md:p-8 rounded-3xl bg-[#FFFDF9] border border-[#D4BC9F] shadow-sm space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EFE2D2] pb-5">
+              {/* Header Card */}
+              <div className="p-6 md:p-8 rounded-3xl bg-[#FFFDF9] border border-[#D4BC9F] shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#8B4513] bg-[#C6832B]/15 px-3 py-1 rounded border border-[#C6832B]/40">
                       Institutional Governance & Welfare
@@ -482,23 +482,6 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                     <span>File an Appeal Online</span>
                     <ArrowLeft className="w-4 h-4 rotate-180" />
                   </button>
-                </div>
-
-                {/* Institutional Preamble Callout */}
-                <div className="p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#FAF3E7] via-[#FFFDF9] to-[#FAF3E7] border border-[#E5D3BD] shadow-inner space-y-2.5">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-[#C6832B]/15 text-[#9C6019] border border-[#C6832B]/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Shield className="w-5 h-5" />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-sm md:text-base font-semibold text-[#1D1611] leading-relaxed">
-                        To ensure a student-friendly, transparent and responsive academic environment, the institution has established a Five-Level Student Response Mechanism to address academic, administrative and other student-related concerns.
-                      </p>
-                      <p className="text-xs md:text-sm text-[#8B4513] font-medium">
-                        All students are hereby advised to follow the student response procedure outlined below:
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
