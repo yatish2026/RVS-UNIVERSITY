@@ -112,6 +112,7 @@ const STUDENT_WELFARE_COMMITTEE: StudentWelfareMember[] = [
     name: 'Dr. V Nirupama',
     designation: 'Student Welfare Officer (Girls)',
     role: 'Member',
+    email: 'StudentWelfareOfficerGirls@rvsu.org',
   },
   {
     sno: 4,
