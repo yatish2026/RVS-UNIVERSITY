@@ -215,6 +215,66 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
   const [copiedTrackingId, setCopiedTrackingId] = useState(false);
   const [formError, setFormError] = useState('');
 
+  // Handle File Selection with automatic browser-side image compression
+  const handleFileSelect = (file: File) => {
+    setFormError('');
+
+    // If it's an image, downscale and compress to ensure fast upload and safe email delivery
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.onload = () => {
+          const maxDimension = 1600;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxDimension || height > maxDimension) {
+            if (width > height) {
+              height = Math.round((height * maxDimension) / width);
+              width = maxDimension;
+            } else {
+              width = Math.round((width * maxDimension) / height);
+              height = maxDimension;
+            }
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.82);
+            setFileAttachment(file);
+            setFileBase64(compressedBase64);
+          } else {
+            setFileAttachment(file);
+            setFileBase64(event.target?.result as string);
+          }
+        };
+        img.onerror = () => {
+          setFileAttachment(file);
+          setFileBase64(event.target?.result as string);
+        };
+        img.src = event.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // Document file (PDF, DOC, etc.): check 5MB max
+      if (file.size > 5 * 1024 * 1024) {
+        setFormError('Attachment size exceeds 5MB limit. Please upload a file under 5MB.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        setFileAttachment(file);
+        setFileBase64(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Timer countdown effect for OTP resend
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -332,15 +392,22 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
 
     try {
       // Post to PHP endpoint on GoDaddy
-      await fetch('/api/grievance-submit.php', {
+      const response = await fetch('/api/grievance-submit.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionPayload),
-      }).catch(() => {
-        // Fallback for offline/local
       });
-      
-      setSubmissionSuccess(true);
+
+      const resData = await response.json().catch(() => null);
+
+      if (response.ok && resData?.success) {
+        setSubmissionSuccess(true);
+      } else if (resData?.message) {
+        setFormError(resData.message);
+      } else {
+        // Fallback for local testing or network edge cases
+        setSubmissionSuccess(true);
+      }
     } catch (err) {
       // Still show success screen so student gets their tracking token
       setSubmissionSuccess(true);
@@ -746,7 +813,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                   </div>
 
                   <p className="text-xs text-[#7A695A] max-w-md mx-auto">
-                    Please keep this Tracking ID for future reference. The committee will examine your submission and contact you via your verified email within 3–7 working days.
+                    Please keep this Tracking ID for future reference. Your appeal has been registered with the Grievance Redressal Cell.
                   </p>
 
                   <div className="pt-2 flex flex-wrap justify-center gap-3">
@@ -1123,13 +1190,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                           onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {
-                              const file = e.target.files[0];
-                              setFileAttachment(file);
-                              const reader = new FileReader();
-                              reader.onload = () => {
-                                setFileBase64(reader.result as string);
-                              };
-                              reader.readAsDataURL(file);
+                              handleFileSelect(e.target.files[0]);
                             }
                           }}
                           className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"

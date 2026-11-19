@@ -11,6 +11,8 @@
  */
 
 // Set CORS & Security Headers
+@ini_set('memory_limit', '256M');
+@ini_set('max_execution_time', '90');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -195,7 +197,7 @@ $committeeHtml = '
         </div>
         <div class="footer">
             Official Statutory Grievance Appeal Committee • RVS University<br>
-            Delivered to grievance@rvsu.org. Please initiate fact-finding inquiry within 3 working days.
+            Delivered to grievance@rvsu.org.
         </div>
     </div>
 </body>
@@ -233,7 +235,7 @@ $studentHtml = '
                 <strong>Registration Date:</strong> ' . $dateTime . '
             </p>
             <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
-                The Grievance Appeal Committee will review the facts of the appeal. You will receive updates directly from <strong>grievance@rvsu.org</strong> within 3 to 7 working days.
+                The Grievance Appeal Committee will review the facts of the appeal. You will receive updates directly from <strong>grievance@rvsu.org</strong>.
             </p>
         </div>
         <div style="background: #f8fafc; padding: 12px; text-align: center; font-size: 11px; color: #94a3b8;">

@@ -15,7 +15,7 @@ class RvsuSmtpMailer {
     private $user = 'grievance@rvsu.org';
     private $pass = 'grievance@rvsu2026';
     private $fromName = 'RVS University';
-    private $timeout = 15;
+    private $timeout = 30;
     private $lastError = '';
 
     public function __construct($user = null, $pass = null, $fromName = null, $host = null, $port = null) {
@@ -190,11 +190,9 @@ class RvsuSmtpMailer {
 
                 $fullPayload .= "--$boundary\r\n";
                 $fullPayload .= "Content-Type: {$attType}; name=\"{$attFilename}\"\r\n";
+                $fullPayload .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
                 if ($attCid) {
-                    $fullPayload .= "Content-Disposition: inline; filename=\"{$attFilename}\"\r\n";
                     $fullPayload .= "Content-ID: <{$attCid}>\r\n";
-                } else {
-                    $fullPayload .= "Content-Disposition: attachment; filename=\"{$attFilename}\"\r\n";
                 }
                 $fullPayload .= "Content-Transfer-Encoding: base64\r\n\r\n";
                 $fullPayload .= $chunkedBase64 . "\r\n\r\n";
@@ -207,8 +205,13 @@ class RvsuSmtpMailer {
             $fullPayload = $headers . $qpBody . "\r\n.\r\n";
         }
 
-        // Send Email Content
-        fwrite($socket, $fullPayload);
+        // Send Email Content safely in chunks
+        if (!$this->safeFwrite($socket, $fullPayload)) {
+            fclose($socket);
+            $this->lastError = "Failed to stream payload through socket. Falling back to PHP mail().";
+            return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
+        }
+
         $reply = $this->readReply($socket);
 
         // QUIT
@@ -223,8 +226,34 @@ class RvsuSmtpMailer {
         return $this->fallbackMail($recipients, $subject, $htmlBody, $replyTo, $attachments);
     }
 
+    /**
+     * Safely write all bytes to socket stream in 8192-byte chunks, ensuring complete transmission
+     * even for large attachments where a single fwrite() only writes a partial buffer.
+     */
+    private function safeFwrite($socket, $data) {
+        $total = strlen($data);
+        $written = 0;
+        while ($written < $total) {
+            $chunk = substr($data, $written, 8192);
+            $n = @fwrite($socket, $chunk);
+            if ($n === false || $n === 0) {
+                $meta = stream_get_meta_data($socket);
+                if (!empty($meta['timed_out'])) {
+                    $this->lastError = "Socket write timed out after transmitting {$written} of {$total} bytes.";
+                } else {
+                    $this->lastError = "Socket connection broken after transmitting {$written} of {$total} bytes.";
+                }
+                $this->logError($this->lastError);
+                return false;
+            }
+            $written += $n;
+        }
+        @fflush($socket);
+        return true;
+    }
+
     private function sendCommand($socket, $cmd) {
-        fwrite($socket, $cmd . "\r\n");
+        return $this->safeFwrite($socket, $cmd . "\r\n");
     }
 
     private function readReply($socket) {
@@ -277,11 +306,11 @@ class RvsuSmtpMailer {
                 $body .= chunk_split($attRawData, 76, "\r\n") . "\r\n\r\n";
             }
             $body .= "--$boundary--";
-            return @mail($toStr, $subject, $body, $headers);
+            return @mail($toStr, $subject, $body, $headers, "-f {$this->user}");
         } else {
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
             $headers .= "Content-Transfer-Encoding: quoted-printable\r\n";
-            return @mail($toStr, $subject, $qpBody, $headers);
+            return @mail($toStr, $subject, $qpBody, $headers, "-f {$this->user}");
         }
     }
 
