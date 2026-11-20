@@ -325,23 +325,8 @@ const ApplicationDetail: React.FC<{
     if (!app || !schema) return;
     setBusy('pdf');
     try {
-      const photo = sectionData(app.data, 'personal')?.photo;
-      let photoDataUrl: string | null = null;
-      const { downloadApplicationPdf, blobToDataUrl } = await import('../pdf');
-      if (isFileMeta(photo) && photo.stored) {
-        try {
-          photoDataUrl = await blobToDataUrl(await api.downloadFile(app.id, photo.stored));
-        } catch {
-          photoDataUrl = null;
-        }
-      }
-      await downloadApplicationPdf(schema, app.data, {
-        id: app.id,
-        submittedAt: app.submittedAt,
-        status: app.status,
-        photoDataUrl,
-        declarationText: schema.settings.declarationText,
-      });
+      const name = app.name.replace(/^(Mr|Ms|Mrs|Dr|Prof)\.\s*/, '').replace(/[^A-Za-z0-9]+/g, '-');
+      saveBlob(await api.downloadPdf(app.id), `Application-${app.id}-${name}.pdf`);
     } catch (e) {
       toast(e instanceof Error ? e.message : 'Could not create PDF', 'err');
     } finally {

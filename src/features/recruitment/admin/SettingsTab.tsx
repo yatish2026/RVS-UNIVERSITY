@@ -57,8 +57,8 @@ export const SettingsTab: React.FC<{
             <Toggle
               checked={s.attachFilesToEmail}
               onChange={(v) => set('attachFilesToEmail', v)}
-              label="Attach uploaded files (resume, photo…) to the team email"
-              description="Files over 15 MB in total are skipped; they stay downloadable here."
+              label="Attach uploaded documents (resume, certificates) to the team email"
+              description="The formatted application PDF is always attached to both emails. Photos appear inside the PDF. Documents over 15 MB in total are skipped."
             />
             <Toggle checked={s.sendApplicantCopy} onChange={(v) => set('sendApplicantCopy', v)} label="Send the applicant a copy of their application" />
           </div>

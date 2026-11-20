@@ -122,6 +122,18 @@ switch ($action) {
         hr_json(['ok' => true, 'mode' => hr_mail_mode()]);
         break;
 
+    case 'pdf':
+        $app = $requireApp(isset($_GET['id']) ? (string)$_GET['id'] : '');
+        require_once __DIR__ . '/_pdf.php';
+        $schema = hr_schema_for_version(isset($app['schemaVersion']) ? $app['schemaVersion'] : 1);
+        $bytes = hr_build_application_pdf($app, $schema);
+        header('Content-Type: application/pdf');
+        header('Content-Length: ' . strlen($bytes));
+        header('Content-Disposition: attachment; filename="' . hr_pdf_filename($app) . '"');
+        header('Cache-Control: no-store');
+        echo $bytes;
+        break;
+
     case 'file':
         $app = $requireApp(isset($_GET['id']) ? (string)$_GET['id'] : '');
         $stored = basename(isset($_GET['file']) ? (string)$_GET['file'] : '');

@@ -87,6 +87,16 @@ export class AdminApi {
     return this.call<{ ok: true; mode: string }>('testEmail', { to });
   }
 
+  /** The same designed PDF that is attached to the emails. */
+  async downloadPdf(id: string): Promise<Blob> {
+    const res = await fetch(`${BASE}/admin.php?action=pdf&id=${encodeURIComponent(id)}`, {
+      headers: { 'X-Admin-Key': this.key },
+      cache: 'no-store',
+    });
+    if (!res.ok) throw new Error(`Could not create PDF (${res.status})`);
+    return res.blob();
+  }
+
   async downloadFile(id: string, stored: string): Promise<Blob> {
     const res = await fetch(
       `${BASE}/admin.php?action=file&id=${encodeURIComponent(id)}&file=${encodeURIComponent(stored)}`,

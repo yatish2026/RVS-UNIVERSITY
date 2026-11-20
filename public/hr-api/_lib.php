@@ -665,7 +665,7 @@ function hr_email_team($app, $schema)
         ['label' => 'Submitted', 'value' => date('d-M-Y, h:i A', strtotime($app['submittedAt'])), 'type' => 'text'],
     ];
     $body = '<tr><td style="padding:24px 32px 4px;font:14px/1.6 Arial,Helvetica,sans-serif;color:#4D3D30;">'
-        . 'A new application has been submitted through the RVS University careers portal. Key details are below, followed by the complete application.'
+        . 'A new application has been submitted through the RVS University careers portal. Key details are below, followed by the complete application. A formatted PDF of the application is attached.'
         . (!empty($app['attachmentsNote']) ? '<br><span style="color:#9C6019;">' . hr_e($app['attachmentsNote']) . '</span>' : '')
         . '</td></tr>'
         . '<tr><td style="padding:12px 32px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #F0D19E;border-radius:10px;border-collapse:separate;background:#FFFBF4;">'
@@ -689,7 +689,7 @@ function hr_email_applicant($app, $schema)
         . '<div style="font:700 24px/1.3 \'Courier New\',monospace;color:#B57321;margin-top:6px;letter-spacing:1px;">' . hr_e($app['id']) . '</div>'
         . '<div style="font:12px/1.4 Arial,Helvetica,sans-serif;color:#9C8B79;margin-top:4px;">Please quote this ID in any communication with us.</div>'
         . '</td></tr></table></td></tr>'
-        . '<tr><td style="padding:18px 32px 0;font:13.5px/1.6 Arial,Helvetica,sans-serif;color:#867362;">For your records, here is a copy of the details you submitted:</td></tr>'
+        . '<tr><td style="padding:18px 32px 0;font:13.5px/1.6 Arial,Helvetica,sans-serif;color:#867362;">For your records, a PDF copy of your application is attached to this email, and your details are listed below:</td></tr>'
         . hr_email_details($summary)
         . '<tr><td style="padding:22px 32px 0;font:14px/1.65 Arial,Helvetica,sans-serif;color:#4D3D30;">Warm regards,<br><b>Recruitment Team</b><br>RVS University</td></tr>';
     $sub = 'Thank you for applying for <b style="color:#F0D19E;">' . hr_e($app['designation']) . '</b>' . ($app['department'] ? ' &middot; ' . hr_e($app['department']) : '');
@@ -717,6 +717,7 @@ function hr_send_mail($to, $subject, $html, $replyTo, $attachments, $fromName)
     if (hr_mail_mode() === 'log') {
         $base = hr_data_dir() . '/outbox/' . date('Ymd-His') . '-' . bin2hex(random_bytes(3));
         @file_put_contents($base . '.html', $html);
+        foreach ($attachments as $i => $a) @file_put_contents($base . '-att' . $i . '-' . preg_replace('/[^\w.\-]/', '_', $a['filename']), base64_decode($a['data']));
         hr_write_json($base . '.json', [
             'to' => $to, 'subject' => $subject, 'replyTo' => $replyTo, 'fromName' => $fromName,
             'attachments' => array_map(function ($a) {
@@ -733,12 +734,26 @@ function hr_send_mail($to, $subject, $html, $replyTo, $attachments, $fromName)
     return [(bool)$ok, $ok ? null : $mailer->getLastError()];
 }
 
+/** The designed application PDF as a mail attachment (null if it cannot be built). */
+function hr_application_pdf_attachment($app, $schema)
+{
+    try {
+        require_once __DIR__ . '/_pdf.php';
+        return ['filename' => hr_pdf_filename($app), 'type' => 'application/pdf', 'data' => base64_encode(hr_build_application_pdf($app, $schema))];
+    } catch (Throwable $e) {
+        @file_put_contents(hr_data_dir() . '/pdf-errors.log', '[' . date('c') . '] ' . $app['id'] . ': ' . $e->getMessage() . "\n", FILE_APPEND);
+        return null;
+    }
+}
+
+/** Uploaded documents (resume, certificates…). Images are skipped: the photo is inside the PDF. */
 function hr_app_attachments($app, $limitBytes)
 {
     $out = [];
     $total = 0;
     $skipped = 0;
     foreach (hr_app_files($app) as $f) {
+        if (stripos((string)$f['type'], 'image/') === 0 || preg_match('/\.(jpe?g|png|webp)$/i', $f['stored'])) continue;
         $path = hr_data_dir() . '/uploads/' . $app['id'] . '/' . $f['stored'];
         $size = is_file($path) ? filesize($path) : 0;
         if (!$size) continue;
@@ -777,21 +792,23 @@ function hr_send_app_emails($app, $schema, $target = 'both')
     $fromName = isset($settings['senderName']) ? $settings['senderName'] : 'RVS University Recruitment';
     $log = isset($app['emailLog']) && is_array($app['emailLog']) ? $app['emailLog'] : [];
     $team = isset($settings['notifyEmails']) && is_array($settings['notifyEmails']) ? $settings['notifyEmails'] : [];
+    $pdfAtt = hr_application_pdf_attachment($app, $schema);
 
     if (($target === 'both' || $target === 'team')) {
         if ($team) {
-            $att = [];
+            $att = $pdfAtt ? [$pdfAtt] : [];
             $app['attachmentsNote'] = '';
             if (!empty($settings['attachFilesToEmail'])) {
-                list($att, $skipped) = hr_app_attachments($app, 15 * 1024 * 1024);
+                list($docs, $skipped) = hr_app_attachments($app, 15 * 1024 * 1024);
+                $att = array_merge($att, $docs);
                 if ($skipped) $app['attachmentsNote'] = $skipped . ' file(s) were too large to attach — download them from the admin console.';
             }
             $subject = 'New Application: ' . $app['name'] . ' — ' . $app['designation'] . ($app['department'] ? ', ' . $app['department'] : '') . ' [' . $app['id'] . ']';
             list($ok, $err) = hr_send_mail($team, $subject, hr_email_team($app, $schema), $app['email'], $att, $fromName);
-            if (!$ok && $att) {
-                // Retry without attachments so the team still gets the details
-                list($ok, $err2) = hr_send_mail($team, $subject, hr_email_team($app, $schema), $app['email'], [], $fromName);
-                if ($ok) $err = 'Sent without attachments (' . $err . ')';
+            if (!$ok && count($att) > 1) {
+                // Retry with just the application PDF so the team still gets the details
+                list($ok, $err2) = hr_send_mail($team, $subject, hr_email_team($app, $schema), $app['email'], $pdfAtt ? [$pdfAtt] : [], $fromName);
+                if ($ok) $err = 'Sent without uploaded documents (' . $err . ')';
             }
             $log[] = ['to' => implode(', ', $team), 'kind' => 'team', 'ok' => $ok, 'at' => hr_now(), 'error' => $err];
         } else {
@@ -801,7 +818,7 @@ function hr_send_app_emails($app, $schema, $target = 'both')
     if (($target === 'both' || $target === 'applicant') && !empty($settings['sendApplicantCopy']) && $app['email']) {
         $subject = 'Application received — RVS University [' . $app['id'] . ']';
         $replyTo = !empty($settings['replyTo']) ? $settings['replyTo'] : ($team ? $team[0] : null);
-        list($ok, $err) = hr_send_mail([$app['email']], $subject, hr_email_applicant($app, $schema), $replyTo, [], $fromName);
+        list($ok, $err) = hr_send_mail([$app['email']], $subject, hr_email_applicant($app, $schema), $replyTo, $pdfAtt ? [$pdfAtt] : [], $fromName);
         $log[] = ['to' => $app['email'], 'kind' => 'applicant', 'ok' => $ok, 'at' => hr_now(), 'error' => $err];
     }
     unset($app['attachmentsNote']);
