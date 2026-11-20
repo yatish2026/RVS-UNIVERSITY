@@ -559,8 +559,8 @@ function hr_email_rows($rows)
     foreach ($rows as $r) {
         $val = $r['type'] === 'textarea' ? nl2br(hr_e($r['value'])) : hr_e($r['value']);
         $h .= '<tr>'
-            . '<td style="padding:9px 12px;border-bottom:1px solid #F1E8DC;width:38%;vertical-align:top;font:13px/1.45 Arial,Helvetica,sans-serif;color:#867362;">' . hr_e($r['label']) . '</td>'
-            . '<td style="padding:9px 12px;border-bottom:1px solid #F1E8DC;vertical-align:top;font:600 13.5px/1.45 Arial,Helvetica,sans-serif;color:#1D1611;">' . $val . '</td>'
+            . '<td class="lbl" width="38%" style="padding:9px 12px;border-bottom:1px solid #F1E8DC;width:38%;vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.45;color:#867362;word-break:break-word;">' . hr_e($r['label']) . '</td>'
+            . '<td class="val" style="padding:9px 12px;border-bottom:1px solid #F1E8DC;vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13.5px;line-height:1.45;font-weight:bold;color:#1D1611;word-break:break-word;overflow-wrap:anywhere;">' . $val . '</td>'
             . '</tr>';
     }
     return $h;
@@ -599,25 +599,38 @@ function hr_email_layout($preheader, $bandTitle, $bandSub, $bodyRows)
 {
     $logo = HR_PUBLIC_SITE . '/images/rvsu-logo-200.png';
     $year = date('Y');
-    return '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        . '<title>' . hr_e($bandTitle) . '</title></head>'
+    $html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        . '<meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light">'
+        . '<title>' . hr_e($bandTitle) . '</title>'
+        . '<style>'
+        . 'table{border-spacing:0}td{word-break:break-word}'
+        . '@media only screen and (max-width:620px){'
+        . '.wrap{padding:12px 6px!important}'
+        . '.px{padding-left:16px!important;padding-right:16px!important}'
+        . '.band{padding-left:10px!important;padding-right:10px!important}'
+        . '.lbl{width:40%!important;font-size:12px!important;padding:8px 8px!important}'
+        . '.val{font-size:13px!important;padding:8px 8px!important}'
+        . '.logo{width:44px!important;height:44px!important}'
+        . '.uni{font-size:18px!important}'
+        . '}'
+        . '</style></head>'
         . '<body style="margin:0;padding:0;background:#F5ECE0;">'
         . '<div style="display:none;max-height:0;overflow:hidden;opacity:0;">' . hr_e($preheader) . '</div>'
-        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5ECE0;"><tr><td align="center" style="padding:28px 12px;">'
-        . '<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="width:100%;max-width:640px;background:#FFFFFF;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(29,22,17,.06);">'
+        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#F5ECE0" style="background:#F5ECE0;"><tr><td class="wrap" align="center" style="padding:28px 12px;">'
+        . '<table role="presentation" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="width:100%;max-width:640px;table-layout:fixed;background:#FFFFFF;border-radius:16px;overflow:hidden;">'
         // gold top bar
         . '<tr><td style="height:5px;background:#C6832B;font-size:0;line-height:0;">&nbsp;</td></tr>'
         // letterhead
         . '<tr><td style="padding:22px 32px 18px;">'
         . '<table role="presentation" cellpadding="0" cellspacing="0"><tr>'
-        . '<td style="padding-right:14px;vertical-align:middle;"><img src="' . $logo . '" width="58" height="58" alt="RVS University" style="display:block;border-radius:50%;"></td>'
+        . '<td width="58" style="width:58px;padding-right:14px;vertical-align:middle;"><img class="logo" src="' . $logo . '" width="58" height="58" alt="RVSU" style="display:block;width:58px;height:58px;border-radius:50%;background:#1D1611;color:#F0D19E;font-family:Arial,sans-serif;font-size:11px;font-weight:bold;text-align:center;line-height:58px;"></td>'
         . '<td style="vertical-align:middle;">'
-        . '<div style="font:700 22px/1.1 Georgia,\'Times New Roman\',serif;color:#1D1611;letter-spacing:.5px;">RVS UNIVERSITY</div>'
+        . '<div class="uni" style="font:700 22px/1.1 Georgia,\'Times New Roman\',serif;color:#1D1611;letter-spacing:.5px;">RVS UNIVERSITY</div>'
         . '<div style="font:italic 12.5px/1.4 Georgia,serif;color:#9C6019;margin-top:3px;">Where Knowledge Meets Possibility</div>'
         . '<div style="font:11.5px/1.4 Arial,Helvetica,sans-serif;color:#9C8B79;margin-top:2px;">R.V.S Nagar, Tirupathi Road, Chittoor, Andhra Pradesh &ndash; 517127</div>'
         . '</td></tr></table></td></tr>'
         // title band
-        . '<tr><td style="padding:0 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1D1611;border-radius:12px;">'
+        . '<tr><td class="band" style="padding:0 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#1D1611" style="background:#1D1611;border-radius:12px;">'
         . '<tr><td style="padding:20px 22px;">'
         . '<div style="font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#E4B56C;">Careers &middot; Recruitment</div>'
         . '<div style="font:700 22px/1.3 Georgia,\'Times New Roman\',serif;color:#FFFFFF;margin-top:8px;">' . hr_e($bandTitle) . '</div>'
@@ -632,6 +645,8 @@ function hr_email_layout($preheader, $bandTitle, $bandSub, $bodyRows)
         . '&copy; ' . $year . ' RVS University. This message was generated by the RVS University careers portal.'
         . '</div></td></tr>'
         . '</table></td></tr></table></body></html>';
+    // Side padding cells get a class so the mobile media query can shrink them.
+    return preg_replace('/<td style="(padding:[^";]*32px)/', '<td class="px" style="$1', $html);
 }
 
 function hr_email_team($app, $schema)
