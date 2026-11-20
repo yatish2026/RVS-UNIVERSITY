@@ -556,11 +556,13 @@ function hr_e($s)
 function hr_email_rows($rows)
 {
     $h = '';
-    foreach ($rows as $r) {
+    $last = count($rows) - 1;
+    foreach ($rows as $i => $r) {
         $val = $r['type'] === 'textarea' ? nl2br(hr_e($r['value'])) : hr_e($r['value']);
+        $line = $i === $last ? 'border-bottom:0' : 'border-bottom:1px solid #F1E8DC';
         $h .= '<tr>'
-            . '<td class="lbl" width="38%" style="padding:9px 12px;border-bottom:1px solid #F1E8DC;width:38%;vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.45;color:#867362;word-break:break-word;">' . hr_e($r['label']) . '</td>'
-            . '<td class="val" style="padding:9px 12px;border-bottom:1px solid #F1E8DC;vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13.5px;line-height:1.45;font-weight:bold;color:#1D1611;word-break:break-word;overflow-wrap:anywhere;">' . $val . '</td>'
+            . '<td class="lbl" width="38%" style="padding:9px 12px;' . $line . ';width:38%;vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.45;color:#867362;word-break:break-word;">' . hr_e($r['label']) . '</td>'
+            . '<td class="val" style="padding:9px 12px;' . $line . ';vertical-align:top;font-family:Arial,Helvetica,sans-serif;font-size:13.5px;line-height:1.45;font-weight:bold;color:#1D1611;word-break:break-word;overflow-wrap:anywhere;">' . $val . '</td>'
             . '</tr>';
     }
     return $h;

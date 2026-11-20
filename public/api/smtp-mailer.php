@@ -198,12 +198,16 @@ class RvsuSmtpMailer {
                 $fullPayload .= $chunkedBase64 . "\r\n\r\n";
             }
 
-            $fullPayload .= "--$boundary--\r\n.\r\n";
+            $fullPayload .= "--$boundary--\r\n";
         } else {
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
             $headers .= "Content-Transfer-Encoding: quoted-printable\r\n\r\n";
-            $fullPayload = $headers . $qpBody . "\r\n.\r\n";
+            $fullPayload = $headers . $qpBody . "\r\n";
         }
+
+        // RFC 5321 §4.5.2 dot-stuffing: a line that starts with "." must be sent as "..",
+        // otherwise the mail server strips the dot (e.g. "13=\r\n.5px" became "135px").
+        $fullPayload = preg_replace('/(^|\r\n)\./', '$1..', $fullPayload) . ".\r\n";
 
         // Send Email Content safely in chunks
         if (!$this->safeFwrite($socket, $fullPayload)) {
