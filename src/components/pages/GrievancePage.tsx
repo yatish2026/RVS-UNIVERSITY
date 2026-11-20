@@ -277,7 +277,7 @@ export const GrievancePage: React.FC<GrievancePageProps> = ({
 
   // Timer countdown effect for OTP resend
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     if (otpSent && countdown > 0) {
       timer = setTimeout(() => setCountdown(countdown - 1), 1000);
     }

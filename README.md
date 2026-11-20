@@ -36,3 +36,25 @@ npm run dev
 ```bash
 npm run build
 ```
+
+---
+
+## 🧑‍💼 Recruitment (Careers) Module
+
+- **Public form:** `https://rvsu.ac.in/#careers-apply` (not linked from the site menus yet).
+- **Admin console:** private link `https://rvsu.ac.in/#hr-console/<secret-key>` — manage applications, edit the form
+  (fields, steps, departments, designations, lists), notification emails, and download applications as PDF.
+- **Code:** `src/features/recruitment/` (React) and `public/hr-api/` (PHP API).
+- **Data:** stored outside the web root in `~/rvsu_hr_data` on the server (applications, uploads, form versions,
+  `admin-key.sha256`). Locally it is `.hr-data/` (git-ignored).
+
+### Local development
+```bash
+npm run dev                                   # http://localhost:3000
+php -S 127.0.0.1:8090 -t public               # serves /hr-api (proxied by Vite)
+```
+Put `log` in `.hr-data/mail-mode.txt` to write emails to `.hr-data/outbox/` instead of sending them.
+
+## 🚀 Deployment
+Every push to `main` runs `.github/workflows/deploy-cpanel.yml`: it builds the site and rsyncs `dist/` to cPanel over SSH.
+It never deletes files and never overwrites the server's root `.htaccess` or the other apps in `public_html/api`.

@@ -1,0 +1,11 @@
+# RVS University recruitment API
+
+# Helper/library files are never served directly.
+<FilesMatch "^_">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Cache-Control "no-store"
+</IfModule>

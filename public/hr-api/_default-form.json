@@ -1,0 +1,2604 @@
+{
+  "version": 1,
+  "updatedAt": null,
+  "settings": {
+    "formTitle": "Faculty & Staff Recruitment",
+    "formSubtitle": "Application for Employment",
+    "intro": "Join a community shaping the future of higher education in Andhra Pradesh. The application takes about 10–15 minutes. Fields marked * are mandatory, and your progress is saved on this device as you go.",
+    "acceptingApplications": true,
+    "closedMessage": "We are not accepting applications at the moment. Please check back soon.",
+    "notifyEmails": [],
+    "sendApplicantCopy": true,
+    "senderName": "RVS University Recruitment",
+    "replyTo": "",
+    "applicantEmailMessage": "Thank you for your interest in joining RVS University. We have received your application and our recruitment team will review your profile. If your profile matches our requirements, we will contact you for the next steps.",
+    "declarationText": "I hereby declare that all the information furnished in this application is true, complete and correct to the best of my knowledge and belief. I understand that any false or misleading information may lead to rejection of my application or termination of service.",
+    "successMessage": "Your application has been submitted successfully. A copy has been sent to your email address.",
+    "idPrefix": "RVSU-REC",
+    "attachFilesToEmail": true
+  },
+  "steps": [
+    {
+      "id": "position",
+      "title": "Applied For",
+      "description": "Tell us which role you are applying for.",
+      "sections": [
+        {
+          "id": "position",
+          "title": "Position Applied For",
+          "fields": [
+            {
+              "id": "postType",
+              "label": "Post Applied For",
+              "type": "choice",
+              "width": "half",
+              "required": true,
+              "listId": "postTypes",
+              "locked": true
+            },
+            {
+              "id": "jobNature",
+              "label": "Nature of Job",
+              "type": "choice",
+              "width": "half",
+              "required": true,
+              "listId": "jobNature"
+            },
+            {
+              "id": "department",
+              "label": "Department",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "departments",
+              "filterBy": {
+                "field": "postType"
+              },
+              "locked": true
+            },
+            {
+              "id": "designation",
+              "label": "Designation",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "designations",
+              "filterBy": {
+                "field": "postType"
+              },
+              "locked": true
+            },
+            {
+              "id": "designationOther",
+              "label": "Please specify designation",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "designation",
+                  "equals": "Other"
+                }
+              ]
+            },
+            {
+              "id": "discovered",
+              "label": "Discovered Opportunity Through",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "discovery"
+            },
+            {
+              "id": "discoveredOther",
+              "label": "Please specify",
+              "type": "text",
+              "width": "half",
+              "required": false,
+              "showIf": [
+                {
+                  "field": "discovered",
+                  "equals": [
+                    "Other",
+                    "Employee Referral",
+                    "Consultancy"
+                  ]
+                }
+              ],
+              "placeholder": "Referrer name / consultancy / source"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "personal",
+      "title": "Personal Details",
+      "description": "Basic information about you.",
+      "sections": [
+        {
+          "id": "personal",
+          "title": "Personal Information",
+          "fields": [
+            {
+              "id": "salutation",
+              "label": "Salutation",
+              "type": "select",
+              "width": "quarter",
+              "required": true,
+              "listId": "salutations"
+            },
+            {
+              "id": "firstName",
+              "label": "First Name",
+              "type": "text",
+              "width": "quarter",
+              "required": true,
+              "locked": true,
+              "maxLength": 60
+            },
+            {
+              "id": "lastName",
+              "label": "Last Name",
+              "type": "text",
+              "width": "quarter",
+              "required": true,
+              "locked": true,
+              "maxLength": 60
+            },
+            {
+              "id": "dob",
+              "label": "Date of Birth",
+              "type": "date",
+              "width": "quarter",
+              "required": true
+            },
+            {
+              "id": "placeOfBirth",
+              "label": "Place of Birth",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "gender",
+              "label": "Gender",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "genders"
+            },
+            {
+              "id": "maritalStatus",
+              "label": "Marital Status",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "maritalStatus"
+            },
+            {
+              "id": "currentLocation",
+              "label": "Current Location",
+              "type": "text",
+              "width": "third",
+              "required": true,
+              "placeholder": "City you live in now"
+            },
+            {
+              "id": "mobile",
+              "label": "Mobile Number",
+              "type": "tel",
+              "width": "third",
+              "required": true,
+              "locked": true,
+              "pattern": "^[6-9][0-9]{9}$",
+              "patternMessage": "Enter a valid 10-digit mobile number",
+              "placeholder": "10-digit mobile"
+            },
+            {
+              "id": "email",
+              "label": "Email Address",
+              "type": "email",
+              "width": "third",
+              "required": true,
+              "locked": true,
+              "placeholder": "you@example.com",
+              "help": "A copy of your application will be sent here."
+            },
+            {
+              "id": "photo",
+              "label": "Passport-size Photograph",
+              "type": "file",
+              "width": "half",
+              "required": false,
+              "accept": ".jpg,.jpeg,.png",
+              "maxSizeMB": 2,
+              "help": "JPG or PNG, up to 2 MB (optional)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "academics",
+      "title": "Academic Details",
+      "description": "Your educational qualifications, starting from 10th.",
+      "sections": [
+        {
+          "id": "ssc",
+          "title": "10th / SSLC",
+          "fields": [
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "half",
+              "required": true
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "half",
+              "required": true
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "third",
+              "required": true,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year of Passing",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "hsc",
+          "title": "Higher Secondary / PUC / Diploma",
+          "fields": [
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "half",
+              "required": true
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "half",
+              "required": true
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "third",
+              "required": true,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year of Passing",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "graduation",
+          "title": "Graduation",
+          "description": "",
+          "fields": [
+            {
+              "id": "degree",
+              "label": "Degree",
+              "type": "text",
+              "width": "full",
+              "required": false,
+              "placeholder": "e.g. B.Tech, B.Sc, B.Com, BBA"
+            },
+            {
+              "id": "eduMode",
+              "label": "Edu. Mode",
+              "type": "select",
+              "width": "third",
+              "required": true,
+              "listId": "eduMode"
+            },
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "specialization",
+              "label": "Specialization",
+              "type": "text",
+              "width": "quarter",
+              "required": true
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "quarter",
+              "required": true,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "quarter",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "year",
+              "width": "quarter",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "pg",
+          "title": "Post Graduation",
+          "description": "",
+          "fields": [
+            {
+              "id": "degree",
+              "label": "Degree",
+              "type": "text",
+              "width": "full",
+              "required": false,
+              "placeholder": "e.g. M.Tech, M.Sc, MBA, MCA"
+            },
+            {
+              "id": "eduMode",
+              "label": "Edu. Mode",
+              "type": "select",
+              "width": "third",
+              "required": true,
+              "listId": "eduMode"
+            },
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "specialization",
+              "label": "Specialization",
+              "type": "text",
+              "width": "quarter",
+              "required": true
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "quarter",
+              "required": true,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "quarter",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "year",
+              "width": "quarter",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "phd",
+          "title": "Ph.D",
+          "description": "Leave blank if not applicable.",
+          "fields": [
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "select",
+              "width": "half",
+              "required": false,
+              "listId": "phdStatus"
+            },
+            {
+              "id": "thesisTitle",
+              "label": "Thesis Title",
+              "type": "text",
+              "width": "half",
+              "required": false
+            },
+            {
+              "id": "eduMode",
+              "label": "Edu. Mode",
+              "type": "select",
+              "width": "third",
+              "required": false,
+              "listId": "eduMode"
+            },
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "third",
+              "required": false
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "third",
+              "required": false
+            },
+            {
+              "id": "specialization",
+              "label": "Specialization",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "quarter",
+              "required": false,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "year",
+              "width": "quarter",
+              "required": false,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "otherQualification",
+          "title": "Other Qualification",
+          "description": "Any additional degree, diploma or certification (optional).",
+          "fields": [
+            {
+              "id": "qualification",
+              "label": "Qualification Name",
+              "type": "text",
+              "width": "full",
+              "required": false
+            },
+            {
+              "id": "eduMode",
+              "label": "Edu. Mode",
+              "type": "select",
+              "width": "third",
+              "required": false,
+              "listId": "eduMode"
+            },
+            {
+              "id": "institution",
+              "label": "Institution Name",
+              "type": "text",
+              "width": "third",
+              "required": false
+            },
+            {
+              "id": "board",
+              "label": "Board / University",
+              "type": "text",
+              "width": "third",
+              "required": false
+            },
+            {
+              "id": "specialization",
+              "label": "Specialization",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            },
+            {
+              "id": "division",
+              "label": "Division / Grade",
+              "type": "select",
+              "width": "quarter",
+              "required": false,
+              "listId": "divisionGrade"
+            },
+            {
+              "id": "percentage",
+              "label": "% of Marks",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0,
+              "max": 100,
+              "placeholder": "e.g. 78.5"
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "year",
+              "width": "quarter",
+              "required": false,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            }
+          ]
+        },
+        {
+          "id": "eligibilityTests",
+          "title": "National Eligibility Tests",
+          "fields": [
+            {
+              "id": "gate",
+              "label": "GATE",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "gatePercentile",
+              "label": "Percentile",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "showIf": [
+                {
+                  "field": "gate",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "gateYear",
+              "label": "Year",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY",
+              "showIf": [
+                {
+                  "field": "gate",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "net",
+              "label": "NET",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "netPercentile",
+              "label": "Percentile",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "showIf": [
+                {
+                  "field": "net",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "netYear",
+              "label": "Year",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY",
+              "showIf": [
+                {
+                  "field": "net",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "ugcCsir",
+              "label": "UGC-CSIR",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "ugcCsirPercentile",
+              "label": "Percentile",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "showIf": [
+                {
+                  "field": "ugcCsir",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "ugcCsirYear",
+              "label": "Year",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY",
+              "showIf": [
+                {
+                  "field": "ugcCsir",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "slet",
+              "label": "SLET / SET (any state)",
+              "type": "choice",
+              "width": "third",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "sletPercentile",
+              "label": "Percentile",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 100,
+              "showIf": [
+                {
+                  "field": "slet",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "sletYear",
+              "label": "Year",
+              "type": "year",
+              "width": "third",
+              "required": true,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY",
+              "showIf": [
+                {
+                  "field": "slet",
+                  "equals": "Yes"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Experience",
+      "description": "Start from your present job. Freshers can skip to the next section.",
+      "sections": [
+        {
+          "id": "experience",
+          "title": "Work Experience",
+          "description": "Start from your present / most recent job.",
+          "repeatable": true,
+          "minItems": 0,
+          "maxItems": 15,
+          "itemLabel": "Experience",
+          "addLabel": "Add experience",
+          "fields": [
+            {
+              "id": "experienceType",
+              "label": "Experience Type",
+              "type": "select",
+              "width": "third",
+              "required": false,
+              "listId": "experienceType"
+            },
+            {
+              "id": "jobNature",
+              "label": "Nature of Job",
+              "type": "select",
+              "width": "third",
+              "required": true,
+              "listId": "employmentNature"
+            },
+            {
+              "id": "organization",
+              "label": "Organization",
+              "type": "text",
+              "width": "third",
+              "required": false
+            },
+            {
+              "id": "designation",
+              "label": "Designation",
+              "type": "text",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "fromDate",
+              "label": "From",
+              "type": "date",
+              "width": "third",
+              "required": true
+            },
+            {
+              "id": "toDate",
+              "label": "To",
+              "type": "date",
+              "width": "third",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "currentlyWorking",
+                  "notEquals": true
+                }
+              ]
+            },
+            {
+              "id": "currentlyWorking",
+              "label": "I currently work here",
+              "type": "checkbox",
+              "width": "full",
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "compensation",
+          "title": "Salary & Availability",
+          "fields": [
+            {
+              "id": "currentSalary",
+              "label": "Current / Last Drawn Salary (Monthly, INR)",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "placeholder": "e.g. 45000"
+            },
+            {
+              "id": "expectedSalary",
+              "label": "Expected Salary (Monthly, INR)",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "placeholder": "e.g. 60000"
+            },
+            {
+              "id": "noticePeriod",
+              "label": "Notice Period (in days)",
+              "type": "number",
+              "width": "third",
+              "required": true,
+              "min": 0,
+              "max": 365,
+              "placeholder": "e.g. 30"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "title": "Publications",
+      "description": "Research output and academic contributions. Leave blank where not applicable.",
+      "showIf": [
+        {
+          "section": "position",
+          "field": "postType",
+          "equals": "Teaching"
+        }
+      ],
+      "sections": [
+        {
+          "id": "journals",
+          "title": "Number of Journal Publications",
+          "fields": [
+            {
+              "id": "international",
+              "label": "International",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "national",
+              "label": "National",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "regional",
+              "label": "Regional",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            }
+          ]
+        },
+        {
+          "id": "conferences",
+          "title": "Number of Conference Publications",
+          "fields": [
+            {
+              "id": "international",
+              "label": "International",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "national",
+              "label": "National",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "regional",
+              "label": "Regional",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            }
+          ]
+        },
+        {
+          "id": "articles",
+          "title": "Articles Published in Journals",
+          "repeatable": true,
+          "minItems": 0,
+          "maxItems": 30,
+          "itemLabel": "Article",
+          "addLabel": "Add article",
+          "fields": [
+            {
+              "id": "author",
+              "label": "Author(s)",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            },
+            {
+              "id": "title",
+              "label": "Title of Article",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            },
+            {
+              "id": "journal",
+              "label": "Name of Journal",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            },
+            {
+              "id": "issn",
+              "label": "ISSN",
+              "type": "text",
+              "width": "quarter",
+              "required": false
+            }
+          ]
+        },
+        {
+          "id": "seminars",
+          "title": "Conferences, Seminars & Workshops (count)",
+          "fields": [
+            {
+              "id": "presentedNational",
+              "label": "Presented — National",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "attendedNational",
+              "label": "Attended — National",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "organizedNational",
+              "label": "Organized — National",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "presentedRegional",
+              "label": "Presented — Regional",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "attendedRegional",
+              "label": "Attended — Regional",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "organizedRegional",
+              "label": "Organized — Regional",
+              "type": "number",
+              "width": "third",
+              "required": false,
+              "min": 0
+            }
+          ]
+        },
+        {
+          "id": "fundedProjects",
+          "title": "Funded Projects (in last three years)",
+          "fields": [
+            {
+              "id": "completedCount",
+              "label": "Completed — No. of Projects",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "completedAmount",
+              "label": "Completed — Amount (INR)",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "ongoingCount",
+              "label": "Ongoing — No. of Projects",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "ongoingAmount",
+              "label": "Ongoing — Amount (INR)",
+              "type": "number",
+              "width": "quarter",
+              "required": false,
+              "min": 0
+            },
+            {
+              "id": "citations",
+              "label": "No. of Citations (in last three years)",
+              "type": "number",
+              "width": "half",
+              "required": false,
+              "min": 0
+            }
+          ]
+        },
+        {
+          "id": "patents",
+          "title": "Patent Details",
+          "repeatable": true,
+          "minItems": 0,
+          "maxItems": 20,
+          "itemLabel": "Patent",
+          "addLabel": "Add patent",
+          "fields": [
+            {
+              "id": "details",
+              "label": "Patent Details",
+              "type": "textarea",
+              "width": "half",
+              "required": false
+            },
+            {
+              "id": "year",
+              "label": "Year",
+              "type": "year",
+              "width": "quarter",
+              "required": false,
+              "min": 1960,
+              "max": 2035,
+              "placeholder": "YYYY"
+            },
+            {
+              "id": "status",
+              "label": "Status",
+              "type": "select",
+              "width": "quarter",
+              "required": false,
+              "listId": "patentStatus"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "additional",
+      "title": "Address & Other Details",
+      "description": "Contact address, identity and anything else you would like us to know.",
+      "sections": [
+        {
+          "id": "background",
+          "title": "Background",
+          "fields": [
+            {
+              "id": "knowAnyone",
+              "label": "Do you know anyone working at RVS University?",
+              "type": "choice",
+              "width": "half",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "knowAnyoneDetails",
+              "label": "Name & relationship",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "knowAnyone",
+                  "equals": "Yes"
+                }
+              ]
+            },
+            {
+              "id": "attendedBefore",
+              "label": "Have you attended an interview at RVS University earlier?",
+              "type": "choice",
+              "width": "half",
+              "required": true,
+              "listId": "yesNo"
+            },
+            {
+              "id": "attendedBeforeDetails",
+              "label": "When, and for which post?",
+              "type": "text",
+              "width": "half",
+              "required": false,
+              "showIf": [
+                {
+                  "field": "attendedBefore",
+                  "equals": "Yes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "currentAddress",
+          "title": "Current Address",
+          "fields": [
+            {
+              "id": "country",
+              "label": "Country",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "countries",
+              "showIf": [],
+              "defaultValue": "India"
+            },
+            {
+              "id": "state",
+              "label": "State / Province",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "indianStates",
+              "showIf": [
+                {
+                  "field": "country",
+                  "equals": "India"
+                }
+              ]
+            },
+            {
+              "id": "stateOther",
+              "label": "State / Province",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "country",
+                  "notEquals": "India"
+                }
+              ]
+            },
+            {
+              "id": "street",
+              "label": "Street Address",
+              "type": "text",
+              "width": "full",
+              "required": true,
+              "showIf": [],
+              "placeholder": "House no., street, area"
+            },
+            {
+              "id": "city",
+              "label": "City",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": []
+            },
+            {
+              "id": "zip",
+              "label": "ZIP / Postal Code",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [],
+              "pattern": "^[A-Za-z0-9 -]{3,10}$",
+              "patternMessage": "Enter a valid postal code"
+            }
+          ]
+        },
+        {
+          "id": "permanentAddress",
+          "title": "Permanent Address",
+          "fields": [
+            {
+              "id": "sameAsCurrent",
+              "label": "Same as current address",
+              "type": "checkbox",
+              "width": "full",
+              "required": false
+            },
+            {
+              "id": "country",
+              "label": "Country",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "countries",
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                }
+              ],
+              "defaultValue": "India"
+            },
+            {
+              "id": "state",
+              "label": "State / Province",
+              "type": "select",
+              "width": "half",
+              "required": true,
+              "listId": "indianStates",
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                },
+                {
+                  "field": "country",
+                  "equals": "India"
+                }
+              ]
+            },
+            {
+              "id": "stateOther",
+              "label": "State / Province",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                },
+                {
+                  "field": "country",
+                  "notEquals": "India"
+                }
+              ]
+            },
+            {
+              "id": "street",
+              "label": "Street Address",
+              "type": "text",
+              "width": "full",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                }
+              ],
+              "placeholder": "House no., street, area"
+            },
+            {
+              "id": "city",
+              "label": "City",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                }
+              ]
+            },
+            {
+              "id": "zip",
+              "label": "ZIP / Postal Code",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "showIf": [
+                {
+                  "field": "sameAsCurrent",
+                  "notEquals": true
+                }
+              ],
+              "pattern": "^[A-Za-z0-9 -]{3,10}$",
+              "patternMessage": "Enter a valid postal code"
+            }
+          ]
+        },
+        {
+          "id": "identity",
+          "title": "Identity Details",
+          "fields": [
+            {
+              "id": "aadhaar",
+              "label": "Aadhaar Card Number",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "pattern": "^[0-9]{4} ?[0-9]{4} ?[0-9]{4}$",
+              "patternMessage": "Enter the 12-digit Aadhaar number",
+              "placeholder": "XXXX XXXX XXXX"
+            },
+            {
+              "id": "pan",
+              "label": "PAN Card Number",
+              "type": "text",
+              "width": "half",
+              "required": true,
+              "transform": "uppercase",
+              "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]$",
+              "patternMessage": "Enter a valid PAN (e.g. ABCDE1234F)",
+              "placeholder": "ABCDE1234F"
+            }
+          ]
+        },
+        {
+          "id": "extras",
+          "title": "Achievements & Documents",
+          "fields": [
+            {
+              "id": "achievements",
+              "label": "Any Special Achievements",
+              "type": "textarea",
+              "width": "full",
+              "required": false,
+              "maxLength": 2000,
+              "placeholder": "Awards, recognitions, certifications, memberships…"
+            },
+            {
+              "id": "resume",
+              "label": "Resume / CV",
+              "type": "file",
+              "width": "half",
+              "required": false,
+              "accept": ".pdf,.doc,.docx",
+              "maxSizeMB": 5,
+              "help": "PDF or Word, up to 5 MB."
+            },
+            {
+              "id": "certificates",
+              "label": "Certificates (single PDF)",
+              "type": "file",
+              "width": "half",
+              "required": false,
+              "accept": ".pdf",
+              "maxSizeMB": 10,
+              "help": "Optional. Combine your certificates into one PDF, up to 10 MB."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "lists": [
+    {
+      "id": "postTypes",
+      "name": "Post Types",
+      "description": "Teaching / Non Teaching. Departments and designations are filtered by these values (tags).",
+      "options": [
+        {
+          "label": "Teaching"
+        },
+        {
+          "label": "Non Teaching"
+        }
+      ]
+    },
+    {
+      "id": "jobNature",
+      "name": "Nature of Job",
+      "description": "",
+      "options": [
+        {
+          "label": "Full Time"
+        },
+        {
+          "label": "Part Time"
+        }
+      ]
+    },
+    {
+      "id": "departments",
+      "name": "Departments",
+      "description": "Grouped by school. Tags decide whether a department shows for Teaching and/or Non Teaching posts.",
+      "options": [
+        {
+          "label": "Civil Engineering",
+          "group": "School of Engineering & Technology (SOET)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Electrical & Electronics Engineering",
+          "group": "School of Engineering & Technology (SOET)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Mechanical Engineering",
+          "group": "School of Engineering & Technology (SOET)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Electronics & Communication Engineering",
+          "group": "School of Engineering & Technology (SOET)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Computer Science & Engineering",
+          "group": "School of Computer Sciences & Engineering (SCSE)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Artificial Intelligence)",
+          "group": "School of Computer Sciences & Engineering (SCSE)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Artificial Intelligence",
+          "group": "School of Computer Sciences & Engineering (SCSE)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Cloud Computing & Automation)",
+          "group": "School of Computer Sciences & Engineering (SCSE)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (AI & Machine Learning)",
+          "group": "School of AI & Data Science (SAID)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (AI & Robotics)",
+          "group": "School of AI & Data Science (SAID)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (AI & Data Engineering)",
+          "group": "School of AI & Data Science (SAID)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "AI & Data Science",
+          "group": "School of AI & Data Science (SAID)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Data Science)",
+          "group": "School of AI & Data Science (SAID)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Information Technology",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Internet of Things)",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Quantum Computing)",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "CSE (Cyber Security)",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Computer Science & Business Systems",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Computer Applications (BCA)",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Computer Applications (MCA)",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Cyber Forensics",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Quantum Technology",
+          "group": "School of Computing & Information Sciences (SCIS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Management Studies (MBA)",
+          "group": "School of Management Studies (SOMS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Business Administration (BBA)",
+          "group": "School of Management Studies (SOMS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Anaesthesia & Operation Theatre Technology",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Medical Radiology & Imaging Technology",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Physician Associates",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Optometry",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Emergency Medical Technology (Paramedic)",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Physiotherapy",
+          "group": "School of Allied Health Sciences (SAHS)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Law",
+          "group": "School of Law (SOL)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Mathematics",
+          "group": "Humanities & Basic Sciences (H&S)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Physics",
+          "group": "Humanities & Basic Sciences (H&S)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Chemistry",
+          "group": "Humanities & Basic Sciences (H&S)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "English & Communication Skills",
+          "group": "Humanities & Basic Sciences (H&S)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Humanities & Social Sciences",
+          "group": "Humanities & Basic Sciences (H&S)",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Department of Administration",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Office of the Registrar",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Accounts & Finance",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Human Resources",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Admissions Office",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Examination Cell",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Central Library",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Training & Placement Cell",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "IT Services & Systems",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Directorate of Research",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "IQAC",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "International Relations Office",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Student Affairs & Welfare",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Physical Education & Sports",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Hostel & Residential Services",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Transport",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Health Centre",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Estate & Maintenance",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Security",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Purchase & Stores",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Public Relations & Media",
+          "group": "Administration & Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "designations",
+      "name": "Designations",
+      "description": "Tags decide whether a designation shows for Teaching and/or Non Teaching posts.",
+      "options": [
+        {
+          "label": "Professor",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Associate Professor",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Assistant Professor",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Professor of Practice",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Adjunct / Visiting Professor",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Dean",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Head of Department",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Post-Doctoral Fellow",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Research Associate",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Teaching Assistant",
+          "group": "Academic Positions",
+          "tags": [
+            "Teaching"
+          ]
+        },
+        {
+          "label": "Registrar",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Deputy Registrar",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Assistant Registrar",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Controller of Examinations",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Administrative Officer",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Office Superintendent",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Senior Assistant",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Junior Assistant",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Office Assistant",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "HR Executive",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Receptionist / Front Office Executive",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "PRO / Media Executive",
+          "group": "Administration",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Accounts Officer",
+          "group": "Accounts",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Accountant",
+          "group": "Accounts",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Accounts Assistant",
+          "group": "Accounts",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Librarian",
+          "group": "Library",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Deputy Librarian",
+          "group": "Library",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Library Assistant",
+          "group": "Library",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Lab Instructor",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Lab Technician",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Lab Assistant",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "System Administrator",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Network Administrator",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Programmer / Software Developer",
+          "group": "Technical",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Training & Placement Officer",
+          "group": "Student Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Physical Director",
+          "group": "Student Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Hostel Warden",
+          "group": "Student Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Nurse / Health Assistant",
+          "group": "Student Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Electrician",
+          "group": "Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Plumber",
+          "group": "Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Driver",
+          "group": "Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Attender",
+          "group": "Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Security Supervisor",
+          "group": "Support Services",
+          "tags": [
+            "Non Teaching"
+          ]
+        },
+        {
+          "label": "Other",
+          "group": "Other",
+          "tags": [
+            "Teaching",
+            "Non Teaching"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discovery",
+      "name": "Discovered Opportunity Through",
+      "description": "",
+      "options": [
+        {
+          "label": "Advertisement"
+        },
+        {
+          "label": "Newspaper"
+        },
+        {
+          "label": "University Website"
+        },
+        {
+          "label": "LinkedIn"
+        },
+        {
+          "label": "Naukri / Job Portal"
+        },
+        {
+          "label": "Social Media"
+        },
+        {
+          "label": "Employee Referral"
+        },
+        {
+          "label": "Friend / Colleague"
+        },
+        {
+          "label": "Consultancy"
+        },
+        {
+          "label": "Walk-in"
+        },
+        {
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "salutations",
+      "name": "Salutations",
+      "description": "",
+      "options": [
+        {
+          "label": "Mr"
+        },
+        {
+          "label": "Ms"
+        },
+        {
+          "label": "Mrs"
+        },
+        {
+          "label": "Dr"
+        },
+        {
+          "label": "Prof"
+        }
+      ]
+    },
+    {
+      "id": "genders",
+      "name": "Gender",
+      "description": "",
+      "options": [
+        {
+          "label": "Male"
+        },
+        {
+          "label": "Female"
+        },
+        {
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "maritalStatus",
+      "name": "Marital Status",
+      "description": "",
+      "options": [
+        {
+          "label": "Single"
+        },
+        {
+          "label": "Married"
+        },
+        {
+          "label": "Divorced"
+        },
+        {
+          "label": "Widowed"
+        }
+      ]
+    },
+    {
+      "id": "divisionGrade",
+      "name": "Division / Grade",
+      "description": "",
+      "options": [
+        {
+          "label": "Distinction"
+        },
+        {
+          "label": "First Class"
+        },
+        {
+          "label": "Second Class"
+        },
+        {
+          "label": "Third / Pass Class"
+        },
+        {
+          "label": "Grade / CGPA"
+        }
+      ]
+    },
+    {
+      "id": "eduMode",
+      "name": "Education Mode",
+      "description": "",
+      "options": [
+        {
+          "label": "Regular"
+        },
+        {
+          "label": "Part Time"
+        },
+        {
+          "label": "Distance"
+        }
+      ]
+    },
+    {
+      "id": "phdStatus",
+      "name": "Ph.D Status",
+      "description": "",
+      "options": [
+        {
+          "label": "Awarded"
+        },
+        {
+          "label": "Thesis Submitted"
+        },
+        {
+          "label": "Pursuing"
+        }
+      ]
+    },
+    {
+      "id": "yesNo",
+      "name": "Yes / No",
+      "description": "",
+      "options": [
+        {
+          "label": "Yes"
+        },
+        {
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "experienceType",
+      "name": "Experience Type",
+      "description": "",
+      "options": [
+        {
+          "label": "Teaching"
+        },
+        {
+          "label": "Industry"
+        },
+        {
+          "label": "Research"
+        },
+        {
+          "label": "Administrative"
+        },
+        {
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "employmentNature",
+      "name": "Nature of Employment",
+      "description": "",
+      "options": [
+        {
+          "label": "Regular"
+        },
+        {
+          "label": "Contract"
+        },
+        {
+          "label": "Temporary"
+        },
+        {
+          "label": "Visiting / Guest"
+        },
+        {
+          "label": "Internship"
+        }
+      ]
+    },
+    {
+      "id": "patentStatus",
+      "name": "Patent Status",
+      "description": "",
+      "options": [
+        {
+          "label": "Filed"
+        },
+        {
+          "label": "Published"
+        },
+        {
+          "label": "Granted"
+        }
+      ]
+    },
+    {
+      "id": "countries",
+      "name": "Countries",
+      "description": "",
+      "options": [
+        {
+          "label": "India"
+        },
+        {
+          "label": "United States"
+        },
+        {
+          "label": "United Kingdom"
+        },
+        {
+          "label": "United Arab Emirates"
+        },
+        {
+          "label": "Saudi Arabia"
+        },
+        {
+          "label": "Qatar"
+        },
+        {
+          "label": "Oman"
+        },
+        {
+          "label": "Singapore"
+        },
+        {
+          "label": "Malaysia"
+        },
+        {
+          "label": "Australia"
+        },
+        {
+          "label": "Canada"
+        },
+        {
+          "label": "Germany"
+        },
+        {
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "indianStates",
+      "name": "Indian States & UTs",
+      "description": "",
+      "options": [
+        {
+          "label": "Andhra Pradesh"
+        },
+        {
+          "label": "Arunachal Pradesh"
+        },
+        {
+          "label": "Assam"
+        },
+        {
+          "label": "Bihar"
+        },
+        {
+          "label": "Chhattisgarh"
+        },
+        {
+          "label": "Goa"
+        },
+        {
+          "label": "Gujarat"
+        },
+        {
+          "label": "Haryana"
+        },
+        {
+          "label": "Himachal Pradesh"
+        },
+        {
+          "label": "Jharkhand"
+        },
+        {
+          "label": "Karnataka"
+        },
+        {
+          "label": "Kerala"
+        },
+        {
+          "label": "Madhya Pradesh"
+        },
+        {
+          "label": "Maharashtra"
+        },
+        {
+          "label": "Manipur"
+        },
+        {
+          "label": "Meghalaya"
+        },
+        {
+          "label": "Mizoram"
+        },
+        {
+          "label": "Nagaland"
+        },
+        {
+          "label": "Odisha"
+        },
+        {
+          "label": "Punjab"
+        },
+        {
+          "label": "Rajasthan"
+        },
+        {
+          "label": "Sikkim"
+        },
+        {
+          "label": "Tamil Nadu"
+        },
+        {
+          "label": "Telangana"
+        },
+        {
+          "label": "Tripura"
+        },
+        {
+          "label": "Uttar Pradesh"
+        },
+        {
+          "label": "Uttarakhand"
+        },
+        {
+          "label": "West Bengal"
+        },
+        {
+          "label": "Andaman & Nicobar Islands"
+        },
+        {
+          "label": "Chandigarh"
+        },
+        {
+          "label": "Dadra & Nagar Haveli and Daman & Diu"
+        },
+        {
+          "label": "Delhi"
+        },
+        {
+          "label": "Jammu & Kashmir"
+        },
+        {
+          "label": "Ladakh"
+        },
+        {
+          "label": "Lakshadweep"
+        },
+        {
+          "label": "Puducherry"
+        }
+      ]
+    }
+  ]
+}

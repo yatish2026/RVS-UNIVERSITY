@@ -1,0 +1,73 @@
+# Builds the site and copies the result to the GoDaddy cPanel account on every
+# push to main.
+#
+# Safety: rsync runs WITHOUT --delete, so it only adds or updates files that
+# come from this repo's build. Anything else in the deploy folder (other
+# sites, mail config, uploaded grievance files, etc.) is never touched.
+#
+# Required repository secrets:
+#   CPANEL_HOST         server IP or hostname
+#   CPANEL_USER         cPanel username
+#   CPANEL_PORT         SSH port (usually 22)
+#   CPANEL_SSH_KEY      private key whose public half is authorized in cPanel
+#   CPANEL_KNOWN_HOSTS  output of `ssh-keyscan -p <port> <host>`
+#   CPANEL_DEPLOY_PATH  absolute folder to deploy into, ending with /
+
+name: Deploy to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.CPANEL_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # public_html is shared with other apps (the Vastra API lives in public_html/api),
+      # so: no --delete, and an explicit list of server files we must never overwrite.
+      - name: Upload build (add/update only, never delete)
+        env:
+          HOST: ${{ secrets.CPANEL_HOST }}
+          USER: ${{ secrets.CPANEL_USER }}
+          PORT: ${{ secrets.CPANEL_PORT }}
+          DEST: ${{ secrets.CPANEL_DEPLOY_PATH }}
+        run: |
+          rsync -rlcz --itemize-changes --chmod=D755,F644 \
+            --exclude='/.htaccess' \
+            --exclude='/api/.htaccess' \
+            --exclude='/api/index.php' \
+            --exclude='/api/auth.php' \
+            --exclude='/api/config.php' \
+            --exclude='/api/db.php' \
+            --exclude='/api/*.html' \
+            --exclude='/api/*.json' \
+            --exclude='/api/error_log' \
+            --exclude='*.log' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT:-22} -o StrictHostKeyChecking=yes" \
+            dist/ "$USER@$HOST:$DEST"

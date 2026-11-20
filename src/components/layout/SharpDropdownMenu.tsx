@@ -14,7 +14,7 @@ export const SharpDropdownMenu: React.FC<SharpDropdownMenuProps> = ({
   onClose,
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Derive menu items from item.items, item.megaMenu, or item.simpleDropdown
   const menuItems: NavSubItem[] =

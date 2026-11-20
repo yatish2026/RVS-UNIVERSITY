@@ -19,6 +19,8 @@
     <!-- Dograh Voice AI Agent Widget -->
     <script>
       (function(d, s, id) {
+        // Not on the careers form / recruitment console (the console URL holds a private key).
+        if (/^#(hr-console|careers-apply)/.test(window.location.hash)) return;
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
