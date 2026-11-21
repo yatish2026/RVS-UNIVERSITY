@@ -32,8 +32,6 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
     return Array.from(set);
   }, [draft, list]);
 
-  const groups = useMemo(() => Array.from(new Set((list?.options ?? []).map((o) => o.group).filter(Boolean))) as string[], [list]);
-
   const addList = () => {
     const id = uniqueId('New list', draft.lists.map((l) => l.id));
     mutate((s) => s.lists.push({ id, name: 'New list', description: '', options: [{ label: 'Option 1' }] }));
@@ -48,17 +46,14 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
       [arr[i], arr[j]] = [arr[j], arr[i]];
     });
 
-  const shown = (list?.options ?? []).map((o, i) => ({ o, i })).filter(({ o }) => !q || `${o.label} ${o.group ?? ''}`.toLowerCase().includes(q.toLowerCase()));
+  const shown = (list?.options ?? []).map((o, i) => ({ o, i })).filter(({ o }) => !q || o.label.toLowerCase().includes(q.toLowerCase()));
 
   const applyBulk = () => {
     const rows = bulkText
       .split('\n')
       .map((r) => r.trim())
       .filter(Boolean)
-      .map((r) => {
-        const [a, b] = r.split('|').map((x) => x.trim());
-        return b ? { label: b, group: a } : { label: a };
-      });
+      .map((label) => ({ label }));
     mutate((s) => {
       const l = findList(s);
       for (const r of rows) if (!l.options.some((o) => o.label === r.label)) l.options.push(r);
@@ -146,9 +141,7 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
                   size="sm"
                   icon={<ArrowDownAZ className="h-3.5 w-3.5" />}
                   onClick={() =>
-                    mutate((s) =>
-                      findList(s).options.sort((a, b) => (a.group ?? '').localeCompare(b.group ?? '') || a.label.localeCompare(b.label)),
-                    )
+                    mutate((s) => findList(s).options.sort((a, b) => a.label.localeCompare(b.label)))
                   }
                 >
                   Sort A–Z
@@ -182,17 +175,11 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
                 </p>
               )}
             </div>
-            <datalist id={`groups-${list.id}`}>
-              {groups.map((g) => (
-                <option key={g} value={g} />
-              ))}
-            </datalist>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[720px] text-[13px]">
+              <table className="w-full min-w-[600px] text-[13px]">
                 <thead className="bg-[#FDFAF5] text-left text-[11px] font-bold uppercase tracking-[0.08em] text-[#9C8B79]">
                   <tr>
                     <th className="px-3 py-2">Option</th>
-                    <th className="px-3 py-2">Category / group</th>
                     <th className="px-3 py-2">Tags (applies to)</th>
                     <th className="px-3 py-2 text-right">Actions</th>
                   </tr>
@@ -202,20 +189,6 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
                     <tr key={i} className={o.hidden ? 'opacity-50' : ''}>
                       <td className="px-3 py-1.5">
                         <TextIn value={o.label} onChange={(e) => mutate((s) => (findList(s).options[i].label = e.target.value))} />
-                      </td>
-                      <td className="px-3 py-1.5">
-                        <TextIn
-                          list={`groups-${list.id}`}
-                          value={o.group ?? ''}
-                          placeholder="—"
-                          onChange={(e) =>
-                            mutate((s) => {
-                              const x = findList(s).options[i];
-                              if (e.target.value) x.group = e.target.value;
-                              else delete x.group;
-                            })
-                          }
-                        />
                       </td>
                       <td className="px-3 py-1.5">
                         <div className="flex flex-wrap gap-1">
@@ -304,9 +277,9 @@ export const ListsTab: React.FC<{ draft: FormSchema; saved: FormSchema; mutate: 
       >
         <div className="space-y-2 p-5">
           <p className="text-[13px] text-[#867362]">
-            One option per line. To set a category, write <code className="rounded bg-[#F3ECE0] px-1">Category | Option</code>. Duplicates are skipped.
+            One option per line. Duplicates are skipped.
           </p>
-          <TextArea rows={10} value={bulkText} onChange={(e) => setBulkText(e.target.value)} placeholder={'School of Engineering & Technology (SOET) | Civil Engineering\nMechanical Engineering'} />
+          <TextArea rows={10} value={bulkText} onChange={(e) => setBulkText(e.target.value)} placeholder={'Civil Engineering\nMechanical Engineering'} />
         </div>
       </Modal>
     </div>

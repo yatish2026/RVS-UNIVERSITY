@@ -22,17 +22,6 @@ const errBorder = 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/15'
 export const formatBytes = (n: number) =>
   n < 1024 ? `${n} B` : n < 1024 * 1024 ? `${(n / 1024).toFixed(0)} KB` : `${(n / 1024 / 1024).toFixed(1)} MB`;
 
-function groupOptions(options: ListOption[]): { group: string; options: ListOption[] }[] {
-  const groups: { group: string; options: ListOption[] }[] = [];
-  for (const o of options) {
-    const g = o.group || '';
-    let bucket = groups.find((x) => x.group === g);
-    if (!bucket) groups.push((bucket = { group: g, options: [] }));
-    bucket.options.push(o);
-  }
-  return groups;
-}
-
 export const FieldLabel: React.FC<{ field: FieldDef; htmlFor?: string }> = ({ field, htmlFor }) => (
   <label htmlFor={htmlFor} className="mb-1.5 block text-[13px] font-semibold leading-snug tracking-[0.01em] text-[#3B2F25]">
     {field.label}
@@ -94,23 +83,11 @@ export const FieldInput: React.FC<Props> = ({ field, value, error, options, wait
             className={`${inputBase} ${border} h-12 appearance-none pr-10 ${strVal ? '' : 'text-[#9C8B79]'}`}
           >
             <option value="">{waiting ? `Choose ${waitingLabel ?? 'the option above'} first` : field.placeholder || 'Select…'}</option>
-            {groupOptions(options).map((g) =>
-              g.group ? (
-                <optgroup key={g.group} label={g.group}>
-                  {g.options.map((o) => (
-                    <option key={o.label} value={o.label}>
-                      {o.label}
-                    </option>
-                  ))}
-                </optgroup>
-              ) : (
-                g.options.map((o) => (
-                  <option key={o.label} value={o.label}>
-                    {o.label}
-                  </option>
-                ))
-              ),
-            )}
+            {options.map((o) => (
+              <option key={o.label} value={o.label}>
+                {o.label}
+              </option>
+            ))}
             {strVal && !options.some((o) => o.label === strVal) && <option value={strVal}>{strVal}</option>}
           </select>
           <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9C8B79]" />

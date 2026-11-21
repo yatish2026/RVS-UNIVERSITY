@@ -1460,11 +1460,10 @@
     {
       "id": "departments",
       "name": "Departments",
-      "description": "Grouped by school. Tags decide whether a department shows for Teaching and/or Non Teaching posts.",
+      "description": "Tags decide whether a department shows for Teaching and/or Non Teaching posts.",
       "options": [
         {
           "label": "Civil Engineering",
-          "group": "School of Engineering & Technology (SOET)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1472,7 +1471,6 @@
         },
         {
           "label": "Electrical & Electronics Engineering",
-          "group": "School of Engineering & Technology (SOET)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1480,7 +1478,6 @@
         },
         {
           "label": "Mechanical Engineering",
-          "group": "School of Engineering & Technology (SOET)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1488,7 +1485,6 @@
         },
         {
           "label": "Electronics & Communication Engineering",
-          "group": "School of Engineering & Technology (SOET)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1496,7 +1492,6 @@
         },
         {
           "label": "Computer Science & Engineering",
-          "group": "School of Computer Sciences & Engineering (SCSE)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1504,7 +1499,6 @@
         },
         {
           "label": "CSE (Artificial Intelligence)",
-          "group": "School of Computer Sciences & Engineering (SCSE)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1512,7 +1506,6 @@
         },
         {
           "label": "Artificial Intelligence",
-          "group": "School of Computer Sciences & Engineering (SCSE)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1520,7 +1513,6 @@
         },
         {
           "label": "CSE (Cloud Computing & Automation)",
-          "group": "School of Computer Sciences & Engineering (SCSE)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1528,7 +1520,6 @@
         },
         {
           "label": "CSE (AI & Machine Learning)",
-          "group": "School of AI & Data Science (SAID)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1536,7 +1527,6 @@
         },
         {
           "label": "CSE (AI & Robotics)",
-          "group": "School of AI & Data Science (SAID)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1544,7 +1534,6 @@
         },
         {
           "label": "CSE (AI & Data Engineering)",
-          "group": "School of AI & Data Science (SAID)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1552,7 +1541,6 @@
         },
         {
           "label": "AI & Data Science",
-          "group": "School of AI & Data Science (SAID)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1560,7 +1548,6 @@
         },
         {
           "label": "CSE (Data Science)",
-          "group": "School of AI & Data Science (SAID)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1568,7 +1555,6 @@
         },
         {
           "label": "Information Technology",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1576,7 +1562,6 @@
         },
         {
           "label": "CSE (Internet of Things)",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1584,7 +1569,6 @@
         },
         {
           "label": "CSE (Quantum Computing)",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1592,7 +1576,6 @@
         },
         {
           "label": "CSE (Cyber Security)",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1600,7 +1583,6 @@
         },
         {
           "label": "Computer Science & Business Systems",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1608,7 +1590,6 @@
         },
         {
           "label": "Computer Applications (BCA)",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1616,7 +1597,6 @@
         },
         {
           "label": "Computer Applications (MCA)",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1624,7 +1604,6 @@
         },
         {
           "label": "Cyber Forensics",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1632,7 +1611,6 @@
         },
         {
           "label": "Quantum Technology",
-          "group": "School of Computing & Information Sciences (SCIS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1640,7 +1618,6 @@
         },
         {
           "label": "Management Studies (MBA)",
-          "group": "School of Management Studies (SOMS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1648,7 +1625,6 @@
         },
         {
           "label": "Business Administration (BBA)",
-          "group": "School of Management Studies (SOMS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1656,7 +1632,6 @@
         },
         {
           "label": "Anaesthesia & Operation Theatre Technology",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1664,7 +1639,6 @@
         },
         {
           "label": "Medical Radiology & Imaging Technology",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1672,7 +1646,6 @@
         },
         {
           "label": "Physician Associates",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1680,7 +1653,6 @@
         },
         {
           "label": "Optometry",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1688,7 +1660,6 @@
         },
         {
           "label": "Emergency Medical Technology (Paramedic)",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1696,7 +1667,6 @@
         },
         {
           "label": "Physiotherapy",
-          "group": "School of Allied Health Sciences (SAHS)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1704,7 +1674,6 @@
         },
         {
           "label": "Law",
-          "group": "School of Law (SOL)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1712,7 +1681,6 @@
         },
         {
           "label": "Mathematics",
-          "group": "Humanities & Basic Sciences (H&S)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1720,7 +1688,6 @@
         },
         {
           "label": "Physics",
-          "group": "Humanities & Basic Sciences (H&S)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1728,7 +1695,6 @@
         },
         {
           "label": "Chemistry",
-          "group": "Humanities & Basic Sciences (H&S)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1736,7 +1702,6 @@
         },
         {
           "label": "English & Communication Skills",
-          "group": "Humanities & Basic Sciences (H&S)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1744,7 +1709,6 @@
         },
         {
           "label": "Humanities & Social Sciences",
-          "group": "Humanities & Basic Sciences (H&S)",
           "tags": [
             "Teaching",
             "Non Teaching"
@@ -1752,147 +1716,126 @@
         },
         {
           "label": "Department of Administration",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Office of the Registrar",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Accounts & Finance",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Human Resources",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Admissions Office",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Examination Cell",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Central Library",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Training & Placement Cell",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "IT Services & Systems",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Directorate of Research",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "IQAC",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "International Relations Office",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Student Affairs & Welfare",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Physical Education & Sports",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Hostel & Residential Services",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Transport",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Health Centre",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Estate & Maintenance",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Security",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Purchase & Stores",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Public Relations & Media",
-          "group": "Administration & Support Services",
           "tags": [
             "Non Teaching"
           ]
@@ -1906,308 +1849,264 @@
       "options": [
         {
           "label": "Professor",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Associate Professor",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Assistant Professor",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Professor of Practice",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Adjunct / Visiting Professor",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Dean",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Head of Department",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Post-Doctoral Fellow",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Research Associate",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Teaching Assistant",
-          "group": "Academic Positions",
           "tags": [
             "Teaching"
           ]
         },
         {
           "label": "Registrar",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Deputy Registrar",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Assistant Registrar",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Controller of Examinations",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Administrative Officer",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Office Superintendent",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Senior Assistant",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Junior Assistant",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Office Assistant",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "HR Executive",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Receptionist / Front Office Executive",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "PRO / Media Executive",
-          "group": "Administration",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Accounts Officer",
-          "group": "Accounts",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Accountant",
-          "group": "Accounts",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Accounts Assistant",
-          "group": "Accounts",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Librarian",
-          "group": "Library",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Deputy Librarian",
-          "group": "Library",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Library Assistant",
-          "group": "Library",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Lab Instructor",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Lab Technician",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Lab Assistant",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "System Administrator",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Network Administrator",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Programmer / Software Developer",
-          "group": "Technical",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Training & Placement Officer",
-          "group": "Student Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Physical Director",
-          "group": "Student Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Hostel Warden",
-          "group": "Student Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Nurse / Health Assistant",
-          "group": "Student Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Electrician",
-          "group": "Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Plumber",
-          "group": "Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Driver",
-          "group": "Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Attender",
-          "group": "Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Security Supervisor",
-          "group": "Support Services",
           "tags": [
             "Non Teaching"
           ]
         },
         {
           "label": "Other",
-          "group": "Other",
           "tags": [
             "Teaching",
             "Non Teaching"
