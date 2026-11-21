@@ -12,6 +12,8 @@ interface Props {
   waitingLabel?: string;
   onChange: (value: FieldValue, file?: File | null) => void;
   disabled?: boolean;
+  /** Mandatory for the applicant's post type (defaults to field.required). */
+  required?: boolean;
 }
 
 const inputBase =
@@ -22,10 +24,10 @@ const errBorder = 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/15'
 export const formatBytes = (n: number) =>
   n < 1024 ? `${n} B` : n < 1024 * 1024 ? `${(n / 1024).toFixed(0)} KB` : `${(n / 1024 / 1024).toFixed(1)} MB`;
 
-export const FieldLabel: React.FC<{ field: FieldDef; htmlFor?: string }> = ({ field, htmlFor }) => (
+export const FieldLabel: React.FC<{ field: FieldDef; htmlFor?: string; required?: boolean }> = ({ field, htmlFor, required }) => (
   <label htmlFor={htmlFor} className="mb-1.5 block text-[13px] font-semibold leading-snug tracking-[0.01em] text-[#3B2F25]">
     {field.label}
-    {field.required && (
+    {(required ?? field.required) && (
       <span className="ml-1 text-rose-500" aria-hidden>
         *
       </span>
@@ -33,7 +35,8 @@ export const FieldLabel: React.FC<{ field: FieldDef; htmlFor?: string }> = ({ fi
   </label>
 );
 
-export const FieldInput: React.FC<Props> = ({ field, value, error, options, waitingFor, waitingLabel, onChange, disabled }) => {
+export const FieldInput: React.FC<Props> = ({ field, value, error, options, waitingFor, waitingLabel, onChange, disabled, required: requiredProp }) => {
+  const required = requiredProp ?? !!field.required;
   const id = useId();
   const fileRef = useRef<HTMLInputElement>(null);
   const strVal = typeof value === 'string' ? value : value === null || value === undefined ? '' : isFileMeta(value) ? '' : String(value);
@@ -108,7 +111,7 @@ export const FieldInput: React.FC<Props> = ({ field, value, error, options, wait
                 role="radio"
                 aria-checked={active}
                 disabled={disabled}
-                onClick={() => onChange(active && !field.required ? '' : o.label)}
+                onClick={() => onChange(active && !required ? '' : o.label)}
                 className={`inline-flex h-11 items-center gap-2 rounded-xl border px-4 text-[14px] font-semibold transition focus:outline-none focus-visible:ring-4 focus-visible:ring-[#C6832B]/25 ${
                   active
                     ? 'border-[#1D1611] bg-[#1D1611] text-white shadow-[0_6px_16px_-8px_rgba(29,22,17,0.6)]'
@@ -158,7 +161,7 @@ export const FieldInput: React.FC<Props> = ({ field, value, error, options, wait
           </span>
           <span className="text-[14px] font-medium leading-snug text-[#3B2F25]">
             {field.label}
-            {field.required && <span className="ml-1 text-rose-500">*</span>}
+            {required && <span className="ml-1 text-rose-500">*</span>}
           </span>
         </label>
       );
@@ -265,7 +268,7 @@ export const FieldInput: React.FC<Props> = ({ field, value, error, options, wait
     <div>
       {field.type !== 'checkbox' && (
         <span id={`${id}-lbl`}>
-          <FieldLabel field={field} htmlFor={field.type === 'choice' ? undefined : id} />
+          <FieldLabel field={field} required={required} htmlFor={field.type === 'choice' ? undefined : id} />
         </span>
       )}
       {control}

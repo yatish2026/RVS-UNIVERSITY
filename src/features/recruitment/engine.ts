@@ -54,14 +54,28 @@ export function evalConditions(
   });
 }
 
+/** The post type the applicant picked (position › postType), e.g. "Teaching". */
+export const currentPostType = (values: FormValues): string => {
+  const v = sectionData(values, 'position')?.postType;
+  return typeof v === 'string' ? v : '';
+};
+
+/** Restricted items are shown only once a matching post type has been chosen. */
+export const appliesTo = (postTypes: string[] | undefined, values: FormValues) =>
+  !postTypes || postTypes.length === 0 || postTypes.includes(currentPostType(values));
+
 export const isStepVisible = (step: StepDef, values: FormValues) =>
-  !step.hidden && evalConditions(step.showIf, values, null);
+  !step.hidden && appliesTo(step.postTypes, values) && evalConditions(step.showIf, values, null);
 
 export const isSectionVisible = (section: SectionDef, values: FormValues) =>
-  !section.hidden && evalConditions(section.showIf, values, null);
+  !section.hidden && appliesTo(section.postTypes, values) && evalConditions(section.showIf, values, null);
 
 export const isFieldVisible = (field: FieldDef, sectionId: string, item: SectionValues | undefined, values: FormValues) =>
-  !field.hidden && evalConditions(field.showIf, values, sectionId, item);
+  !field.hidden && appliesTo(field.postTypes, values) && evalConditions(field.showIf, values, sectionId, item);
+
+/** Mandatory for the applicant's post type? (`requiredFor` overrides `required`.) */
+export const isRequired = (field: FieldDef, values: FormValues): boolean =>
+  field.requiredFor ? field.requiredFor.includes(currentPostType(values)) : !!field.required;
 
 export const visibleSteps = (schema: FormSchema, values: FormValues) => schema.steps.filter((s) => isStepVisible(s, values));
 
@@ -89,9 +103,9 @@ export function resolveOptions(
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export function validateField(field: FieldDef, raw: FieldValue): string | null {
+export function validateField(field: FieldDef, raw: FieldValue, required: boolean = !!field.required): string | null {
   if (field.type === 'file') {
-    if (!raw) return field.required ? 'Please upload this file' : null;
+    if (!raw) return required ? 'Please upload this file' : null;
     if (isFileMeta(raw) && field.maxSizeMB && raw.size > field.maxSizeMB * 1024 * 1024)
       return `File must be ${field.maxSizeMB} MB or smaller`;
     if (isFileMeta(raw) && field.accept) {
@@ -101,10 +115,10 @@ export function validateField(field: FieldDef, raw: FieldValue): string | null {
     }
     return null;
   }
-  if (field.type === 'checkbox') return field.required && raw !== true ? 'Please tick this box' : null;
+  if (field.type === 'checkbox') return required && raw !== true ? 'Please tick this box' : null;
 
   const v = typeof raw === 'string' ? raw.trim() : raw === null || raw === undefined ? '' : String(raw);
-  if (v === '') return field.required ? 'This field is required' : null;
+  if (v === '') return required ? 'This field is required' : null;
 
   if (field.type === 'email' && !EMAIL_RE.test(v)) return 'Enter a valid email address';
   if (field.type === 'number' || field.type === 'year') {
@@ -133,7 +147,7 @@ export function validateStep(step: StepDef, schema: FormSchema, values: FormValu
     const check = (item: SectionValues | undefined, index: number | null) => {
       for (const field of section.fields) {
         if (!isFieldVisible(field, section.id, item, values)) continue;
-        const err = validateField(field, item?.[field.id]);
+        const err = validateField(field, item?.[field.id], isRequired(field, values));
         if (err) errors[fieldKey(section.id, index, field.id)] = err;
       }
     };

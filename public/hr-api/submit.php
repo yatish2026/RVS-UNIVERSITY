@@ -108,7 +108,7 @@ foreach ($uploadFiles as $key => $file) {
 }
 
 $submittedAt = hr_now();
-$app = hr_summary_from($id, $submittedAt, $data);
+$app = hr_summary_from($id, $submittedAt, $data, $schema);
 $app['schemaVersion'] = (int)$schema['version'];
 $app['data'] = $data;
 $app['notes'] = '';

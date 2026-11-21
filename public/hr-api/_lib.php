@@ -243,19 +243,40 @@ function hr_eval($conds, $values, $sectionId, $item)
     return true;
 }
 
+/** Post type the applicant picked (position › postType). */
+function hr_post_type($values)
+{
+    $p = hr_section_data($values, 'position');
+    return ($p && isset($p['postType']) && is_string($p['postType'])) ? $p['postType'] : '';
+}
+
+/** Items restricted to some post types are shown only once a matching one is chosen. */
+function hr_applies($item, $values)
+{
+    if (empty($item['postTypes']) || !is_array($item['postTypes'])) return true;
+    return in_array(hr_post_type($values), $item['postTypes'], true);
+}
+
+/** Mandatory for this applicant's post type? (`requiredFor` overrides `required`.) */
+function hr_is_required($f, $values)
+{
+    if (isset($f['requiredFor']) && is_array($f['requiredFor'])) return in_array(hr_post_type($values), $f['requiredFor'], true);
+    return !empty($f['required']);
+}
+
 function hr_step_visible($step, $values)
 {
-    return empty($step['hidden']) && hr_eval(isset($step['showIf']) ? $step['showIf'] : null, $values, null, null);
+    return empty($step['hidden']) && hr_applies($step, $values) && hr_eval(isset($step['showIf']) ? $step['showIf'] : null, $values, null, null);
 }
 
 function hr_section_visible($sec, $values)
 {
-    return empty($sec['hidden']) && hr_eval(isset($sec['showIf']) ? $sec['showIf'] : null, $values, null, null);
+    return empty($sec['hidden']) && hr_applies($sec, $values) && hr_eval(isset($sec['showIf']) ? $sec['showIf'] : null, $values, null, null);
 }
 
 function hr_field_visible($f, $sid, $item, $values)
 {
-    return empty($f['hidden']) && hr_eval(isset($f['showIf']) ? $f['showIf'] : null, $values, $sid, $item);
+    return empty($f['hidden']) && hr_applies($f, $values) && hr_eval(isset($f['showIf']) ? $f['showIf'] : null, $values, $sid, $item);
 }
 
 function hr_js_regex($pattern)
@@ -263,10 +284,10 @@ function hr_js_regex($pattern)
     return '~' . str_replace('~', '\~', $pattern) . '~u';
 }
 
-function hr_validate_value($f, $v)
+function hr_validate_value($f, $v, $required = null)
 {
     $type = isset($f['type']) ? $f['type'] : 'text';
-    $required = !empty($f['required']);
+    if ($required === null) $required = !empty($f['required']);
     if ($type === 'file') {
         return ($required && !$v) ? 'Please upload this file' : null;
     }
@@ -344,7 +365,7 @@ function hr_clean_and_validate($schema, $payload, $uploads)
                         $key = $sid . '.' . ($index === null ? '_' : $index) . '.' . $f['id'];
                         $v = !empty($uploads[$key]) ? $key : null;
                     }
-                    $err = hr_validate_value($f, $v);
+                    $err = hr_validate_value($f, $v, hr_is_required($f, $raw));
                     if ($err) {
                         $where = $step['title'] . ' › ' . $sec['title'] . ($index !== null ? ' #' . ($index + 1) : '') . ' › ' . $f['label'];
                         $errors[] = $where . ': ' . $err;
@@ -412,7 +433,7 @@ function hr_save_app($app)
     return hr_write_json(hr_app_path($app['id']), $app);
 }
 
-function hr_summary_from($id, $submittedAt, $data)
+function hr_summary_from($id, $submittedAt, $data, $schema = null)
 {
     $p = hr_section_data($data, 'position') ?: [];
     $pe = hr_section_data($data, 'personal') ?: [];
@@ -422,6 +443,30 @@ function hr_summary_from($id, $submittedAt, $data)
     };
     $desig = $g($p, 'designation');
     if ($desig === 'Other' && $g($p, 'designationOther') !== '') $desig = $g($p, 'designationOther');
+    $dept = $g($p, 'department');
+    $hasResume = !empty($ex['resume']);
+
+    // Admins may add their own fields (e.g. a Teaching-only "Department" and "Cadre").
+    // Fall back to them by label so lists, email subjects and PDFs are never blank.
+    if ($schema && is_array($schema)) {
+        foreach ($schema['steps'] as $step) {
+            foreach ($step['sections'] as $sec) {
+                foreach ($sec['fields'] as $f) {
+                    $label = isset($f['label']) ? $f['label'] : '';
+                    if ($sec['id'] === 'position' && !in_array($f['id'], ['postType', 'department', 'designation', 'designationOther'], true)) {
+                        $val = $g($p, $f['id']);
+                        if ($val === '') continue;
+                        if ($dept === '' && preg_match('/department|unit|centre|center|school/i', $label)) $dept = $val;
+                        elseif ($desig === '' && preg_match('/designation|cadre|position|post\b|role/i', $label)) $desig = $val;
+                    }
+                    if (!$hasResume && $f['type'] === 'file' && preg_match('/resume|\bcv\b|curriculum/i', $label)) {
+                        $sd = hr_section_data($data, $sec['id']);
+                        if ($sd && !empty($sd[$f['id']])) $hasResume = true;
+                    }
+                }
+            }
+        }
+    }
     return [
         'id' => $id,
         'submittedAt' => $submittedAt,
@@ -431,9 +476,9 @@ function hr_summary_from($id, $submittedAt, $data)
         'mobile' => $g($pe, 'mobile'),
         'postType' => $g($p, 'postType'),
         'jobNature' => $g($p, 'jobNature'),
-        'department' => $g($p, 'department'),
+        'department' => $dept,
         'designation' => $desig,
-        'hasResume' => !empty($ex['resume']),
+        'hasResume' => $hasResume,
     ];
 }
 

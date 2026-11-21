@@ -49,6 +49,10 @@ export interface FieldDef {
   defaultValue?: string;
   accept?: string;
   maxSizeMB?: number;
+  /** Show only for these post types (e.g. ["Teaching"]). Missing/empty = all post types. */
+  postTypes?: string[];
+  /** Mandatory only for these post types. When set it replaces `required`. */
+  requiredFor?: string[];
   /** Core fields the system relies on (name, email…) cannot be deleted. */
   locked?: boolean;
   /** Temporarily removed from the form without deleting it. */
@@ -66,6 +70,7 @@ export interface SectionDef {
   itemLabel?: string;
   addLabel?: string;
   showIf?: Condition[];
+  postTypes?: string[];
   hidden?: boolean;
 }
 
@@ -75,6 +80,7 @@ export interface StepDef {
   description?: string;
   sections: SectionDef[];
   showIf?: Condition[];
+  postTypes?: string[];
   hidden?: boolean;
 }
 

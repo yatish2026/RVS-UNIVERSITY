@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { CheckCircle2, ClipboardList, Copy, ExternalLink, Eye, Inbox, ListTree, Loader2, Save, Settings, ShieldAlert, Undo2, XCircle } from 'lucide-react';
+import { CheckCircle2, ClipboardList, Copy, ExternalLink, Eye, Inbox, ListChecks, ListTree, Loader2, Save, Settings, ShieldAlert, Undo2, XCircle } from 'lucide-react';
 import { AdminApi } from '../api';
 import type { FormSchema } from '../types';
 import { BrandBar } from '../components/BrandBar';
@@ -8,14 +8,16 @@ import { Hero } from '../ApplicationFormPage';
 import { ApplicationsTab } from './ApplicationsTab';
 import { FormBuilderTab } from './FormBuilderTab';
 import { ListsTab } from './ListsTab';
+import { RequirementsTab } from './RequirementsTab';
 import { SettingsTab } from './SettingsTab';
 import { Btn, Modal } from './ui';
 
-type Tab = 'applications' | 'builder' | 'lists' | 'settings';
+type Tab = 'applications' | 'builder' | 'requirements' | 'lists' | 'settings';
 
 const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
   { id: 'applications', label: 'Applications', icon: <Inbox className="h-4 w-4" /> },
   { id: 'builder', label: 'Form Builder', icon: <ClipboardList className="h-4 w-4" /> },
+  { id: 'requirements', label: 'Mandatory & Optional', icon: <ListChecks className="h-4 w-4" /> },
   { id: 'lists', label: 'Lists & Categories', icon: <ListTree className="h-4 w-4" /> },
   { id: 'settings', label: 'Email & Settings', icon: <Settings className="h-4 w-4" /> },
 ];
@@ -222,6 +224,7 @@ export const AdminConsole: React.FC = () => {
       <main className="mx-auto max-w-[1500px] px-4 py-6 pb-28 sm:px-6">
         {tab === 'applications' && <ApplicationsTab api={api} toast={toast} />}
         {tab === 'builder' && <FormBuilderTab draft={draft} saved={saved} mutate={mutate} />}
+        {tab === 'requirements' && <RequirementsTab draft={draft} mutate={mutate} />}
         {tab === 'lists' && <ListsTab draft={draft} saved={saved} mutate={mutate} />}
         {tab === 'settings' && (
           <SettingsTab

@@ -15,7 +15,8 @@ import {
 } from 'lucide-react';
 import type { Condition, FieldDef, FieldType, FieldWidth, FormSchema, SectionDef, StepDef } from '../types';
 import { uniqueId } from '../engine';
-import { Btn, Card, Field, IconBtn, Label, Select, TextArea, TextIn, Toggle } from './ui';
+import { Btn, Card, Field, IconBtn, Label, Modal, Select, TextArea, TextIn, Toggle } from './ui';
+import { AudienceEditor, applyAudience, applyShow, audienceText, lockFlags, mandatoryFor, postTypeLabels, shownFor } from './audience';
 
 type Mutate = (fn: (s: FormSchema) => void) => void;
 
@@ -66,6 +67,8 @@ interface Props {
 
 export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
   const [sel, setSel] = useState<Sel>({ stepId: draft.steps[0]?.id ?? '' });
+  const allPT = postTypeLabels(draft);
+  const [adding, setAdding] = useState<null | { sectionId: string; label: string; type: FieldType; show: string[]; mand: string[] }>(null);
   const step = draft.steps.find((s) => s.id === sel.stepId) ?? draft.steps[0];
   const section = step?.sections.find((s) => s.id === sel.sectionId);
   const field = section?.fields.find((f) => f.id === sel.fieldId);
@@ -106,10 +109,26 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
     setSel({ stepId: step.id, sectionId: sid });
   };
 
-  const addField = (sec: SectionDef) => {
-    const fid = uniqueId('New field', sec.fields.map((f) => f.id));
-    mutate((s) => findSection(s, sec.id).fields.push({ id: fid, label: 'New field', type: 'text', width: 'half', required: false }));
+  // "Add field" first asks who the field is for and whether it is mandatory.
+  const addField = (sec: SectionDef) =>
+    setAdding({ sectionId: sec.id, label: '', type: 'text', show: shownFor(sec, allPT), mand: [] });
+
+  const createField = () => {
+    if (!adding) return;
+    const sec = step.sections.find((x) => x.id === adding.sectionId);
+    if (!sec) return;
+    const label = adding.label.trim() || 'New field';
+    const fid = uniqueId(label, sec.fields.map((f) => f.id));
+    const f: FieldDef = { id: fid, label, type: adding.type, width: adding.type === 'checkbox' ? 'full' : 'half', required: false };
+    if (hasOptions(adding.type)) f.options = ['Option 1', 'Option 2'];
+    if (adding.type === 'file') {
+      f.accept = '.pdf';
+      f.maxSizeMB = 5;
+    }
+    applyAudience(f, adding.show, adding.mand, allPT);
+    mutate((s) => findSection(s, sec.id).fields.push(f));
     setSel({ stepId: step.id, sectionId: sec.id, fieldId: fid });
+    setAdding(null);
   };
 
   const updateField = (patch: Partial<FieldDef>) =>
@@ -206,6 +225,18 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
               description="Removed from the form without deleting it."
             />
           </div>
+          {allPT.length > 1 && (
+            <div className="mt-4">
+              <AudienceEditor
+                all={allPT}
+                show={shownFor(step, allPT)}
+                withMandatory={false}
+                noun="step"
+                lockShow={step.sections.some((x) => x.fields.some((f) => lockFlags(f, x.id).lockShow))}
+                onChange={(show) => mutate((s) => applyShow(findStep(s), show, allPT))}
+              />
+            </div>
+          )}
           <ConditionsEditor
             className="mt-4"
             title="Show this step only when…"
@@ -259,7 +290,7 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
                         {f.showIf?.length ? <GitBranch className="h-3 w-3 shrink-0 text-[#AD9A88]" aria-label="Conditional" /> : null}
                       </div>
                       <div className="text-[11.5px] text-[#9C8B79]">
-                        {TYPE_LABELS[f.type]} · {WIDTH_LABELS[f.width ?? 'half']}
+                        {TYPE_LABELS[f.type]} · <span className="font-semibold text-[#9C6019]">{audienceText(f, allPT)}</span>
                         {f.listId ? ` · list: ${draft.lists.find((l) => l.id === f.listId)?.name ?? f.listId}` : ''}
                       </div>
                     </div>
@@ -339,6 +370,13 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
             section={section}
             draft={draft}
             isNew={!savedFieldKeys.has(`${section.id}.${field.id}`)}
+            allPT={allPT}
+            setAudience={(show, mand) =>
+              mutate((s) => {
+                const f = findSection(s).fields.find((x) => x.id === field.id)!;
+                applyAudience(f, show, mand, allPT);
+              })
+            }
             update={updateField}
             rename={(newId) => {
               mutate((s) => {
@@ -359,6 +397,7 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
             onDeleted={() => setSel({ stepId: step.id })}
             onRenamed={(nid) => setSel({ stepId: step.id, sectionId: nid })}
             stepId={step.id}
+            allPT={allPT}
           />
         ) : (
           <Card>
@@ -369,6 +408,46 @@ export const FormBuilderTab: React.FC<Props> = ({ draft, saved, mutate }) => {
           </Card>
         )}
       </div>
+
+      <Modal
+        open={!!adding}
+        onClose={() => setAdding(null)}
+        title="Add a field"
+        footer={
+          <>
+            <Btn onClick={() => setAdding(null)}>Cancel</Btn>
+            <Btn variant="primary" icon={<Plus className="h-4 w-4" />} onClick={createField} disabled={!adding?.label.trim()}>
+              Add field
+            </Btn>
+          </>
+        }
+      >
+        {adding && (
+          <div className="space-y-4 p-5">
+            <Field label="Question / label">
+              <TextIn autoFocus value={adding.label} placeholder="e.g. Teaching experience in years" onChange={(e) => setAdding({ ...adding, label: e.target.value })} />
+            </Field>
+            <Field label="Answer type">
+              <Select value={adding.type} onChange={(e) => setAdding({ ...adding, type: e.target.value as FieldType })}>
+                {Object.entries(TYPE_LABELS).map(([k, v]) => (
+                  <option key={k} value={k}>
+                    {v}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+            {allPT.length > 1 && (
+              <AudienceEditor
+                all={allPT}
+                show={adding.show}
+                mandatory={adding.mand}
+                onChange={(show, mand) => setAdding({ ...adding, show, mand })}
+              />
+            )}
+            <p className="text-[12px] text-[#9C8B79]">You can change everything later in Field settings or in the Mandatory &amp; Optional tab.</p>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
@@ -384,7 +463,8 @@ const SectionInspector: React.FC<{
   onDeleted: () => void;
   onRenamed: (id: string) => void;
   stepId: string;
-}> = ({ section, draft, isNew, mutate, canDelete, onDeleted, onRenamed, stepId }) => {
+  allPT: string[];
+}> = ({ section, draft, isNew, mutate, canDelete, onDeleted, onRenamed, stepId, allPT }) => {
   const find = (s: FormSchema) => s.steps.find((x) => x.id === stepId)!.sections.find((x) => x.id === section.id)!;
   const set = (patch: Partial<SectionDef>) =>
     mutate((s) => {
@@ -441,6 +521,16 @@ const SectionInspector: React.FC<{
           />
         </Field>
         <Toggle checked={!!section.hidden} disabled={!canDelete} onChange={(v) => set({ hidden: v || undefined })} label="Hide section" />
+        {allPT.length > 1 && (
+          <AudienceEditor
+            all={allPT}
+            show={shownFor(section, allPT)}
+            withMandatory={false}
+            noun="section"
+            lockShow={section.fields.some((f) => lockFlags(f, section.id).lockShow)}
+            onChange={(show) => mutate((s) => applyShow(find(s), show, allPT))}
+          />
+        )}
         <div className="rounded-xl border border-[#EDE3D6] p-3.5">
           <Toggle
             checked={!!section.repeatable}
@@ -490,9 +580,11 @@ const FieldInspector: React.FC<{
   section: SectionDef;
   draft: FormSchema;
   isNew: boolean;
+  allPT: string[];
+  setAudience: (show: string[], mandatory: string[]) => void;
   update: (p: Partial<FieldDef>) => void;
   rename: (id: string) => void;
-}> = ({ field, section, draft, isNew, update, rename }) => {
+}> = ({ field, section, draft, isNew, allPT, setAudience, update, rename }) => {
   const [idText, setIdText] = useState(field.id);
   const optionSource = field.listId ? 'list' : 'custom';
   const sameSectionSources = section.fields.filter((f) => f.id !== field.id && hasOptions(f.type));
@@ -538,10 +630,18 @@ const FieldInspector: React.FC<{
             </Select>
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-2.5">
-          <Toggle checked={!!field.required} disabled={field.locked} onChange={(v) => update({ required: v })} label="Mandatory" />
-          <Toggle checked={!!field.hidden} disabled={field.locked} onChange={(v) => update({ hidden: v || undefined })} label="Hidden" />
-        </div>
+        {allPT.length > 1 ? (
+          <AudienceEditor
+            all={allPT}
+            show={shownFor(field, allPT)}
+            mandatory={mandatoryFor(field, allPT)}
+            {...lockFlags(field, section.id)}
+            onChange={setAudience}
+          />
+        ) : (
+          <Toggle checked={!!field.required} disabled={field.locked} onChange={(v) => update({ required: v, requiredFor: undefined })} label="Mandatory" />
+        )}
+        <Toggle checked={!!field.hidden} disabled={field.locked} onChange={(v) => update({ hidden: v || undefined })} label="Hidden for everyone" />
 
         {field.type !== 'checkbox' && field.type !== 'choice' && field.type !== 'file' && (
           <Field label="Placeholder" hint="(hint inside the box)">

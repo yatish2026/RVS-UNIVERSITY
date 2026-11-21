@@ -22,6 +22,7 @@ import {
   initialValues,
   isFieldVisible,
   isFileMeta,
+  isRequired,
   isSectionVisible,
   resolveOptions,
   sectionData,
@@ -188,14 +189,14 @@ export const ApplicationForm: React.FC<Props> = ({ schema, preview = false }) =>
       setErrors((prev) => {
         if (!prev[key]) return prev;
         const field = section.fields.find((f) => f.id === fieldId);
-        const err = field ? validateField(field, v) : null;
+        const err = field ? validateField(field, v, isRequired(field, values)) : null;
         const n = { ...prev };
         if (err) n[key] = err;
         else delete n[key];
         return n;
       });
     },
-    [schema],
+    [schema, values],
   );
 
   const addItem = (section: SectionDef) =>
@@ -374,6 +375,7 @@ export const ApplicationForm: React.FC<Props> = ({ schema, preview = false }) =>
               options={options}
               waitingFor={waitingFor}
               waitingLabel={waitingLabel}
+              required={isRequired(field, values)}
               onChange={(v, file) => setField(section, index, field.id, v, file)}
             />
           </div>

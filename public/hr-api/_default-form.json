@@ -281,14 +281,20 @@
               "label": "Institution Name",
               "type": "text",
               "width": "half",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "board",
               "label": "Board / University",
               "type": "text",
               "width": "half",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "division",
@@ -296,7 +302,10 @@
               "type": "select",
               "width": "third",
               "required": true,
-              "listId": "divisionGrade"
+              "listId": "divisionGrade",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "percentage",
@@ -306,7 +315,10 @@
               "required": true,
               "min": 0,
               "max": 100,
-              "placeholder": "e.g. 78.5"
+              "placeholder": "e.g. 78.5",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "year",
@@ -316,7 +328,10 @@
               "required": true,
               "min": 1960,
               "max": 2035,
-              "placeholder": "YYYY"
+              "placeholder": "YYYY",
+              "requiredFor": [
+                "Teaching"
+              ]
             }
           ]
         },
@@ -339,28 +354,40 @@
               "type": "select",
               "width": "third",
               "required": true,
-              "listId": "eduMode"
+              "listId": "eduMode",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "institution",
               "label": "Institution Name",
               "type": "text",
               "width": "third",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "board",
               "label": "Board / University",
               "type": "text",
               "width": "third",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "specialization",
               "label": "Specialization",
               "type": "text",
               "width": "quarter",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "division",
@@ -368,7 +395,10 @@
               "type": "select",
               "width": "quarter",
               "required": true,
-              "listId": "divisionGrade"
+              "listId": "divisionGrade",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "percentage",
@@ -378,7 +408,10 @@
               "required": true,
               "min": 0,
               "max": 100,
-              "placeholder": "e.g. 78.5"
+              "placeholder": "e.g. 78.5",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "year",
@@ -388,7 +421,10 @@
               "required": true,
               "min": 1960,
               "max": 2035,
-              "placeholder": "YYYY"
+              "placeholder": "YYYY",
+              "requiredFor": [
+                "Teaching"
+              ]
             }
           ]
         },
@@ -411,28 +447,40 @@
               "type": "select",
               "width": "third",
               "required": true,
-              "listId": "eduMode"
+              "listId": "eduMode",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "institution",
               "label": "Institution Name",
               "type": "text",
               "width": "third",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "board",
               "label": "Board / University",
               "type": "text",
               "width": "third",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "specialization",
               "label": "Specialization",
               "type": "text",
               "width": "quarter",
-              "required": true
+              "required": true,
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "division",
@@ -440,7 +488,10 @@
               "type": "select",
               "width": "quarter",
               "required": true,
-              "listId": "divisionGrade"
+              "listId": "divisionGrade",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "percentage",
@@ -450,7 +501,10 @@
               "required": true,
               "min": 0,
               "max": 100,
-              "placeholder": "e.g. 78.5"
+              "placeholder": "e.g. 78.5",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "year",
@@ -460,7 +514,10 @@
               "required": true,
               "min": 1960,
               "max": 2035,
-              "placeholder": "YYYY"
+              "placeholder": "YYYY",
+              "requiredFor": [
+                "Teaching"
+              ]
             }
           ]
         },
@@ -624,7 +681,10 @@
               "type": "choice",
               "width": "third",
               "required": true,
-              "listId": "yesNo"
+              "listId": "yesNo",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "gatePercentile",
@@ -639,6 +699,9 @@
                   "field": "gate",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -655,6 +718,9 @@
                   "field": "gate",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -663,7 +729,10 @@
               "type": "choice",
               "width": "third",
               "required": true,
-              "listId": "yesNo"
+              "listId": "yesNo",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "netPercentile",
@@ -678,6 +747,9 @@
                   "field": "net",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -694,6 +766,9 @@
                   "field": "net",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -702,7 +777,10 @@
               "type": "choice",
               "width": "third",
               "required": true,
-              "listId": "yesNo"
+              "listId": "yesNo",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "ugcCsirPercentile",
@@ -717,6 +795,9 @@
                   "field": "ugcCsir",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -733,6 +814,9 @@
                   "field": "ugcCsir",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -741,7 +825,10 @@
               "type": "choice",
               "width": "third",
               "required": true,
-              "listId": "yesNo"
+              "listId": "yesNo",
+              "requiredFor": [
+                "Teaching"
+              ]
             },
             {
               "id": "sletPercentile",
@@ -756,6 +843,9 @@
                   "field": "slet",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             },
             {
@@ -772,6 +862,9 @@
                   "field": "slet",
                   "equals": "Yes"
                 }
+              ],
+              "requiredFor": [
+                "Teaching"
               ]
             }
           ]
@@ -892,13 +985,6 @@
       "id": "research",
       "title": "Publications",
       "description": "Research output and academic contributions. Leave blank where not applicable.",
-      "showIf": [
-        {
-          "section": "position",
-          "field": "postType",
-          "equals": "Teaching"
-        }
-      ],
       "sections": [
         {
           "id": "journals",
@@ -1135,6 +1221,9 @@
             }
           ]
         }
+      ],
+      "postTypes": [
+        "Teaching"
       ]
     },
     {
@@ -1388,7 +1477,10 @@
               "transform": "uppercase",
               "pattern": "^[A-Z]{5}[0-9]{4}[A-Z]$",
               "patternMessage": "Enter a valid PAN (e.g. ABCDE1234F)",
-              "placeholder": "ABCDE1234F"
+              "placeholder": "ABCDE1234F",
+              "requiredFor": [
+                "Teaching"
+              ]
             }
           ]
         },
